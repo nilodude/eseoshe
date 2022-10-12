@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'eseoshe';
   randis: number[] = [];
+  randos: number[] = [];
 
   constructor(){
     
@@ -15,12 +16,18 @@ export class AppComponent implements OnInit {
   ngOnInit(){
     this.randis = [];
 
-    this.randis.push(this.random(1,3));
-    this.randis.push(this.random(2,2));
-    this.randis.push(this.random(1,2));
-    this.randis.push(this.random(2,2));
-
-    this.randis.push(12-(this.randis[0]+this.randis[1]+this.randis[2]+this.randis[3]));
+    for(let i =0; i< 20 ;i++){
+      let rand = this.random(1,3);
+      if(i>0 && rand == this.randis[i-1]){
+        if(rand > 3){
+          rand--;
+        }else{
+          rand++;
+        }
+      }
+      this.randis.push(rand);
+    }
+  
   }
 
   random(min:number, max: number){

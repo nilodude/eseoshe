@@ -1,17 +1,7 @@
-<div class="grid col-12 bg-blue-500 border-round border-1">
-  <div class="col-{{randis[0]}} bg-blue-100 border-round border-1">
-    {{randis[0]}}
-  </div>
-  <div class="col-{{randis[1]}} bg-blue-100 border-round border-1">
-    {{randis[1]}}
-  </div>
-  <div class="col-{{randis[2]}} bg-blue-100 border-round border-1">
-    {{randis[2]}}
-  </div>
-  <div class="col-{{randis[3]}} bg-blue-100 border-round border-1">
-    {{randis[3]}}
-  </div>
-  <div class="col-{{randis[4]}} bg-blue-100 border-round border-1">
-    {{randis[4]}}
-  </div>
+<div class="flex flex-wrap align-items-center justify-content-center grid col-12 bg-blue-500 border-round border-1">
+  <ng-template ngFor let-r [ngForOf]="randis">
+    <div class="col-{{r}} bg-blue-100 border-round border-1 h-{{7*r}}rem">
+      {{r}}
+    </div>
+  </ng-template>
 </div>
