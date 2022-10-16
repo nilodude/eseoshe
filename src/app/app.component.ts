@@ -9,9 +9,17 @@ import { Box, Cell } from './models';
 })
 export class AppComponent implements OnInit {
   title = 'eseoshe';
+  width: number = 6;
+  height: number = this.width;
+
   _1x1 = new Box();
   _2x1 = new Box();
   _1x2 = new Box();
+  _2x2 = new Box();
+  _1x3 = new Box();
+  _2x3 = new Box();
+  _3x2 = new Box();
+
   boxesType: any;
   boxPool: Box[] = [];
   boxes: Box[] = [];
@@ -31,14 +39,28 @@ export class AppComponent implements OnInit {
 
     this._1x1.tag = '1x1';
 
-    this.boxesType= {'1x1': this._1x1, '1x2': this._1x2, '2x1': this._2x1};
+    this._1x3.xlen = 2;
+    this._1x3.tag = '2x3';
+
+    this._2x2.xlen = 1;
+    this._2x2.ylen = 1;
+    this._2x2.tag = '2x2';
+
+    this._2x3.xlen = 2;
+    this._2x3.ylen = 1;
+    this._2x3.tag = '2x3';
+
+    this._3x2.xlen = 1;
+    this._3x2.ylen = 2;
+    this._3x2.tag = '3x2';
+
+    this.boxesType= {'1x1': this._1x1, '1x2': this._1x2, '2x1': this._2x1, '2x2': this._2x2,'1x3': this._1x3, '2x3': this._2x3, '3x2': this._3x2};
     this.boxPool =  [this._1x1];
 
-    for(let y =0; y< 10 ;y++){
-      for(let x =0; x< 10 ;x++){
+    for(let y =0; y< this.height ;y++){
+      for(let x =0; x< this.width ;x++){
         if(this.itsFree(x,y)){
           this.placeBox(x,y);
-          //this.applyStyle(x,y);
         }
       }
     }
@@ -46,11 +68,11 @@ export class AppComponent implements OnInit {
   }
 
   itsFree(x:number, y:number){
-    let isit = false;
-    isit = x<9 && y<9;
+    let withinBounds = false;
+    withinBounds = x<this.width -1 && y<this.height-1;
     let exists = this.pos.length > 0 && this.pos[y] != undefined && this.pos[y][x] != undefined;
     
-    return isit && (!exists || (exists && this.pos[y][x].free));
+    return withinBounds && (!exists || (exists && this.pos[y][x].free));
   }
 
   placeBox(x0:number, y0:number){
@@ -70,6 +92,8 @@ export class AppComponent implements OnInit {
         row[x]=cell;
         console.log('new cell x:'+x+',y:'+y);
 
+
+
       }
       this.pos[y] = row;
     }
@@ -81,11 +105,26 @@ export class AppComponent implements OnInit {
     console.log(''+x0+','+y0)
     let box;
 
+    if(this.itsFree(x0,y0+1)){
+      this.boxPool.push(this.boxesType['2x1']);
+      if(this.itsFree(x0+1,y0) && this.itsFree(x0+1,y0+1)){
+        this.boxPool.push(this.boxesType['2x2']);
+      }
+    }
     if(this.itsFree(x0+1,y0)){
       this.boxPool.push(this.boxesType['1x2']);
-    }else if(this.itsFree(x0,y0+1)){
-      this.boxPool.push(this.boxesType['2x1']);
+      if(this.itsFree(x0+2,y0)){
+        this.boxPool.push(this.boxesType['1x3']);
+        if(this.itsFree(x0+1,y0+1) && this.itsFree(x0+1,y0+2)){
+          this.boxPool.push(this.boxesType['2x3']);
+        }
+      }
     }
+   
+    if(this.itsFree(x0+1,y0) && this.itsFree(x0+2,y0)){
+      this.boxPool.push(this.boxesType['1x3']);
+    }
+
     const rand = this.random(this.boxPool.length);
     box = this.boxPool[rand];
     box.color = this.getRandomColor();
