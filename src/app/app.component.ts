@@ -11,7 +11,8 @@ export class AppComponent implements OnInit {
   title = 'eseoshe';
   width: number = 7;
   height: number = 4;
-  scale: number = window.innerWidth /9;
+  windowScale: number = 9;
+  scale: number = window.innerWidth /this.windowScale;
 
   _1x1 = new Box();
   _2x1 = new Box();
@@ -77,7 +78,7 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
-    this.scale = window.innerWidth /9;
+    this.scale = window.innerWidth /this.windowScale;
     this.arrange();
   }
 
