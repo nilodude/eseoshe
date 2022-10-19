@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
     }
 
     if(this.boxesPlaced){
-      console.log(this.boxes)
+      //console.log(this.boxes)
       this.arrange();
     }
   }
@@ -149,18 +149,18 @@ export class AppComponent implements OnInit {
   }
 
   arrange(){
-    const scale = 13;
+    const scale = 11;
+    const poScale = scale*2.2;
     this.boxes.forEach(box=>{
-      console.log(box)
-      let newImg = document.createElement("img");
+      var newImg = document.createElement("img");
       newImg.style.width = (scale*(box.xlen + 1)).toString() + 'vh';
       newImg.style.height = (scale*(box.ylen + 1)).toString() + 'vh';
-      newImg.style.position = "relative";
-      //console.log(box.cells[0].x +', ' +box.cells[0].y);
-      newImg.style.transform = 'translate('+box.cells[0].x+','+box.cells[0].y+')';
+      newImg.style.position = "absolute";
+      const x = box.cells[0].x;
+      const y = box.cells[0].y;
+      newImg.style.transform = "translate("+poScale*x +"px, "+poScale*y+"px)";
       newImg.src = '../../favicon.ico'
-      document.getElementById('eldiv')?.appendChild(newImg);
-      let newDiv = document.createElement("div");
+      document.getElementById("eldiv")?.appendChild(newImg);
     });
   }
 
