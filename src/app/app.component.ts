@@ -9,9 +9,9 @@ import { Box, Cell } from './models';
 })
 export class AppComponent implements OnInit {
   title = 'eseoshe';
-  width: number = 5;
-  height: number = this.width;
-  scale: number = window.innerWidth /6;
+  width: number = 7;
+  height: number = 4;
+  scale: number = window.innerWidth /9;
 
   _1x1 = new Box();
   _2x1 = new Box();
@@ -77,7 +77,7 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
-    this.scale = window.innerWidth /6;
+    this.scale = window.innerWidth /9;
     this.arrange();
   }
 
@@ -177,8 +177,8 @@ export class AppComponent implements OnInit {
           const x = box.cells[0].x;
           const y = box.cells[0].y;
           newBox.style.transform = "translate(" + scale * x + "px, " + scale * y + "px)";
-          newBox.style.border = '2px solid yellow';
-          newBox.style.background = "url(../../assets/" + box.boxID + ".png)";
+          newBox.style.border = '0px dashed yellow';
+          newBox.style.background = "url(../../assets/" + box.boxID + ".jpg)";
           newBox.style.backgroundRepeat = 'round';
           const bgW = (100 / (box.xlen + 1)).toString();
           const bgH = (100 / (box.ylen + 1)).toString();
