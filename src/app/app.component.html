@@ -4,10 +4,9 @@
   <ng-template ngFor let-r [ngForOf]="this.pos">
     <div class="fila">
       <ng-template ngFor let-cell [ngForOf]="r" let-i="index">
-        <span class="iyo b{{cell.boxID}}">
-          
-          {{cell.boxID > 9 ? cell.boxID:'_'+cell.boxID}}
-        </span>
+        <div class="iyo b{{cell.boxID}}">
+          {{cell.boxID > 9 ? cell.boxID:'__'+cell.boxID}}
+        </div>
       </ng-template>
     </div>
   </ng-template>

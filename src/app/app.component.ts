@@ -9,7 +9,7 @@ import { Box, Cell } from './models';
 })
 export class AppComponent implements OnInit {
   title = 'eseoshe';
-  width: number = 6;
+  width: number = 5;
   height: number = this.width;
 
   _1x1 = new Box();
@@ -149,17 +149,20 @@ export class AppComponent implements OnInit {
   }
 
   arrange(){
-    const scale = 11;
-    const poScale = scale*2.2;
+    const scale = 12;
+    const poScale = scale*10;
     this.boxes.forEach(box=>{
       var newImg = document.createElement("img");
+      console.log(document.getElementsByClassName('b'+box.boxID+' iyo'));
       newImg.style.width = (scale*(box.xlen + 1)).toString() + 'vh';
       newImg.style.height = (scale*(box.ylen + 1)).toString() + 'vh';
       newImg.style.position = "absolute";
       const x = box.cells[0].x;
       const y = box.cells[0].y;
       newImg.style.transform = "translate("+poScale*x +"px, "+poScale*y+"px)";
-      newImg.src = '../../favicon.ico'
+      newImg.style.border = '0.5px solid grey';
+      newImg.src = "../../assets/"+box.boxID+".png";
+      
       document.getElementById("eldiv")?.appendChild(newImg);
     });
   }
