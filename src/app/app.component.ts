@@ -1,5 +1,5 @@
 import { isPlatformServer } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Box, Cell } from './models';
 
 @Component({
@@ -11,6 +11,7 @@ export class AppComponent implements OnInit {
   title = 'eseoshe';
   width: number = 5;
   height: number = this.width;
+  scale: number = window.innerWidth /6;
 
   _1x1 = new Box();
   _2x1 = new Box();
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
     
   }
   ngOnInit(){
+    
     this._2x1.ylen = 1;
     this._2x1.tag = '2x1';
     
@@ -71,6 +73,12 @@ export class AppComponent implements OnInit {
       //console.log(this.boxes)
       this.arrange();
     }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onWindowResize() {
+    this.scale = window.innerWidth /6;
+    this.arrange();
   }
 
   itsFree(x:number, y:number){
@@ -148,29 +156,41 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * max);
   }
 
+
+  
   arrange(){
-    const scale = 12;
-    const poScale = scale*10;
-    this.boxes.forEach(box=>{
-      var newImg = document.createElement("div");
-      console.log(document.getElementsByClassName('b'+box.boxID+' iyo'));
-      const w = box.xlen + 1;
-      const h = box.ylen + 1;
-      newImg.style.width = (scale*w).toString() + '%';
-      newImg.style.height = (scale*h).toString() + '%';
-      newImg.style.position = "absolute";
-      const x = box.cells[0].x;
-      const y = box.cells[0].y;
-      newImg.style.transform = "translate("+poScale*x +"px, "+poScale*y+"px)";
-      newImg.style.border = '2px solid yellow';
-      newImg.style.background = "url(../../assets/"+box.boxID+".png)";
-      newImg.style.backgroundRepeat = 'round';
-      const bgW = (100 /(box.xlen + 1)).toString();
-      const bgH = (100 /(box.ylen + 1)).toString();
-      newImg.style.backgroundSize = bgW +'%'+ bgH +'%';
-      // newImg.style.backgroundSize = '33% 100%';
-      document.getElementById("eldiv")?.appendChild(newImg);
-    });
+    // const scale = 200;
+    // this.scale = window.innerWidth /6;
+    const scale = this.scale;
+    
+    let eldiv = document.getElementById("eldiv");
+    if (eldiv != null) {
+      eldiv.innerHTML = '';
+      this.boxes.forEach(box => {
+        if (eldiv != null) {
+          var newBox = document.createElement("div");
+          const w = box.xlen + 1;
+          const h = box.ylen + 1;
+          newBox.style.width = (scale * w).toString() + 'px';
+          newBox.style.height = (scale * h).toString() + 'px';
+          newBox.style.position = "absolute";
+          const x = box.cells[0].x;
+          const y = box.cells[0].y;
+          newBox.style.transform = "translate(" + scale * x + "px, " + scale * y + "px)";
+          newBox.style.border = '2px solid yellow';
+          newBox.style.background = "url(../../assets/" + box.boxID + ".png)";
+          newBox.style.backgroundRepeat = 'round';
+          const bgW = (100 / (box.xlen + 1)).toString();
+          const bgH = (100 / (box.ylen + 1)).toString();
+          newBox.style.backgroundSize = bgW + '%' + bgH + '%';
+
+          eldiv.appendChild(newBox);
+        }
+      });
+
+      eldiv.style.margin = '10%';
+    }
+    
   }
 
   }
