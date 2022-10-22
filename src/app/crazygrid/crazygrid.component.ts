@@ -64,6 +64,12 @@ export class CrazygridComponent implements OnInit {
     
   }
   ngOnInit(){
+    this.boxes= [];
+    this.cells= [];
+    this.idCount= 0;
+    this.boxesPlaced = false;
+
+    
     this.scale = window.innerWidth /this.windowScale;
     
     this.boxPool =  [this._1x1];
@@ -179,15 +185,15 @@ export class CrazygridComponent implements OnInit {
           const h = box.ylen + 1;
           newBox.style.width = (scale * w).toString() + 'px';
           newBox.style.height = (scale * h).toString() + 'px';
-          newBox.style.position = "absolute";
           newImg.style.width = (scale * w - boxPadding) + 'px';
           newImg.style.height = (scale * h - boxPadding)+ 'px';
-          newImg.style.position = "realtive";
           //POSITION
           const x = box.cells[0].x;
           const y = box.cells[0].y;
+          newBox.style.position = "absolute";
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           //image itself
+          newImg.style.position = "realtive";
           newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
           newImg.style.backgroundRepeat = 'round';
           const bgScale = 100;
@@ -198,6 +204,7 @@ export class CrazygridComponent implements OnInit {
           newImg.style.marginLeft = 'auto';
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
+          newImg.style.boxShadow = '5px 5px 20px grey';
           newBox.appendChild(newImg);
           eldiv.appendChild(newBox);
         }
@@ -208,5 +215,10 @@ export class CrazygridComponent implements OnInit {
       // eldiv.style.display = 'block';
 
     }
+  }
+
+  refresh(){
+    console.log('onini')
+    this.ngOnInit();
   }
 }
