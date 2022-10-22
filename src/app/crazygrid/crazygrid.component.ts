@@ -8,14 +8,13 @@ import { Box, Cell } from '../models';
 })
 export class CrazygridComponent implements OnInit {
 
-  @Input('cols') width: number = 8;
+  @Input('cols') width: number = 7;
   @Input('rows') height: number = 4;
-  @Input('account-id') windowScale: number = 9;
-  @Input('account-id') margin: string = '10%';
-  @Input('account-id') boxPadding: number = 18;
+  @Input('scale') windowScale: number = 9;
+  @Input('outerMargin') margin: string = '10%';
+  @Input('innerMargin') boxPadding: number = 18;
 
-  title = 'eseoshe';
-  
+  title = 'CrazyGrid';
   
   
   scale: number = window.innerWidth /this.windowScale;
