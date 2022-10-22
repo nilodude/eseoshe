@@ -170,6 +170,7 @@ export class AppComponent implements OnInit {
         if (eldiv != null && this.cells) {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
+          //DIMENSIONS
           const w = box.xlen + 1;
           const h = box.ylen + 1;
           newBox.style.width = (scale * w).toString() + 'px';
@@ -177,27 +178,22 @@ export class AppComponent implements OnInit {
           newBox.style.position = "absolute";
           newImg.style.width = (scale * w - margin) + 'px';
           newImg.style.height = (scale * h - margin)+ 'px';
-          newImg.style.position = "relative";
+          newImg.style.position = "realtive";
+          //POSITION
           const x = box.cells[0].x;
           const y = box.cells[0].y;
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
-          //newBox.style.border = '0px dashed yellow';
-          //newImg.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
-          //newImg.style.transform = '0px dashed yellow';
+          //image itself
           newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
-          //newImg.style.backgroundRepeat = 'round';
+          newImg.style.backgroundRepeat = 'round';
           const bgScale = 100;
           const bgW = (bgScale / (box.xlen + 1)).toString();
           const bgH = (bgScale / (box.ylen + 1)).toString();
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
-          newImg.style.borderRadius = "15px";
+          newImg.style.borderRadius = "12px";
          
           newBox.appendChild(newImg);
-
           eldiv.appendChild(newBox);
-
-          //la "verdadera" Box anterior, en realidad no es la anterior en el array, sino la que tiene del boxID de la Cell en la posicion x-1
-         
         }
       });
 
