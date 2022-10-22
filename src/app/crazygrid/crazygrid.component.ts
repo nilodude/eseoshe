@@ -180,6 +180,15 @@ export class CrazygridComponent implements OnInit {
         if (eldiv != null && this.cells) {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
+          let newTitle = document.createElement("h2");
+          //TITLE
+          newTitle.innerHTML= 'LA CAJITA'+box.boxID.toString();
+          newTitle.style.position = 'absolute';
+          newTitle.style.bottom = '15px';
+          newTitle.style.right= '32px';
+          newTitle.style.color = 'black';
+          newTitle.style.boxShadow = 'rgb(120 120 120) -10px 10px 10px,rgb(120 120 120) 10px -10px 15px';
+          newTitle.style.background ='rgb(150 150 150 / 30%)';
           //DIMENSIONS
           const w = box.xlen + 1;
           const h = box.ylen + 1;
@@ -204,8 +213,13 @@ export class CrazygridComponent implements OnInit {
           newImg.style.marginLeft = 'auto';
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
-          newImg.style.boxShadow = '5px 5px 20px grey';
+          newImg.style.boxShadow = 'rgb(110 110 110) 5px 5px 28px inset';
+
+
+
+          
           newBox.appendChild(newImg);
+          newBox.appendChild(newTitle);
           eldiv.appendChild(newBox);
         }
       });
