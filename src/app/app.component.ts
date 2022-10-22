@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
 
   
   arrange(){
-    let margin = 25; //px
+    let margin = 18; //px
     const scale = this.scale;
     
     let eldiv = document.getElementById("eldiv");
@@ -190,7 +190,7 @@ export class AppComponent implements OnInit {
           const bgW = (bgScale / (box.xlen + 1)).toString();
           const bgH = (bgScale / (box.ylen + 1)).toString();
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
-          newImg.style.borderRadius = "12px";
+          newImg.style.borderRadius = scale/13 +'px';
          
           newBox.appendChild(newImg);
           eldiv.appendChild(newBox);
