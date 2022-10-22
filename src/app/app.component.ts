@@ -160,9 +160,7 @@ export class AppComponent implements OnInit {
 
   
   arrange(){
-    let margin = 50; //px
-    let prevW = margin;
-
+    let margin = 25; //px
     const scale = this.scale;
     
     let eldiv = document.getElementById("eldiv");
@@ -177,21 +175,22 @@ export class AppComponent implements OnInit {
           newBox.style.width = (scale * w).toString() + 'px';
           newBox.style.height = (scale * h).toString() + 'px';
           newBox.style.position = "absolute";
-          newImg.style.width = newBox.style.width;
-          newImg.style.height = newBox.style.height;
-          newImg.style.position = "absolute";
+          newImg.style.width = (scale * w - margin) + 'px';
+          newImg.style.height = (scale * h - margin)+ 'px';
+          newImg.style.position = "relative";
           const x = box.cells[0].x;
           const y = box.cells[0].y;
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
-          newBox.style.border = '0px dashed yellow';
-          newImg.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
-          newImg.style.transform = '0px dashed yellow';
+          //newBox.style.border = '0px dashed yellow';
+          //newImg.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
+          //newImg.style.transform = '0px dashed yellow';
           newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
-          newImg.style.backgroundRepeat = 'round';
-          const bgW = (100 / (box.xlen + 1)).toString();
-          const bgH = (100 / (box.ylen + 1)).toString();
+          //newImg.style.backgroundRepeat = 'round';
+          const bgScale = 100;
+          const bgW = (bgScale / (box.xlen + 1)).toString();
+          const bgH = (bgScale / (box.ylen + 1)).toString();
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
-          
+          newImg.style.borderRadius = "15px";
          
           newBox.appendChild(newImg);
 
@@ -202,7 +201,7 @@ export class AppComponent implements OnInit {
         }
       });
 
-      eldiv.style.margin = '1%';
+      eldiv.style.margin = '10%';
     }
     
   }
