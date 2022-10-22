@@ -170,40 +170,31 @@ export class AppComponent implements OnInit {
       eldiv.innerHTML = '';
       this.boxes.forEach(box => {
         if (eldiv != null && this.cells) {
-          var newBox = document.createElement("div");
+          let newBox = document.createElement("div");
+          let newImg = document.createElement("img");
           const w = box.xlen + 1;
           const h = box.ylen + 1;
           newBox.style.width = (scale * w).toString() + 'px';
           newBox.style.height = (scale * h).toString() + 'px';
           newBox.style.position = "absolute";
+          newImg.style.width = newBox.style.width;
+          newImg.style.height = newBox.style.height;
+          newImg.style.position = "absolute";
           const x = box.cells[0].x;
           const y = box.cells[0].y;
-
-          if(x== 0){
-            margin = 0;
-          }else{
-            // const prevBoxID = this.cells[y][x-1] ? this.cells[y][x-1].boxID : 99;
-            // const prevBox = this.boxes.find(b=>b.boxID===prevBoxID);
-            // prevW = 50;
-            margin = margin + prevW;
-            //margin = 50;
-          }
-          const newX = (scale*x)+margin;
-
-          newBox.style.transform = "translate(" + newX  + "px, " + scale * y + "px)";
+          newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           newBox.style.border = '0px dashed yellow';
-          newBox.style.background = "url(../../assets/" + box.boxID + ".jpg)";
-          newBox.style.backgroundRepeat = 'round';
+          newImg.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
+          newImg.style.transform = '0px dashed yellow';
+          newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
+          newImg.style.backgroundRepeat = 'round';
           const bgW = (100 / (box.xlen + 1)).toString();
           const bgH = (100 / (box.ylen + 1)).toString();
-          newBox.style.backgroundSize = bgW + '%' + bgH + '%';
+          newImg.style.backgroundSize = bgW + '%' + bgH + '%';
           
-          // if(x == 0){
-          //   prevW = 0;
-          // }
-          // const marginLeft = (margin +6*prevW/scale).toString() + 'px';
-          // newBox.style.marginLeft = marginLeft;
-          
+         
+          newBox.appendChild(newImg);
+
           eldiv.appendChild(newBox);
 
           //la "verdadera" Box anterior, en realidad no es la anterior en el array, sino la que tiene del boxID de la Cell en la posicion x-1
@@ -211,7 +202,7 @@ export class AppComponent implements OnInit {
         }
       });
 
-      eldiv.style.margin = '10%';
+      eldiv.style.margin = '1%';
     }
     
   }
