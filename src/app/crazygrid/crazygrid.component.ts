@@ -10,13 +10,13 @@ export class CrazygridComponent implements OnInit {
 
   @Input('cols') width: number = 7;
   @Input('rows') height: number = 4;
-  @Input('scale') windowScale: number = 9;
-  @Input('outerMargin') margin: string = '10%';
+  @Input('scale') windowScale: number = 7.15;
+  //[scale]="7.15" ocupa toda la pantalla
+  @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
 
   title = 'CrazyGrid';
-  
-  
+    
   scale: number = window.innerWidth /this.windowScale;
 
   _1x1 = new Box();
@@ -34,12 +34,9 @@ export class CrazygridComponent implements OnInit {
   idCount: number = 0;
   boxesPlaced: boolean = false;
 
+  
   constructor(){
     this.cells = [];
-    
-  }
-  ngOnInit(){
-    
     this._2x1.ylen = 1;
     this._2x1.tag = '2x1';
     
@@ -64,6 +61,11 @@ export class CrazygridComponent implements OnInit {
     this._3x2.tag = '3x2';
 
     this.boxesType= {'1x1': this._1x1, '1x2': this._1x2, '2x1': this._2x1, '2x2': this._2x2,'1x3': this._1x3, '2x3': this._2x3, '3x2': this._3x2};
+    
+  }
+  ngOnInit(){
+    this.scale = window.innerWidth /this.windowScale;
+    
     this.boxPool =  [this._1x1];
 
     for(let y =0; y<= this.height ;y++){
@@ -76,7 +78,6 @@ export class CrazygridComponent implements OnInit {
     }
 
     if(this.boxesPlaced){
-      //console.log(this.boxes)
       this.arrange();
     }
   }
@@ -163,7 +164,7 @@ export class CrazygridComponent implements OnInit {
   }
 
   arrange(){
-    let margin = this.boxPadding;
+    let boxPadding = this.boxPadding;
     const scale = this.scale;
     
     let eldiv = document.getElementById("eldiv");
@@ -179,8 +180,8 @@ export class CrazygridComponent implements OnInit {
           newBox.style.width = (scale * w).toString() + 'px';
           newBox.style.height = (scale * h).toString() + 'px';
           newBox.style.position = "absolute";
-          newImg.style.width = (scale * w - margin) + 'px';
-          newImg.style.height = (scale * h - margin)+ 'px';
+          newImg.style.width = (scale * w - boxPadding) + 'px';
+          newImg.style.height = (scale * h - boxPadding)+ 'px';
           newImg.style.position = "realtive";
           //POSITION
           const x = box.cells[0].x;
@@ -202,6 +203,10 @@ export class CrazygridComponent implements OnInit {
         }
       });
       eldiv.style.margin = this.margin;
+      // eldiv.style.marginLeft = 'auto';
+      // eldiv.style.marginRight = 'auto';
+      // eldiv.style.display = 'block';
+
     }
   }
 }
