@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Box, Cell } from '../models';
 
 @Component({
@@ -8,10 +8,16 @@ import { Box, Cell } from '../models';
 })
 export class CrazygridComponent implements OnInit {
 
+  @Input('cols') width: number = 8;
+  @Input('rows') height: number = 4;
+  @Input('account-id') windowScale: number = 9;
+  @Input('account-id') margin: string = '10%';
+  @Input('account-id') boxPadding: number = 18;
+
   title = 'eseoshe';
-  width: number = 8;
-  height: number = 4;
-  windowScale: number = 9;
+  
+  
+  
   scale: number = window.innerWidth /this.windowScale;
 
   _1x1 = new Box();
@@ -61,12 +67,12 @@ export class CrazygridComponent implements OnInit {
     this.boxesType= {'1x1': this._1x1, '1x2': this._1x2, '2x1': this._2x1, '2x2': this._2x2,'1x3': this._1x3, '2x3': this._2x3, '3x2': this._3x2};
     this.boxPool =  [this._1x1];
 
-    for(let y =0; y< this.height ;y++){
-      for(let x =0; x< this.width ;x++){
+    for(let y =0; y<= this.height ;y++){
+      for(let x =0; x<= this.width ;x++){
         if(this.itsFree(x,y)){
           this.placeBox(x,y);
         }
-        this.boxesPlaced = (y === (this.height -1) && x === (this.width -1));
+        this.boxesPlaced = (y === (this.height ) && x === (this.width ));
       }
     }
 
@@ -84,7 +90,7 @@ export class CrazygridComponent implements OnInit {
 
   itsFree(x:number, y:number){
     let withinBounds = false;
-    withinBounds = x<this.width -1 && y<this.height-1;
+    withinBounds = x<this.width  && y<this.height;
     let exists = this.cells.length > 0 && this.cells[y] != undefined && this.cells[y][x] != undefined;
     
     return withinBounds && (!exists || (exists && this.cells[y][x].free));
@@ -157,10 +163,8 @@ export class CrazygridComponent implements OnInit {
     return Math.floor(Math.random() * max);
   }
 
-
-  
   arrange(){
-    let margin = 18; //px
+    let margin = this.boxPadding;
     const scale = this.scale;
     
     let eldiv = document.getElementById("eldiv");
@@ -198,10 +202,7 @@ export class CrazygridComponent implements OnInit {
           eldiv.appendChild(newBox);
         }
       });
-
-      eldiv.style.margin = '10%';
+      eldiv.style.margin = this.margin;
     }
-    
   }
-
 }
