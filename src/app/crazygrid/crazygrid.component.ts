@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { Box, Cell } from '../models';
 
 @Component({
@@ -18,7 +18,6 @@ export class CrazygridComponent implements OnInit {
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
-  contenido: string = '<p-button (onClick)="this.like(b.boxID)" icon="pi pi-heart" styleClass="p-button-outlined p-button-rounded p-button-help"><button pripple="" class="p-ripple p-element p-button-outlined p-button-rounded p-button-help p-button p-component p-button-icon-only" ng-reflect-ng-class="[object Object]" type="button"><!--bindings={}--><span class="pi pi-heart p-button-icon" ng-reflect-ng-class="[object Object]" aria-hidden="true"></span><!--bindings={   "ng-reflect-ng-if": "pi pi-sync"  }--><span class="p-button-label" aria-hidden="true">&nbsp;</span><!--bindings={    "ng-reflect-ng-if": "true"  }--><!--bindings={}--></button></p-button><p-button (onClick)="this.zoom(b.boxID)" icon="pi pi-search-plus"  styleClass="p-button-outlined p-button-rounded p-button-help"><button pripple="" class="p-ripple p-element p-button-outlined p-button-rounded p-button-help p-button p-component p-button-icon-only" ng-reflect-ng-class="[object Object]" type="button"><!--bindings={}--><span class="pi pi-search-plus p-button-icon" ng-reflect-ng-class="[object Object]" aria-hidden="true"></span><!--bindings={    "ng-reflect-ng-if": "pi pi-sync"  }--><span class="p-button-label" aria-hidden="true">&nbsp;</span><!--bindings={    "ng-reflect-ng-if": "true"  }--><!--bindings={}--></button></p-button>'
   _1x1 = new Box();
   _2x1 = new Box();
   _1x2 = new Box();
@@ -33,10 +32,11 @@ export class CrazygridComponent implements OnInit {
   cells: any;
   idCount: number = 0;
   boxesPlaced: boolean = false;
+  public removeEventListener: (() => void) | undefined;
 
   
   constructor(
-    private renderer:Renderer2, 
+    private renderer: Renderer2, private elementRef: ElementRef 
   ){
     this.cells = [];
     this._2x1.ylen = 1;
@@ -88,6 +88,19 @@ export class CrazygridComponent implements OnInit {
     if(this.boxesPlaced){
       this.arrange();
     }
+
+    this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
+      if (event.target instanceof HTMLImageElement) {
+        const id = event.target.id.toString();
+        if(id.includes('like')){
+          this.like(id[id.length-1]);
+        }
+        if(id.includes('zoom')){
+          this.zoom(id[id.length-1]);
+        }
+      }
+    });
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -231,14 +244,34 @@ export class CrazygridComponent implements OnInit {
           
           //BUTTONS
           let buttons = document.createElement("div");
-          const idLike = 'buttons' + box.boxID;
-          buttons.id = idLike;
+
+          const idButtons = 'buttons' + box.boxID;
+          buttons.id = idButtons;
           buttons.style.position = 'absolute';
-          buttons.style.top = '20%';
-          buttons.style.left = '80%';
-          buttons.style.transform = 'translate(-10%, -80%)';
+          buttons.style.top = scale/19 +'px';
+          buttons.style.right = scale/13 +'px';
+          //buttons.style.transform = 'translate(-10%, -80%)';
           buttons.style.zIndex = '1007';
-          buttons.innerHTML = this.contenido;
+          buttons.style.width = scale/4 +'px';;
+
+          let likeBtn = document.createElement("img");
+          likeBtn.id = 'like' + box.boxID;
+          likeBtn.style.position = "realtive";
+          likeBtn.style.width = scale/11 +'px';
+          likeBtn.src = '../../assets/icons/heart.svg';
+          likeBtn.style.zIndex = '1007';
+          
+          let zoomBtn = document.createElement("img");
+          zoomBtn.id = 'zoom' + box.boxID;
+          zoomBtn.style.position = "realtive";
+          zoomBtn.style.width = scale/11 +'px';
+          zoomBtn.src = '../../assets/icons/zoom.svg';
+          zoomBtn.style.zIndex = '1007';
+          zoomBtn.style.marginLeft = scale/25 +'px';
+          
+          buttons.appendChild(likeBtn);
+          buttons.appendChild(zoomBtn);
+          // buttons.innerHTML = this.contenido(box.boxID);
 
           newBox.appendChild(buttons);
           newBox.appendChild(newImg);
