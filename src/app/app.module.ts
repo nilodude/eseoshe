@@ -10,7 +10,7 @@ import {ButtonModule} from 'primeng/button';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
     CrazygridComponent
   ],
   imports: [
