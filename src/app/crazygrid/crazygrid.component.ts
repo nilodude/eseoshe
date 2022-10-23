@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { Box, Cell } from '../models';
 
 @Component({
@@ -18,7 +18,7 @@ export class CrazygridComponent implements OnInit {
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
-
+  contenido: string = '<p-button (onClick)="this.like(b.boxID)" icon="pi pi-heart" styleClass="p-button-outlined p-button-rounded p-button-help"><button pripple="" class="p-ripple p-element p-button-outlined p-button-rounded p-button-help p-button p-component p-button-icon-only" ng-reflect-ng-class="[object Object]" type="button"><!--bindings={}--><span class="pi pi-heart p-button-icon" ng-reflect-ng-class="[object Object]" aria-hidden="true"></span><!--bindings={   "ng-reflect-ng-if": "pi pi-sync"  }--><span class="p-button-label" aria-hidden="true">&nbsp;</span><!--bindings={    "ng-reflect-ng-if": "true"  }--><!--bindings={}--></button></p-button><p-button (onClick)="this.zoom(b.boxID)" icon="pi pi-search-plus"  styleClass="p-button-outlined p-button-rounded p-button-help"><button pripple="" class="p-ripple p-element p-button-outlined p-button-rounded p-button-help p-button p-component p-button-icon-only" ng-reflect-ng-class="[object Object]" type="button"><!--bindings={}--><span class="pi pi-search-plus p-button-icon" ng-reflect-ng-class="[object Object]" aria-hidden="true"></span><!--bindings={    "ng-reflect-ng-if": "pi pi-sync"  }--><span class="p-button-label" aria-hidden="true">&nbsp;</span><!--bindings={    "ng-reflect-ng-if": "true"  }--><!--bindings={}--></button></p-button>'
   _1x1 = new Box();
   _2x1 = new Box();
   _1x2 = new Box();
@@ -35,7 +35,9 @@ export class CrazygridComponent implements OnInit {
   boxesPlaced: boolean = false;
 
   
-  constructor(){
+  constructor(
+    private renderer:Renderer2, 
+  ){
     this.cells = [];
     this._2x1.ylen = 1;
     this._2x1.tag = '2x1';
@@ -181,7 +183,7 @@ export class CrazygridComponent implements OnInit {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
           let newTitle = document.createElement("h2");
-          
+                   
           //TITLE
           newTitle.innerHTML= 'LA CAJITA '+box.boxID.toString();
           newTitle.style.position = 'absolute';
@@ -223,9 +225,23 @@ export class CrazygridComponent implements OnInit {
           newImg.style.display = 'block';
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
 
- 
+          //ONMOUSEOVER
+          newImg.onmouseover = ()=>this.mouseOver();
+          newImg.onmouseout = ()=>this.mouseOut();
+          
+          //BUTTONS
+          let buttons = document.createElement("div");
+          const idLike = 'buttons' + box.boxID;
+          buttons.id = idLike;
+          buttons.style.position = 'absolute';
+          buttons.style.top = '20%';
+          buttons.style.left = '80%';
+          buttons.style.transform = 'translate(-10%, -80%)';
+          buttons.style.zIndex = '1007';
+          buttons.innerHTML = this.contenido;
+
+          newBox.appendChild(buttons);
           newBox.appendChild(newImg);
-          newBox.appendChild(newTitle);
           eldiv.appendChild(newBox);
         }
       });
@@ -235,6 +251,21 @@ export class CrazygridComponent implements OnInit {
       // eldiv.style.display = 'block';
 
     }
+  }
+
+  mouseOver(){
+    
+  }
+
+  mouseOut(){
+    
+  }
+  like(boxID: number){
+    console.log('liked box '+boxID);
+  }
+
+  zoom(boxID: number){
+    console.log('zoomed box '+boxID);
   }
 
   refresh(){
