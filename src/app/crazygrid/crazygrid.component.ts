@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { Box, Cell } from '../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crazygrid',
@@ -10,12 +11,17 @@ export class CrazygridComponent implements OnInit {
 
   @Input('buttons') buttons: boolean = false;
   @Input('cols') width: number = 7;
-  @Input('rows') height: number = 4;
+  @Input('rows') height: number = 3;
   @Input('scale') windowScale: number = 7.15;
   //[scale]="7.15" ocupa toda la pantalla
   @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
-
+  categories: any[] =[
+    {label:'Backgrounds', value:'0'},
+    {label:'Trees', value:'1'},
+    {label:'Animals', value:'2'},
+    {label:'Flowers', value:'3'},
+    {label:'Lines', value:'4'}];
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
@@ -36,7 +42,7 @@ export class CrazygridComponent implements OnInit {
   public removeEventListener: (() => void) | undefined;
   
   constructor(
-    private renderer: Renderer2, private elementRef: ElementRef 
+    private renderer: Renderer2, private elementRef: ElementRef ,private router: Router,
   ){
     this.cells = [];
     this._2x1.ylen = 1;
@@ -201,7 +207,7 @@ export class CrazygridComponent implements OnInit {
           let newTitle = document.createElement("h2");
                    
           //TITLE
-          newTitle.innerHTML= 'LA CAJITA '+box.boxID.toString();
+          newTitle.innerHTML= this.categories.find(c=>c.value == box.boxID)?.label;
           newTitle.style.position = 'absolute';
           newTitle.style.top = '41%';
           newTitle.style.left= '50%';
@@ -214,6 +220,7 @@ export class CrazygridComponent implements OnInit {
           newTitle.style.borderRadius = scale/20 +'px';
           newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
           newTitle.style.width = '180px';
+          newBox.appendChild(newTitle);
           //newTitle.style.border = '0.1px gray';
           //DIMENSIONS
           const w = box.xlen + 1;
@@ -287,27 +294,34 @@ export class CrazygridComponent implements OnInit {
   }
 
   mouseOver(boxID: number){
-    console.log('OVER '+boxID);
+    console.log('OVER '+this.categoryName(boxID));
   }
 
   mouseOut(boxID: number){
-    console.log('OUT '+boxID);
+    console.log('OUT '+this.categoryName(boxID));
   }
 
   like(boxID: number){
-    console.log('liked box '+boxID);
+    console.log('liked box '+this.categoryName(boxID));
   }
 
   zoom(boxID: number){
-    console.log('zoomed box '+boxID);
+    console.log('zoomed box '+this.categoryName(boxID));
   }
 
   clickImage(boxID: number){
-    console.log('clicked box '+boxID);
+    
+    console.log('clicked box '+this.categoryName(boxID));
+    localStorage.setItem('category',boxID.toString());
+    this.router.navigate(['/category']);
   }
 
   refresh(){
     console.log('onini')
     this.ngOnInit();
+  }
+
+  categoryName(value: number){
+    return this.categories.find(c=>c.value == value)?.label;
   }
 }

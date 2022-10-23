@@ -1,3 +1,18 @@
-<div>
-    hola
+<div class="up">
+    <p-dropdown [options]="categories" [(ngModel)]="this.category" scrollHeight="100%" (onChange)="this.changeCategory()"></p-dropdown>
+    <div class="categoryName">
+        {{this.categoryName}}
+    </div>
+    <div class="userPanel">
+        <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL" class="p-button-raised p-button-secondary p-button-text"></button>
+    </div>
+
+</div>
+<div class="gallery">
+    <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
+        <div class="imDiv">
+            <img class="im" src="../../assets/{{im}}.jpg">
+        </div>
+      </ng-template>
+
 </div>
