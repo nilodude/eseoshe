@@ -1,18 +1,10 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { Box, Cell } from './models';
-
-@Component({
+import { Component} from '@angular/core';
+ @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-
-
-  constructor(){
-    
+export class AppComponent {
+  title = 'Eseoshe';
+   
   }
-  ngOnInit(){
-    
-  }
-}
