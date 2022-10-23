@@ -8,6 +8,7 @@ import { Box, Cell } from '../models';
 })
 export class CrazygridComponent implements OnInit {
 
+  @Input('buttons') buttons: boolean = false;
   @Input('cols') width: number = 7;
   @Input('rows') height: number = 4;
   @Input('scale') windowScale: number = 7.15;
@@ -33,7 +34,6 @@ export class CrazygridComponent implements OnInit {
   idCount: number = 0;
   boxesPlaced: boolean = false;
   public removeEventListener: (() => void) | undefined;
-
   
   constructor(
     private renderer: Renderer2, private elementRef: ElementRef 
@@ -242,38 +242,34 @@ export class CrazygridComponent implements OnInit {
           newImg.onmouseover = ()=>this.mouseOver();
           newImg.onmouseout = ()=>this.mouseOut();
           
-          //BUTTONS
-          let buttons = document.createElement("div");
+          if (this.buttons) {
+            //BUTTONS
+            let buttons = document.createElement("div");
+            const idButtons = 'buttons' + box.boxID;
+            buttons.id = idButtons;
+            buttons.style.position = 'absolute';
+            buttons.style.top = scale / 19 + 'px';
+            buttons.style.right = scale / 13 + 'px';
+            buttons.style.zIndex = '1007';
+            buttons.style.width = scale / 4 + 'px';;
+            let likeBtn = document.createElement("img");
+            likeBtn.id = 'like' + box.boxID;
+            likeBtn.style.position = "realtive";
+            likeBtn.style.width = scale / 11 + 'px';
+            likeBtn.src = '../../assets/icons/heart.svg';
+            likeBtn.style.zIndex = '1007';
+            let zoomBtn = document.createElement("img");
+            zoomBtn.id = 'zoom' + box.boxID;
+            zoomBtn.style.position = "realtive";
+            zoomBtn.style.width = scale / 11 + 'px';
+            zoomBtn.src = '../../assets/icons/zoom.svg';
+            zoomBtn.style.zIndex = '1007';
+            zoomBtn.style.marginLeft = scale / 25 + 'px';
 
-          const idButtons = 'buttons' + box.boxID;
-          buttons.id = idButtons;
-          buttons.style.position = 'absolute';
-          buttons.style.top = scale/19 +'px';
-          buttons.style.right = scale/13 +'px';
-          //buttons.style.transform = 'translate(-10%, -80%)';
-          buttons.style.zIndex = '1007';
-          buttons.style.width = scale/4 +'px';;
-
-          let likeBtn = document.createElement("img");
-          likeBtn.id = 'like' + box.boxID;
-          likeBtn.style.position = "realtive";
-          likeBtn.style.width = scale/11 +'px';
-          likeBtn.src = '../../assets/icons/heart.svg';
-          likeBtn.style.zIndex = '1007';
-          
-          let zoomBtn = document.createElement("img");
-          zoomBtn.id = 'zoom' + box.boxID;
-          zoomBtn.style.position = "realtive";
-          zoomBtn.style.width = scale/11 +'px';
-          zoomBtn.src = '../../assets/icons/zoom.svg';
-          zoomBtn.style.zIndex = '1007';
-          zoomBtn.style.marginLeft = scale/25 +'px';
-          
-          buttons.appendChild(likeBtn);
-          buttons.appendChild(zoomBtn);
-          // buttons.innerHTML = this.contenido(box.boxID);
-
-          newBox.appendChild(buttons);
+            buttons.appendChild(likeBtn);
+            buttons.appendChild(zoomBtn);
+            newBox.appendChild(buttons);
+          }
           newBox.appendChild(newImg);
           eldiv.appendChild(newBox);
         }
