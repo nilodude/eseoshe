@@ -181,7 +181,22 @@ export class CrazygridComponent implements OnInit {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
           let newTitle = document.createElement("h2");
-                  
+          
+          //TITLE
+          newTitle.innerHTML= 'LA CAJITA '+box.boxID.toString();
+          newTitle.style.position = 'absolute';
+          newTitle.style.top = '41%';
+          newTitle.style.left= '50%';
+          newTitle.style.transform =  'translate(-50%, -50%)';
+          newTitle.style.color = 'rgba(1,1,1,0.7)';
+          newTitle.style.font = 'small-caps bold 18px/30px Verdana';
+          newTitle.style.textAlign = 'center';
+          newTitle.style.whiteSpace = 'nowrap';
+          newTitle.style.background = 'rgba(255,255,255,1)';
+          newTitle.style.borderRadius = scale/20 +'px';
+          newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
+          newTitle.style.width = '180px';
+          //newTitle.style.border = '0.1px gray';
           //DIMENSIONS
           const w = box.xlen + 1;
           const h = box.ylen + 1;
@@ -206,16 +221,9 @@ export class CrazygridComponent implements OnInit {
           newImg.style.marginLeft = 'auto';
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
-          //newImg.style.boxShadow = 'rgb(110 110 110) 5px 5px 28px inset';
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
 
-           //TITLE
-           newTitle.innerHTML= 'LA CAJITA'+box.boxID.toString();
-           newTitle.style.position = 'absolute';
-           newTitle.style.bottom = '15px';
-           newTitle.style.right= '32px';
-           newTitle.style.color = 'black';
-           
+ 
           newBox.appendChild(newImg);
           newBox.appendChild(newTitle);
           eldiv.appendChild(newBox);
