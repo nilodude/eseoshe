@@ -181,14 +181,7 @@ export class CrazygridComponent implements OnInit {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
           let newTitle = document.createElement("h2");
-          //TITLE
-          newTitle.innerHTML= 'LA CAJITA'+box.boxID.toString();
-          newTitle.style.position = 'absolute';
-          newTitle.style.bottom = '15px';
-          newTitle.style.right= '32px';
-          newTitle.style.color = 'black';
-          newTitle.style.boxShadow = 'rgb(120 120 120) -10px 10px 10px,rgb(120 120 120) 10px -10px 15px';
-          newTitle.style.background ='rgb(150 150 150 / 30%)';
+                  
           //DIMENSIONS
           const w = box.xlen + 1;
           const h = box.ylen + 1;
@@ -213,11 +206,16 @@ export class CrazygridComponent implements OnInit {
           newImg.style.marginLeft = 'auto';
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
-          newImg.style.boxShadow = 'rgb(110 110 110) 5px 5px 28px inset';
+          //newImg.style.boxShadow = 'rgb(110 110 110) 5px 5px 28px inset';
+          newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
 
-
-
-          
+           //TITLE
+           newTitle.innerHTML= 'LA CAJITA'+box.boxID.toString();
+           newTitle.style.position = 'absolute';
+           newTitle.style.bottom = '15px';
+           newTitle.style.right= '32px';
+           newTitle.style.color = 'black';
+           
           newBox.appendChild(newImg);
           newBox.appendChild(newTitle);
           eldiv.appendChild(newBox);
