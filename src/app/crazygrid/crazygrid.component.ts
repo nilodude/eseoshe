@@ -98,6 +98,9 @@ export class CrazygridComponent implements OnInit {
         if(id.includes('zoom')){
           this.zoom(id[id.length-1]);
         }
+        if(id.includes('im')){
+          this.clickImage(id[id.length-1]);
+        }
       }
     });
 
@@ -225,6 +228,7 @@ export class CrazygridComponent implements OnInit {
           newBox.style.position = "absolute";
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           //image itself
+          newImg.id = 'im'+box.boxID;
           newImg.style.position = "realtive";
           newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
           newImg.style.backgroundRepeat = 'round';
@@ -239,8 +243,8 @@ export class CrazygridComponent implements OnInit {
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
 
           //ONMOUSEOVER
-          newImg.onmouseover = ()=>this.mouseOver();
-          newImg.onmouseout = ()=>this.mouseOut();
+          newImg.onmouseover = ()=>this.mouseOver(box.boxID);
+          newImg.onmouseout = ()=>this.mouseOut(box.boxID);
           
           if (this.buttons) {
             //BUTTONS
@@ -282,19 +286,24 @@ export class CrazygridComponent implements OnInit {
     }
   }
 
-  mouseOver(){
-    
+  mouseOver(boxID: number){
+    console.log('OVER '+boxID);
   }
 
-  mouseOut(){
-    
+  mouseOut(boxID: number){
+    console.log('OUT '+boxID);
   }
+
   like(boxID: number){
     console.log('liked box '+boxID);
   }
 
   zoom(boxID: number){
     console.log('zoomed box '+boxID);
+  }
+
+  clickImage(boxID: number){
+    console.log('clicked box '+boxID);
   }
 
   refresh(){
