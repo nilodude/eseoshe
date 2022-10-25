@@ -1,10 +1,18 @@
 .all{
-    margin: 1% 5%;
+    margin: 0% 5%;
+    padding-top: 1px;
+    display: flex;
+    overflow: auto;
 }
 
 .up{
+    position: -webkit-sticky;
+    position:sticky;
+    top: 0;
+    margin-top: 6%;
     display: flex;
     justify-content:space-between;
+    align-self: flex-start;
     background-color: lightblue;
     .categoryName{
         background-color: lightcoral;
@@ -20,7 +28,7 @@
     justify-content: space-between;
 }
 .imDiv{
-    height: 100%;
+    height: inherit;
     //width:25%;
     //align-self: center;
     //flex-grow: 2;
@@ -29,6 +37,6 @@
 }
 
 .im{
-    height: 100%; //height un numero (el del div) y width auto hace lo que yo quiero pero no desde aqui desde el navegador ya
+    height: inherit; //height un numero (el del div) y width auto hace lo que yo quiero pero no desde aqui desde el navegador ya
     width:100%;
 }
