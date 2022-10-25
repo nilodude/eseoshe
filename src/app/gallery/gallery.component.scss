@@ -18,16 +18,17 @@
     // place-content: space-evenly;
     display: flex;
     flex-wrap:  wrap;
-    //align-content:center;
-    //align-items: flex-end;
-    //align-content: stretch;
+    align-content:center;
+    align-items: flex-end;
+    align-content: stretch;
+    
 }
 .imDiv{
-    height: 25%;
-    width:25%;
-    align-self: center;
+    height: 100%;
+    //width:25%;
+    //align-self: center;
     //flex-grow: 2;
-    //flex-basis: content;
+    flex-basis: 25%;
     //place-self: center;
 }
 

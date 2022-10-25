@@ -8,9 +8,9 @@
     </div>
 
 </div>
-<div class="gallery">
+<div class="gallery flex">
     <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
-        <div class="imDiv">
+        <div class="imDiv flex-grow-1">
             <img class="im" src="../../assets/{{im}}.jpg">
         </div>
     </ng-template>
