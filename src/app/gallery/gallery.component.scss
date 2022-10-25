@@ -23,7 +23,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1% 0%;
+    margin: 1% 0.25%;
     gap: 5px;
     justify-content: space-between;
 }
@@ -31,10 +31,10 @@
     height: inherit;
     flex-basis: 0%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .im{
-    height: 40vh; //height un numero (el del div) y width auto hace lo que yo quiero pero no desde aqui desde el navegador ya
+    height: 35vh; //height un numero (el del div) y width auto hace lo que yo quiero pero no desde aqui desde el navegador ya
     width:auto;
 }
