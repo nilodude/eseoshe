@@ -50,4 +50,13 @@ export class GalleryComponent implements OnInit {
     localStorage.setItem('category',this.category.toString());
     this.ngOnInit();
   }
+
+  like(im: number){
+    console.log('liked image '+im);
+  }
+
+  zoom(im: number){
+    console.log('zoomed image '+im);
+  }
+
 }
