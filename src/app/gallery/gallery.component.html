@@ -16,14 +16,15 @@
         <div class="gallery flex justify-content-center sm:justify-content-between">
             <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
                 <div class="imDiv">
-                    <div>
+                    
                         <img class="im" src="../../assets/{{im}}.jpg">
-                        <p-button class="overlay likeIcon" (onClick)="this.like(i)" icon="pi pi-heart"
+                        <div class="overlay flex">
+                            <p-button class="likeIcon" (onClick)="this.like(i)" icon="pi pi-heart"
                                 styleClass="p-button-rounded p-button-text p-button-secondary"></p-button>
-                        <p-button class="overlay zoomIcon" (onClick)="this.zoom(i)" icon="pi pi-search-plus"
+                            <p-button class="zoomIcon" (onClick)="this.zoom(i)" icon="pi pi-search-plus"
                                 styleClass="p-button-rounded p-button-text p-button-secondary"></p-button>
                         
-                    </div>
+                        </div>
                 </div>
             </ng-template>
         </div>
