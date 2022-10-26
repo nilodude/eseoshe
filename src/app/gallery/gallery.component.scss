@@ -2,18 +2,13 @@
     margin: 0% 5%;
     padding-top: 1px;
     display: flex;
-    overflow: auto;
-    justify-content:start;
 }
 
 .up{
-    position: -webkit-sticky;
-    position:sticky;
-    top: 0px;
+    top: 1%;
     margin-top: 6%;
     display: flex;
     justify-content:space-between;
-    align-self: flex-start;
     background-color: lightblue;
     .categoryName{
         background-color: lightcoral;
