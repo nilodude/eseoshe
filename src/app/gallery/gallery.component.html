@@ -1,7 +1,7 @@
-<div class="overflow-hidden indigo-container">
-    <div class="all overflow-auto">
+<div class="overflow-hidden" >
+    <div class="overflow-auto all">
         <div>
-            <div class="up sticky">
+            <div class="sticky top-0 up">
                 <p-dropdown [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
                     (onChange)="this.changeCategory()"></p-dropdown>
                 <div class="categoryName">
@@ -25,10 +25,10 @@
     </div>
 </div>
     
-<div class="overflow-hidden indigo-container">
-        <div class="overflow-auto border-round border-1 border-indigo-500" style="height: 300px">
+<div class="overflow-hidden">
+        <div class="overflow-auto border-indigo-500" style="height: 300px">
             <div>
-                <div class="sticky top-0 font-bold text-white bg-indigo-500 p-4">
+                <div class="sticky top-0 bg-indigo-500 p-4">
                     Sticky Title 1
                 </div>
                 <p class="surface-overlay p-4 m-0">
@@ -59,4 +59,4 @@
             </div>
            
         </div>
-    </div>
+</div>
