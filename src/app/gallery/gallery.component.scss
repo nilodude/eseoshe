@@ -35,11 +35,14 @@
     display: flex;
     justify-content: center;
     position: relative;
-    //flex-grow: 1;
+    //flex-grow: 1; 
+    // el flex grow coloca bien las imagenes pero 
+    //hace que el div que las contiene sea mas grande y los iconos like y zoom
+    //salen fuera de la imagen
 }
 
 .im{
-    height: 35vh; //height un numero (el del div) y width auto hace lo que yo quiero pero no desde aqui desde el navegador ya
+    height: 35vh; 
     width:auto;
     display: block;
 }
@@ -54,36 +57,11 @@
     width: 100%;
     opacity: 0;
     transition: .2s ease;
-    //background-color: rgba(204, 204, 204, 0.459);
     border-radius: 4px;
     z-index: 1007;
   }
-
-//   .overlay {
-//     position: absolute;
-//     top: 0;
-//     bottom: 0;
-//     left: 0;
-//     right: 0;
-//     height: 100%;
-//     width: 100%;
-//     opacity: 0;
-//     transition: .3s ease;
-//     background-color: rgb(95, 92, 92);
-//     border-radius: 4px;
-//   }
 
   .imDiv:hover .overlay {
     opacity: 1;
   }
   
-//   .icon {
-//     color: white;
-//     font-size: 100px;
-//     position: absolute;
-//     top: 50%;
-//     left: 50%;
-//     transform: translate(-50%, -50%);
-//     -ms-transform: translate(-50%, -50%);
-//     text-align: center;
-//   }
