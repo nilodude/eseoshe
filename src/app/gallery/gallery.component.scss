@@ -78,9 +78,28 @@
 }
 
 .likeDiv, .zoomDiv{
-    width:2.7vh;
-    height: auto;
-    margin:1vh;
+    width: 2.7vh;
+    height: 2.7vh;
+    margin:1vh 0.5vh;
+}
+.likedDiv{
+    //mask-image: url(../../assets/icons/heart-filled.svg);
+    //background-color: rgb(189, 11, 11);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.likeDiv{
+    mask-image: url(../../assets/icons/heart.svg);
+    background-color: rgb(189, 11, 11);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.zoomDiv{
+    //background-image: '../../assets/icons/zoom.svg';
+    background-size: contain;
+    background-position: center;
 }
 .zoomIcon{
     width:2.7vh;

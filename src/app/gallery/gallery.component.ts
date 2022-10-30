@@ -16,20 +16,29 @@ export class GalleryComponent implements OnInit {
   
   category: string = '';
   categoryName: string = '';
-  images2: any[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  imagesRaw: any[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   images: any[] = [];
+  liked: any = [false];
+
   constructor() {
-    
+    this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
+    if(this.liked == null){
+      this.liked = [];
+    }
    }
 
   ngOnInit(): void {
     this.category = localStorage.getItem('category') as string;
-    
     this.categoryName = this.categories.find(c=>c.value === this.category)?.label as string;
     console.log('into category '+ this.categoryName);
     
-    
-    let ims = structuredClone(this.images2);
+    this.imagesRaw.map(i=>{
+      if(this.liked[i] == null){
+        this.liked[i] = this.liked[i] != null && this.liked[i];
+      }
+    })
+
+    let ims = structuredClone(this.imagesRaw);
     let rand = '';
     while(
       ims.findIndex(function(v, i) {
@@ -38,7 +47,10 @@ export class GalleryComponent implements OnInit {
     ) {
       ims.sort(function() { return Math.random() - 0.5; });
     }
-    this.images = ims;
+    this.images = ims.map(i=>{
+      return {name: i, liked: this.liked[i]}
+    });
+    
     console.log(this.images);
   }
 
@@ -52,7 +64,9 @@ export class GalleryComponent implements OnInit {
   }
 
   like(im: number){
-    console.log('liked image '+im);
+    this.liked[im] = !this.liked[im];
+    console.log((this.liked[im] ? 'liked':'unliked')+ ' image '+im);
+    localStorage.setItem('liked', JSON.stringify(this.liked));
   }
 
   zoom(im: number){
