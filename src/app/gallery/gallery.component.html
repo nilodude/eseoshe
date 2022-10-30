@@ -19,11 +19,10 @@
                     
                         <img class="im" src="../../assets/{{im}}.jpg">
                         <div class="overlay flex">
-                            <p-button class="likeIcon" (onClick)="this.like(i)" icon="pi pi-heart"
-                                styleClass="p-button-rounded p-button-text p-button-secondary"></p-button>
-                            <p-button class="zoomIcon" (onClick)="this.zoom(i)" icon="pi pi-search-plus"
-                                styleClass="p-button-rounded p-button-text p-button-secondary"></p-button>
-                        
+                            <div class="likeDiv" (click)="this.like(i)">
+                                <img  class="likeIcon"src='../../assets/icons/heart.svg'/></div>
+                            <div class="zoomDiv" (click)="this.zoom(i)">
+                                <img class="zoomIcon" src='../../assets/icons/zoom.svg'/> </div>
                         </div>
                 </div>
             </ng-template>

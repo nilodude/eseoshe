@@ -65,12 +65,24 @@
     border-radius: 4px;
     z-index: 1007;
     justify-content: flex-end;
+    align-items:flex-start;
 }
 
 .imDiv:hover .overlay {
     opacity: 1;
+    background-color: rgba(211, 211, 211, 0.356);
 }
 .imDiv:hover .im {
     opacity: 0.5;
     transition: .2s ease;
+}
+
+.likeDiv, .zoomDiv{
+    width:2.7vh;
+    height: auto;
+    margin:1vh;
+}
+.zoomIcon{
+    width:2.7vh;
+    height: auto;
 }
