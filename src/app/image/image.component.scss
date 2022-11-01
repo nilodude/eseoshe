@@ -1,3 +1,7 @@
+$titleSize: 4vh;
+$dataTitleSize: 2vh;
+
+
 ::ng-deep .tooltip .p-tooltip-text{
     background-color: rgba(255, 255, 255, 0.096);
     color: gray;
@@ -22,13 +26,13 @@
     transition: .3s ease;
     display: flex;
     transition: letter-spacing .3s cubic-bezier(0.165, 2, 0.44, 1);
-    font-size: medium;
+    font-size: 1.5vh;
     padding: 8%;
 }
 .breadcrumbString:hover{
     letter-spacing: 0.7vh;
-    font-size: large;
-    padding: 5%;
+    font-size: 2vh;
+    padding: 1vh;
 }
 
 .categoryName:hover{
@@ -45,9 +49,13 @@
     height:70vh;
     width: auto;
 }
+.imTitle{
+    font-size: $titleSize;
+}
 .imageData{
     margin: 3vh 6vh;
+    font-size: $dataTitleSize;
 }
 .imDataTitle{
-
+    font-size: $dataTitleSize;
 }

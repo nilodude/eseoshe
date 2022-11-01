@@ -1,13 +1,26 @@
-*{
-    font-size: 1.8vh;
-}
-
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
 }
 :host ::ng-deep .p-element.ng-tns-c62-0.p-dropdown-label.p-inputtext.ng-star-inserted{
     font-family: monospace;
 }
+
+:host ::ng-deep .dropDownStyle.p-dropdown {
+    min-width: 14vh;
+}
+:host ::ng-deep .p-dropdown .p-dropdown-trigger{
+    width: 2rem;
+}
+:host ::ng-deep .p-dropdown-label.p-inputtext{
+    padding-right: 0%;
+    display:flex;
+    justify-content: center;
+}
+.title {
+    letter-spacing: 0.2vh;
+    font-size: 2vh;
+}
+
 .gallery {
     margin: 1% 0.25%;
     display: flex;
@@ -82,7 +95,7 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-.likeDiv:active, .likedDiv:active{
+.likeDiv:active, .likedDiv:active, .zoomDiv:active{
     transform: scale(0.8, 0.8);
 }
 .zoomDiv{

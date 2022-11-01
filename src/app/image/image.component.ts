@@ -16,7 +16,7 @@ export class ImageComponent implements OnInit {
     this.imageName = localStorage.getItem('imageName') as string;
     this.category = localStorage.getItem('category') as string;
     this.categoryName = localStorage.getItem('categoryName') as string;
-    this.imageData = [{title:'size', value: '4000x3000'}, {title:'type', value:'jpg'} ,{title:'category', value: this.categoryName}, {title:'license', value: 'standart'}];
+    this.imageData = [{title:'Size', value: '4000x3000'}, {title:'Type', value:'jpg'} ,{title:'Category', value: this.categoryName}, {title:'License', value: 'standart'}];
    }
 
   ngOnInit(): void {
