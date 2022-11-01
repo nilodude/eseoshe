@@ -13,14 +13,18 @@
     <div class="imageBlock">
         <div class="imageDiv">
             <img class="image" src="../../assets/{{imageName}}.jpg">
+            <div class="imageTitle">IMAGE WITH TITLE {{imageName}}</div>
         </div>
         <div class="imageData">
-            <div>
-                blabla
-            </div>
-            <div>
-                iyoke
-            </div>
+            <ng-template ngFor let-imData [ngForOf]="this.imageData" let-i="index">
+                <div class="imDataTitle">
+                    <h3>{{imData.title}}</h3>
+                </div>
+                <div class="imDataValue">
+                    {{imData.value}}
+                </div>
+            </ng-template>
+           
         </div>
     </div>
 </div>

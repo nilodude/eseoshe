@@ -1,13 +1,19 @@
+*{
+    font-size: 1.8vh;
+}
+
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
 }
-
+:host ::ng-deep .p-element.ng-tns-c62-0.p-dropdown-label.p-inputtext.ng-star-inserted{
+    font-family: monospace;
+}
 .gallery {
+    margin: 1% 0.25%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin: 1% 0.25%;
-    gap: 5px;
+    gap: 1.5vh;
     justify-content: center;
 }
 

@@ -10,12 +10,13 @@ export class ImageComponent implements OnInit {
   category: string= '';
   categoryName: string= '';
   imageName: string= '';
-  imageData: any = null;
+  imageData: any = [];
 
   constructor(private router: Router) {
     this.imageName = localStorage.getItem('imageName') as string;
     this.category = localStorage.getItem('category') as string;
     this.categoryName = localStorage.getItem('categoryName') as string;
+    this.imageData = [{title:'size', value: '4000x3000'}, {title:'type', value:'jpg'} ,{title:'category', value: this.categoryName}, {title:'license', value: 'standart'}];
    }
 
   ngOnInit(): void {
