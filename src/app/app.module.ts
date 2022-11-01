@@ -14,6 +14,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule }   from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
 import { ImageComponent } from './image/image.component';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ImageComponent } from './image/image.component';
     DropdownModule,
     FormsModule,
     BrowserAnimationsModule,
-    DialogModule
+    DialogModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

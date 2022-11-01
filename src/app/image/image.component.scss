@@ -34,3 +34,15 @@
     height:70vh;
     width: auto;
 }
+::ng-deep .tooltip .p-tooltip-text{
+    background-color: rgba(255, 255, 255, 0.096);
+    font-family: monospace !important;
+    color: gray;
+    white-space: nowrap;
+    box-shadow: unset;
+    border: unset;
+    margin: 0% 0%;
+}
+::ng-deep .tooltip .p-tooltip-arrow{
+   display: none;
+}

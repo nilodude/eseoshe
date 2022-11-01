@@ -1,8 +1,8 @@
 <div class="all">
     <div class="sticky up">
         <div class="breadcrumb">
-            <span class="breadcrumbString">
-                <div class="categoryName" (click)="this.back()">{{categoryName}}</div>/{{imageName}}
+            <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600" tooltipStyleClass="tooltip">
+                <div class="categoryName" (click)="this.back()" >{{categoryName}}</div>/{{imageName}}
             </span>
         </div>
         <div class="userPanel">
