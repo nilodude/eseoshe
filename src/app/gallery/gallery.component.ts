@@ -19,6 +19,8 @@ export class GalleryComponent implements OnInit {
   imagesRaw: any[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   images: any[] = [];
   liked: any = [false];
+  popup: boolean = false;
+  zoomedIm: number = 0;
 
   constructor() {
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
@@ -72,6 +74,12 @@ export class GalleryComponent implements OnInit {
 
   zoom(im: number){
     console.log('zoomed image '+im);
+    this.popup = true;
+    this.zoomedIm= im;
   }
 
+  clickImage(im: number){
+    console.log('clicked image '+im);
+    
+  }
 }

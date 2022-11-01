@@ -11,11 +11,9 @@
     display: flex;
     justify-content: space-between;
     background-color: lightblue;
-
     .categoryName {
         background-color: lightcoral;
     }
-
 }
 
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
@@ -109,4 +107,11 @@
 .zoomIcon{
     width:2.7vh;
     height: auto;
+}
+.zoomed{
+    height:70vh;
+    width: auto;
+}
+:host ::ng-deep .p-dialog .p-dialog-content{
+    display:flex;
 }

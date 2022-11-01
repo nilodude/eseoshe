@@ -30,6 +30,19 @@
             </ng-template>
         </div>
     </div>
+
+    <div class="popup">
+        <p-dialog header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+            [maximizable]="false" [draggable]="false" [resizable]="false">
+            <div class="zoomedDiv">
+                <img class="zoomed" src="../../assets/{{zoomedIm}}.jpg">
+            </div>
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-check" (click)="popup=false" label="ENGA" styleClass="p-button-text">
+                </p-button>
+            </ng-template>
+        </p-dialog>
+    </div>
 </div>
 
       

@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule }   from '@angular/forms';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { FormsModule }   from '@angular/forms';
     ButtonModule,
     DropdownModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
