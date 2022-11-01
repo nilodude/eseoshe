@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { CrazygridComponent } from './crazygrid/crazygrid.component';
 import {ButtonModule} from 'primeng/button';
+import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    CrazygridComponent
+    CrazygridComponent,
+    ColorButtonsComponent
   ],
   imports: [
     BrowserModule,
