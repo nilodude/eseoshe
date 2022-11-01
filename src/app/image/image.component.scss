@@ -1,0 +1,33 @@
+.breadcrumb {
+    //background-color: lightcoral;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 3%
+}
+.breadcrumbString{
+    border: 1px solid white;
+    border-radius: 10px;
+    letter-spacing: 0.2vh;
+    transition: .3s ease;
+    display: flex;
+    transition: letter-spacing .3s cubic-bezier(0.165, 2, 0.44, 1);
+    font-size: medium;
+    padding: 8%;
+}
+.breadcrumbString:hover{
+    letter-spacing: 0.7vh;
+    font-size: large;
+}
+.categoryName:hover{
+    color: rgb(255, 255, 255);
+}
+
+.imageBlock{
+    display:flex;
+    margin: 1% 0.25%;
+}
+.image{
+    height:70vh;
+    width: auto;
+}

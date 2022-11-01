@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-gallery',
@@ -22,7 +23,7 @@ export class GalleryComponent implements OnInit {
   popup: boolean = false;
   zoomedIm: number = 0;
 
-  constructor() {
+  constructor(private router: Router) {
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
       this.liked = [];
@@ -32,6 +33,7 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.category = localStorage.getItem('category') as string;
     this.categoryName = this.categories.find(c=>c.value === this.category)?.label as string;
+    localStorage.setItem('categoryName', this.categoryName);
     console.log('into category '+ this.categoryName);
     
     this.imagesRaw.map(i=>{
@@ -80,6 +82,7 @@ export class GalleryComponent implements OnInit {
 
   clickImage(im: number){
     console.log('clicked image '+im);
-    
+    localStorage.setItem('imageName', im.toString());
+    this.router.navigate(['/image']);
   }
 }

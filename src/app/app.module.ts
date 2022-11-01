@@ -13,6 +13,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule }   from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
+import { ImageComponent } from './image/image.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {DialogModule} from 'primeng/dialog';
     HeaderComponent,
     CrazygridComponent,
     HomeComponent,
-    GalleryComponent
+    GalleryComponent,
+    ImageComponent
   ],
   imports: [
     BrowserModule,
