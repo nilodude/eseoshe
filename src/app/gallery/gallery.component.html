@@ -16,25 +16,19 @@
         <div class="gallery flex justify-content-center">
             <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
                 <div class="imDiv">
-                    
-                        <img class="im" src="../../assets/{{im.name}}.jpg">
-                        <div class="overlay flex">
-                            <div *ngIf="im.liked; else notLiked" class="likedDiv" (click)="this.like(im.name)">
-                                <!-- <img  class="likeIcon"src='../../assets/icons/heart.svg'/> -->
-                            </div>
-                            <ng-template #notLiked >
-                                <div class="likeDiv" (click)="this.like(im.name)">
-                                    <img  class="likeIcon"src='../../assets/icons/heart2.svg'/> -->
-                                </div>
-                            </ng-template>
-                            <div class="zoomDiv" (click)="this.zoom(im.name)">
-                                <img class="zoomIcon" src='../../assets/icons/zoom.svg'/> 
-                            </div>
+                    <img class="im" src="../../assets/{{im.name}}.jpg">
+                    <div class="overlay flex">
+                        <div *ngIf="im.liked; else notLiked" class="likedDiv" (click)="this.like(im.name)"></div>
+                        <ng-template #notLiked>
+                            <div class="likeDiv" (click)="this.like(im.name)"></div>
+                        </ng-template>
+                        <div class="zoomDiv" (click)="this.zoom(im.name)">
+                            <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
                         </div>
+                    </div>
                 </div>
             </ng-template>
         </div>
-
     </div>
 </div>
 

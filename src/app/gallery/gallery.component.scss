@@ -32,7 +32,6 @@
 }
 
 .imDiv {
-    //height: inherit;
     flex-basis: 0%;
     display: flex;
     justify-content: center;
@@ -47,18 +46,18 @@
     height: 25vh;
     width: auto;
     display: block;
-    
 }
+
 .imdiv:hover{
     opacity: 50%;
 }
+
 .overlay {
     position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    //height: 100%;
     width: 100%;
     opacity: 0;
     transition: .2s ease;
@@ -77,17 +76,19 @@
     transition: .2s ease;
 }
 
-.likeDiv, .zoomDiv{
+.likeDiv, .zoomDiv, .likedDiv{
     width: 2.7vh;
     height: 2.7vh;
     margin:1vh 0.5vh;
+    transition: transform 0.1s;
 }
 .likedDiv{
-    //mask-image: url(../../assets/icons/heart-filled.svg);
-    //background-color: rgb(189, 11, 11);
+    mask-image: url(../../assets/icons/heart-filled.svg);
+    background-color: rgb(189, 11, 11);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    //transition: .2s ease;
 }
 .likeDiv{
     mask-image: url(../../assets/icons/heart.svg);
@@ -95,6 +96,10 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    //transition: .2s ease;
+}
+.likeDiv:active, .likedDiv:active{
+    transform: scale(0.7, 0.7);
 }
 .zoomDiv{
     //background-image: '../../assets/icons/zoom.svg';

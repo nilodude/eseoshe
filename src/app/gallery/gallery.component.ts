@@ -65,6 +65,7 @@ export class GalleryComponent implements OnInit {
 
   like(im: number){
     this.liked[im] = !this.liked[im];
+    this.images.find(i=>i.name===im).liked = this.liked[im];
     console.log((this.liked[im] ? 'liked':'unliked')+ ' image '+im);
     localStorage.setItem('liked', JSON.stringify(this.liked));
   }
