@@ -19,8 +19,10 @@
     letter-spacing: 0.7vh;
     font-size: large;
 }
+
 .categoryName:hover{
     color: rgb(255, 255, 255);
+    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
 }
 
 .imageBlock{

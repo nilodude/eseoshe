@@ -7,12 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./image.component.scss']
 })
 export class ImageComponent implements OnInit {
-  imageName: string= '';
+  category: string= '';
   categoryName: string= '';
+  imageName: string= '';
   imageData: any = null;
 
   constructor(private router: Router) {
     this.imageName = localStorage.getItem('imageName') as string;
+    this.category = localStorage.getItem('category') as string;
     this.categoryName = localStorage.getItem('categoryName') as string;
    }
 
@@ -20,6 +22,8 @@ export class ImageComponent implements OnInit {
   }
 
   back(){
+    localStorage.setItem('categoryName', this.categoryName);
+    localStorage.setItem('category',this.category);
     this.router.navigate(['/category']);
   }
   

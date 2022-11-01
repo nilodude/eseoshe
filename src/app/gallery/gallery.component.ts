@@ -24,6 +24,7 @@ export class GalleryComponent implements OnInit {
   zoomedIm: number = 0;
 
   constructor(private router: Router) {
+    
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
       this.liked = [];
