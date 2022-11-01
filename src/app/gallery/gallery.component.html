@@ -16,7 +16,9 @@
         <div class="gallery flex justify-content-center">
             <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
                 <div class="imDiv">
-                    <img class="im" src="../../assets/{{im.name}}.jpg">
+                    <div (click)="this.clickImage(im.name)" >
+                        <img class="im" src="../../assets/{{im.name}}.jpg">
+                    </div>
                     <div class="overlay flex">
                         <div *ngIf="im.liked; else notLiked" class="likedDiv" (click)="this.like(im.name)"></div>
                         <ng-template #notLiked>
@@ -30,9 +32,9 @@
             </ng-template>
         </div>
     </div>
-
-    <div class="popup">
-        <p-dialog header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+    <!-- {{im.liked? 'likedDiv' : 'likeDiv'}} -->
+    <div  class="popup">
+        <p-dialog  header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">
             <div class="zoomedDiv">
                 <img class="zoomed" src="../../assets/{{zoomedIm}}.jpg">

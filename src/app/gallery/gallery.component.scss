@@ -54,9 +54,10 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 0;
+    left: calc(100% - 7.5vh);
     right: 0;
-    width: 100%;
+    width: 7.5vh;
+    height: 4vh;
     opacity: 0;
     transition: .2s ease;
     border-radius: 4px;
@@ -67,7 +68,6 @@
 
 .imDiv:hover .overlay {
     opacity: 1;
-    background-color: rgba(211, 211, 211, 0.356);
 }
 .imDiv:hover .im {
     opacity: 0.5;
@@ -86,7 +86,6 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    //transition: .2s ease;
 }
 .likeDiv{
     mask-image: url(../../assets/icons/heart.svg);
@@ -94,7 +93,6 @@
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    //transition: .2s ease;
 }
 .likeDiv:active, .likedDiv:active{
     transform: scale(0.8, 0.8);

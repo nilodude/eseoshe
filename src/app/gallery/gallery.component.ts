@@ -73,9 +73,9 @@ export class GalleryComponent implements OnInit {
   }
 
   zoom(im: number){
+    this.zoomedIm= im;
     console.log('zoomed image '+im);
     this.popup = true;
-    this.zoomedIm= im;
   }
 
   clickImage(im: number){
