@@ -21,3 +21,9 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 23/10/22:
 	-investigar el flexbox de primeng (como el de fuji), puede que diciendole al div la altura 
 	de la imagen y poniendole p-col, se ponga automaticamente con el ancho que necesita
+	
+	
+----------
+
+01/11/12:
+	connection string java:  jdbc:postgresql://146.158.170.12:4000/postgres 	
