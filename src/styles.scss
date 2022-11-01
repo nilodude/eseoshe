@@ -10,12 +10,15 @@
     top: 1%;
     margin-top: 6%;
     display: flex;
+    transition: display 1s ease;
     justify-content: space-between;
     background-color: lightblue;
     align-items: center;
     height: 6vh;
 }
-
+.userPanel{
+    margin-right: 1vh;
+}
 *{
     font-family: monospace;
 }

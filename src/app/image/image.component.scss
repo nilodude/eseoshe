@@ -17,10 +17,10 @@ $dataTitleSize: 2vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 3%
+    margin-left: 1%
 }
 .breadcrumbString{
-    border: 1px solid white;
+    border: 0px solid white;
     border-radius: 10px;
     letter-spacing: 0.2vh;
     transition: .3s ease;
@@ -42,8 +42,7 @@ $dataTitleSize: 2vh;
 
 .imageBlock{
     display:flex;
-    margin: 1% 0.25%;
-    //font-size: larger;
+    margin: 1% 1%;
 }
 .image{
     height:70vh;
