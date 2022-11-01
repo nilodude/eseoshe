@@ -20,10 +20,7 @@
                         <img class="im" src="../../assets/{{im.name}}.jpg">
                     </div>
                     <div class="overlay flex">
-                        <div *ngIf="im.liked; else notLiked" class="likedDiv" (click)="this.like(im.name)"></div>
-                        <ng-template #notLiked>
-                            <div class="likeDiv" (click)="this.like(im.name)"></div>
-                        </ng-template>
+                        <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
                         <div class="zoomDiv" (click)="this.zoom(im.name)">
                             <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
                         </div>
@@ -32,9 +29,8 @@
             </ng-template>
         </div>
     </div>
-    <!-- {{im.liked? 'likedDiv' : 'likeDiv'}} -->
-    <div  class="popup">
-        <p-dialog  header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+    <div class="popup">
+        <p-dialog header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">
             <div class="zoomedDiv">
                 <img class="zoomed" src="../../assets/{{zoomedIm}}.jpg">
