@@ -1,5 +1,5 @@
-$titleSize: 4vh;
-$dataTitleSize: 2vh;
+$titleSize: 4vw;
+$dataTitleSize: 1.5vw;
 
 
 ::ng-deep .tooltip .p-tooltip-text{
@@ -17,7 +17,8 @@ $dataTitleSize: 2vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-left: 1%
+    margin-left: 1%;
+    cursor: pointer;
 }
 .breadcrumbString{
     border: 0px solid white;
@@ -42,18 +43,24 @@ $dataTitleSize: 2vh;
 
 .imageBlock{
     display:flex;
+    flex-wrap: nowrap;
     margin: 1% 1%;
 }
 .image{
-    height:70vh;
+    height:39vw;
     width: auto;
 }
+
 .imTitle{
     font-size: $titleSize;
 }
 .imageData{
-    margin: 3vh 6vh;
+    margin: 3vh 5vw;
     font-size: $dataTitleSize;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 2vh;
 }
 .imDataTitle{
     font-size: $dataTitleSize;
