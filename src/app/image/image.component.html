@@ -2,7 +2,7 @@
     <div class="sticky up">
         <div class="breadcrumb">
             <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600" tooltipStyleClass="tooltip">
-                <div><img src=""></div>/<div class="categoryName" (click)="this.back()" >{{categoryName}}</div>/{{imageName}}
+                <div><img src="">home</div>/<div class="categoryName" (click)="this.back()" >{{categoryName}}</div>/{{imageName}}
             </span>
         </div>
         <div class="userPanel">
@@ -15,11 +15,11 @@
             <img class="image" src="../../assets/{{imageName}}.jpg">
             <div class="imTitle"><span>IMAGE WITH TITLE {{imageName}}</span></div>
         </div>
-        <div class="imageData">
+        <div class="imDataDiv">
             <ng-template ngFor let-imData [ngForOf]="this.imageData" let-i="index">
-                <div>
+                <div class="imData">
                     <div class="imDataTitle">
-                        <h3>{{imData.title}}</h3>
+                        <div>{{imData.title}}</div>
                     </div>
                     <div class="imDataValue">
                         {{imData.value}}

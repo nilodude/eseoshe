@@ -11,14 +11,15 @@ export class ImageComponent implements OnInit {
   categoryName: string= '';
   imageName: string= '';
   imageData: any = [];
-  lorem: string = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit Modi, ab natus! Voluptatibus magnam dicta alias illo repellat ipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias';
+  lorem: string = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit Modi, ab natus! Voluptatibus magnam dicta alias illo repellat ipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!';
   keywords: string[] = this.lorem.split(' ');
 
   constructor(private router: Router) {
     this.imageName = localStorage.getItem('imageName') as string;
     this.category = localStorage.getItem('category') as string;
     this.categoryName = localStorage.getItem('categoryName') as string;
-    this.imageData = [{title:'Size', value: '4000x3000'}, {title:'Type', value:'jpg'} ,{title:'Category', value: this.categoryName}, {title:'License', value: 'standart'}];
+    this.imageData = [{title:'Size', value: '4000x3000'}, {title:'Type', value:'jpg'} ,{title:'Category', value: this.categoryName},
+     {title:'License', value: 'standart'}, {title:'Price', value:'1000 atm·L/K·mol'}];
    }
 
   ngOnInit(): void {

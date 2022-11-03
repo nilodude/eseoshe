@@ -45,6 +45,8 @@ $dataTitleSize: calc(90% + 0.2vw);
     flex-wrap: wrap;
     margin: 1% 1%;
     justify-content: center;
+    //justify-content: flex-start; //o incluso space-between para probar el nuevo layout en el que salen las fotos recomendadas
+
 }
 .imageDiv{
     display: flex;
@@ -52,7 +54,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     align-items: center;
     justify-content: flex-start;
     flex-wrap: nowrap;
-    width: calc(40vh + 11vw);
+    width: calc(36vh + 18vw);
     height: auto;
 }
 .image{
@@ -66,7 +68,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     font-size: $titleSize;
     white-space: nowrap;
 }
-.imageData{
+.imDataDiv{
     margin: 1vh 3vw;
     font-size: $dataTitleSize;
     display: flex;
@@ -75,28 +77,37 @@ $dataTitleSize: calc(90% + 0.2vw);
     align-content: flex-start;
     gap: 2vh;
 }
+
+.imData{
+    display: flex;
+    flex-direction: column;
+}
+
 .imDataTitle{
     font-size: $dataTitleSize;
+    font-weight: bold;
+    margin-bottom: 2.5%;
 }
 .keywords{
     margin: 3vh 1vw;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    flex-basis:41%;
+    justify-content: space-between;
+    flex-basis:47%;
     flex-grow: 1;
-    
 }
 .keyword{
-    border: 0.5px dashed lightblue;
+    border: 0.5px solid rgba(173, 216, 230, 0.404);
     border-radius: 11px;
     display: flex;
     align-items: center;
+    margin: 0.1%;
     padding: 0.7%;
     background-color: unset;
     transition: background-color .2s ease;
 }
 .keyword:hover{
-    background-color: rgb(125, 205, 231);
+    background-color: rgba(140, 202, 223, 0.384);
     transition: .2s ease;
+    cursor: pointer;
 }
