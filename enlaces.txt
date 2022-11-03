@@ -35,6 +35,11 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 	-keywords abajo del todo PERO debajo del titulo que haya una filita de keywords
 	
 	-sustituir el breadcrumb a pelo por este https://www.primefaces.org/primeng/breadcrumb
+	el problema es que pa meterle navegacion al breadcrumb parece que what the fuck
+	https://medium.com/applantic/https-medium-com-applantic-how-to-implement-breadcrumb-navigation-in-angular-and-primeng-52573e49b97a
+	
+	PERO se puede hacer mas artesanal tambien con (onItemClick)="funcion($event)" y se gestiona la navegacion 
+	https://stackoverflow.com/questions/61814221/how-to-get-a-click-on-p-breadcrumb-when-click-on-home
 	
 	-con el componente p-chips ( https://www.primefaces.org/primeng/chips ) se puede gestionar
 	perfectamente el buscador de keywords, tiene todos los controles basicos para un buscador
