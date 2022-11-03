@@ -3,7 +3,7 @@
     <div>
         <div class="sticky up">
             <p-dropdown [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
-                (onChange)="this.changeCategory()" styleClass="dropDownStyle" placeholder="Select"></p-dropdown>
+                (onChange)="this.changeCategory()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
             <div class="title flex align-items-center">
                 <span>{{this.categoryName}}</span>
             </div>

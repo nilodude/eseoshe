@@ -11,6 +11,8 @@ export class ImageComponent implements OnInit {
   categoryName: string= '';
   imageName: string= '';
   imageData: any = [];
+  lorem: string = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit Modi, ab natus! Voluptatibus magnam dicta alias illo repellat ipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias illo repellatipsum quos neque nam atque pariatur? Excepturi odio a explicabo. Ea, illo quae!Lorem ipsum dolor sit amet, consectetur adipisicing elit.Modi, ab natus! Voluptatibus magnam dicta alias';
+  keywords: string[] = this.lorem.split(' ');
 
   constructor(private router: Router) {
     this.imageName = localStorage.getItem('imageName') as string;
@@ -20,6 +22,7 @@ export class ImageComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    window.scrollTo(0,0);
   }
 
   back(){

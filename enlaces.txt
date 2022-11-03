@@ -27,3 +27,9 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 
 01/11/12:
 	connection string java:  jdbc:postgresql://146.158.170.12:4000/postgres 	
+	
+	
+03/11/22:
+	-breadcrumb con desplegable en todas partes
+	-buscador en todas partes
+	-keywords abajo del todo PERO debajo del titulo que haya una filita de keywords

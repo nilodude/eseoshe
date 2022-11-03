@@ -1,6 +1,5 @@
-$titleSize: 4vw;
-$dataTitleSize: 1.5vw;
-
+$titleSize: calc(215% + 1vw);
+$dataTitleSize: calc(90% + 0.2vw);
 
 ::ng-deep .tooltip .p-tooltip-text{
     background-color: rgba(255, 255, 255, 0.096);
@@ -43,25 +42,61 @@ $dataTitleSize: 1.5vw;
 
 .imageBlock{
     display:flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin: 1% 1%;
+    justify-content: center;
+}
+.imageDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: calc(40vh + 11vw);
+    height: auto;
 }
 .image{
-    height:39vw;
-    width: auto;
+    // height:39vw;
+    // width: auto;
+    height:inherit;
+    width: inherit;
 }
 
 .imTitle{
     font-size: $titleSize;
+    white-space: nowrap;
 }
 .imageData{
-    margin: 3vh 5vw;
+    margin: 1vh 3vw;
     font-size: $dataTitleSize;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     align-content: flex-start;
     gap: 2vh;
 }
 .imDataTitle{
     font-size: $dataTitleSize;
+}
+.keywords{
+    margin: 3vh 1vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-basis:41%;
+    flex-grow: 1;
+    
+}
+.keyword{
+    border: 0.5px dashed lightblue;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    padding: 0.7%;
+    background-color: unset;
+    transition: background-color .2s ease;
+}
+.keyword:hover{
+    background-color: rgb(125, 205, 231);
+    transition: .2s ease;
 }
