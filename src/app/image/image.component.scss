@@ -1,0 +1,113 @@
+$titleSize: calc(215% + 1vw);
+$dataTitleSize: calc(90% + 0.2vw);
+
+::ng-deep .tooltip .p-tooltip-text{
+    background-color: rgba(255, 255, 255, 0.096);
+    color: gray;
+    white-space: nowrap;
+    box-shadow: unset;
+    border: unset;
+    margin: 0% 0%;
+}
+::ng-deep .tooltip .p-tooltip-arrow{
+   display: none;
+}
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 1%;
+    cursor: pointer;
+}
+.breadcrumbString{
+    border: 0px solid white;
+    border-radius: 10px;
+    letter-spacing: 0.2vh;
+    transition: .3s ease;
+    display: flex;
+    transition: letter-spacing .3s cubic-bezier(0.165, 2, 0.44, 1);
+    font-size: 1.5vh;
+    padding: 8%;
+}
+.breadcrumbString:hover{
+    letter-spacing: 0.5vh;
+    font-size: 1.8vh;
+    //padding: 1vh;
+}
+
+.categoryName:hover{
+    color: rgb(255, 255, 255);
+    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
+}
+
+.imageBlock{
+    display:flex;
+    flex-wrap: wrap;
+    margin: 1% 1%;
+    justify-content: center;
+    //justify-content: flex-start; //o incluso space-between para probar el nuevo layout en el que salen las fotos recomendadas
+
+}
+.imageDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: calc(36vh + 18vw);
+    height: auto;
+}
+.image{
+    // height:39vw;
+    // width: auto;
+    height:inherit;
+    width: inherit;
+}
+
+.imTitle{
+    font-size: $titleSize;
+    white-space: nowrap;
+}
+.imDataDiv{
+    margin: 1vh 3vw;
+    font-size: $dataTitleSize;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 2vh;
+}
+
+.imData{
+    display: flex;
+    flex-direction: column;
+}
+
+.imDataTitle{
+    font-size: $dataTitleSize;
+    font-weight: bold;
+    margin-bottom: 2.5%;
+}
+.keywords{
+    margin: 3vh 1vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-basis:47%;
+    flex-grow: 1;
+}
+.keyword{
+    border: 0.5px solid rgba(173, 216, 230, 0.404);
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    margin: 0.1%;
+    padding: 0.7%;
+    background-color: unset;
+    transition: background-color .2s ease;
+}
+.keyword:hover{
+    background-color: rgba(140, 202, 223, 0.384);
+    transition: .2s ease;
+    cursor: pointer;
+}

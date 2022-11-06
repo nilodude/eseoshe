@@ -1,21 +1,27 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { Box, Cell } from '../models';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crazygrid',
   templateUrl: './crazygrid.component.html',
-  styleUrls: ['./crazygrid.component.scss']
+  styleUrls: ['./crazygrid.component.scss'],
 })
 export class CrazygridComponent implements OnInit {
 
   @Input('buttons') buttons: boolean = false;
   @Input('cols') width: number = 7;
-  @Input('rows') height: number = 4;
+  @Input('rows') height: number = 3;
   @Input('scale') windowScale: number = 7.15;
   //[scale]="7.15" ocupa toda la pantalla
   @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
-
+  categories: any[] =[
+    {label:'Backgrounds', value:'0'},
+    {label:'Trees', value:'1'},
+    {label:'Animals', value:'2'},
+    {label:'Flowers', value:'3'},
+    {label:'Lines', value:'4'}];
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
@@ -36,7 +42,7 @@ export class CrazygridComponent implements OnInit {
   public removeEventListener: (() => void) | undefined;
   
   constructor(
-    private renderer: Renderer2, private elementRef: ElementRef 
+    private renderer: Renderer2, private elementRef: ElementRef ,private router: Router,
   ){
     this.cells = [];
     this._2x1.ylen = 1;
@@ -97,6 +103,9 @@ export class CrazygridComponent implements OnInit {
         }
         if(id.includes('zoom')){
           this.zoom(id[id.length-1]);
+        }
+        if(id.includes('im')){
+          this.clickImage(id[id.length-1]);
         }
       }
     });
@@ -198,7 +207,8 @@ export class CrazygridComponent implements OnInit {
           let newTitle = document.createElement("h2");
                    
           //TITLE
-          newTitle.innerHTML= 'LA CAJITA '+box.boxID.toString();
+          newTitle.innerHTML= this.categories.find(c=>c.value == box.boxID)?.label;
+          newTitle.id = 'title'+box.boxID;
           newTitle.style.position = 'absolute';
           newTitle.style.top = '41%';
           newTitle.style.left= '50%';
@@ -210,7 +220,9 @@ export class CrazygridComponent implements OnInit {
           newTitle.style.background = 'rgba(255,255,255,1)';
           newTitle.style.borderRadius = scale/20 +'px';
           newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
-          newTitle.style.width = '180px';
+          newTitle.style.width =  scale*0.65 +'px';
+          newTitle.style.zIndex ='1009';
+          newBox.appendChild(newTitle);
           //newTitle.style.border = '0.1px gray';
           //DIMENSIONS
           const w = box.xlen + 1;
@@ -225,6 +237,7 @@ export class CrazygridComponent implements OnInit {
           newBox.style.position = "absolute";
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           //image itself
+          newImg.id = 'im'+box.boxID;
           newImg.style.position = "realtive";
           newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
           newImg.style.backgroundRepeat = 'round';
@@ -237,10 +250,10 @@ export class CrazygridComponent implements OnInit {
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
-
+          newImg.style.transition = 'transform 0.3s';
           //ONMOUSEOVER
-          newImg.onmouseover = ()=>this.mouseOver();
-          newImg.onmouseout = ()=>this.mouseOut();
+          newImg.onmouseover = ()=>this.mouseOver(box.boxID);
+          newImg.onmouseout = ()=>this.mouseOut(box.boxID);
           
           if (this.buttons) {
             //BUTTONS
@@ -282,23 +295,43 @@ export class CrazygridComponent implements OnInit {
     }
   }
 
-  mouseOver(){
-    
+  mouseOver(boxID: number){
+    console.log('OVER '+this.categoryName(boxID));
+    let im = document.getElementById("im"+boxID);
+    if(im){
+      im.style.transform = 'scale(1.03,1.03)';
+    }
   }
 
-  mouseOut(){
-    
+  mouseOut(boxID: number){
+    console.log('OUT '+this.categoryName(boxID));
+    let im = document.getElementById("im"+boxID);
+    if(im ){
+      im.style.transform = 'scale(1,1)';
+    }
   }
+
   like(boxID: number){
-    console.log('liked box '+boxID);
+    console.log('liked box '+this.categoryName(boxID));
   }
 
   zoom(boxID: number){
-    console.log('zoomed box '+boxID);
+    console.log('zoomed box '+this.categoryName(boxID));
+  }
+
+  clickImage(boxID: number){
+    console.log('clicked box '+this.categoryName(boxID));
+    
+    localStorage.setItem('category',boxID.toString());
+    this.router.navigate(['/category']);
   }
 
   refresh(){
     console.log('onini')
     this.ngOnInit();
+  }
+
+  categoryName(value: number){
+    return this.categories.find(c=>c.value == value)?.label;
   }
 }

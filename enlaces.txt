@@ -1,0 +1,55 @@
+https://www.win.tue.nl/~nikhil/pubs/Bansal-packing.pdf
+http://paulbourke.net/fractals/randomtile/
+
+https://github.com/solomon-b/greedypacker
+https://github.com/olragon/binpackingjs
+https://github.com/jakesgordon/bin-packing
+
+https://codeincomplete.com/articles/bin-packing/
+
+
+
+--------------
+
+hay que probar a representar una sola imagen repetida muchas veces (canvas gigante) y probar efecto zoom fractal
+
+
+en lugar de aplicar margen, hay que meter un offset en el translate
+
+----------------------
+
+23/10/22:
+	-investigar el flexbox de primeng (como el de fuji), puede que diciendole al div la altura 
+	de la imagen y poniendole p-col, se ponga automaticamente con el ancho que necesita
+	
+	
+----------
+
+01/11/12:
+	connection string java:  jdbc:postgresql://146.158.170.12:4000/postgres 	
+	
+	
+03/11/22:
+	-breadcrumb con desplegable en todas partes
+	-buscador en todas partes
+	-keywords abajo del todo PERO debajo del titulo que haya una filita de keywords
+	
+	-sustituir el breadcrumb a pelo por este https://www.primefaces.org/primeng/breadcrumb
+	el problema es que pa meterle navegacion al breadcrumb parece que what the fuck
+	https://medium.com/applantic/https-medium-com-applantic-how-to-implement-breadcrumb-navigation-in-angular-and-primeng-52573e49b97a
+	
+	PERO se puede hacer mas artesanal tambien con (onItemClick)="funcion($event)" y se gestiona la navegacion 
+	https://stackoverflow.com/questions/61814221/how-to-get-a-click-on-p-breadcrumb-when-click-on-home
+	
+	PERO se le puede poner el atributo command al MenuItem y ya está gestionado tambien el click 
+	sin tener que parsear el $event del onItemClick
+	https://stackblitz.com/edit/angular-6-template-kbxbb3?file=src%2Findex.html,src%2Fapp%2Fapp.component.ts
+	
+	
+	-con el componente p-chips ( https://www.primefaces.org/primeng/chips ) se puede gestionar
+	perfectamente el buscador de keywords, tiene todos los controles basicos para un buscador
+	on the fly, que no haya que pulsar BUSCAR para que busque.
+	
+	-floatlabel (https://www.primefaces.org/primeng/floatlabel) detalle muy guapo pal buscador
+	
+	-para mas adelante confirm popup (https://www.primefaces.org/primeng/confirmpopup) muy elegante

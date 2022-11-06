@@ -1,0 +1,39 @@
+<div class="all">
+    <div class="sticky up">
+        <div class="breadcrumb">
+            <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600" tooltipStyleClass="tooltip">
+                <div><img src="">home</div>/<div class="categoryName" (click)="this.back()" >{{categoryName}}</div>/{{imageName}}
+            </span>
+        </div>
+        <div class="userPanel">
+            <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
+                class="p-button-raised p-button-secondary p-button-text"></button>
+        </div>
+    </div>
+    <div class="imageBlock">
+        <div class="imageDiv">
+            <img class="image" src="../../assets/{{imageName}}.jpg">
+            <div class="imTitle"><span>IMAGE WITH TITLE {{imageName}}</span></div>
+        </div>
+        <div class="imDataDiv">
+            <ng-template ngFor let-imData [ngForOf]="this.imageData" let-i="index">
+                <div class="imData">
+                    <div class="imDataTitle">
+                        <div>{{imData.title}}</div>
+                    </div>
+                    <div class="imDataValue">
+                        {{imData.value}}
+                    </div>
+                </div>
+            </ng-template>
+           
+        </div>
+        <div class="keywords">
+            <ng-template ngFor let-keyword [ngForOf]="this.keywords" let-k="index">
+                <div class="keyword">
+                    ({{k}}){{keyword}}
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
