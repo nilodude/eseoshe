@@ -43,7 +43,15 @@ export class ImageComponent implements OnInit {
     console.log('userPanel clicked');
   }
 
-  despliega(){
-    console.log('no iyo');
+  despliega(event: any){
+    console.log(event.target.innerText);
+    if(!event.target.classList.contains('p-inputtext') && event.target.innerText == this.categoryName){
+      localStorage.setItem('categoryName', this.categoryName);
+      localStorage.setItem('category',this.category);
+      // this.router.navigate(['/category']);
+
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
+   this.router.navigate(['/category']));
+    }
   }
 }

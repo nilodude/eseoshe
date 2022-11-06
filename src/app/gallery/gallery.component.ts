@@ -87,8 +87,13 @@ export class GalleryComponent implements OnInit {
     this.router.navigate(['/image']);
   }
 
-  despliega(){
-    console.log('no iyo');
+  despliega(event: any){
+    console.log(event.target.innerText);
+    if(event.target.innerText == this.categoryName){
+      localStorage.setItem('categoryName', this.categoryName);
+      localStorage.setItem('category',this.category);
+      this.router.navigate(['/category']);
+    }
   }
  
 }
