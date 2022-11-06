@@ -24,7 +24,7 @@ import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
     CrazygridComponent,
     HomeComponent,
     GalleryComponent,
-    ImageComponent
+    ImageComponent,
     ColorButtonsComponent
   ],
   imports: [
