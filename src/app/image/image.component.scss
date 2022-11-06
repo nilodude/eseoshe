@@ -12,31 +12,6 @@ $dataTitleSize: calc(90% + 0.2vw);
 ::ng-deep .tooltip .p-tooltip-arrow{
    display: none;
 }
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-left: 1%;
-    cursor: pointer;
-}
-.breadcrumbString{
-    border: 0px solid white;
-    border-radius: 10px;
-    letter-spacing: 0.2vh;
-    transition: .3s ease;
-    display: flex;
-    transition: letter-spacing .3s cubic-bezier(0.165, 2, 0.44, 1);
-    font-size: 1.5vh;
-    padding: 8%;
-}
-.breadcrumbString:hover{
-    letter-spacing: 0.5vh;
-    font-size: 1.8vh;
-}
-.categoryName:hover{
-    color: rgb(255, 255, 255);
-    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
-}
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
     background-color: rgba(255, 255, 255, 0.473);
@@ -59,10 +34,16 @@ $dataTitleSize: calc(90% + 0.2vw);
     justify-content: center;
     color:black;
     border: none;
+
     padding: 0%;
     margin: 0%;
     max-width: fit-content;
 }
+:host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
+    color: rgb(255, 255, 255);
+    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
+}
+// aqui termina la parte común del breadcrumb entre gallery e image
 
 .imageBlock{
     display:flex;
@@ -70,7 +51,6 @@ $dataTitleSize: calc(90% + 0.2vw);
     margin: 1% 1%;
     justify-content: center;
     //justify-content: flex-start; //o incluso space-between para probar el nuevo layout en el que salen las fotos recomendadas
-
 }
 .imageDiv{
     display: flex;
