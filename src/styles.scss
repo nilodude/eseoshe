@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+.all {
+    margin: 0% 5%;
+    padding-top: 1px;
+    display: flex;
+    flex-direction: column;
+}
+
+.up {
+    z-index: 1009;
+    top: 1%;
+    margin-top: 6%;
+    display: flex;
+    transition: display 1s ease;
+    justify-content: space-between;
+    background-color: lightblue;
+    align-items: center;
+    height: 6vh;
+}
+.userPanel{
+    margin-right: 1vh;
+}
+*{
+    font-family: monospace;
+}

@@ -1,0 +1,127 @@
+
+:host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
+    z-index: 1010 !important;
+    background-color: rgba(255, 255, 255, 0.473);
+    border: none;
+}
+
+:host ::ng-deep .dropDownStyle.p-dropdown {
+    min-width: 14vh;
+    margin-left: 1vh;
+    border: none;
+    opacity:1;
+    background-color: rgba(255, 255, 255, 0);
+}
+
+:host ::ng-deep  .p-dropdown-trigger{
+    width: 2rem;
+}
+
+:host ::ng-deep .p-dropdown-label.p-inputtext{
+    font-family: monospace;
+    font-size: 1.5vh;
+    opacity:1;
+    padding-right: 0%;
+    display:flex;
+    justify-content: center;
+    color:black;
+    border: none;
+}
+.title {
+    letter-spacing: 0.2vh;
+    font-size: 2vh;
+}
+
+.gallery {
+    margin: 1% 0.25%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5vh;
+    justify-content: center;
+}
+
+.imDiv {
+    flex-basis: 0%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    //flex-grow: 1; 
+    // el flex grow coloca bien las imagenes pero 
+    //hace que el div que las contiene sea mas grande y los iconos like y zoom
+    //salen fuera de la imagen
+}
+
+.im {
+    height: 25vh;
+    width: auto;
+    display: block;
+}
+
+.imdiv:hover{
+    opacity: 50%;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(100% - 7.5vh);
+    right: 0;
+    width: 7.5vh;
+    height: 4vh;
+    opacity: 0;
+    transition: .2s ease;
+    border-radius: 4px;
+    z-index: 1007;
+    justify-content: flex-end;
+    align-items:flex-start;
+}
+
+.imDiv:hover .overlay {
+    opacity: 1;
+}
+.imDiv:hover .im {
+    opacity: 0.5;
+    transition: .2s ease;
+}
+
+.likeDiv, .zoomDiv, .likedDiv{
+    width: 2.7vh;
+    height: 2.7vh;
+    margin:1vh 0.5vh;
+    transition: transform 0.1s;
+}
+.likedDiv{
+    mask-image: url(../../assets/icons/heart-filled.svg);
+    background-color: rgb(189, 11, 11);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.likeDiv{
+    mask-image: url(../../assets/icons/heart.svg);
+    background-color: rgb(189, 11, 11);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.likeDiv:active, .likedDiv:active, .zoomDiv:active{
+    transform: scale(0.8, 0.8);
+}
+.zoomDiv{
+    //background-image: '../../assets/icons/zoom.svg';
+    background-size: contain;
+    background-position: center;
+}
+.zoomIcon{
+    width:2.7vh;
+    height: auto;
+}
+.zoomed{
+    height:70vh;
+    width: auto;
+}
+:host ::ng-deep .p-dialog .p-dialog-content{
+    display:flex;
+}

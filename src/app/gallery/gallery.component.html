@@ -1,0 +1,46 @@
+
+<div class="all" style="height: 100%">
+    <div>
+        <div class="sticky up">
+            <p-dropdown (click)="despliega()" [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
+                (onChange)="this.changeCategory()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
+            <div class="title flex align-items-center">
+                <span>{{this.categoryName}}</span>
+            </div>
+            <div class="userPanel">
+                <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
+                    class="p-button-raised p-button-secondary p-button-text"></button>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
+                <div class="imDiv">
+                    <div (click)="this.clickImage(im.name)" >
+                        <img class="im" src="../../assets/{{im.name}}.jpg">
+                    </div>
+                    <div class="overlay flex">
+                        <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
+                        <div class="zoomDiv" (click)="this.zoom(im.name)">
+                            <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="popup">
+        <p-dialog header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+            [maximizable]="false" [draggable]="false" [resizable]="false">
+            <div class="zoomedDiv">
+                <img class="zoomed" src="../../assets/{{zoomedIm}}.jpg">
+            </div>
+            <ng-template pTemplate="footer">
+                <p-button icon="pi pi-check" (click)="popup=false" label="ENGA" styleClass="p-button-text">
+                </p-button>
+            </ng-template>
+        </p-dialog>
+    </div>
+</div>
+
+      
