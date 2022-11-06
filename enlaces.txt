@@ -53,3 +53,8 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 	-floatlabel (https://www.primefaces.org/primeng/floatlabel) detalle muy guapo pal buscador
 	
 	-para mas adelante confirm popup (https://www.primefaces.org/primeng/confirmpopup) muy elegante
+
+
+06/11/22:
+	-para el backend 
+	https://medium.com/bb-tutorials-and-thoughts/how-to-build-nodejs-rest-api-with-express-and-postgresql-typescript-version-121b5a11c9a6
