@@ -2,8 +2,16 @@
 <div class="all" style="height: 100%">
     <div>
         <div class="sticky up">
-            <p-dropdown (click)="despliega()" [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
-                (onChange)="this.changeCategory()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
+            <div class="breadcrumb">
+                <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600"
+                    tooltipStyleClass="tooltip">
+                    <div><img src="">home</div>
+                    /<div class="categoryName">
+                        <p-dropdown (click)="despliega()" [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
+                            (onChange)="changeCategory()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
+                    </div>
+                </span>
+            </div>
             <div class="title flex align-items-center">
                 <span>{{this.categoryName}}</span>
             </div>

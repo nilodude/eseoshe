@@ -90,5 +90,5 @@ export class GalleryComponent implements OnInit {
   despliega(){
     console.log('no iyo');
   }
-
+ 
 }

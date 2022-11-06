@@ -32,12 +32,36 @@ $dataTitleSize: calc(90% + 0.2vw);
 .breadcrumbString:hover{
     letter-spacing: 0.5vh;
     font-size: 1.8vh;
-    //padding: 1vh;
 }
-
 .categoryName:hover{
     color: rgb(255, 255, 255);
     transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
+}
+:host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
+    z-index: 1010 !important;
+    background-color: rgba(255, 255, 255, 0.473);
+    border: none;
+}
+:host ::ng-deep .dropDownStyle.p-dropdown {
+    border: none;
+    opacity:1;
+    background-color: rgba(255, 255, 255, 0);
+}
+:host ::ng-deep  .p-dropdown-trigger{
+    width: 2rem;
+}
+:host ::ng-deep .p-dropdown-label.p-inputtext{
+    font-family: monospace;
+    font-size: 1.5vh;
+    opacity:1;
+    padding-right: 0%;
+    display:flex;
+    justify-content: center;
+    color:black;
+    border: none;
+    padding: 0%;
+    margin: 0%;
+    max-width: fit-content;
 }
 
 .imageBlock{

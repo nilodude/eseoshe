@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-image',
@@ -7,6 +8,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./image.component.scss']
 })
 export class ImageComponent implements OnInit {
+  categories: SelectItem[] =[
+    {label:'Backgrounds', value:'0'},
+    {label:'Trees', value:'1'},
+    {label:'Animals', value:'2'},
+    {label:'Flowers', value:'3'},
+    {label:'Lines', value:'4'}];
   category: string= '';
   categoryName: string= '';
   imageName: string= '';
@@ -34,5 +41,9 @@ export class ImageComponent implements OnInit {
   
   userPanel(){
     console.log('userPanel clicked');
+  }
+
+  despliega(){
+    console.log('no iyo');
   }
 }
