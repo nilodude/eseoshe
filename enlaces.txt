@@ -41,6 +41,11 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 	PERO se puede hacer mas artesanal tambien con (onItemClick)="funcion($event)" y se gestiona la navegacion 
 	https://stackoverflow.com/questions/61814221/how-to-get-a-click-on-p-breadcrumb-when-click-on-home
 	
+	PERO se le puede poner el atributo command al MenuItem y ya está gestionado tambien el click 
+	sin tener que parsear el $event del onItemClick
+	https://stackblitz.com/edit/angular-6-template-kbxbb3?file=src%2Findex.html,src%2Fapp%2Fapp.component.ts
+	
+	
 	-con el componente p-chips ( https://www.primefaces.org/primeng/chips ) se puede gestionar
 	perfectamente el buscador de keywords, tiene todos los controles basicos para un buscador
 	on the fly, que no haya que pulsar BUSCAR para que busque.

@@ -86,4 +86,9 @@ export class GalleryComponent implements OnInit {
     localStorage.setItem('imageName', im.toString());
     this.router.navigate(['/image']);
   }
+
+  despliega(){
+    console.log('no iyo');
+  }
+
 }

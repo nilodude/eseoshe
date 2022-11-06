@@ -1,24 +1,31 @@
 
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
+    background-color: rgba(255, 255, 255, 0.473);
+    border: none;
 }
 
 :host ::ng-deep .dropDownStyle.p-dropdown {
     min-width: 14vh;
     margin-left: 1vh;
     border: none;
-    opacity:0.8;
+    opacity:1;
+    background-color: rgba(255, 255, 255, 0);
 }
-:host ::ng-deep .p-dropdown .p-dropdown-trigger{
+
+:host ::ng-deep  .p-dropdown-trigger{
     width: 2rem;
 }
+
 :host ::ng-deep .p-dropdown-label.p-inputtext{
     font-family: monospace;
     font-size: 1.5vh;
-    opacity:0.5;
+    opacity:1;
     padding-right: 0%;
     display:flex;
     justify-content: center;
+    color:black;
+    border: none;
 }
 .title {
     letter-spacing: 0.2vh;
