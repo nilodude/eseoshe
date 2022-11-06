@@ -15,6 +15,7 @@ import { FormsModule }   from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
 import { ImageComponent } from './image/image.component';
 import {TooltipModule} from 'primeng/tooltip';
+import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import {TooltipModule} from 'primeng/tooltip';
     HomeComponent,
     GalleryComponent,
     ImageComponent
+    ColorButtonsComponent
   ],
   imports: [
     BrowserModule,
