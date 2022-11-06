@@ -48,10 +48,7 @@ export class ImageComponent implements OnInit {
     if(!event.target.classList.contains('p-inputtext') && event.target.innerText == this.categoryName){
       localStorage.setItem('categoryName', this.categoryName);
       localStorage.setItem('category',this.category);
-      // this.router.navigate(['/category']);
-
-      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>
-   this.router.navigate(['/category']));
+      this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/category']));
     }
   }
 }
