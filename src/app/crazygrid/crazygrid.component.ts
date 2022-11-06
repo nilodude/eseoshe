@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@angular/core';
 import { Box, Cell } from '../models';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-crazygrid',
@@ -16,12 +17,7 @@ export class CrazygridComponent implements OnInit {
   //[scale]="7.15" ocupa toda la pantalla
   @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
-  categories: any[] =[
-    {label:'Backgrounds', value:'0'},
-    {label:'Trees', value:'1'},
-    {label:'Animals', value:'2'},
-    {label:'Flowers', value:'3'},
-    {label:'Lines', value:'4'}];
+  categories: any[] =[];
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
@@ -39,10 +35,14 @@ export class CrazygridComponent implements OnInit {
   cells: any;
   idCount: number = 0;
   boxesPlaced: boolean = false;
+  isDataRetrieved: boolean = false;
   public removeEventListener: (() => void) | undefined;
   
   constructor(
-    private renderer: Renderer2, private elementRef: ElementRef ,private router: Router,
+    private renderer: Renderer2,
+    private elementRef: ElementRef,
+    private router: Router,
+    private apiService: ApiService,
   ){
     this.cells = [];
     this._2x1.ylen = 1;
@@ -72,29 +72,8 @@ export class CrazygridComponent implements OnInit {
     
   }
   ngOnInit(){
-    this.boxes= [];
-    this.cells= [];
-    this.idCount= 0;
-    this.boxesPlaced = false;
-
+    this.getCategories();
     
-    this.scale = window.innerWidth /this.windowScale;
-    
-    this.boxPool =  [this._1x1];
-
-    for(let y =0; y<= this.height ;y++){
-      for(let x =0; x<= this.width ;x++){
-        if(this.itsFree(x,y)){
-          this.placeBox(x,y);
-        }
-        this.boxesPlaced = (y === (this.height ) && x === (this.width ));
-      }
-    }
-
-    if(this.boxesPlaced){
-      this.arrange();
-    }
-
     this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
       if (event.target instanceof HTMLImageElement) {
         const id = event.target.id.toString();
@@ -109,8 +88,32 @@ export class CrazygridComponent implements OnInit {
         }
       }
     });
-
   }
+
+  obtainCrazyGrid(){
+    this.boxes= [];
+    this.cells= [];
+    this.idCount= 1;
+    this.boxesPlaced = false;
+    
+    this.scale = window.innerWidth /this.windowScale;
+    
+    this.boxPool =  [this._1x1];
+
+    for(let y =0; y<= this.height ;y++){
+      for(let x =0; x<= this.width ;x++){
+        if(this.itsFree(x,y)){
+          this.placeBox(x,y);
+        }
+        this.boxesPlaced = (y === (this.height ) && x === (this.width ));
+      }
+    }
+
+    if(this.isDataRetrieved && this.boxesPlaced){
+      this.arrange();
+    }
+  }
+
 
   @HostListener('window:resize', ['$event'])
   onWindowResize() {
@@ -207,7 +210,7 @@ export class CrazygridComponent implements OnInit {
           let newTitle = document.createElement("h2");
                    
           //TITLE
-          newTitle.innerHTML= this.categories.find(c=>c.value == box.boxID)?.label;
+          newTitle.innerHTML= this.categoryName(box.boxID);//this.categories.find(c=>c.value == box.boxID)?.label;
           newTitle.id = 'title'+box.boxID;
           newTitle.style.position = 'absolute';
           newTitle.style.top = '41%';
@@ -333,5 +336,22 @@ export class CrazygridComponent implements OnInit {
 
   categoryName(value: number){
     return this.categories.find(c=>c.value == value)?.label;
+  }
+
+  getCategories(){
+    this.categories = [];
+    this.apiService.getCollections().subscribe(
+      result=>{
+        this.categories = result.map((c: any)=>{
+          return {label: c['name'], value: c['id']}
+        });
+        console.log('retrieved collections');
+        this.isDataRetrieved = true;
+        this.obtainCrazyGrid();
+      },error=>{
+        console.log('error retrieving collections')
+        console.log(error)
+      }
+    );
   }
 }
