@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn-color:enabled:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.btn-white-grad:enabled:hover {
+    background-position: right center;
+    color: black;
+    text-decoration: none;
+}
+
+.btn-color {
+    width: 6.3%;
+    height:3.5vh;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 10px;
+    //padding: 10px 35px;
+    transition: 0.5s;
+    font-size: 100%;
+    background-size: 200% auto;
+    color: white;
+    border-radius: 10px;
+    display: block;
+    border: unset;
+    min-width:70px;
+    font-family: 'Roboto';
+}
+
+.btn-red-grad {
+    background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
+}
+        
+.btn-orange-grad {
+    background-image: linear-gradient(to right, #E44D26 0%, #F16529  51%, #E44D26  100%);
+}
+       
+.btn-yellow-grad {
+    background-image: linear-gradient(to right, #ffb347 0%, #ffcc33  51%, #ffb347  100%);
+}
+         
+.btn-green-grad {
+    background-image: linear-gradient(to right, #a8e063 0%, #56ab2f  51%, #56ab2f  100%);
+}
+       
+.btn-cyan-grad {
+    background-image: linear-gradient(to right, #40b7ee 0%, #12D8FA  51%, #1FA2FF  100%);
+}
+         
+.btn-blue-grad {
+    background-image: linear-gradient(to right, #0575E6 0%, #021B79  51%, #0575E6  100%);
+}
+         
+.btn-purple-grad {
+    background-image: linear-gradient(to right, #7a44d6 0%, #512DA8  51%, #542d98  100%);
+}
+         
+.btn-magenta-grad {
+    background-image: linear-gradient(to right, #ff00cc 0%, #950880  51%, #ff00cc  100%);
+}
+         
+.btn-brown-grad {
+    background-image: linear-gradient(to right, #bb8d72 0%, #38210a  51%, #bb8d72  100%);
+}
+
+.btn-black-grad {
+    background-image: linear-gradient(to right, #353434 0%, #000000  51%, #1e1d1c  100%);
+}
+         
+.btn-grey-grad {
+    background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  100%);
+}
+         
+.btn-white-grad {
+    background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%);
+    color: black;
+  }
+ 
+  .btn-rainbow-grad {
+    background-image: linear-gradient(to right, rgba(255, 0, 0, 1) 0%,
+    rgba(255, 154, 0, 1) 10%,
+    rgba(208, 222, 33, 1) 20%,
+    rgba(79, 220, 74, 1) 30%,
+    rgba(63, 218, 216, 1) 40%,
+    rgba(47, 201, 226, 1) 50%,
+    rgba(28, 127, 238, 1) 60%,
+    rgba(95, 21, 242, 1) 70%,
+    rgba(186, 12, 248, 1) 80%,
+    rgba(251, 7, 217, 1) 90%,
+    rgba(255, 0, 0, 1) 100%);
+
+  }
+ 
+ 
+
+
+
+
+
+ 
+
+
+ 
+
+ 
