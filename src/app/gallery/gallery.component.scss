@@ -19,6 +19,7 @@
     border: none;
     opacity:1;
     background-color: rgba(255, 255, 255, 0);
+    box-shadow: unset;
 }
 :host ::ng-deep  .p-dropdown-trigger{
     width: 2rem;
@@ -32,13 +33,14 @@
     justify-content: center;
     color:black;
     border: none;
-
     padding-left:0%;
 }
+
 :host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
     color: rgb(255, 255, 255);
     transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
 }
+
 // aqui termina la parte común del breadcrumb entre gallery e image
 
 .title {
