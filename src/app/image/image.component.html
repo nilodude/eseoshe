@@ -3,7 +3,6 @@
         <div class="breadcrumb">
             <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600" tooltipStyleClass="tooltip">
                 <div><img src="">home</div>
-                <!-- /<div class="categoryName" (click)="this.back()" >{{categoryName}}</div> -->
                 /<div class="categoryName">
                     <p-dropdown (click)="despliega($event)" [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
                     (onChange)="back()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>    

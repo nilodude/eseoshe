@@ -324,7 +324,7 @@ export class CrazygridComponent implements OnInit {
 
   clickImage(boxID: number){
     console.log('clicked box '+this.categoryName(boxID));
-    
+    localStorage.setItem('categories',JSON.stringify(this.categories));
     localStorage.setItem('category',boxID.toString());
     this.router.navigate(['/category']);
   }

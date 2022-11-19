@@ -16,6 +16,7 @@ import {DialogModule} from 'primeng/dialog';
 import { ImageComponent } from './image/image.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
     HomeComponent,
     GalleryComponent,
     ImageComponent,
-    ColorButtonsComponent
+    ColorButtonsComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
