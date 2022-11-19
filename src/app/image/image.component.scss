@@ -50,28 +50,28 @@ $dataTitleSize: calc(90% + 0.2vw);
     flex-wrap: wrap;
     margin: 1% 1%;
     justify-content: center;
-    //justify-content: flex-start; //o incluso space-between para probar el nuevo layout en el que salen las fotos recomendadas
 }
 .imageDiv{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
     flex-wrap: nowrap;
-    width: calc(36vh + 18vw);
-    height: auto;
 }
+
 .image{
-    // height:39vw;
-    // width: auto;
-    height:inherit;
-    width: inherit;
+    max-height:calc(35vh + 20vw);
+    max-width: 100%;
+    height: auto;
+    width: auto;
 }
 
 .imTitle{
     font-size: $titleSize;
     white-space: nowrap;
+    display: flex;
+    justify-content: center;
 }
+
 .imDataDiv{
     margin: 1vh 3vw;
     font-size: $dataTitleSize;
