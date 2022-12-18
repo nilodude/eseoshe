@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,6 +16,7 @@ import {DialogModule} from 'primeng/dialog';
 import { ImageComponent } from './image/image.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
+import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
     HomeComponent,
     GalleryComponent,
     ImageComponent,
-    ColorButtonsComponent
+    ColorButtonsComponent,
+    BreadcrumbComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,8 @@ import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
     FormsModule,
     BrowserAnimationsModule,
     DialogModule,
-    TooltipModule
+    TooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

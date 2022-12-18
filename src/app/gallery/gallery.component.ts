@@ -8,14 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  categories: SelectItem[] =[
-    {label:'Backgrounds', value:'0'},
-    {label:'Trees', value:'1'},
-    {label:'Animals', value:'2'},
-    {label:'Flowers', value:'3'},
-    {label:'Lines', value:'4'}];
-  
-  category: string = '';
+  categories: SelectItem[] =[];
+  category: number;
   categoryName: string = '';
   imagesRaw: any[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
   images: any[] = [];
@@ -24,7 +18,8 @@ export class GalleryComponent implements OnInit {
   zoomedIm: number = 0;
 
   constructor(private router: Router) {
-    
+    this.categories = JSON.parse(localStorage.getItem('categories') as string);
+    this.category = parseInt(localStorage.getItem('category') as string);
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
       this.liked = [];
@@ -32,8 +27,7 @@ export class GalleryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.category = localStorage.getItem('category') as string;
-    this.categoryName = this.categories.find(c=>c.value === this.category)?.label as string;
+    this.categoryName = this.categories.find(c=>c.value == this.category)?.label as string;
     localStorage.setItem('categoryName', this.categoryName);
     console.log('into category '+ this.categoryName);
     
@@ -87,8 +81,17 @@ export class GalleryComponent implements OnInit {
     this.router.navigate(['/image']);
   }
 
-  despliega(){
-    console.log('no iyo');
+  despliega(event: any){
+    console.log(event.target.innerText);
+    if(event.target.innerText == this.categoryName){
+      localStorage.setItem('categoryName', this.categoryName);
+      localStorage.setItem('category',this.category.toString());
+      this.router.navigate(['/category']);
+    }
   }
-
+  
+  goHome(){
+    localStorage.clear();
+    this.router.navigate(['/']);
+  }
 }

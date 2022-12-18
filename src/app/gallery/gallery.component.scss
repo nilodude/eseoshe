@@ -1,22 +1,29 @@
 
-:host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.ng-tns-c62-0.p-dropdown-panel.p-component.ng-star-inserted {
+::ng-deep .tooltip .p-tooltip-text{
+    background-color: rgba(255, 255, 255, 0.096);
+    color: gray;
+    white-space: nowrap;
+    box-shadow: unset;
+    border: unset;
+    margin: 0% 0%;
+}
+::ng-deep .tooltip .p-tooltip-arrow{
+   display: none;
+}
+:host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
-    background-color: rgba(255, 255, 255, 0.473);
+    background-color: rgba(255, 255, 255, 0.5);
     border: none;
 }
-
 :host ::ng-deep .dropDownStyle.p-dropdown {
-    min-width: 14vh;
-    margin-left: 1vh;
     border: none;
     opacity:1;
     background-color: rgba(255, 255, 255, 0);
+    box-shadow: unset;
 }
-
 :host ::ng-deep  .p-dropdown-trigger{
     width: 2rem;
 }
-
 :host ::ng-deep .p-dropdown-label.p-inputtext{
     font-family: monospace;
     font-size: 1.5vh;
@@ -26,7 +33,16 @@
     justify-content: center;
     color:black;
     border: none;
+    padding-left:0%;
 }
+
+:host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
+    color: rgb(255, 255, 255);
+    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
+}
+
+// aqui termina la parte común del breadcrumb entre gallery e image
+
 .title {
     letter-spacing: 0.2vh;
     font-size: 2vh;
