@@ -8,18 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  categories: SelectItem[] =[];
-  category: number;
-  categoryName: string = '';
-  imagesRaw: any[] = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  collections: SelectItem[] =[];
+  collectionID: number;
+  collectionName: string = '';
   images: any[] = [];
   liked: any = [false];
   popup: boolean = false;
   zoomedIm: number = 0;
 
   constructor(private router: Router) {
-    this.categories = JSON.parse(localStorage.getItem('categories') as string);
-    this.category = parseInt(localStorage.getItem('category') as string);
+    // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
+    // theres an elegant way to do this, DataService, so users can't inspect your application data 
+    this.collections = JSON.parse(localStorage.getItem('collections') as string);
+    this.collectionID = parseInt(localStorage.getItem('collectionID') as string);
+    this.collectionName = localStorage.getItem('collectionName') as string
+    // "this.liked" is a temporary array containing a boolean indicating if the image is liked
+    // when the "user" DB table is implemented, this "liked" data will be retrieved from DB
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
       this.liked = [];
@@ -27,17 +31,28 @@ export class GalleryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.categoryName = this.categories.find(c=>c.value == this.category)?.label as string;
-    localStorage.setItem('categoryName', this.categoryName);
-    console.log('into category '+ this.categoryName);
+    // this.collectionName = this.getCollectionName(this.collectionID);
+    // localStorage.setItem('collectionName', this.collectionName);
+    this.collectionName = localStorage.getItem('collectionName') as string
+    console.log('into collection '+ this.collectionName);
     
-    this.imagesRaw.map(i=>{
+    // this.images should be retrieved from DB. "getImagesByCollection() or similar"
+    this.images = this.getRandomTestImages().map(i=>{
+      return {name: i, liked: this.liked[i]}
+    });
+    
+    console.log(this.images);
+  }
+
+  getRandomTestImages(){
+    const imagesRaw = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+    imagesRaw.map(i=>{
       if(this.liked[i] == null){
         this.liked[i] = this.liked[i] != null && this.liked[i];
       }
-    })
-
-    let ims = structuredClone(this.imagesRaw);
+    });
+    
+    let ims = structuredClone(imagesRaw);
     let rand = '';
     while(
       ims.findIndex(function(v, i) {
@@ -46,19 +61,17 @@ export class GalleryComponent implements OnInit {
     ) {
       ims.sort(function() { return Math.random() - 0.5; });
     }
-    this.images = ims.map(i=>{
-      return {name: i, liked: this.liked[i]}
-    });
-    
-    console.log(this.images);
+    return ims;
   }
 
   userPanel(){
     console.log('userPanel clicked');
   }
 
-  changeCategory(){
-    localStorage.setItem('category',this.category.toString());
+  changeCollection(){
+    // taking advantage of angular component lifecycle, setting "collection" in localStorage and re-initializing the component, works
+    localStorage.setItem('collectionID',this.collectionID.toString());
+    localStorage.setItem('collectionName', this.getCollectionName(this.collectionID))
     this.ngOnInit();
   }
 
@@ -83,15 +96,19 @@ export class GalleryComponent implements OnInit {
 
   despliega(event: any){
     console.log(event.target.innerText);
-    if(event.target.innerText == this.categoryName){
-      localStorage.setItem('categoryName', this.categoryName);
-      localStorage.setItem('category',this.category.toString());
-      this.router.navigate(['/category']);
+    if(event.target.innerText == this.collectionName){
+      localStorage.setItem('collectionName', this.collectionName);
+      localStorage.setItem('collectionID',this.collectionID.toString());
+      this.router.navigate(['/collection']);
     }
   }
   
+  getCollectionName(collectionID: number){
+    return this.collections.find(c=>c.value == collectionID)?.label as string;
+  }
+
   goHome(){
-    localStorage.clear();
+    //localStorage.clear();
     this.router.navigate(['/']);
   }
 }

@@ -8,13 +8,13 @@ import { SelectItem } from 'primeng/api';
   styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-  @Input('categoryName') categoryName: string = '';
+  @Input('collectionName') collectionName: string = '';
   @Input('imageName') imageName: string = '';
-  categories: SelectItem[] =[];
-  category: string = '';
+  collections: SelectItem[] =[];
+  collection: string = '';
 
   constructor(private router: Router) {
-    this.categories = JSON.parse(localStorage.getItem('categories') as any);
+    this.collections = JSON.parse(localStorage.getItem('collections') as any);
     
    }
 
@@ -23,14 +23,14 @@ export class BreadcrumbComponent implements OnInit {
   
   despliega(event: any){
     console.log(event.target.innerText);
-    if(event.target.innerText == this.categoryName){
-      localStorage.setItem('categoryName', this.categoryName);
-      localStorage.setItem('category',this.category);
-      this.router.navigate(['/category']);
+    if(event.target.innerText == this.collectionName){
+      localStorage.setItem('collectionName', this.collectionName);
+      localStorage.setItem('collection',this.collection);
+      this.router.navigate(['/collection']);
     }
   }
   changeCategory(){
-    localStorage.setItem('category',this.category.toString());
+    localStorage.setItem('collection',this.collection.toString());
     //this.ngOnInit();
   }
 }
