@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, Input, OnInit, Renderer2 } from '@
 import { Box, Cell } from '../models';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
+// import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-crazygrid',
@@ -43,6 +44,7 @@ export class CrazygridComponent implements OnInit {
     private elementRef: ElementRef,
     private router: Router,
     private apiService: ApiService,
+    // private dataService: DataService,
   ){
     this.cells = [];
     this._2x1.ylen = 1;
@@ -324,6 +326,8 @@ export class CrazygridComponent implements OnInit {
 
   clickImage(boxID: number){
     console.log('clicked box '+this.categoryName(boxID));
+    // this.dataService.updateCategories(this.categories);
+    // this.dataService.updateCategory(boxID.toString());
     localStorage.setItem('categories',JSON.stringify(this.categories));
     localStorage.setItem('category',boxID.toString());
     this.router.navigate(['/category']);
@@ -340,18 +344,20 @@ export class CrazygridComponent implements OnInit {
 
   getCategories(){
     this.categories = [];
-    this.apiService.getCollections().subscribe(
-      result=>{
+    this.apiService.getCollections().subscribe({
+      next: (result)=>{
         this.categories = result.map((c: any)=>{
           return {label: c['name'], value: c['id']}
         });
+      },
+      error: (error)=>{
+        console.log('error retrieving collections')
+        console.log(error)
+      },
+      complete: ()=>{
         console.log('retrieved collections');
         this.isDataRetrieved = true;
         this.obtainCrazyGrid();
-      },error=>{
-        console.log('error retrieving collections')
-        console.log(error)
-      }
-    );
+      }});
   }
 }

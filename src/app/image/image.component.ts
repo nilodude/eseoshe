@@ -20,6 +20,7 @@ export class ImageComponent implements OnInit {
     this.imageName = localStorage.getItem('imageName') as string;
     this.categories = JSON.parse(localStorage.getItem('categories') as string);
     this.category = parseInt(localStorage.getItem('category') as string);
+    this.categoryName = localStorage.getItem('categoryName') as string;
     this.imageData = [{title:'Size', value: '4000x3000'}, {title:'Type', value:'jpg'} ,{title:'Category', value: this.categoryName},
      {title:'License', value: 'standart'}, {title:'Price', value:'1000 atm·L/K·mol'}];
    }
