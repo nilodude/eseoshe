@@ -11,6 +11,7 @@ export class GalleryComponent implements OnInit {
   collections: SelectItem[] =[];
   collectionID: number;
   collectionName: string = '';
+  collection: SelectItem = {label:'', value:''};
   images: any[] = [];
   liked: any = [false];
   popup: boolean = false;
@@ -22,6 +23,9 @@ export class GalleryComponent implements OnInit {
     this.collections = JSON.parse(localStorage.getItem('collections') as string);
     this.collectionID = parseInt(localStorage.getItem('collectionID') as string);
     this.collectionName = localStorage.getItem('collectionName') as string
+
+    this.collection = JSON.parse(localStorage.getItem('collection') as string);
+
     // "this.liked" is a temporary array containing a boolean indicating if the image is liked
     // when the "user" DB table is implemented, this "liked" data will be retrieved from DB
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
@@ -31,10 +35,11 @@ export class GalleryComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // this.collectionName = this.getCollectionName(this.collectionID);
-    // localStorage.setItem('collectionName', this.collectionName);
     this.collectionName = localStorage.getItem('collectionName') as string
-    console.log('into collection '+ this.collectionName);
+    
+    this.collection = JSON.parse(localStorage.getItem('collection') as string);
+
+    console.log('into collection '+ this.collection.label);
     
     // this.images should be retrieved from DB. "getImagesByCollection() or similar"
     this.images = this.getRandomTestImages().map(i=>{
@@ -70,6 +75,10 @@ export class GalleryComponent implements OnInit {
 
   changeCollection(){
     // taking advantage of angular component lifecycle, setting "collection" in localStorage and re-initializing the component, works
+    //this.collectionID = this.collection.value;
+    this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
+    this.collectionName = this.collection.label as string;
+    localStorage.setItem('collection',JSON.stringify(this.collection));
     localStorage.setItem('collectionID',this.collectionID.toString());
     localStorage.setItem('collectionName', this.getCollectionName(this.collectionID))
     this.ngOnInit();
@@ -97,6 +106,8 @@ export class GalleryComponent implements OnInit {
   despliega(event: any){
     console.log(event.target.innerText);
     if(event.target.innerText == this.collectionName){
+      this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
+      localStorage.setItem('collection',JSON.stringify(this.collection));
       localStorage.setItem('collectionName', this.collectionName);
       localStorage.setItem('collectionID',this.collectionID.toString());
       this.router.navigate(['/collection']);

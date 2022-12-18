@@ -212,7 +212,7 @@ export class CrazygridComponent implements OnInit {
           let newTitle = document.createElement("h2");
                    
           //TITLE
-          newTitle.innerHTML= this.collectionName(box.boxID);//this.collections.find(c=>c.value == box.boxID)?.label;
+          newTitle.innerHTML= this.getCollectionName(box.boxID);//this.collections.find(c=>c.value == box.boxID)?.label;
           newTitle.id = 'title'+box.boxID;
           newTitle.style.position = 'absolute';
           newTitle.style.top = '41%';
@@ -317,22 +317,23 @@ export class CrazygridComponent implements OnInit {
   }
 
   like(boxID: number){
-    console.log('liked box '+this.collectionName(boxID));
+    console.log('liked box '+this.getCollectionName(boxID));
   }
 
   zoom(boxID: number){
-    console.log('zoomed box '+this.collectionName(boxID));
+    console.log('zoomed box '+this.getCollectionName(boxID));
   }
 
   clickCollection(collectionID: number){
-    console.log('clicked collection '+this.collectionName(collectionID));
+    console.log('clicked collection '+this.getCollectionName(collectionID));
     // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
     // theres an elegant way to do this, DataService, so users can't inspect your application data 
     // this.dataService.updateCollections(this.collections);
     // this.dataService.updatecollection(collectionID.toString());
     localStorage.setItem('collections',JSON.stringify(this.collections));
     localStorage.setItem('collectionID',collectionID.toString());
-    localStorage.setItem('collectionName', this.collectionName(collectionID))
+    localStorage.setItem('collectionName', this.getCollectionName(collectionID))
+    localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == collectionID)))
     this.router.navigate(['/collection']);
   }
 
@@ -341,7 +342,7 @@ export class CrazygridComponent implements OnInit {
     this.ngOnInit();
   }
 
-  collectionName(value: number){
+  getCollectionName(value: number){
     return this.collections.find(c=>c.value == value)?.label;
   }
 
