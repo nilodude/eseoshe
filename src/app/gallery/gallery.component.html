@@ -6,14 +6,14 @@
                 <span class="breadcrumbString" pTooltip="Back to collection" tooltipPosition="top" [showDelay]="600"
                     tooltipStyleClass="tooltip">
                     <div (click)="goHome()"><img src="">home</div>
-                    /<div class="categoryName">
-                        <p-dropdown (click)="despliega($event)" [options]="categories" [(ngModel)]="this.category" scrollHeight="100%"
-                            (onChange)="changeCategory()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
+                    /<div class="collectionName">
+                        <p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
+                            (onChange)="changeCollection()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
                     </div>
                 </span>
             </div>
             <div class="title flex align-items-center">
-                <span>{{this.categoryName}}</span>
+                <span>{{this.collection.label}}</span>
             </div>
             <div class="userPanel">
                 <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
