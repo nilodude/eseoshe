@@ -331,8 +331,6 @@ export class CrazygridComponent implements OnInit {
     // this.dataService.updateCollections(this.collections);
     // this.dataService.updatecollection(collectionID.toString());
     localStorage.setItem('collections',JSON.stringify(this.collections));
-    localStorage.setItem('collectionID',collectionID.toString());
-    localStorage.setItem('collectionName', this.getCollectionName(collectionID))
     localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == collectionID)))
     this.router.navigate(['/collection']);
   }
