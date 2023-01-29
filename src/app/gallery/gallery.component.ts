@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
-import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gallery',
@@ -41,12 +40,7 @@ export class GalleryComponent implements OnInit {
     console.log('into collection '+ this.collection.label);
     
     this.getImagesByCollection(this.collection.value);
-    
-    // this.images should be retrieved from DB. "getImagesByCollection() or similar"
-    // this.images = this.getRandomTestImages().map(i=>{
-    //   return {name: i, liked: this.liked[i]}
-    // });
-    
+      
     console.log(this.images);
   }
 
@@ -62,7 +56,7 @@ export class GalleryComponent implements OnInit {
             b64: i.b64,
             title: i.title,
             liked: this.liked[i.file_name],
-            keywords: i.keywords.replace('[','').replace(']','').replace('\'','').split(','),
+            keywords: i.keywords.replaceAll('[','').replaceAll(']','').replaceAll("'",'').trim().split(',').map((each: string)=>each.trim()),
             size: [i.width, i.height],
             id_collection: i.id_collection
           }
