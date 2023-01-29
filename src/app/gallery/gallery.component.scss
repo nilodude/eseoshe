@@ -141,3 +141,7 @@
 :host ::ng-deep .p-dialog .p-dialog-content{
     display:flex;
 }
+
+:host ::ng-deep .p-dialog .p-dialog-title{
+    font-family: initial;
+}

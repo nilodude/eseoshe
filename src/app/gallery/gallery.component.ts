@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ApiService } from './../services/api.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-gallery',
@@ -12,11 +14,12 @@ export class GalleryComponent implements OnInit {
   collectionID: number;
   collection: SelectItem = {label:'', value:''};
   images: any[] = [];
-  liked: any = [false];
+  liked: any = [{}];
   popup: boolean = false;
-  zoomedIm: number = 0;
+  isDataRetrieved: boolean = false;
+  zoomedIm: any={};
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private apiService: ApiService) {
     // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
     // theres an elegant way to do this, DataService, so users can't inspect your application data 
     this.collections = JSON.parse(localStorage.getItem('collections') as string);
@@ -27,7 +30,7 @@ export class GalleryComponent implements OnInit {
     // when the "user" DB table is implemented, this "liked" data will be retrieved from DB
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
-      this.liked = [];
+      this.liked = [{}];
     }
    }
 
@@ -36,12 +39,34 @@ export class GalleryComponent implements OnInit {
     
     console.log('into collection '+ this.collection.label);
     
+    this.getImagesByCollection(this.collection.value);
+    
     // this.images should be retrieved from DB. "getImagesByCollection() or similar"
-    this.images = this.getRandomTestImages().map(i=>{
-      return {name: i, liked: this.liked[i]}
-    });
+    // this.images = this.getRandomTestImages().map(i=>{
+    //   return {name: i, liked: this.liked[i]}
+    // });
     
     console.log(this.images);
+  }
+
+
+  getImagesByCollection(collection: number){
+    this.apiService.getImagesByCollection(collection).subscribe({
+      next: (result)=>{
+        // THIS SHOULD BE PARSED USING A CLASS, not hardcoded json
+        this.images = result.map((i: any)=>{
+          return {name: i.file_name, b64: i.b64, title: i.title,liked: this.liked[i.file_name]}
+        });
+      },
+      error: (error)=>{
+        console.log('error retrieving images')
+        console.log(error)
+      },
+      complete: ()=>{
+        console.log('retrieved images');
+        this.isDataRetrieved = true;
+      }
+    })
   }
 
   getRandomTestImages(){
@@ -75,16 +100,16 @@ export class GalleryComponent implements OnInit {
     this.ngOnInit();
   }
 
-  like(im: number){
-    this.liked[im] = !this.liked[im];
-    this.images.find(i=>i.name===im).liked = this.liked[im];
-    console.log((this.liked[im] ? 'liked':'unliked')+ ' image '+im);
+  like(imageName: any){
+    this.liked[imageName] = !this.liked[imageName];
+    this.images.find(i=>i.name==imageName).liked = this.liked[imageName];
+    console.log((this.liked[imageName] ? 'liked':'unliked')+ ' image '+imageName);
     localStorage.setItem('liked', JSON.stringify(this.liked));
   }
 
-  zoom(im: number){
+  zoom(im: any){
     this.zoomedIm= im;
-    console.log('zoomed image '+im);
+    console.log('zoomed image '+im.file_name);
     this.popup = true;
   }
 

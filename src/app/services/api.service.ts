@@ -24,6 +24,6 @@ export class ApiService {
   }
 
   getImagesByCollection(idCollection: number): Observable<any>{
-    return this.http.get<any>(this.apiUrl+'/collection'+idCollection);
+    return this.http.get<any>(this.apiUrl+'/collection/'+idCollection);
   }
 }

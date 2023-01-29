@@ -21,15 +21,15 @@
             </div>
         </div>
 
-        <div class="gallery">
+        <div *ngIf="isDataRetrieved" class="gallery">
             <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
                 <div class="imDiv">
                     <div (click)="this.clickImage(im.name)" >
-                        <img class="im" src="../../assets/{{im.name}}.jpg">
+                        <img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
                     <div class="overlay flex">
                         <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
-                        <div class="zoomDiv" (click)="this.zoom(im.name)">
+                        <div class="zoomDiv" (click)="this.zoom(im)">
                             <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
                         </div>
                     </div>
@@ -38,10 +38,10 @@
         </div>
     </div>
     <div class="popup">
-        <p-dialog header="IMAGE {{zoomedIm}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+        <p-dialog header="{{zoomedIm.title}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">
             <div class="zoomedDiv">
-                <img class="zoomed" src="../../assets/{{zoomedIm}}.jpg">
+                <img class="zoomed" src="data:image/png;base64,{{ zoomedIm.b64 }}">
             </div>
             <ng-template pTemplate="footer">
                 <p-button icon="pi pi-check" (click)="popup=false" label="ENGA" styleClass="p-button-text">
