@@ -7,7 +7,9 @@
                     <p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
                     (onChange)="back()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>    
                 </div>
-                /{{imageName}}
+                /<div class="breadCrumbImageName">
+                    {{imageName}}
+                </div>
             </span>
         </div>
         <div class="userPanel">
@@ -17,14 +19,14 @@
     </div>
     <div class="imageBlock">
         <div class="imageDiv">
-            <img class="image" src="../../assets/{{imageName}}.jpg">
-            <div class="imTitle"><span>IMAGE WITH TITLE {{imageName}}</span></div>
+            <img class="image" src="data:image/png;base64,{{ image.b64 }}">
+            <div class="imTitle"><div>{{image.title}}</div></div>
         </div>
         <div class="imDataDiv">
             <ng-template ngFor let-imData [ngForOf]="this.imageData" let-i="index">
                 <div class="imData">
-                    <div class="imDataTitle">
-                        <div>{{imData.title}}</div>
+                    <div class="imDataHeader">
+                        <div>{{imData.header}}</div>
                     </div>
                     <div class="imDataValue">
                         {{imData.value}}
@@ -36,7 +38,7 @@
         <div class="keywords">
             <ng-template ngFor let-keyword [ngForOf]="this.keywords" let-k="index">
                 <div class="keyword">
-                    ({{k}}){{keyword}}
+                    {{keyword}}
                 </div>
             </ng-template>
         </div>

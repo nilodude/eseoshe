@@ -35,6 +35,7 @@ export class GalleryComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    this.isDataRetrieved = false;
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
     
     console.log('into collection '+ this.collection.label);
@@ -55,7 +56,16 @@ export class GalleryComponent implements OnInit {
       next: (result)=>{
         // THIS SHOULD BE PARSED USING A CLASS, not hardcoded json
         this.images = result.map((i: any)=>{
-          return {name: i.file_name, b64: i.b64, title: i.title,liked: this.liked[i.file_name]}
+          return {
+            id: i.id,
+            name: i.file_name,
+            b64: i.b64,
+            title: i.title,
+            liked: this.liked[i.file_name],
+            keywords: i.keywords.replace('[','').replace(']','').replace('\'','').split(','),
+            size: [i.width, i.height],
+            id_collection: i.id_collection
+          }
         });
       },
       error: (error)=>{
@@ -109,13 +119,14 @@ export class GalleryComponent implements OnInit {
 
   zoom(im: any){
     this.zoomedIm= im;
-    console.log('zoomed image '+im.file_name);
+    console.log('zoomed image '+im.name);
     this.popup = true;
   }
 
-  clickImage(im: number){
-    console.log('clicked image '+im);
-    localStorage.setItem('imageName', im.toString());
+  clickImage(im: any){
+    console.log('clicked image '+im.name);
+    localStorage.setItem('imageName', im.name);
+    localStorage.setItem('image', JSON.stringify(im));
     this.router.navigate(['/image']);
   }
 

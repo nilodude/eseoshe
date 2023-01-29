@@ -45,11 +45,16 @@ $dataTitleSize: calc(90% + 0.2vw);
 }
 // aqui termina la parte común del breadcrumb entre gallery e image
 
+.breadCrumbImageName{
+    white-space: nowrap;
+}
+
 .imageBlock{
     display:flex;
     flex-wrap: wrap;
     margin: 1% 1%;
-    justify-content: center;
+    // justify-content: center;
+    justify-content: space-evenly;
 }
 .imageDiv{
     display: flex;
@@ -66,10 +71,13 @@ $dataTitleSize: calc(90% + 0.2vw);
 }
 
 .imTitle{
-    font-size: $titleSize;
-    white-space: nowrap;
+    // font-size: $titleSize;
+    font-size: calc(1vh + 1vw);
+    // white-space: nowrap;
     display: flex;
     justify-content: center;
+    margin: 1.5% 2%;
+    max-width: calc(73.1vh + 1vw);
 }
 
 .imDataDiv{
@@ -87,7 +95,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     flex-direction: column;
 }
 
-.imDataTitle{
+.imDataHeader{
     font-size: $dataTitleSize;
     font-weight: bold;
     margin-bottom: 2.5%;
