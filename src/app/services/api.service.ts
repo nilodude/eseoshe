@@ -17,7 +17,7 @@ export class ApiService {
   }
   
   getCollection(idCollection: number): Observable<any>{
-    return this.http.get<any>(this.apiUrl+'/collections'+idCollection);
+    return this.http.get<any>(this.apiUrl+'/collections/'+idCollection);
   }
  
   getImages(): Observable<any>{
@@ -26,5 +26,13 @@ export class ApiService {
 
   getImagesByCollection(idCollection: number): Observable<any>{
     return this.http.get<any>(this.apiUrl+'/collection/'+idCollection);
+  }
+
+  getImagesByFileNames(fileNames: string): Observable<any>{
+    return this.http.get<any>(this.apiUrl+'/images?fileNames='+fileNames)
+  }
+
+  getImagesByKeywords(keywords: string): Observable<any>{
+    return this.http.get<any>(this.apiUrl+'/images?keywords='+keywords)
   }
 }
