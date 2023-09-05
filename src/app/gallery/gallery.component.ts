@@ -25,7 +25,7 @@ export class GalleryComponent implements OnInit {
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
     this.collectionID = this.collection.value;
     
-    // "this.liked" is a temporary array containing a boolean indicating if the image is liked
+    // "this.liked" is a temporary array containing a boolean indicating if the image is liked, no longer working
     // when the "user" DB table is implemented, this "liked" data will be retrieved from DB
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
@@ -61,6 +61,7 @@ export class GalleryComponent implements OnInit {
             id_collection: i.id_collection
           }
         });
+        
       },
       error: (error)=>{
         console.log('error retrieving images')
@@ -68,6 +69,7 @@ export class GalleryComponent implements OnInit {
       },
       complete: ()=>{
         console.log('retrieved images');
+        //localStorage.setItem('images', JSON.stringify(this.images)); //still too heavy b64
         this.isDataRetrieved = true;
       }
     })

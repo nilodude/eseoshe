@@ -64,7 +64,7 @@ $dataTitleSize: calc(90% + 0.2vw);
 }
 
 .image{
-    max-height:calc(35vh + 20vw);
+    max-height:calc(34vh + 20vw);
     max-width: 100%;
     height: auto;
     width: auto;
@@ -77,7 +77,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     display: flex;
     justify-content: center;
     margin: 1.5% 2%;
-    max-width: calc(73.1vh + 1vw);
+    max-width: calc(73.1vh + 3vw);
 }
 
 .imDataDiv{
@@ -101,7 +101,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     margin-bottom: 2.5%;
 }
 .keywords{
-    margin: 3vh 1vw;
+    margin: 1vh 1vw;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
