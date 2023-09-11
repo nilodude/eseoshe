@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 #STAGE 0: BUILD NODE FRONTEND APP
-FROM node:18.12.1 
+FROM node:18.17.1 
 ENV NODE_ENV=production
 
 RUN mkdir -p /app
