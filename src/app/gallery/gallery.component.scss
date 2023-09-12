@@ -140,6 +140,7 @@
 }
 :host ::ng-deep .p-dialog .p-dialog-content{
     display:flex;
+    justify-content: center;
 }
 
 :host ::ng-deep .p-dialog .p-dialog-title{
