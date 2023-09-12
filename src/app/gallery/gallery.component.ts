@@ -13,7 +13,7 @@ export class GalleryComponent implements OnInit {
   collectionID: number;
   collection: SelectItem = {label:'', value:''};
   images: any[] = [];
-  liked: any = [{}];
+  liked: any = {};
   popup: boolean = false;
   isDataRetrieved: boolean = false;
   zoomedIm: any={};
@@ -25,11 +25,11 @@ export class GalleryComponent implements OnInit {
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
     this.collectionID = this.collection.value;
     
-    // "this.liked" is a temporary array containing a boolean indicating if the image is liked, no longer working
+    // "this.liked" is a temporary object containing a boolean indicating if the image is liked
     // when the "user" DB table is implemented, this "liked" data will be retrieved from DB
     this.liked = JSON.parse(localStorage.getItem('liked') as unknown as any);
     if(this.liked == null){
-      this.liked = [{}];
+      this.liked = {};
     }
    }
 
@@ -40,10 +40,7 @@ export class GalleryComponent implements OnInit {
     console.log('into collection '+ this.collection.label);
     
     this.getImagesByCollection(this.collection.value);
-      
-    console.log(this.images);
   }
-
 
   getImagesByCollection(collection: number){
     this.apiService.getImagesByCollection(collection).subscribe({
@@ -73,26 +70,6 @@ export class GalleryComponent implements OnInit {
         this.isDataRetrieved = true;
       }
     })
-  }
-
-  getRandomTestImages(){
-    const imagesRaw = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-    imagesRaw.map(i=>{
-      if(this.liked[i] == null){
-        this.liked[i] = this.liked[i] != null && this.liked[i];
-      }
-    });
-    
-    let ims = structuredClone(imagesRaw);
-    let rand = '';
-    while(
-      ims.findIndex(function(v, i) {
-        return v == i + 1 || (i && Math.abs(ims[i - 1] - v) == 1);
-      }) != -1
-    ) {
-      ims.sort(function() { return Math.random() - 0.5; });
-    }
-    return ims;
   }
 
   userPanel(){
@@ -127,7 +104,7 @@ export class GalleryComponent implements OnInit {
   }
 
   despliega(event: any){
-    console.log(event.target.innerText);
+    //console.log(event.target.innerText);
     if(event.target.innerText == this.collection.label){
       this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
       localStorage.setItem('collection',JSON.stringify(this.collection));
@@ -135,10 +112,6 @@ export class GalleryComponent implements OnInit {
     }
   }
   
-  getCollectionName(collectionID: number){
-    return this.collections.find(c=>c.value == collectionID)?.label as string;
-  }
-
   goHome(){
     //localStorage.clear();
     this.router.navigate(['/']);
