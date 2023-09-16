@@ -22,6 +22,7 @@ export class GalleryComponent implements OnInit {
   liked: any = {};
   popup: boolean = false;
   isDataRetrieved: boolean = false;
+
   zoomedIm: any={};
 
   constructor(private router: Router, private apiService: ApiService) {
@@ -53,25 +54,28 @@ export class GalleryComponent implements OnInit {
       this.getImagesByCollection(this.collection.value);
     }else if (this.view == 'keywords'){
       console.log('into keywords '+ this.keywords);
-      
       this.getImagesByKeywords(this.keywords);
-      this.setupStyle();
     }
-    
+  }
+
+  ngAfterViewChecked(){
+    this.setupStyle();
   }
 
   setupStyle(){
     let upBarDiv = document.getElementById('upBar');
     if(upBarDiv){
-      let color = 'var(--'+this.keywords+'-300)';// need to check if var is not set
-      console.log(color)
-      if(CSS.supports('background-color',color)){ // need to check if var is not set
-        upBarDiv.style.backgroundColor = color;
-      }else{
-        console.log('invalid color')
-        upBarDiv.style.backgroundColor = '#cacaca';
-      }
+      let bgcolor = 'var(--'+this.keywords+'-400,'+this.keywords+')';// need to check if var is not set
       
+      if(CSS.supports('background-color',bgcolor)){ // need to check if var is not set
+        //upBarDiv.style.backgroundColor = bgcolor;
+        let kwTitle = document.getElementById('keywordTitle');
+             
+        if(kwTitle){
+          console.log(bgcolor)
+          kwTitle.style.color = bgcolor;
+        }
+      }
     }
   }
 
@@ -129,6 +133,7 @@ export class GalleryComponent implements OnInit {
     complete: ()=>{
       console.log('retrieved images by keyword');
       this.isDataRetrieved = true;
+      this.setupStyle();
     }
   })
   }
