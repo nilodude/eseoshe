@@ -89,7 +89,6 @@ export class GalleryComponent implements OnInit {
       },
       complete: ()=>{
         console.log('retrieved images');
-        //localStorage.setItem('images', JSON.stringify(this.images)); //still too heavy b64
         this.isDataRetrieved = true;
       }
     })

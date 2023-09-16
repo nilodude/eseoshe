@@ -5,10 +5,17 @@
             <div class="breadcrumb">
                 <span class="breadcrumbString" >
                     <div (click)="goHome()"><img src="">home</div>
-                    /<div class="collectionName">
+                    /
+                    <div *ngIf="this.view == 'collection'; then collectionView else keywordsView"></div>
+                    <ng-template #collectionView>
+                      <div class="collectionName">
                         <p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
                             (onChange)="changeCollection()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
-                    </div>
+                      </div>
+                    </ng-template>
+                    <ng-template #keywordsView>
+                      <div class="collectionName">{{this.keywords}}</div>
+                    </ng-template>       
                 </span>
             </div>
             <div class="title flex align-items-center">
