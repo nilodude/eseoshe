@@ -1,15 +1,5 @@
 <div>
-<button type="button" class="btn-color btn-red-grad">Red</button>
-<button type="button" class="btn-color btn-orange-grad">orange</button>
-<button type="button" class="btn-color btn-yellow-grad">yellow</button>
-<button type="button" class="btn-color btn-green-grad">green</button>
-<button type="button" class="btn-color btn-cyan-grad">cyan</button>
-<button type="button" class="btn-color btn-blue-grad">blue</button>
-<button type="button" class="btn-color btn-purple-grad">purple</button>
-<button type="button" class="btn-color btn-magenta-grad">magenta</button>
-<button type="button" class="btn-color btn-brown-grad">brown</button>
-<button type="button" class="btn-color btn-black-grad">black</button>
-<button type="button" class="btn-color btn-grey-grad">grey</button>
-<button type="button" class="btn-color btn-white-grad">white</button>
-<button type="button" class="btn-color btn-rainbow-grad">rainbow</button>
+    <ng-template ngFor let-buton [ngForOf]="this.buttonInfo" let-i="index">
+        <button class="btn-color {{buton.class}}" (click)="this.click(buton.label.toLowerCase().trim())"> {{buton.label}} </button>
+    </ng-template>
 </div>

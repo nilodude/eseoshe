@@ -223,7 +223,7 @@ export class CrazygridComponent implements OnInit {
           newTitle.style.textAlign = 'center';
           newTitle.style.whiteSpace = 'nowrap';
           newTitle.style.background = 'rgba(255,255,255,1)';
-          newTitle.style.borderRadius = scale/20 +'px';
+          // newTitle.style.borderRadius = scale/20 +'px';
           newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
           newTitle.style.width =  scale*0.65 +'px';
           newTitle.style.zIndex ='1009';
@@ -250,7 +250,7 @@ export class CrazygridComponent implements OnInit {
           const bgW = (bgScale / (box.xlen + 1)).toString();
           const bgH = (bgScale / (box.ylen + 1)).toString();
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
-          newImg.style.borderRadius = scale/13 +'px';
+          // newImg.style.borderRadius = scale/13 +'px';
           newImg.style.marginLeft = 'auto';
           newImg.style.marginRight = 'auto';
           newImg.style.display = 'block';
@@ -359,6 +359,7 @@ export class CrazygridComponent implements OnInit {
       complete: ()=>{
         console.log('retrieved collections');
         this.isDataRetrieved = true;
+        localStorage.setItem('collections',JSON.stringify(this.collections));
         this.obtainCrazyGrid();
       }});
   }

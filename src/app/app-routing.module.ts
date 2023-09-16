@@ -7,6 +7,7 @@ import { ImageComponent } from './image/image.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'collection', component: GalleryComponent },
+  { path: 'keywords', component: GalleryComponent },
   { path: 'image', component: ImageComponent }
 ];
 

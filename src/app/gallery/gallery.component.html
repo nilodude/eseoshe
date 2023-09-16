@@ -1,7 +1,7 @@
 
 <div class="all" style="height: 100%">
     <div>
-        <div class="sticky up">
+        <div id="upBar" class="sticky up">
             <div class="breadcrumb">
                 <span class="breadcrumbString" >
                     <div (click)="goHome()"><img src="">home</div>
@@ -12,7 +12,7 @@
                 </span>
             </div>
             <div class="title flex align-items-center">
-                <span>{{this.collection.label}}</span>
+                <span>{{this.collection?.label}}</span>
             </div>
             <div class="userPanel">
                 <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
