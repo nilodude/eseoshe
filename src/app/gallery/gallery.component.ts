@@ -70,9 +70,7 @@ export class GalleryComponent implements OnInit {
       if(CSS.supports('background-color',bgcolor)){ // need to check if var is not set
         //upBarDiv.style.backgroundColor = bgcolor;
         let kwTitle = document.getElementById('keywordTitle');
-             
         if(kwTitle){
-          console.log(bgcolor)
           kwTitle.style.color = bgcolor;
         }
       }

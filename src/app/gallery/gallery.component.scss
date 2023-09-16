@@ -95,14 +95,15 @@
 }
 
 .zoomedOverlay {
+    opacity: 1;
     top: calc(100% - 81vh);
     left: calc(100% - 15vh);
 }
 
-.imDiv:hover .overlay, .zoomedDiv:hover .zoomedOverlay {
+.imDiv:hover .overlay {
     opacity: 1;
 }
-.imDiv:hover .im, .zoomedDiv:hover .zoomed  {
+.imDiv:hover .im  {
     opacity: 0.5;
     transition: .2s ease;
 }
@@ -146,8 +147,4 @@
 :host ::ng-deep .p-dialog .p-dialog-content{
     display:flex;
     justify-content: center;
-}
-
-:host ::ng-deep .p-dialog .p-dialog-title{
-    font-family: initial;
 }

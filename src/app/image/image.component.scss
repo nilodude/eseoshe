@@ -117,9 +117,11 @@ $dataTitleSize: calc(90% + 0.2vw);
     padding: 0.7%;
     background-color: unset;
     transition: background-color .2s ease;
+    transition: transform .2s ease;
 }
 .keyword:hover{
-    background-color: rgba(140, 202, 223, 0.384);
-    transition: .2s ease;
+    background-color: rgba(200, 200, 200, 0.31);
+    transition: 0.2s ease;
     cursor: pointer;
+    transform: scale(1.2);
 }
