@@ -22,11 +22,11 @@
     box-shadow: unset;
 }
 :host ::ng-deep  .p-dropdown-trigger{
-    width: 2rem;
+    width: 1.5rem;
 }
 :host ::ng-deep .p-dropdown-label.p-inputtext{
     font-family: monospace;
-    font-size: 1.5vh;
+    font-size: 1.7vh; // este tiene que ser el mismo que el de .breadcrumbString
     opacity:1;
     padding-right: 0%;
     display:flex;
@@ -53,7 +53,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1.5vh;
+    gap: 0.7vh;
     justify-content: center;
 }
 
@@ -74,11 +74,11 @@
     display: block;
 }
 
-.imdiv:hover{
+.imdiv:hover, .zoomDiv:hover{
     opacity: 50%;
 }
 
-.overlay {
+.overlay, .zoomedOverlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -94,10 +94,15 @@
     align-items:flex-start;
 }
 
-.imDiv:hover .overlay {
+.zoomedOverlay {
+    top: calc(100% - 81vh);
+    left: calc(100% - 15vh);
+}
+
+.imDiv:hover .overlay, .zoomedDiv:hover .zoomedOverlay {
     opacity: 1;
 }
-.imDiv:hover .im {
+.imDiv:hover .im, .zoomedDiv:hover .zoomed  {
     opacity: 0.5;
     transition: .2s ease;
 }

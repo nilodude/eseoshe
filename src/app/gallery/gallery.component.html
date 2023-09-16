@@ -18,9 +18,18 @@
                     </ng-template>       
                 </span>
             </div>
-            <div class="title flex align-items-center">
+            <div *ngIf="this.view == 'collection'; then collectionTitle else keywordsTitle"></div>
+            <ng-template #collectionTitle>
+              <div class="title flex align-items-center">
                 <span>{{this.collection?.label}}</span>
             </div>
+            </ng-template>
+            <ng-template #keywordsTitle>
+              <div *ngIf="this.isDataRetrieved" class="title flex align-items-center">
+                <span>{{this.keywords}} ({{this.numResults}} results)</span>
+            </div>
+            </ng-template>
+            
             <div class="userPanel">
                 <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
                     class="p-button-raised p-button-secondary p-button-text"></button>
@@ -149,15 +158,16 @@
         </div>
     </div>
     <div class="popup">
-        <p-dialog header="{{zoomedIm.title}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
+        <p-dialog header="{{zoomedIm.name}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">
+            
             <div class="zoomedDiv">
-                <img class="zoomed" src="data:image/png;base64,{{ zoomedIm.b64 }}">
+              <img class="zoomed" src="data:image/png;base64,{{ zoomedIm.b64 }}">
+              <div class="zoomedOverlay flex">
+                <div class="{{zoomedIm.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(zoomedIm.name)"></div>
+              </div>
             </div>
-            <ng-template pTemplate="footer">
-                <p-button icon="pi pi-check" (click)="popup=false" label="ENGA" styleClass="p-button-text">
-                </p-button>
-            </ng-template>
+
         </p-dialog>
     </div>
 </div>

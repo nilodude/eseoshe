@@ -63,4 +63,9 @@ export class ImageComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/']);
   }
+
+  click(keyword: string){
+    localStorage.setItem('keywords',keyword);
+    this.router.navigate(['/keywords']);
+  }
 }

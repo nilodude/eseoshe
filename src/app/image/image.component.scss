@@ -24,11 +24,11 @@ $dataTitleSize: calc(90% + 0.2vw);
     box-shadow: unset;
 }
 :host ::ng-deep  .p-dropdown-trigger{
-    width: 2rem;
+    width: 1.5rem;
 }
 :host ::ng-deep .p-dropdown-label.p-inputtext{
     font-family: monospace;
-    font-size: 1.5vh;
+    font-size: 1.7vh; // este tiene que ser el mismo que el de .breadcrumbString
     opacity:1;
     padding-right: 0%;
     display:flex;

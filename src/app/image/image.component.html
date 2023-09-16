@@ -37,7 +37,7 @@
         </div>
         <div class="keywords">
             <ng-template ngFor let-keyword [ngForOf]="this.keywords" let-k="index">
-                <div class="keyword">
+                <div class="keyword" (click)="click(keyword)">
                     {{keyword}}
                 </div>
             </ng-template>

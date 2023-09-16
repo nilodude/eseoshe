@@ -18,6 +18,7 @@ export class GalleryComponent implements OnInit {
   keywords: string= ''
 
   images: any[] = [];
+  numResults: number = 0;
   liked: any = {};
   popup: boolean = false;
   isDataRetrieved: boolean = false;
@@ -39,7 +40,7 @@ export class GalleryComponent implements OnInit {
     if(this.liked == null){
       this.liked = {};
     }
-
+    this.isDataRetrieved = false;
    }
 
   ngOnInit(): void {
@@ -52,8 +53,9 @@ export class GalleryComponent implements OnInit {
       this.getImagesByCollection(this.collection.value);
     }else if (this.view == 'keywords'){
       console.log('into keywords '+ this.keywords);
-      this.setupStyle();
+      
       this.getImagesByKeywords(this.keywords);
+      this.setupStyle();
     }
     
   }
@@ -61,7 +63,15 @@ export class GalleryComponent implements OnInit {
   setupStyle(){
     let upBarDiv = document.getElementById('upBar');
     if(upBarDiv){
-      upBarDiv.style.backgroundColor = 'var(--'+this.keywords+'-300)';
+      let color = 'var(--'+this.keywords+'-300)';// need to check if var is not set
+      console.log(color)
+      if(CSS.supports('background-color',color)){ // need to check if var is not set
+        upBarDiv.style.backgroundColor = color;
+      }else{
+        console.log('invalid color')
+        upBarDiv.style.backgroundColor = '#cacaca';
+      }
+      
     }
   }
 
@@ -110,6 +120,7 @@ export class GalleryComponent implements OnInit {
           id_collection: i.id_collection
         }
       });
+      this.numResults = this.images.length;
     },
     error: (error)=>{
       console.log('error retrieving images by keyword');
