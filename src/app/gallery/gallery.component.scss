@@ -55,7 +55,7 @@
 }
 
 .gallery {
-    margin: 1% 0.25%;
+    margin: 1.5vh 0.25%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -63,6 +63,25 @@
     justify-content: center;
 }
 
+// para tamaño w < 812 maomeno
+// .im {
+//     // height: 28vh;
+//     width: 100%;
+//     display: block;
+//   }
+// .imDiv {
+//    //SIN FLEX-BASIS y con flex-grow 1  
+// }
+
+@media (max-width: 812px){
+    .im {
+        height: unset !important;
+        width: 100% !important;
+    }
+    .imDiv {
+        flex-basis: unset !important;
+    }
+}
 .imDiv {
     flex-basis: 0%;
     display: flex;
@@ -75,9 +94,8 @@
 }
 
 .im {
-    height: 28vh;
+    height: 29vh;
     width: auto;
-    display: block;
 }
 
 .imdiv:hover, .zoomDiv:hover{
