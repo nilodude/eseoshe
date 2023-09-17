@@ -14,7 +14,7 @@
                       </div>
                     </ng-template>
                     <ng-template #keywordsView>
-                      <div class="collectionName">{{this.keywords}}</div>
+                      <div id="keywordTitle" class="collectionName">{{this.keywords}}</div>
                     </ng-template>       
                 </span>
             </div>
@@ -26,7 +26,7 @@
                 </div>
               </ng-template>
               <ng-template #keywordsTitle>
-                <div id="keywordTitle" class="title flex align-items-center">
+                <div class="title flex align-items-center">
                   <span *ngIf="this.isDataRetrieved">{{this.keywords}} ({{this.numResults}} results)</span>
                 </div>
               </ng-template>
