@@ -31,7 +31,7 @@ $dataTitleSize: calc(90% + 0.2vw);
 
 :host ::ng-deep .p-dropdown-label.p-inputtext{
     font-family: monospace;
-    font-size: 1.7vh; // este era el mismo que el de .breadcrumbString pero ahora ese depende de 1.4vh
+    font-size: 1.4vh; // este era el mismo que el de .breadcrumbString pero ahora ese depende de 1.4vh
     opacity:1;
     padding-right: 0%;
     display:flex;
