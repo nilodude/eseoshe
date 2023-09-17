@@ -12,16 +12,21 @@
     display: flex;
     //transition: display 1s ease;
     justify-content: space-between;
-    background-color: rgba(226, 226, 226, 0.7);
+    background-color: rgba(226, 226, 226, 0.9);
     align-items: center;
     height: 6vh;
 }
 .userPanel{
-    margin-right: 1vh;
+    margin-right: 0vh;
     display: flex;
-    flex-basis: 15.5%;
+    flex-basis: 10%;
     justify-content: flex-end
 }
+
+.userPanel .p-button{
+    padding: 0.5vh 0.4vh;
+}
+
 *{
     font-family: monospace;
 }

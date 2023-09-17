@@ -10,7 +10,8 @@ import { ApiService } from './../services/api.service';
 })
 export class GalleryComponent implements OnInit {
   view: string = 'collection' || 'keywords';
-  
+  fullTitle: boolean = false;
+
   collections: SelectItem[] =[]; // SelectItem is the kind of array that "understands" angular p-dropdown component
   collectionID: number;
   collection: SelectItem = {label:'', value:''};
@@ -51,6 +52,7 @@ export class GalleryComponent implements OnInit {
 
     if(this.view == 'collection'){
       console.log('into collection '+ this.collection.label);
+      this.fullTitle = window.innerWidth > 812;
       this.getImagesByCollection(this.collection.value);
     }else if (this.view == 'keywords'){
       console.log('into keywords '+ this.keywords);
@@ -58,7 +60,7 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  
+
 
   getImagesByCollection(collection: number){
     this.apiService.getImagesByCollection(collection).subscribe({

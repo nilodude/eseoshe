@@ -9,7 +9,7 @@
                 (onChange)="emitChangeCollection()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
           </div>
           /<div *ngIf="imageName" class="breadCrumbImageName">
-            {{imageName}}
+            <span>{{imageName}}</span>
         </div>
         </ng-template>
         <ng-template #keywordsView>
