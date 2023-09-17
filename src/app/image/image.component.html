@@ -1,6 +1,8 @@
 <div class="all">
     <div class="sticky up">
-        <div class="breadcrumb">
+        <app-breadcrumb [collectionID]="this.collectionID" [view]="'collection'" [imageName]="this.image.name"
+            (changeCollection)="back()"> </app-breadcrumb>
+        <!-- <div class="breadcrumb">
             <span class="breadcrumbString" >
                 <div (click)="goHome()"><img src="">home</div>
                 /<div class="collectionName">
@@ -11,7 +13,7 @@
                     {{imageName}}
                 </div>
             </span>
-        </div>
+        </div> -->
         <div class="userPanel">
             <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
                 class="p-button-raised p-button-secondary p-button-text"></button>

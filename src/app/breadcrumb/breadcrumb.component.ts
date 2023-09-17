@@ -12,7 +12,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input('imageName') imageName: string = '';
   @Input('keywords') keywords: string= ''
   @Input('view') view: string='';
-  @Output('changeCollection') changeCollection: EventEmitter<any> = new EventEmitter();
+  @Output('changeCollection') changeCollection: EventEmitter<number> = new EventEmitter();
 
 
   collections: SelectItem[] =[];

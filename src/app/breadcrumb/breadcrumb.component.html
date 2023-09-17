@@ -8,6 +8,9 @@
             <p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
                 (onChange)="emitChangeCollection()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
           </div>
+          /<div *ngIf="imageName" class="breadCrumbImageName">
+            {{imageName}}
+        </div>
         </ng-template>
         <ng-template #keywordsView>
           <div id="keywordTitle" class="collectionName">{{this.keywords}}</div>

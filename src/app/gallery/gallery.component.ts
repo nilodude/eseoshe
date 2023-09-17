@@ -141,9 +141,6 @@ export class GalleryComponent implements OnInit {
   }
 
   changeCollection(){
-    // collection is being updated in breadcrumb, no need to update it now
-    // this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
-    // localStorage.setItem('collection',JSON.stringify(this.collection));
     this.ngOnInit();
   }
 
