@@ -58,3 +58,11 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 06/11/22:
 	-para el backend 
 	https://medium.com/bb-tutorials-and-thoughts/how-to-build-nodejs-rest-api-with-express-and-postgresql-typescript-version-121b5a11c9a6
+
+
+17/09/23:
+	-hay que arreglar el crazygrid en pantalla pequeña
+	-hay que evitar doble click sobre las imagenes
+	-hay que arreglar el zoom desde gallery en pantalla pequeña
+	-hay que implementar los likes y el perfil de usuario
+	-hay que implementar busqueda manual de keywords
