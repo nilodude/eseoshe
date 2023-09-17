@@ -61,7 +61,9 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 
 
 17/09/23:
-	-hay que arreglar el crazygrid en pantalla pequeña
+	-hay que arreglar el crazygrid en pantalla pequeña. DONE
+	-hay que crear al menos 14 collections
+	-hay que añadir el More... a la pantalla de inicio
 	-hay que evitar doble click sobre las imagenes
 	-hay que arreglar el zoom desde gallery en pantalla pequeña
 	-hay que implementar los likes y el perfil de usuario

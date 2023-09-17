@@ -3,4 +3,4 @@
 <div>{{title}}</div>
 <app-color-buttons></app-color-buttons>
 
-<app-crazygrid [cols]="7" [rows]="4" [scale]="7.15"  [innerMargin]="18" [buttons]="false"></app-crazygrid>
+<app-crazygrid [cols]="this.cgCols" [rows]="this.cgRows" [scale]="this.cgScale"  [outerMargin]="'1% 0% 0% 0%'" [innerMargin]="12" [buttons]="false"></app-crazygrid>

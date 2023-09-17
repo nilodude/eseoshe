@@ -199,9 +199,10 @@ export class CrazygridComponent implements OnInit {
   }
 
   arrange(){
-    let boxPadding = this.boxPadding;
-    const scale = this.scale;
     
+    const scale = this.scale;
+    let boxPadding = this.boxPadding//*scale *0.00035
+
     let eldiv = document.getElementById("eldiv");
     if (eldiv != null) {
       eldiv.innerHTML = '';
