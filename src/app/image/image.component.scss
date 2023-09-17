@@ -1,69 +1,6 @@
 $titleSize: calc(215% + 1vw);
 $dataTitleSize: calc(90% + 0.2vw);
 
-::ng-deep .tooltip .p-tooltip-text{
-    background-color: rgba(255, 255, 255, 0.096);
-    color: gray;
-    white-space: nowrap;
-    box-shadow: unset;
-    border: unset;
-    margin: 0% 0%;
-}
-::ng-deep .tooltip .p-tooltip-arrow{
-   display: none;
-}
-:host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
-    z-index: 1010 !important;
-    background-color: rgba(226, 226, 226, 0.6);
-    border: none;
-    top: 3.7vh !important;
-    left: -2vh !important;
-}
-:host ::ng-deep .dropDownStyle.p-dropdown {
-    border: none;
-    opacity:1;
-    background-color: rgba(255, 255, 255, 0);
-    box-shadow: unset;
-}
-:host ::ng-deep  .p-dropdown-trigger{
-    width: 1.5rem;
-}
-
-:host ::ng-deep .p-dropdown-label.p-inputtext{
-    font-family: monospace;
-    font-size: 1.4vh; // este era el mismo que el de .breadcrumbString pero ahora ese depende de 1.4vh
-    opacity:1;
-    padding-right: 0%;
-    display:flex;
-    justify-content: center;
-    color:black;
-    border: none;
-    padding: 0%;
-    margin: 0%;
-    max-width: fit-content;
-}
-:host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
-    color: rgb(255, 255, 255);
-    transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
-}
-
-:host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
-    color: #5a5a5a;
-    background: rgba(255, 255, 255,0.9);
-}
-
-:host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover{
-    color: #5a5a5a;
-    background: rgba(255, 255, 255,0.6);
-}
-
-
-// aqui termina la parte común del breadcrumb entre gallery e image
-
-.breadCrumbImageName{
-    white-space: nowrap;
-}
-
 .imageBlock{
     display:flex;
     flex-wrap: wrap;
