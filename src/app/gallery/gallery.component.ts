@@ -58,24 +58,7 @@ export class GalleryComponent implements OnInit {
     }
   }
 
-  ngAfterViewChecked(){
-    this.setupStyle();
-  }
-
-  setupStyle(){
-    let upBarDiv = document.getElementById('upBar');
-    if(upBarDiv){
-      let bgcolor = 'var(--'+this.keywords+'-400,'+this.keywords+')';// need to check if var is not set
-      
-      if(CSS.supports('background-color',bgcolor)){ // need to check if var is not set
-        //upBarDiv.style.backgroundColor = bgcolor;
-        let kwTitle = document.getElementById('keywordTitle');
-        if(kwTitle){
-          kwTitle.style.color = bgcolor;
-        }
-      }
-    }
-  }
+  
 
   getImagesByCollection(collection: number){
     this.apiService.getImagesByCollection(collection).subscribe({
@@ -93,7 +76,7 @@ export class GalleryComponent implements OnInit {
             id_collection: i.id_collection
           }
         });
-        
+        this.numResults = this.images.length;
       },
       error: (error)=>{
         console.log('error retrieving images')
@@ -131,7 +114,6 @@ export class GalleryComponent implements OnInit {
     complete: ()=>{
       console.log('retrieved images by keyword');
       this.isDataRetrieved = true;
-      this.setupStyle();
     }
   })
   }
@@ -165,15 +147,6 @@ export class GalleryComponent implements OnInit {
     localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == im.id_collection)))
 
     this.router.navigate(['/image']);
-  }
-
-  despliega(event: any){
-    //console.log(event.target.innerText);
-    if(event.target.innerText == this.collection.label){
-      this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
-      localStorage.setItem('collection',JSON.stringify(this.collection));
-      this.router.navigate(['/collection']);
-    }
   }
   
   goHome(){

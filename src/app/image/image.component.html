@@ -2,18 +2,7 @@
     <div class="sticky up">
         <app-breadcrumb [collectionID]="this.collectionID" [view]="'collection'" [imageName]="this.image.name"
             (changeCollection)="back()"> </app-breadcrumb>
-        <!-- <div class="breadcrumb">
-            <span class="breadcrumbString" >
-                <div (click)="goHome()"><img src="">home</div>
-                /<div class="collectionName">
-                    <p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
-                    (onChange)="back()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>    
-                </div>
-                /<div class="breadCrumbImageName">
-                    {{imageName}}
-                </div>
-            </span>
-        </div> -->
+        
         <div class="userPanel">
             <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
                 class="p-button-raised p-button-secondary p-button-text"></button>

@@ -8,7 +8,7 @@
             <div *ngIf="this.view == 'collection'; then collectionTitle else keywordsTitle"></div>
             <ng-template #collectionTitle>
               <div class="title flex align-items-center">
-                <span>{{this.collection.label}}</span>
+                <span>{{this.collection.label}} ({{this.numResults}} results)</span>
               </div>
             </ng-template>
             <ng-template #keywordsTitle>

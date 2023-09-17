@@ -33,7 +33,6 @@ export class ImageComponent implements OnInit {
     ];
     this.keywords = [];
     this.keywords=this.image.keywords;
-    
   }
 
   ngOnInit(): void {
@@ -41,23 +40,12 @@ export class ImageComponent implements OnInit {
   }
 
   back(){
-    // this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
-    // localStorage.setItem('collection',JSON.stringify(this.collection));
     this.router.navigate(['/collection']);
   }
   
   userPanel(){
     console.log('userPanel clicked');
   }
-
-  // despliega(event: any){
-  //   console.log(event.target.innerText);
-  //   if(!event.target.classList.contains('p-inputtext') && event.target.innerText == this.collection.label){
-  //     this.collection = this.collections.find(c=>c.value == this.collectionID) as SelectItem;
-  //     localStorage.setItem('collection',JSON.stringify(this.collection));
-  //     this.router.navigateByUrl('/', {skipLocationChange: true}).then(()=>this.router.navigate(['/collection']));
-  //   }
-  // }
 
   goHome(){
     localStorage.clear();
