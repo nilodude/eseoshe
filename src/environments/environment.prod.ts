@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  api: 'http://localhost:3000/pestock' 
+  api: 'http://pstock-backend:3000/pestock' 
 };
