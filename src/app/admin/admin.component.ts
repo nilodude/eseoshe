@@ -37,13 +37,16 @@ export class AdminComponent implements OnInit {
     //console.clear()
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
+    // meta should be filled with data: keywords, etc
+    let meta = {'sync':shouldSync}
 
         if (this.files) {
-            console.clear()
-            console.log('uploading files...')
+          console.clear()
+          console.log('uploading files...')
 
+                    
           this.uploadSub =
-            this.apiService.uploadFiles(this.files, shouldSync)
+            this.apiService.uploadFiles(this.encodeFormData(meta))
             .pipe(finalize(() => this.reset())).subscribe({
               next: (result) => {
                 console.clear()
@@ -65,6 +68,19 @@ export class AdminComponent implements OnInit {
               }
             });
         }
+  }
+
+  // meta should be an array/map (key: imageIndex , value: imageMetadata)
+  encodeFormData(meta : any){
+    const formData = new FormData();
+    formData.append('meta',JSON.stringify(meta))
+    this.files.forEach(f=>{
+      let i = this.files.indexOf(f).toString()
+      formData.append(i, f)
+      
+    });
+
+    return formData;
   }
 
   cancelUpload() {
