@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from '../services/api.service';
+import { Subscription, finalize, of } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
@@ -12,13 +14,15 @@ export class AdminComponent implements OnInit {
   
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
-    autoSync: new FormControl(''),
+    shouldSync: new FormControl(false),
   });
   files: File[] = [];
   isFileUploaded: boolean = false;
-
+  uploadProgress:number = 0;
+  uploadSub: Subscription =of().subscribe();
+  
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
-    
+   
   }
 
   ngOnInit(): void {
@@ -31,26 +35,45 @@ export class AdminComponent implements OnInit {
 
   uploadToBackend(){
     //console.clear()
-    console.log(this.uploadForm)
-
+    console.log(this.uploadForm.value)
+    let shouldSync = this.uploadForm.value.shouldSync as boolean;
 
         if (this.files) {
-
+            console.clear()
             console.log('uploading files...')
 
-            this.apiService.uploadFiles(this.files).subscribe({
-              next: (result)=> {
-                console.log(result)
+          this.uploadSub =
+            this.apiService.uploadFiles(this.files, shouldSync)
+            .pipe(finalize(() => this.reset())).subscribe({
+              next: (result) => {
+                console.clear()
+                console.log('uploading files...')
+                if (result.type == HttpEventType.UploadProgress) {
+                  this.uploadProgress = Math.round(100 * (result.loaded / result.total));
+                  console.log('\tprogress: '+this.uploadProgress+'%')
+                }else{
+                  console.log('files uploaded SUCCESSFULLY\n',result)
+                }
+                
               },
-              error: (error)=>{
-                console.log('error uploading');
-                console.log(error);
+              error: (error) => {
+                console.log('ERROR uploading',error);
               },
-              complete: ()=>{
+              complete: () => {
                 console.log('uploaded');
                 this.isFileUploaded = true;
               }
             });
         }
+  }
+
+  cancelUpload() {
+    this.uploadSub.unsubscribe();
+    this.reset();
+  }
+
+  reset() {
+    this.uploadProgress = 0;
+    this.uploadSub = of().subscribe();
   }
 }

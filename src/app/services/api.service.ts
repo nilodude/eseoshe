@@ -36,9 +36,12 @@ export class ApiService {
     return this.http.get<any>(this.apiUrl+'/images?keywords='+keywords)
   }
 
-  uploadFiles(files: File[]): Observable<any>{
+  uploadFiles(files: File[], shouldSync: boolean): Observable<any>{
     const formData = new FormData();
     files.forEach(f=>formData.append(files.indexOf(f).toString(), f));
-    return this.http.post(this.apiUrl+'/upload',formData);
+    return this.http.post(this.apiUrl+'/upload?sync='+shouldSync,formData,{
+      reportProgress: true,
+      observe: 'events'
+  });
   }
 }
