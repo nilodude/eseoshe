@@ -3,7 +3,7 @@
         <div class="uploadForm">
             <div class="uploadField">
                 <label for="fileNames">fileNames</label>
-                <input id="ffileNames" type="file" class="file-upload" (change)="loadedFiles($event)" formControlName="fileNames">
+                <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)" formControlName="fileNames">
             </div>
             
             <div class="uploadField">

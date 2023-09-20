@@ -14,7 +14,7 @@ export class AdminComponent implements OnInit {
     fileNames: new FormControl(''),
     autoSync: new FormControl(''),
   });
-  file: File = new File([""], "filename");
+  files: File[] = [];
   isFileUploaded: boolean = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
 
   loadedFiles(event: any){
     console.log(event.target.files)
-    this.file = event.target.files[0]
+    this.files = Array.from(event.target.files);
   }
 
   uploadToBackend(){
@@ -34,14 +34,11 @@ export class AdminComponent implements OnInit {
     console.log(this.uploadForm)
 
 
-        if (this.file) {
+        if (this.files) {
 
-           
-            const formData = new FormData();
+            console.log('uploading files...')
 
-            formData.append("unarchivo", this.file);
-            console.log('uploading file...')
-            this.apiService.uploadFile(this.file).subscribe({
+            this.apiService.uploadFiles(this.files).subscribe({
               next: (result)=> {
                 console.log(result)
               },

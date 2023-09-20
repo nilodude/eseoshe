@@ -36,10 +36,9 @@ export class ApiService {
     return this.http.get<any>(this.apiUrl+'/images?keywords='+keywords)
   }
 
-  uploadFile(file: File): Observable<any>{
+  uploadFiles(files: File[]): Observable<any>{
     const formData = new FormData();
-
-    formData.append("elarchivo", file);
+    files.forEach(f=>formData.append(files.indexOf(f).toString(), f));
     return this.http.post(this.apiUrl+'/upload',formData);
   }
 }
