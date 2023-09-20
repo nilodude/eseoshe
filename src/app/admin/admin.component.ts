@@ -17,7 +17,11 @@ export class AdminComponent implements OnInit {
     shouldSync: new FormControl(false),
     collection: new FormControl('',Validators.required)
   });
+
   files: File[] = [];
+  shouldSync: boolean = false;
+  collection: string = '';
+  meta: any = {};
   isFileUploaded: boolean = false;
   uploadProgress:number = 0;
   uploadSub: Subscription =of().subscribe();
@@ -39,24 +43,18 @@ export class AdminComponent implements OnInit {
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
     //for now its only one collection, pending dependency: UX/UI proposal
-    let collection = this.uploadForm.controls['collection'].value as string; 
+    this.collection = this.uploadForm.controls['collection'].value as string; 
     
     
     // meta should be an array/map (key: imageIndex , value: collection)
-    let meta = {'sync':shouldSync}
-
-
+    this.meta.sync = shouldSync
     
-        if (this.files) {
-
-
-
+    if (this.files) {
           console.clear()
           console.log('uploading files...')
-
                     
           this.uploadSub =
-            this.apiService.uploadFiles(this.encodeFormData(meta, collection))
+            this.apiService.uploadFiles(this.encodeFormData())
             .pipe(finalize(() => this.reset())).subscribe({
               next: (result) => {
                 console.clear()
@@ -81,16 +79,16 @@ export class AdminComponent implements OnInit {
   }
 
   // meta should be an array/map (key: imageIndex , value: collection)
-  encodeFormData(meta : any, collection: string){
+  encodeFormData(){
     const formData = new FormData();
     
     this.files.forEach(f=>{
       let i = this.files.indexOf(f).toString()
       formData.append(i, f)
-      meta[i]=collection
+      this.meta[i]=this.collection
     });
 
-    formData.append('meta',JSON.stringify(meta))
+    formData.append('meta',JSON.stringify(this.meta))
     
     return formData;
   }
@@ -103,5 +101,9 @@ export class AdminComponent implements OnInit {
   reset() {
     this.uploadProgress = 0;
     this.uploadSub = of().subscribe();
+  }
+
+  sync(collection: string){
+    this.apiService.sync(collection).subscribe();
   }
 }

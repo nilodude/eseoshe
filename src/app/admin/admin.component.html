@@ -36,6 +36,10 @@
             <div>
                 <button type="submit">UPLOAD</button>
             </div>
+            
         </div>
     </form>
+    <div>
+        <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
+    </div>
 </div>
