@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ export class HomeComponent implements OnInit {
   cgCols: number = 7;
   cgScale: number = 7.15;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     if(window.innerWidth < 812){
@@ -21,4 +22,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  gotoAdmin(){
+    this.router.navigate(['/admin']);
+  }
 }

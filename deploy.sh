@@ -10,6 +10,7 @@
 # remove all images
 # sudo docker rmi $(sudo docker images -q)
 
+git pull
 
 rm -rf dist/*
 

@@ -1,0 +1,19 @@
+<div class="all">
+    <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
+        <div class="uploadForm">
+            <div class="uploadField">
+                <label for="fileNames">fileNames</label>
+                <input id="ffileNames" type="file" class="file-upload" (change)="loadedFiles($event)" formControlName="fileNames">
+            </div>
+            
+            <div class="uploadField">
+                <label for="autoSync">autoSync</label>
+                <input id="autoSync" type="checkbox" formControlName="autoSync">
+            </div>
+            
+            <div>
+                <button type="submit" >UPLOAD</button>
+            </div>
+        </div>
+    </form>
+</div>

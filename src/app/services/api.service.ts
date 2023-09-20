@@ -35,4 +35,11 @@ export class ApiService {
   getImagesByKeywords(keywords: string): Observable<any>{
     return this.http.get<any>(this.apiUrl+'/images?keywords='+keywords)
   }
+
+  uploadFile(file: File): Observable<any>{
+    const formData = new FormData();
+
+    formData.append("elarchivo", file);
+    return this.http.post(this.apiUrl+'/upload',formData);
+  }
 }

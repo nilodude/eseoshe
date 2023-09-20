@@ -11,12 +11,13 @@ import {ButtonModule} from 'primeng/button';
 import { HomeComponent } from './home/home.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import {DropdownModule} from 'primeng/dropdown';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {DialogModule} from 'primeng/dialog';
 import { ImageComponent } from './image/image.component';
 import {TooltipModule} from 'primeng/tooltip';
 import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     GalleryComponent,
     ImageComponent,
     ColorButtonsComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     ButtonModule,
     DropdownModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     DialogModule,
     TooltipModule,
