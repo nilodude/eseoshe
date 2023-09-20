@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
     shouldSync: new FormControl(false),
+    collection: new FormControl('',Validators.required)
   });
   files: File[] = [];
   isFileUploaded: boolean = false;
@@ -37,16 +38,25 @@ export class AdminComponent implements OnInit {
     //console.clear()
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
+    //for now its only one collection, pending dependency: UX/UI proposal
+    let collection = this.uploadForm.controls['collection'].value as string; 
+    
+    
     // meta should be an array/map (key: imageIndex , value: collection)
-    let meta = {'sync':shouldSync, 0: 'Collection00', 1:'Collection01', 2:'Collection02'}
+    let meta = {'sync':shouldSync}
 
+
+    
         if (this.files) {
+
+
+
           console.clear()
           console.log('uploading files...')
 
                     
           this.uploadSub =
-            this.apiService.uploadFiles(this.encodeFormData(meta))
+            this.apiService.uploadFiles(this.encodeFormData(meta, collection))
             .pipe(finalize(() => this.reset())).subscribe({
               next: (result) => {
                 console.clear()
@@ -71,15 +81,17 @@ export class AdminComponent implements OnInit {
   }
 
   // meta should be an array/map (key: imageIndex , value: collection)
-  encodeFormData(meta : any){
+  encodeFormData(meta : any, collection: string){
     const formData = new FormData();
-    formData.append('meta',JSON.stringify(meta))
+    
     this.files.forEach(f=>{
       let i = this.files.indexOf(f).toString()
       formData.append(i, f)
-      
+      meta[i]=collection
     });
 
+    formData.append('meta',JSON.stringify(meta))
+    
     return formData;
   }
 
