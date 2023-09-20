@@ -37,8 +37,8 @@ export class AdminComponent implements OnInit {
     //console.clear()
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
-    // meta should be filled with data: keywords, etc
-    let meta = {'sync':shouldSync}
+    // meta should be an array/map (key: imageIndex , value: collection)
+    let meta = {'sync':shouldSync, 0: 'Collection00', 1:'Collection01', 2:'Collection02'}
 
         if (this.files) {
           console.clear()
@@ -70,7 +70,7 @@ export class AdminComponent implements OnInit {
         }
   }
 
-  // meta should be an array/map (key: imageIndex , value: imageMetadata)
+  // meta should be an array/map (key: imageIndex , value: collection)
   encodeFormData(meta : any){
     const formData = new FormData();
     formData.append('meta',JSON.stringify(meta))
