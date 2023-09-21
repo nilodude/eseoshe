@@ -73,5 +73,8 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 	-icono home casita
 	-NEED ERROR HANDLING TO AVOID RESTARTING CONTAINERS WHEN ERROR
 	-NEED TO IMPLEMENT ERROR HANDLING WHEN DB DOESNT CONNECT!!
+
 	-NEED TO CHECK FILESYSTEM STATE TO BE COHERENT WITH DB STATE:
 		-collections MUST be inserted depending on filesystem directory structure, NOT depending on /upload body data!!!!!!!!!
+	
+	-NEED TO AVOID RESIZE IF IMAGE ALREADY "SMALL"
