@@ -35,6 +35,7 @@ export class AdminComponent implements OnInit {
 
   loadedFiles(event: any){
     console.log(event.target.files)
+    this.files= []
     this.files = Array.from(event.target.files);
   }
 

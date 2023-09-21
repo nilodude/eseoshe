@@ -78,15 +78,10 @@ export class CrazygridComponent implements OnInit {
     
     this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
       if (event.target instanceof HTMLImageElement) {
+        debugger
         const id = event.target.id.toString();
-        if(id.includes('like')){
-          this.like(id[id.length-1]);
-        }
-        if(id.includes('zoom')){
-          this.zoom(id[id.length-1]);
-        }
         if(id.includes('im')){
-          this.clickCollection(id[id.length-1]);
+          this.clickCollection(id.replace('im',''));
         }
       }
     });
@@ -211,10 +206,12 @@ export class CrazygridComponent implements OnInit {
           let newBox = document.createElement("div");
           let newImg = document.createElement("img");
           let newTitle = document.createElement("h2");
-                   
+          
+          let collection = this.getOrderedCollection(box.boxID);
+
           //TITLE
-          newTitle.innerHTML= this.getCollectionName(box.boxID);//this.collections.find(c=>c.value == box.boxID)?.label;
-          newTitle.id = 'title'+box.boxID;
+          newTitle.innerHTML= collection?.label;//this.collections.find(c=>c.value == box.boxID)?.label;
+          newTitle.id = 'title'+collection?.value;
           newTitle.style.position = 'absolute';
           newTitle.style.top = '41%';
           newTitle.style.left= '50%';
@@ -243,9 +240,9 @@ export class CrazygridComponent implements OnInit {
           newBox.style.position = "absolute";
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           //image itself
-          newImg.id = 'im'+box.boxID;
+          newImg.id = 'im'+collection?.value;
           newImg.style.position = "realtive";
-          newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)";
+          newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)"; //need to get collection cover image from BD
           newImg.style.backgroundRepeat = 'round';
           const bgScale = 100;
           const bgW = (bgScale / (box.xlen + 1)).toString();
@@ -258,37 +255,37 @@ export class CrazygridComponent implements OnInit {
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
           newImg.style.transition = 'transform 0.3s';
           //ONMOUSEOVER
-          newImg.onmouseover = ()=>this.mouseOver(box.boxID);
-          newImg.onmouseout = ()=>this.mouseOut(box.boxID);
+          newImg.onmouseover = ()=>this.mouseOver(collection?.value);
+          newImg.onmouseout = ()=>this.mouseOut(collection?.value);
           
-          if (this.buttons) {
-            //BUTTONS
-            let buttons = document.createElement("div");
-            const idButtons = 'buttons' + box.boxID;
-            buttons.id = idButtons;
-            buttons.style.position = 'absolute';
-            buttons.style.top = scale / 19 + 'px';
-            buttons.style.right = scale / 13 + 'px';
-            buttons.style.zIndex = '1007';
-            buttons.style.width = scale / 4 + 'px';;
-            let likeBtn = document.createElement("img");
-            likeBtn.id = 'like' + box.boxID;
-            likeBtn.style.position = "realtive";
-            likeBtn.style.width = scale / 11 + 'px';
-            likeBtn.src = '../../assets/icons/heart.svg';
-            likeBtn.style.zIndex = '1007';
-            let zoomBtn = document.createElement("img");
-            zoomBtn.id = 'zoom' + box.boxID;
-            zoomBtn.style.position = "realtive";
-            zoomBtn.style.width = scale / 11 + 'px';
-            zoomBtn.src = '../../assets/icons/zoom.svg';
-            zoomBtn.style.zIndex = '1007';
-            zoomBtn.style.marginLeft = scale / 25 + 'px';
+          // if (this.buttons) {
+          //   //BUTTONS
+          //   let buttons = document.createElement("div");
+          //   const idButtons = 'buttons' + box.boxID;
+          //   buttons.id = idButtons;
+          //   buttons.style.position = 'absolute';
+          //   buttons.style.top = scale / 19 + 'px';
+          //   buttons.style.right = scale / 13 + 'px';
+          //   buttons.style.zIndex = '1007';
+          //   buttons.style.width = scale / 4 + 'px';;
+          //   let likeBtn = document.createElement("img");
+          //   likeBtn.id = 'like' + box.boxID;
+          //   likeBtn.style.position = "realtive";
+          //   likeBtn.style.width = scale / 11 + 'px';
+          //   likeBtn.src = '../../assets/icons/heart.svg';
+          //   likeBtn.style.zIndex = '1007';
+          //   let zoomBtn = document.createElement("img");
+          //   zoomBtn.id = 'zoom' + box.boxID;
+          //   zoomBtn.style.position = "realtive";
+          //   zoomBtn.style.width = scale / 11 + 'px';
+          //   zoomBtn.src = '../../assets/icons/zoom.svg';
+          //   zoomBtn.style.zIndex = '1007';
+          //   zoomBtn.style.marginLeft = scale / 25 + 'px';
 
-            buttons.appendChild(likeBtn);
-            buttons.appendChild(zoomBtn);
-            newBox.appendChild(buttons);
-          }
+          //   buttons.appendChild(likeBtn);
+          //   buttons.appendChild(zoomBtn);
+          //   newBox.appendChild(buttons);
+          // }
           newBox.appendChild(newImg);
           eldiv.appendChild(newBox);
         }
@@ -317,15 +314,9 @@ export class CrazygridComponent implements OnInit {
     }
   }
 
-  like(boxID: number){
-    console.log('liked box '+this.getCollectionName(boxID));
-  }
-
-  zoom(boxID: number){
-    console.log('zoomed box '+this.getCollectionName(boxID));
-  }
 
   clickCollection(collectionID: number){
+    debugger
     console.log('clicked collection '+this.getCollectionName(collectionID));
     // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
     // theres an elegant way to do this, DataService, so users can't inspect your application data 
@@ -341,8 +332,15 @@ export class CrazygridComponent implements OnInit {
     this.ngOnInit();
   }
 
+ 
+  getOrderedCollection(value: number){
+    // return this.collections.find(c=>c.value == value)?.label;
+    return this.collections[value-1]
+  }
+  
   getCollectionName(value: number){
     return this.collections.find(c=>c.value == value)?.label;
+    // return this.collections[value-1]?.label
   }
 
   getCollections(){
