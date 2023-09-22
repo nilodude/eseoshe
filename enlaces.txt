@@ -60,21 +60,23 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 	https://medium.com/bb-tutorials-and-thoughts/how-to-build-nodejs-rest-api-with-express-and-postgresql-typescript-version-121b5a11c9a6
 
 
-17/09/23:
+solo front: 
 	-hay que arreglar el crazygrid en pantalla pequeña. DONE
-	-hay que crear al menos 14 collections
-	-hay que añadir el More... a la pantalla de inicio
+	-hay que crear al menos 14 collections. DONE more or less
+	-hay que añadir el More... a la pantalla de inicio:
+		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
 	-hay que evitar doble click sobre las imagenes
-	-hay que arreglar el zoom desde gallery en pantalla pequeña
-	-hay que implementar los likes y el perfil de usuario
-	-hay que implementar busqueda manual de keywords
+	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
 	-en la vista de imagen, hay que resaltar visualmente el keyword recien buscado
 	-boton BACK
 	-icono home casita
-	-NEED ERROR HANDLING TO AVOID RESTARTING CONTAINERS WHEN ERROR
-	-NEED TO IMPLEMENT ERROR HANDLING WHEN DB DOESNT CONNECT!!
+	-header con breadcrumb, barra busqueda y colorbuttons a lo largo de la app
+	-funcionalidad barra busqueda 
 
-	-NEED TO CHECK FILESYSTEM STATE TO BE COHERENT WITH DB STATE:
-		-collections MUST be inserted depending on filesystem directory structure, NOT depending on /upload body data!!!!!!!!!
+tambien necesita back:
+	-likes y el perfil de usuario
+
 	
-	-NEED TO AVOID RESIZE IF IMAGE ALREADY "SMALL"
+	
+
+	
