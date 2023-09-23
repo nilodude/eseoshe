@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <button (click)="this.gotoAdmin()"> ADMIN SETTINGS </button>
-<header class="header1">
+<!-- <header class="header1">
     
     <div class="search-container">
         <form action="">
@@ -8,7 +8,7 @@
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
-</header>
+</header> -->
 
 <app-color-buttons ></app-color-buttons>
 
@@ -17,7 +17,12 @@
     <app-breadcrumb [collectionID]="this.collectionID" [keywords]="this.keywords" [view]="this.view" [imageName]="this.imageName"
       (changeCollection)="this.changeCollection()"> </app-breadcrumb>
   </div>
-
+  <div class="search-container">
+    <form [formGroup]="searchForm" (submit)="search()">
+      <input type="text" placeholder="Enter keywords..." formControlName="keywords">
+      <button type="submit"><i class="fa fa-search"></i></button>
+    </form>
+  </div>
   <div class="title">
     <div *ngIf="this.view == 'collection'; then collectionTitle else keywordsTitle"></div>
     <ng-template #collectionTitle>
@@ -27,7 +32,7 @@
     </ng-template>
     <ng-template #keywordsTitle>
       <div class="title flex align-items-center">
-        <span *ngIf="this.isDataRetrieved">({{this.numResults}} results)</span>
+        <span *ngIf="this.isDataRetrieved">"{{this.keywords}}" ({{this.numResults}} results)</span>
       </div>
     </ng-template>
   </div>

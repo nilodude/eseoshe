@@ -57,6 +57,7 @@ $dataTitleSize: calc(90% + 0.2vw);
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
     flex-basis:47%;
     flex-grow: 1;
 }

@@ -1,15 +1,6 @@
 <div class="all">
     <app-header [collectionID]="this.collectionID" [view]="'collection'" [imageName]="this.image.name"></app-header>
     
-    <!-- <div class="sticky up">
-        <app-breadcrumb [collectionID]="this.collectionID" [view]="'collection'" [imageName]="this.image.name"
-            (changeCollection)="back()"> </app-breadcrumb>
-        
-        <div class="userPanel">
-            <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
-                class="p-button-raised p-button-secondary p-button-text"></button>
-        </div>
-    </div> -->
     <div class="imageBlock">
         <div class="imageDiv">
             <img class="image" src="data:image/png;base64,{{ image.b64 }}">
