@@ -1,16 +1,19 @@
 <div class="breadcrumb">
     <span class="breadcrumbString" >
-        <div (click)="goHome()"><img src=""><i class="fa fa-home fa-2x"></i></div>
+        <div (click)="goHome()"><img src=""><i class="fa fa-home"></i></div>
+        
+        
         <div *ngIf="this.view == 'collection'; then collectionView else keywordsView"></div>
         <ng-template #collectionView>
           <div class="collectionName">
             /<p-dropdown (click)="despliega($event)" [options]="collections" [(ngModel)]="this.collectionID" scrollHeight="100%"
-                (onChange)="emitChangeCollection()" styleClass="dropDownStyle" [placeholder]="'select'"></p-dropdown>
+                (onChange)="emitChangeCollection()" styleClass="dropDownStyle" [placeholder]="'Collections'"></p-dropdown>
           </div>
           <div *ngIf="imageName" class="breadCrumbImageName">
             /<span>{{imageName}}</span>
         </div>
         </ng-template>
+
         <ng-template #keywordsView>
           <div id="keywordTitle" class="collectionName">/{{this.keywords}}</div>
         </ng-template>       
