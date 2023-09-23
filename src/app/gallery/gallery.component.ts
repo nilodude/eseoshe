@@ -50,6 +50,10 @@ export class GalleryComponent implements OnInit {
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
     this.view= this.router.url.replace('/','');
 
+    this.getImages();
+  }
+
+  getImages(){
     if(this.view == 'collection'){
       console.log('into collection '+ this.collection.label);
       this.fullTitle = window.innerWidth > 812;
@@ -59,8 +63,6 @@ export class GalleryComponent implements OnInit {
       this.getImagesByKeywords(this.keywords);
     }
   }
-
-
 
   getImagesByCollection(collection: number){
     this.apiService.getImagesByCollection(collection).subscribe({
@@ -118,14 +120,6 @@ export class GalleryComponent implements OnInit {
       this.isDataRetrieved = true;
     }
   })
-  }
-
-  userPanel(){
-    console.log('userPanel clicked');
-  }
-
-  changeCollection(){
-    this.ngOnInit();
   }
 
   like(imageName: any){
