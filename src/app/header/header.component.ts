@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fullTitle = window.innerWidth > 812;
   }
 
   gotoAdmin(){

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-gallery',
@@ -33,7 +34,6 @@ export class GalleryComponent implements OnInit {
     this.collection = JSON.parse(localStorage.getItem('collection') as string)|| {};
     this.collectionID = this.collection?.value;
     
-    
     this.keywords =localStorage.getItem('keywords') as string;
 
     // "this.liked" is a temporary object containing a boolean indicating if the image is liked
@@ -48,25 +48,24 @@ export class GalleryComponent implements OnInit {
   ngOnInit(): void {
     this.isDataRetrieved = false;
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
-    this.view= this.router.url.replace('/','');
+    this.view = this.router.url.replace('/','');
 
     this.getImages();
   }
 
   getImages(){
+    let request: Observable<any> = of()
+
     if(this.view == 'collection'){
       console.log('into collection '+ this.collection.label);
-      this.fullTitle = window.innerWidth > 812;
-      this.getImagesByCollection(this.collection.value);
+      request  = this.apiService.getImagesByCollection(this.collection.value) as Observable<any>;
     }else if (this.view == 'keywords'){
       console.log('into keywords '+ this.keywords);
-      this.getImagesByKeywords(this.keywords);
+      request = this.apiService.getImagesByKeywords(this.keywords) as Observable<any>;
     }
-  }
 
-  getImagesByCollection(collection: number){
-    this.apiService.getImagesByCollection(collection).subscribe({
-      next: (result)=>{
+    request.subscribe({
+      next: (result: any[])=>{
         // THIS SHOULD BE PARSED USING A CLASS, not hardcoded json
         this.images = result.map((i: any)=>{
           return {
@@ -91,35 +90,6 @@ export class GalleryComponent implements OnInit {
         this.isDataRetrieved = true;
       }
     })
-  }
-
-  getImagesByKeywords(keywords: string){
-  this.apiService.getImagesByKeywords(keywords).subscribe({
-    next: (result)=>{
-      // THIS SHOULD BE PARSED USING A CLASS, not hardcoded json
-      this.images = result.map((i: any)=>{
-        return {
-          id: i.id,
-          name: i.file_name,
-          b64: i.b64,
-          title: i.title,
-          liked: this.liked[i.file_name],
-          keywords: i.keywords.replaceAll('[','').replaceAll(']','').replaceAll("'",'').trim().split(',').map((each: string)=>each.trim()),
-          size: [i.width, i.height],
-          id_collection: i.id_collection
-        }
-      });
-      this.numResults = this.images.length;
-    },
-    error: (error)=>{
-      console.log('error retrieving images by keyword');
-      console.log(error);
-    },
-    complete: ()=>{
-      console.log('retrieved images by keyword');
-      this.isDataRetrieved = true;
-    }
-  })
   }
 
   like(imageName: any){
