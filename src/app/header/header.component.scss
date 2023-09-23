@@ -1,33 +1,3 @@
-.header1 {
-  //background-image: url('../../assets/images/123.jpg');
-  background-image: linear-gradient(45deg, pink, rgb(233, 183, 76));
-  width: 100%;
-  height: 8vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-container button {
-  // float: none;
-  // padding: 6px 10px;
-  // margin-top: 8px;
-  // margin-right: 16px;
-  // background-image: linear-gradient(-45deg, rgb(224, 86, 109), orange);
-  // font-size: 22px;
-  border: none;
-  cursor: pointer;
-  background-color: rgba(0,0,0,0);
-}
-
-.search-container button:hover {
-  background-color:#d1d1d1
-}
-
-input[type=text] {
-  width: 55vw;
-}
-
 .up {
   z-index: 1009;
   top: 2%;
@@ -35,8 +5,41 @@ input[type=text] {
   justify-content: space-between;
   background-color: rgba(226, 226, 226, 0.9);
   align-items: center;
-  height: 6vh;
+  height: 4vh;
 }
+
+.search-container{
+  display: flex;
+  flex-direction: row;;
+  flex-basis: 20%;
+  
+}
+
+.search-container button {
+  border: none;
+  cursor: pointer;
+  background-color: rgba(0,0,0,0);
+  
+}
+
+.search-container button:hover {
+  background-color:#d1d1d1
+}
+
+input[type=text] {
+  width: 100%;
+  height: 3vh;
+}
+
+
+
+.title {
+  letter-spacing: 0.2vh;
+  font-size: 1.6vh;
+  margin-right: 2vh;
+  white-space: nowrap;
+}
+
 .userPanel{
   margin-right: 0vh;
   display: flex;

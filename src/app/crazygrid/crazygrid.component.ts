@@ -221,7 +221,7 @@ export class CrazygridComponent implements OnInit {
           newTitle.style.whiteSpace = 'nowrap';
           newTitle.style.background = 'rgba(255,255,255,1)';
           // newTitle.style.borderRadius = scale/20 +'px';
-          newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
+          // newTitle.style.boxShadow = 'rgb(100,100,100,0.4) -5px 2px 7px inset, rgb(100,100,100,0.6) 5px -2px 7px inset';
           newTitle.style.width =  scale*0.65 +'px';
           newTitle.style.zIndex ='1009';
           newBox.appendChild(newTitle);
@@ -249,7 +249,7 @@ export class CrazygridComponent implements OnInit {
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
           
           newImg.style.display = 'block';
-          newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
+          newImg.style.boxShadow = 'rgba(0, 0, 0, 0.03) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.03) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.03) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.03) 0px 2px 1px, rgba(0, 0, 0, 0.03) 0px 4px 2px, rgba(0, 0, 0, 0.03) 0px 8px 4px, rgba(0, 0, 0, 0.03) 0px 16px 8px, rgba(0, 0, 0, 0.03) 0px 32px 16px';
           newImg.style.transition = 'transform 0.3s';
           //ONMOUSEOVER
           newImg.onmouseover = ()=>this.mouseOver(collection?.value);

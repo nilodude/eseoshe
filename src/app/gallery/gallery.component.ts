@@ -61,6 +61,7 @@ export class GalleryComponent implements OnInit {
       request  = this.apiService.getImagesByCollection(this.collection.value) as Observable<any>;
     }else if (this.view == 'keywords'){
       console.log('into keywords '+ this.keywords);
+      this.collectionID = 0;
       request = this.apiService.getImagesByKeywords(this.keywords) as Observable<any>;
     }
 
