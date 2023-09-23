@@ -248,8 +248,8 @@ export class CrazygridComponent implements OnInit {
           const bgH = (bgScale / (box.ylen + 1)).toString();
           newImg.style.backgroundSize = bgW + '%' + bgH + '%';
           // newImg.style.borderRadius = scale/13 +'px';
-          newImg.style.marginLeft = 'auto';
-          newImg.style.marginRight = 'auto';
+          // newImg.style.marginLeft = '1%';
+          // newImg.style.marginRight = '1%';
           newImg.style.display = 'block';
           newImg.style.boxShadow = 'rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px';
           newImg.style.transition = 'transform 0.3s';
@@ -315,14 +315,17 @@ export class CrazygridComponent implements OnInit {
 
 
   clickCollection(collectionID: number){
-    console.log('clicked collection '+this.getCollectionName(collectionID));
-    // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
-    // theres an elegant way to do this, DataService, so users can't inspect your application data 
-    // this.dataService.updateCollections(this.collections);
-    // this.dataService.updatecollection(collectionID.toString());
-    localStorage.setItem('collections',JSON.stringify(this.collections));
-    localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == collectionID)))
-    this.router.navigate(['/collection']);
+    const collection = this.collections.find(c=>c.value == collectionID)
+    if (collection) {
+      console.log('clicked collection ' + JSON.stringify(collection));
+      // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
+      // theres an elegant way to do this, DataService, so users can't inspect your application data 
+      // this.dataService.updateCollections(this.collections);
+      // this.dataService.updatecollection(collectionID.toString());
+      localStorage.setItem('collections', JSON.stringify(this.collections));
+      localStorage.setItem('collection', JSON.stringify(collection))
+      this.router.navigate(['/collection']);
+    }
   }
 
   refresh(){

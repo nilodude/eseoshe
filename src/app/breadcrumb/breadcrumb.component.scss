@@ -24,7 +24,7 @@
 
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1010 !important;
-    background-color: rgba(226, 226, 226, 0.6);
+    background-color: rgba(226, 226, 226, 0.9);
     border: none;
     top: 5.2vh !important;
     left: -2vh !important;
@@ -62,7 +62,7 @@
 
 :host ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item:not(.p-highlight):not(.p-disabled):hover{
     color: #5a5a5a;
-    background: rgba(255, 255, 255,0.6);
+    background: rgba(255, 255, 255,0.9);
 }
 
 .breadCrumbImageName{

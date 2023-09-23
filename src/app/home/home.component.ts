@@ -11,7 +11,7 @@ export class HomeComponent implements OnInit {
 
   cgRows: number = 4;
   cgCols: number = 7;
-  cgScale: number = 7.15;
+  cgScale: number = 7.425;
 
   constructor() { }
 
