@@ -1,6 +1,19 @@
-<button (click)="this.gotoAdmin()"> ADMIN SETTINGS </button>
+<div class="all" style="height: 100%">
+
+
 <app-header></app-header>
-<div>{{title}}</div>
-<app-color-buttons></app-color-buttons>
+<div id="upBar" class="sticky up">
+    <div class="breadcrumb flex-grow-1 sm:flex-grow-0">
+      <app-breadcrumb [collectionID]="0" [keywords]="''" [view]="''"
+        > </app-breadcrumb>
+    </div>
+    
+    <div class="userPanel">
+      <button (click)="{}" pButton pRipple type="button" label="USER PANEL"
+        class="p-button-raised p-button-secondary p-button-text"></button>
+    </div>
+  </div>
+
 
 <app-crazygrid [cols]="this.cgCols" [rows]="this.cgRows" [scale]="this.cgScale"  [outerMargin]="'1% 0% 0% 0%'" [innerMargin]="12" [buttons]="false"></app-crazygrid>
+</div>

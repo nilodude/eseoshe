@@ -73,10 +73,13 @@ export class ColorButtonsComponent implements OnInit {
 
   click(color: string){
     console.log(color)
-
-    // localStorage.setItem('view',"keywords");
     localStorage.setItem('keywords',color);
-    this.router.navigate(['/keywords']);
+   
+    if(this.router.url == '/keywords'){
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+      this.router.navigate(['/keywords']));
+    }else{
+      this.router.navigate(['/keywords'])
+    }
   }
-
 }

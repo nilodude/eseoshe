@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   cgCols: number = 7;
   cgScale: number = 7.15;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
     if(window.innerWidth < 812){
@@ -22,7 +22,4 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  gotoAdmin(){
-    this.router.navigate(['/admin']);
-  }
 }

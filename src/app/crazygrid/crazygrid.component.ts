@@ -78,7 +78,6 @@ export class CrazygridComponent implements OnInit {
     
     this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
       if (event.target instanceof HTMLImageElement) {
-        debugger
         const id = event.target.id.toString();
         if(id.includes('im')){
           this.clickCollection(id.replace('im',''));
@@ -316,7 +315,6 @@ export class CrazygridComponent implements OnInit {
 
 
   clickCollection(collectionID: number){
-    debugger
     console.log('clicked collection '+this.getCollectionName(collectionID));
     // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
     // theres an elegant way to do this, DataService, so users can't inspect your application data 
