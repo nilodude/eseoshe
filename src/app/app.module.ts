@@ -20,6 +20,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AdminComponent } from './admin/admin.component';
 import {Messages, MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {ProgressBarModule} from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MessageModule} from 'primeng/message';
     TooltipModule,
     HttpClientModule,
     MessageModule,
-    MessagesModule
+    MessagesModule,
+    ProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -26,6 +26,10 @@ export class AdminComponent implements OnInit {
   uploadProgress:number = 0;
   uploadSub: Subscription =of().subscribe();
   
+  isFileSync: boolean = false;
+  syncProgress:number = 0;
+  syncSub: Subscription =of().subscribe();
+
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
    
   }
@@ -49,24 +53,25 @@ export class AdminComponent implements OnInit {
     
     // meta should be an array/map (key: imageIndex , value: collection)
     this.meta.sync = shouldSync
-    
-    if (this.files) {
+    let inserted = 1
+    if (this.files.length > 0) {
           console.clear()
           console.log('uploading files...')
                     
           this.uploadSub =
             this.apiService.uploadFiles(this.encodeFormData())
-            .pipe(finalize(() => this.reset())).subscribe({
+            .pipe(finalize(() => this.resetUpload())).subscribe({
               next: (result) => {
                 console.clear()
-                console.log('uploading files...')
                 if (result.type == HttpEventType.UploadProgress) {
                   this.uploadProgress = Math.round(100 * (result.loaded / result.total));
                   console.log('\tprogress: '+this.uploadProgress+'%')
                 }else{
                   console.log('files uploaded SUCCESSFULLY\n',result)
                 }
-                
+                if(result.body?.inserted == 0){
+                  inserted = 0;
+                }
               },
               error: (error) => {
                 console.log('ERROR uploading',error);
@@ -74,8 +79,11 @@ export class AdminComponent implements OnInit {
               complete: () => {
                 console.log('uploaded');
                 this.isFileUploaded = true;
+                
               }
             });
+        }else{
+          console.error('No files selected to upload!')
         }
   }
 
@@ -96,15 +104,42 @@ export class AdminComponent implements OnInit {
 
   cancelUpload() {
     this.uploadSub.unsubscribe();
-    this.reset();
+    this.resetUpload();
   }
 
-  reset() {
+  resetUpload() {
     this.uploadProgress = 0;
     this.uploadSub = of().subscribe();
   }
 
+  resetSync() {
+    this.syncProgress = 0;
+    this.syncSub = of().subscribe();
+  }
+
   sync(collection: string){
-    this.apiService.sync(collection).subscribe();
+    console.log('sync files...')
+    this.syncSub = this.apiService.sync(collection)
+    .pipe(finalize(() => this.resetSync())).subscribe({
+      next: (result)=>{      
+        if (result.type == HttpEventType.UploadProgress) {
+            this.syncProgress = Math.round(100 * (result.loaded / result.total));
+            console.log('\tprogress: '+this.syncProgress+'%')
+        }else{
+          console.log('files sync SUCCESSFULLY\n',result)
+          if(result.body?.inserted == 0){
+          }
+        }
+        
+      },
+       error: (error) => {
+        console.log('ERROR sync',error);
+      },
+      complete: () => {
+        console.log('sync OK');
+        this.isFileUploaded = false;
+        this.isFileSync = true;
+      }
+    });
   }
 }
