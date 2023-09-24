@@ -8,18 +8,26 @@
   height: 4vh;
 }
 
+.breadcrumb{
+  flex-basis: 25%;
+}
+
 .search-container{
   display: flex;
   flex-direction: row;;
-  flex-basis: 20%;
-  
+  flex-basis: 30%;
+  justify-content: space-between;
+}
+
+.searchForm{
+  display: flex;
+  flex-basis: 70%;
 }
 
 .search-container button {
   border: none;
   cursor: pointer;
   background-color: rgba(0,0,0,0);
-  
 }
 
 .search-container button:hover {
@@ -31,6 +39,23 @@ input[type=text] {
   height: 3vh;
 }
 
+:host ::ng-deep .p-message{
+  margin: unset;
+}
+
+:host ::ng-deep .p-message.p-message-error{
+  background: #962e2a00;
+  border: unset;
+  border-width: 0 0 0 0px;
+  color: #ff5757;
+}
+:host ::ng-deep .p-message .p-message-wrapper{
+  padding: unset;
+}
+
+:host ::ng-deep .p-message.p-message-error .p-message-icon{
+  display: none;
+}
 
 
 .title {
@@ -50,3 +75,4 @@ input[type=text] {
 .userPanel .p-button{
   padding: 0.5vh 0.4vh;
 }
+

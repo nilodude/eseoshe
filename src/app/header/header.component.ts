@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SelectItem } from 'primeng/api';
+import { Message, SelectItem } from 'primeng/api';
 
 @Component({
   selector: 'app-header',
@@ -26,12 +26,26 @@ export class HeaderComponent implements OnInit {
     keywords: new FormControl(''),
   });
 
+  msgs: Message[] = []
+
   constructor(private router: Router) {
     this.collections = JSON.parse(localStorage.getItem('collections') as any);
   }
 
   ngOnInit(): void {
     this.fullTitle = window.innerWidth > 812;
+    
+  }
+  ngAfterViewChecked(){
+    this.setupStyle();
+  }
+
+  setupStyle() {
+    let bgcolor = 'var(--' + this.keywords + '-400,' + this.keywords + ')';
+    let kwTitle = document.getElementById('keywordTitle');
+    if (kwTitle) {
+      kwTitle.style.color = bgcolor;
+    }
   }
 
   gotoAdmin(){
@@ -39,21 +53,26 @@ export class HeaderComponent implements OnInit {
   }
   
   changeCollection(){
-    
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
       this.router.navigate(['/collection']));
   }
 
   search(){
+    this.msgs = []
     const keywords = this.searchForm.value.keywords ?? 'art' as string;
     localStorage.setItem('keywords',keywords);
-   console.log(keywords)
-    if(this.router.url == '/keywords'){
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-      this.router.navigate(['/keywords']));
+    console.log(keywords)
+    if(keywords != ''){
+      if(this.router.url == '/keywords'){
+        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
+        this.router.navigate(['/keywords']));
+      }else{
+        this.router.navigate(['/keywords'])
+      }
     }else{
-      this.router.navigate(['/keywords'])
+      this.msgs.push({severity:'error', summary:'Empty search!'})
     }
+    
   }
 
   userPanel(){

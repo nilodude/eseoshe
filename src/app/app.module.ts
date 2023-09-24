@@ -18,6 +18,8 @@ import {TooltipModule} from 'primeng/tooltip';
 import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AdminComponent } from './admin/admin.component';
+import {Messages, MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AdminComponent } from './admin/admin.component';
     BrowserAnimationsModule,
     DialogModule,
     TooltipModule,
-    HttpClientModule
+    HttpClientModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

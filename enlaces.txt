@@ -63,20 +63,23 @@ en lugar de aplicar margen, hay que meter un offset en el translate
 solo front: 
 	-hay que arreglar el crazygrid en pantalla pequeña. DONE
 	-hay que crear al menos 14 collections. DONE more or less
+	
+	-icono home casita. DONE
+	-header con breadcrumb, barra busqueda y colorbuttons a lo largo de la app. DONE
+	-funcionalidad barra busqueda. DONE
+
 	-hay que añadir el More... a la pantalla de inicio:
 		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
 	-hay que evitar doble click sobre las imagenes
 	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
 	-en la vista de imagen, hay que resaltar visualmente el keyword recien buscado
 	-boton BACK
-	-icono home casita
-	-header con breadcrumb, barra busqueda y colorbuttons a lo largo de la app
-	-funcionalidad barra busqueda 
 
 tambien necesita back:
 	-likes y el perfil de usuario
 
-	
-	
-
+	https://visual-computing.com/ hay 1000 cosa
+	http://www.akiwi.eu/ no
+	https://labs.everypixel.com/docs
+	me he registrado y funciona, tengo la peticion en el postman 
 	

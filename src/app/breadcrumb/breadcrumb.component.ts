@@ -14,10 +14,8 @@ export class BreadcrumbComponent implements OnInit {
   @Input('view') view: string='';
   @Output('changeCollection') changeCollection: EventEmitter<number> = new EventEmitter();
 
-
   collections: SelectItem[] =[];
   collection: SelectItem = {label:'', value:''};
-
 
   constructor(private router: Router) {
     this.collections = JSON.parse(localStorage.getItem('collections') as any);
@@ -26,18 +24,6 @@ export class BreadcrumbComponent implements OnInit {
 
   ngOnInit(): void {
     this.collection = JSON.parse(localStorage.getItem('collection') as string);
-  }
-
-  ngAfterViewChecked(){
-    this.setupStyle();
-  }
-
-  setupStyle() {
-    let bgcolor = 'var(--' + this.keywords + '-400,' + this.keywords + ')';
-    let kwTitle = document.getElementById('keywordTitle');
-    if (kwTitle) {
-      kwTitle.style.color = bgcolor;
-    }
   }
   
   despliega(event: any){
