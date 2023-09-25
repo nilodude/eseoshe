@@ -19,7 +19,7 @@
             </div>
 
             <div>
-                <button type="submit">UPLOAD</button>
+                <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
             </div>
             
         </div>
@@ -33,7 +33,7 @@
         <p-progressBar [value]="this.syncProgress"></p-progressBar>
     </div>
 
-    <div class="dropZone" pDroppable="loaded" (onDrop)="drop()">
+    <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
         drop here
         <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
             <div class="imDiv">
@@ -51,10 +51,13 @@
             </div>
         </ng-template>
     </div>
-
-
+    <div>
+        <button (click)="this.switch()">{{this.uploadView ? 'SHOWING FILES TO UPLOAD' : 'SHOWING FILES WITHOUT COLLECTION'}}</button>
+    </div>
     <div class="gallery" >
-        <ng-template ngFor let-im [ngForOf]="this.loadedImages" let-i="index">
+        <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
+        <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No images without collection </div>
+        <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
             <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                 <div  >
                     <img class="im" src="{{ im.b64 }}">

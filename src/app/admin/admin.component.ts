@@ -38,11 +38,15 @@ export class AdminComponent implements OnInit {
   dragged: any = {}
   dropped: any[] = []
 
+  uploadView: boolean = false;
+
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
    
   }
 
   ngOnInit(): void {
+    this.loadedImages = [];
+    this.noCollection = [];
     this.getImagesNoCollection();
 
   }
@@ -50,7 +54,17 @@ export class AdminComponent implements OnInit {
   getImagesNoCollection(){
     this.apiService.getImagesNoCollection().subscribe({
       next: (result)=>{
-        this.noCollection = result
+        this.noCollection = result.map((i: { id: any; file_name: string | number; b64: any; title: any; keywords: { replaceAll: (arg0: string, arg1: string) => { (): any; new(): any; replaceAll: { (arg0: string, arg1: string): { (): any; new(): any; replaceAll: { (arg0: string, arg1: string): string; new(): any; }; }; new(): any; }; }; }; width: any; height: any; id_collection: any; })=>{
+          return {
+            id: i.id,
+            name: i.file_name,
+            b64: 'data:image/png;base64,'+i.b64,
+            title: i.title,
+            liked: '',
+            keywords: i.keywords.replaceAll('[','').replaceAll(']','').replaceAll("'",'').trim().split(',').map((each: string)=>each.trim()),
+            size: [i.width, i.height],
+            id_collection: i.id_collection
+        }})
         this.images = structuredClone(this.noCollection)
         // this.isDataRetrieved = true;
       }
@@ -62,7 +76,7 @@ export class AdminComponent implements OnInit {
     console.log(event.target.files)
     this.files= []
     this.files = Array.from(event.target.files);
-    
+    this.loadedImages = [];
     if (this.files.length > 0) {
       this.files.forEach(f=>{
         const reader = new FileReader();
@@ -85,13 +99,20 @@ export class AdminComponent implements OnInit {
       })
     }
   }
+  switch(){
+    this.uploadView = !this.uploadView
+  }
 
   uploadToBackend(){
     //console.clear()
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
     //for now its only one collection, pending dependency: UX/UI proposal
-    this.collection = this.uploadForm.controls['collection'].value as string; 
+    this.collection = this.uploadForm.value.collection as string; 
+    
+    if(this.collection != ''){
+
+      
     
     
     // meta should be an array/map (key: imageIndex , value: collection)
@@ -128,6 +149,10 @@ export class AdminComponent implements OnInit {
         }else{
           console.error('No files selected to upload!')
         }
+
+    }else{
+      console.error('No collection selected to upload!')
+    }
   }
 
   // meta should be an array/map (key: imageIndex , value: collection)
@@ -188,14 +213,15 @@ export class AdminComponent implements OnInit {
 
   dragStart(image: any) {
     this.dragged = image;
-    console.log('dragged '+image)
+    console.log('dragged')
+    console.log(this.dragged)
   }
   
   drop() {
     if (this.dragged) {
-        let index = this.loadedImages.indexOf(this.dragged)
-        this.dropped = [...this.dropped, this.dragged];
-        this.loadedImages = this.loadedImages.splice(index,1);
+        let index = (this.uploadView ? this.loadedImages : this.noCollection).indexOf(this.dragged)
+        this.dropped.push(this.dragged);
+        (this.uploadView ? this.loadedImages : this.noCollection).splice(index,1);
         console.log('dropped ')
         console.log(this.dropped)
         this.dragged = null;
