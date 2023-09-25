@@ -1,21 +1,6 @@
 <div class="all">
-    <!-- dinamically create uploadForm, one for each /directory -->
-    
-    <!-- with primeng fileupload component it could be smooth, one component for each /directory  -->
-    <!-- <div class="card flex justify-content-center">
-        <p-toast></p-toast>
-        <p-fileUpload name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php" (onUpload)="onUpload($event)"
-            [multiple]="true" accept="image/*" maxFileSize="1000000">
-            <ng-template pTemplate="content">
-                <ul *ngIf="uploadedFiles.length">
-                    <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-                </ul>
-            </ng-template>
-        </p-fileUpload>
-    </div> -->
-
-
-    <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
+    <div>
+        <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
         <div class="uploadForm">
             <div class="uploadField">
                 <label for="fileNames">fileNames</label>
@@ -38,12 +23,32 @@
             </div>
             
         </div>
-    </form>
+        </form>
+    </div>
     <div>
         <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
         
     </div>
-    
-    <p-progressBar [value]="this.syncProgress"></p-progressBar>
-    
+    <div>
+        <p-progressBar [value]="this.syncProgress"></p-progressBar>
+    </div>
+
+
+    <div *ngIf="isDataRetrieved" class="gallery">
+        <ng-template ngFor let-im [ngForOf]="this.noCollection" let-i="index" lazy-load>
+            <div class="imDiv">
+                <div  >
+                    <img class="im" src="data:image/png;base64,{{ im.b64 }}">
+                </div>
+                <div class="overlay flex">
+                    
+                    <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
+                    <div class="zoomDiv" >
+                        <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                    </div>
+                    <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
 </div>

@@ -160,15 +160,18 @@
                         <img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
                     <div class="overlay flex">
+                        
                         <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
                         <div class="zoomDiv" (click)="this.zoom(im)">
                             <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
                         </div>
+                        <div class="removeDiv" (click)="this.delete(im.id)"><i class="removeIcon fa fa-trash"></i></div>
                     </div>
                 </div>
             </ng-template>
         </div>
     </div>
+    <p-confirmDialog header="Remove image?" icon="pi pi-exclamation-triangle"></p-confirmDialog>
     <div class="popup">
         <p-dialog header="{{zoomedIm.name}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">

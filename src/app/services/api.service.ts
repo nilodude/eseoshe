@@ -32,6 +32,10 @@ export class ApiService {
     return this.http.get<any>(this.apiUrl+'/images?fileNames='+fileNames)
   }
 
+  getImagesNoCollection(): Observable<any>{
+    return this.http.get<any>(this.apiUrl+'/images/noCollection')
+  }
+
   getImagesByKeywords(keywords: string): Observable<any>{
     return this.http.get<any>(this.apiUrl+'/images?keywords='+keywords)
   }
@@ -48,5 +52,9 @@ export class ApiService {
       reportProgress: true,
       observe: 'events'
   })
+  }
+
+  removeFile(id: number): Observable<any>{
+    return this.http.delete<any>(this.apiUrl+'/delete/'+id)
   }
 }

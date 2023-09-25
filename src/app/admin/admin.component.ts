@@ -30,11 +30,24 @@ export class AdminComponent implements OnInit {
   syncProgress:number = 0;
   syncSub: Subscription =of().subscribe();
 
+  noCollection: any[] = []
+  isDataRetrieved: boolean = false
+  
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
    
   }
 
   ngOnInit(): void {
+    this.getImagesNoCollection();
+  }
+
+  getImagesNoCollection(){
+    this.apiService.getImagesNoCollection().subscribe({
+      next: (result)=>{
+        this.noCollection = result
+        this.isDataRetrieved = true;
+      }
+    })
   }
 
   loadedFiles(event: any){

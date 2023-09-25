@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SelectItem } from 'primeng/api';
+import { ConfirmationService, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
 import { Observable, of } from 'rxjs';
@@ -7,7 +7,8 @@ import { Observable, of } from 'rxjs';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
-  styleUrls: ['./gallery.component.scss']
+  styleUrls: ['./gallery.component.scss'],
+  providers: [ConfirmationService]
 })
 export class GalleryComponent implements OnInit {
   view: string = 'collection' || 'keywords';
@@ -27,7 +28,9 @@ export class GalleryComponent implements OnInit {
 
   zoomedIm: any={};
 
-  constructor(private router: Router, private apiService: ApiService) {
+  constructor(private router: Router,
+     private apiService: ApiService,
+     private confirmationService: ConfirmationService) {
     // TODO: by now, localStorage is used as "data storage" within the whole frontend app, and it is fine but its just for prototyping
     // theres an elegant way to do this, DataService, so users can't inspect your application data 
     this.collections = JSON.parse(localStorage.getItem('collections') as string) || [];
@@ -104,6 +107,28 @@ export class GalleryComponent implements OnInit {
     this.zoomedIm= im;
     console.log('zoomed image '+im.name);
     this.popup = true;
+  }
+
+  delete(id: number) {
+    this.confirmationService.confirm({
+      message: 'Are you sure?',
+      accept: () => {
+        console.log('removing image ID=' + id)
+        this.apiService.removeFile(id).subscribe({
+          next: (result) => {
+            console.log('removed image', result)
+            let index = this.images.findIndex(i=>i.id==id)
+            this.images.splice(index, 1);
+          },
+          error: (error) => {
+            console.error('error removing image', error);
+          }
+        })
+      },
+      reject: () => {
+        this.confirmationService.close()
+      }
+    });
   }
 
   clickImage(im: any){

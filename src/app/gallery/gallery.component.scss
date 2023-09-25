@@ -44,16 +44,18 @@
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc(100% - 7.5vh);
+    left: calc(100% - 11.5vh);
     right: 0;
-    width: 7.5vh;
+    // width: 9.5vh;
     height: 4vh;
     opacity: 0;
     transition: .2s ease;
     border-radius: 4px;
     z-index: 1007;
-    justify-content: flex-end;
-    align-items:flex-start;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 1vh;
 }
 
 .zoomedOverlay {
@@ -70,11 +72,14 @@
     transition: .2s ease;
 }
 
-.likeDiv, .zoomDiv, .likedDiv{
+.likeDiv, .zoomDiv, .likedDiv, .removeDiv{
     width: 2.7vh;
     height: 2.7vh;
-    margin:1vh 0.5vh;
+    // margin:1vh 0.5vh;
     transition: transform 0.1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .likedDiv{
     mask-image: url(../../assets/icons/heart-filled.svg);
@@ -90,7 +95,7 @@
     background-position: center;
     background-repeat: no-repeat;
 }
-.likeDiv:active, .likedDiv:active, .zoomDiv:active{
+.likeDiv:active, .likedDiv:active, .zoomDiv:active, .removeDiv:active{
     transform: scale(0.8, 0.8);
 }
 .zoomDiv{
@@ -98,10 +103,14 @@
     background-size: contain;
     background-position: center;
 }
-.zoomIcon{
+.zoomIcon, .removeIcon{
     width:2.7vh;
     height: auto;
 }
+.removeIcon{
+    font-size: 1.5em;
+}
+
 .zoomed{
     height:70vh;
     width: auto;

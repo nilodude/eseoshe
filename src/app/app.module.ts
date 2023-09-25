@@ -21,6 +21,8 @@ import { AdminComponent } from './admin/admin.component';
 import {Messages, MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ProgressBarModule} from 'primeng/progressbar';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,8 @@ import {ProgressBarModule} from 'primeng/progressbar';
     HttpClientModule,
     MessageModule,
     MessagesModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ConfirmDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

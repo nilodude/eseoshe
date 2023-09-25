@@ -12,6 +12,8 @@
     <form class="searchForm" [formGroup]="searchForm" (submit)="search()">
       <div class="flex flex-grow-1 align-items-center"><input type="text" placeholder="Search by keywords..." formControlName="keywords"></div>
       <div class="flex align-items-center"><button type="submit"><i class="fa fa-search"></i></button></div>
+      <div class="flex justify-content-end align-items-center"><i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i></div>
+      
     </form>
     <p-messages [(value)]="msgs"></p-messages>
   </div>
