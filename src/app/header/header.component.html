@@ -18,18 +18,10 @@
     <p-messages [(value)]="msgs"></p-messages>
   </div>
 
-  <div *ngIf="this.view != 'admin'" class="title">
-    <div *ngIf="this.view == 'collection'; then collectionTitle else keywordsTitle"></div>
-    <ng-template #collectionTitle>
-      <div class="flex align-items-center">
-        <span *ngIf="this.fullTitle">{{this.collection.label}}</span><span *ngIf="this.isDataRetrieved">({{this.numResults}} results)</span>
-      </div>
-    </ng-template>
-    <ng-template #keywordsTitle>
-      <div *ngIf="this.isDataRetrieved" class="title flex align-items-center">
-        <span id="keywordTitle" >"{{this.keywords}}" </span><span> ({{this.numResults}} results)</span>
-      </div>
-    </ng-template>
+  <div *ngIf="!['admin','image'].includes(this.view)" class="title">
+    <div *ngIf="this.isDataRetrieved" class="title flex align-items-center">
+      <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span><span> ({{this.numResults}} results)</span>
+    </div>
   </div>
   
   <div class="userPanel">
