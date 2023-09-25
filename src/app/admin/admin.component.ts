@@ -15,12 +15,10 @@ export class AdminComponent implements OnInit {
   
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
-    shouldSync: new FormControl(false),
     collection: new FormControl('',Validators.required)
   });
 
   files: File[] = [];
-  shouldSync: boolean = false;
   collection: string = '';
   meta: any = {};
   isFileUploaded: boolean = false;
@@ -65,6 +63,7 @@ export class AdminComponent implements OnInit {
             id_collection: i.id_collection
         }})
         this.images = structuredClone(this.noCollection)
+        this.isDataRetrieved = true;
       }
     })
   }
@@ -112,16 +111,11 @@ export class AdminComponent implements OnInit {
   }
 
   uploadToBackend() {
-    console.log(this.uploadForm.value)
-    let shouldSync = this.uploadForm.value.shouldSync as boolean;
-    
     //for now its only one collection, pending dependency: UX/UI proposal
     this.collection = this.uploadForm.value.collection as string;
 
     if (this.collection != '') {
-      // meta should be an array/map (key: imageIndex , value: collection)
-      
-      if (this.files.length > 0) {
+      if (this.files.length > 0 || this.dropped.length > 0) {
         console.log('uploading files...')
         this.apiService.uploadFiles(this.encodeFormData()).subscribe({
           next: (result) => {

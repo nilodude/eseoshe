@@ -1,4 +1,5 @@
 <div class="all">
+    <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved"></app-header>
     <div>
         <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
         <div class="uploadForm">
@@ -7,12 +8,6 @@
                 <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
                     formControlName="fileNames">
             </div>
-
-            <div class="uploadField">
-                <label for="shouldSync">sync?</label>
-                <input id="shouldSync" type="checkbox" formControlName="shouldSync">
-            </div>
-
             <div class="uploadField">
                 <label for="collection">collection</label>
                 <input required id="collection" type="text" formControlName="collection">

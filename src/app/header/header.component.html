@@ -18,7 +18,7 @@
     <p-messages [(value)]="msgs"></p-messages>
   </div>
 
-  <div class="title">
+  <div *ngIf="this.view != 'admin'" class="title">
     <div *ngIf="this.view == 'collection'; then collectionTitle else keywordsTitle"></div>
     <ng-template #collectionTitle>
       <div class="flex align-items-center">

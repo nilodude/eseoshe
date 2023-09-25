@@ -1,4 +1,4 @@
 <div class="all" style="height: 100%">
-    <app-header [view]="'collection'"></app-header>
-    <app-crazygrid [cols]="this.cgCols" [rows]="this.cgRows" [scale]="this.cgScale"  [outerMargin]="'1% 0% 0% 0.2%'" [innerMargin]="12" [buttons]="false"></app-crazygrid>
+    <app-header [view]="'collection'" [isDataRetrieved]="true"></app-header>
+    <app-crazygrid [cols]="this.cgCols" [rows]="this.cgRows" [scale]="this.cgScale"  [outerMargin]="'1% 0% 0% 0.2%'" [innerMargin]="12" [buttons]="false" ></app-crazygrid>
 </div>
