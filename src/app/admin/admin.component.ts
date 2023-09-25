@@ -65,39 +65,51 @@ export class AdminComponent implements OnInit {
             id_collection: i.id_collection
         }})
         this.images = structuredClone(this.noCollection)
-        // this.isDataRetrieved = true;
       }
     })
   }
 
-  loadedFiles(event: any){
+  loadedFiles(event: any) {
     this.isDataRetrieved = false;
     console.log(event.target.files)
-    this.files= []
+    this.files = []
     this.files = Array.from(event.target.files);
     this.loadedImages = [];
     if (this.files.length > 0) {
-      this.files.forEach(f=>{
+      this.files.forEach(async f => {
+        let title = ''
+        let keywords = ''
+        exifr.parse(f, true).then(parsed=>{
+          title = parsed.ImageDescription
+          keywords = parsed.subject?.split(',').map((k: string)=>k.trim())
+          console.log(title)
+          console.log(keywords)
+        })
+              
         const reader = new FileReader();
         reader.readAsDataURL(f)
         reader.onloadend = () => {
           const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
-          
           this.loadedImages.push({
             id: undefined,
             name: f.name,
             b64: b64,
-            title: '',
+            title: title,
             liked: '',
-            keywords: '',
+            keywords: keywords,
             size: [0, 0],
             id_collection: 0
           })
-          this.isDataRetrieved = true;
+          if(this.files.length == this.loadedImages.length){
+            this.isDataRetrieved = true;
+            this.uploadView = true;
+          }
+          
         }
       })
     }
   }
+
   switch(){
     this.uploadView = !this.uploadView
   }
@@ -110,10 +122,8 @@ export class AdminComponent implements OnInit {
     this.collection = this.uploadForm.value.collection as string;
 
     if (this.collection != '') {
-
       // meta should be an array/map (key: imageIndex , value: collection)
       this.meta.sync = shouldSync
-
       if (this.files.length > 0) {
         console.clear()
         console.log('uploading files...')
@@ -132,7 +142,6 @@ export class AdminComponent implements OnInit {
       } else {
         console.error('No files selected to upload!')
       }
-
     } else {
       console.error('No collection selected to upload!')
     }
@@ -171,7 +180,6 @@ export class AdminComponent implements OnInit {
           if(result.body?.inserted == 0){
           }
         }
-        
       },
        error: (error) => {
         console.log('ERROR sync',error);
@@ -185,6 +193,7 @@ export class AdminComponent implements OnInit {
   }
 
   dragStart(image: any) {
+    console.log(this.loadedImages)
     this.dragged = image;
     console.log('dragged')
     console.log(this.dragged)
@@ -205,4 +214,3 @@ export class AdminComponent implements OnInit {
     this.dragged = null;
   }
 }
-

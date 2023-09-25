@@ -34,7 +34,7 @@
     </div>
 
     <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
-        drop here
+        <span *ngIf="this.dropped.length == 0">drop here</span>
         <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
             <div class="imDiv">
                 <div  >
@@ -52,15 +52,22 @@
         </ng-template>
     </div>
     <div>
-        <button (click)="this.switch()">{{this.uploadView ? 'SHOWING FILES TO UPLOAD' : 'SHOWING FILES WITHOUT COLLECTION'}}</button>
+        <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>
+        <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW FILES WITHOUT COLLECTION</button>
+    </div>
+    <div class="flex align-items-center justify-content-center">
+        <span>{{this.uploadView ? 'Files to upload:' : 'Files without collection:'}}</span>
     </div>
     <div class="gallery" >
+        
         <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
         <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No images without collection </div>
         <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
             <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                 <div  >
                     <img class="im" src="{{ im.b64 }}">
+                    <span>{{im.title}}</span>
+                    <span>{{im.keywords}}</span>
                 </div>
                 <div class="overlay flex">
                     
