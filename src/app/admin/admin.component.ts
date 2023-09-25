@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import exifr from 'exifr'
 
 @Component({
   selector: 'app-admin',
@@ -23,9 +24,7 @@ export class AdminComponent implements OnInit {
   collection: string = '';
   meta: any = {};
   isFileUploaded: boolean = false;
-  uploadProgress:number = 0;
-  uploadSub: Subscription =of().subscribe();
-  
+    
   isFileSync: boolean = false;
   syncProgress:number = 0;
   syncSub: Subscription =of().subscribe();
@@ -103,54 +102,38 @@ export class AdminComponent implements OnInit {
     this.uploadView = !this.uploadView
   }
 
-  uploadToBackend(){
-    //console.clear()
+  uploadToBackend() {
     console.log(this.uploadForm.value)
     let shouldSync = this.uploadForm.value.shouldSync as boolean;
+    
     //for now its only one collection, pending dependency: UX/UI proposal
-    this.collection = this.uploadForm.value.collection as string; 
-    
-    if(this.collection != ''){
+    this.collection = this.uploadForm.value.collection as string;
 
-      
-    
-    
-    // meta should be an array/map (key: imageIndex , value: collection)
-    this.meta.sync = shouldSync
-    let inserted = 1
-    if (this.files.length > 0) {
-          console.clear()
-          console.log('uploading files...')
-                    
-          this.uploadSub =
-            this.apiService.uploadFiles(this.encodeFormData())
-            .pipe(finalize(() => this.resetUpload())).subscribe({
-              next: (result) => {
-                console.clear()
-                if (result.type == HttpEventType.UploadProgress) {
-                  this.uploadProgress = Math.round(100 * (result.loaded / result.total));
-                  console.log('\tprogress: '+this.uploadProgress+'%')
-                }else{
-                  console.log('files uploaded SUCCESSFULLY\n',result)
-                }
-                if(result.body?.inserted == 0){
-                  inserted = 0;
-                }
-              },
-              error: (error) => {
-                console.log('ERROR uploading',error);
-              },
-              complete: () => {
-                console.log('uploaded');
-                this.isFileUploaded = true;
-                
-              }
-            });
-        }else{
-          console.error('No files selected to upload!')
-        }
+    if (this.collection != '') {
 
-    }else{
+      // meta should be an array/map (key: imageIndex , value: collection)
+      this.meta.sync = shouldSync
+
+      if (this.files.length > 0) {
+        console.clear()
+        console.log('uploading files...')
+        this.apiService.uploadFiles(this.encodeFormData()).subscribe({
+          next: (result) => {
+            console.log('files uploaded SUCCESSFULLY\n', result)
+          },
+          error: (error) => {
+            console.log('ERROR uploading', error);
+          },
+          complete: () => {
+            console.log('uploaded');
+            this.isFileUploaded = true;
+          }
+        });
+      } else {
+        console.error('No files selected to upload!')
+      }
+
+    } else {
       console.error('No collection selected to upload!')
     }
   }
@@ -168,16 +151,6 @@ export class AdminComponent implements OnInit {
     formData.append('meta',JSON.stringify(this.meta))
     
     return formData;
-  }
-
-  cancelUpload() {
-    this.uploadSub.unsubscribe();
-    this.resetUpload();
-  }
-
-  resetUpload() {
-    this.uploadProgress = 0;
-    this.uploadSub = of().subscribe();
   }
 
   resetSync() {
