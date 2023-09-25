@@ -74,39 +74,36 @@ export class AdminComponent implements OnInit {
     console.log(event.target.files)
     this.files = []
     this.files = Array.from(event.target.files);
-    this.loadedImages = [];
+    
     if (this.files.length > 0) {
-      this.files.forEach(async f => {
+      this.files.forEach(f => {
         let title = ''
         let keywords = ''
-        exifr.parse(f, true).then(parsed=>{
+        exifr.parse(f, true).then(parsed => {
           title = parsed.ImageDescription
-          keywords = parsed.subject?.split(',').map((k: string)=>k.trim())
-          console.log(title)
-          console.log(keywords)
-        })
-              
-        const reader = new FileReader();
-        reader.readAsDataURL(f)
-        reader.onloadend = () => {
-          const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
-          this.loadedImages.push({
-            id: undefined,
-            name: f.name,
-            b64: b64,
-            title: title,
-            liked: '',
-            keywords: keywords,
-            size: [0, 0],
-            id_collection: 0
-          })
-          if(this.files.length == this.loadedImages.length){
-            this.isDataRetrieved = true;
-            this.uploadView = true;
-          }
+          keywords = parsed.subject?.split(',').map((k: string) => k.trim())
           
-        }
-      })
+          const reader = new FileReader();
+          reader.readAsDataURL(f)
+          reader.onloadend = () => {
+            const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
+            this.loadedImages.push({
+              id: null,
+              name: f.name,
+              b64: b64,
+              title: title,
+              liked: '',
+              keywords: keywords,
+              size: [0, 0],
+              id_collection: null
+            })
+            if (this.files.length == this.loadedImages.length) {
+              this.isDataRetrieved = true;
+              this.uploadView = true;
+            }
+          }//onLoadEnd
+        })//parse
+      })//forEach
     }
   }
 
@@ -123,9 +120,8 @@ export class AdminComponent implements OnInit {
 
     if (this.collection != '') {
       // meta should be an array/map (key: imageIndex , value: collection)
-      this.meta.sync = shouldSync
+      
       if (this.files.length > 0) {
-        console.clear()
         console.log('uploading files...')
         this.apiService.uploadFiles(this.encodeFormData()).subscribe({
           next: (result) => {
@@ -152,11 +148,12 @@ export class AdminComponent implements OnInit {
     const formData = new FormData();
     
     this.files.forEach(f=>{
-      let i = this.files.indexOf(f).toString()
-      formData.append(i, f)
-      this.meta[i]=this.collection
+      let i = this.files.indexOf(f)
+      formData.append(i.toString(), f)
+      this.meta[i]={collection: this.collection, title: this.dropped[i].title, keywords: this.dropped[i].keywords}
     });
-
+    console.log('meta')
+    console.log(this.meta)
     formData.append('meta',JSON.stringify(this.meta))
     
     return formData;
@@ -177,8 +174,7 @@ export class AdminComponent implements OnInit {
             console.log('\tprogress: '+this.syncProgress+'%')
         }else{
           console.log('files sync SUCCESSFULLY\n',result)
-          if(result.body?.inserted == 0){
-          }
+          
         }
       },
        error: (error) => {
@@ -188,12 +184,13 @@ export class AdminComponent implements OnInit {
         console.log('sync OK');
         this.isFileUploaded = false;
         this.isFileSync = true;
+        this.dropped = [];
+        console.log(this.loadedImages)
       }
     });
   }
 
   dragStart(image: any) {
-    console.log(this.loadedImages)
     this.dragged = image;
     console.log('dragged')
     console.log(this.dragged)
@@ -201,9 +198,10 @@ export class AdminComponent implements OnInit {
   
   drop() {
     if (this.dragged) {
-        let index = (this.uploadView ? this.loadedImages : this.noCollection).indexOf(this.dragged)
+        let arr = this.uploadView ? this.loadedImages : this.noCollection
+        let index = arr.indexOf(this.dragged)
         this.dropped.push(this.dragged);
-        (this.uploadView ? this.loadedImages : this.noCollection).splice(index,1);
+        arr.splice(index,1);
         console.log('dropped ')
         console.log(this.dropped)
         this.dragged = null;
