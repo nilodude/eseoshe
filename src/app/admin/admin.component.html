@@ -33,12 +33,31 @@
         <p-progressBar [value]="this.syncProgress"></p-progressBar>
     </div>
 
-
-    <div *ngIf="isDataRetrieved" class="gallery">
-        <ng-template ngFor let-im [ngForOf]="this.noCollection" let-i="index" lazy-load>
+    <div class="dropZone" pDroppable="loaded" (onDrop)="drop()">
+        drop here
+        <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
             <div class="imDiv">
                 <div  >
-                    <img class="im" src="data:image/png;base64,{{ im.b64 }}">
+                    <img class="im" src="{{ im.b64 }}">
+                </div>
+                <div class="overlay flex">
+                    
+                    <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
+                    <div class="zoomDiv" >
+                        <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                    </div>
+                    <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+
+
+    <div class="gallery" >
+        <ng-template ngFor let-im [ngForOf]="this.loadedImages" let-i="index">
+            <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
+                <div  >
+                    <img class="im" src="{{ im.b64 }}">
                 </div>
                 <div class="overlay flex">
                     

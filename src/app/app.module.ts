@@ -18,11 +18,11 @@ import {TooltipModule} from 'primeng/tooltip';
 import { ColorButtonsComponent } from './color-buttons/color-buttons.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AdminComponent } from './admin/admin.component';
-import {Messages, MessagesModule} from 'primeng/messages';
+import { MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
+import {DragDropModule} from 'primeng/dragdrop';
 
 @NgModule({
   declarations: [
@@ -50,7 +50,8 @@ import {ConfirmationService} from 'primeng/api';
     MessageModule,
     MessagesModule,
     ProgressBarModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

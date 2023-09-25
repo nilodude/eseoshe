@@ -10,3 +10,33 @@
     flex-direction: column;
 
 }
+[pDraggable] {
+    cursor: move;
+}
+
+.dropZone{
+    height: 25vh;
+}
+.dropZone:hover{
+    border: solid #5b1792 1px;
+}
+.gallery {
+    margin: 1.5vh 0.25%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.7vh;
+    justify-content: center;
+}
+
+.imDiv {
+    flex-basis: 0%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.im {
+    height: 29vh;
+    width: auto;
+}

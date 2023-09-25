@@ -30,30 +30,60 @@ export class AdminComponent implements OnInit {
   syncProgress:number = 0;
   syncSub: Subscription =of().subscribe();
 
+  images: any[] = []
+  loadedImages: any[] = []
   noCollection: any[] = []
   isDataRetrieved: boolean = false
-  
+
+  dragged: any = {}
+  dropped: any[] = []
+
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
    
   }
 
   ngOnInit(): void {
     this.getImagesNoCollection();
+
   }
 
   getImagesNoCollection(){
     this.apiService.getImagesNoCollection().subscribe({
       next: (result)=>{
         this.noCollection = result
-        this.isDataRetrieved = true;
+        this.images = structuredClone(this.noCollection)
+        // this.isDataRetrieved = true;
       }
     })
   }
 
   loadedFiles(event: any){
+    this.isDataRetrieved = false;
     console.log(event.target.files)
     this.files= []
     this.files = Array.from(event.target.files);
+    
+    if (this.files.length > 0) {
+      this.files.forEach(f=>{
+        const reader = new FileReader();
+        reader.readAsDataURL(f)
+        reader.onloadend = () => {
+          const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
+          
+          this.loadedImages.push({
+            id: undefined,
+            name: f.name,
+            b64: b64,
+            title: '',
+            liked: '',
+            keywords: '',
+            size: [0, 0],
+            id_collection: 0
+          })
+          this.isDataRetrieved = true;
+        }
+      })
+    }
   }
 
   uploadToBackend(){
@@ -155,4 +185,25 @@ export class AdminComponent implements OnInit {
       }
     });
   }
+
+  dragStart(image: any) {
+    this.dragged = image;
+    console.log('dragged '+image)
+  }
+  
+  drop() {
+    if (this.dragged) {
+        let index = this.loadedImages.indexOf(this.dragged)
+        this.dropped = [...this.dropped, this.dragged];
+        this.loadedImages = this.loadedImages.splice(index,1);
+        console.log('dropped ')
+        console.log(this.dropped)
+        this.dragged = null;
+    }
+  }
+  
+  dragEnd() {
+    this.dragged = null;
+  }
 }
+
