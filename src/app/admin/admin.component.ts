@@ -73,19 +73,36 @@ export class AdminComponent implements OnInit {
     console.log(event.target.files)
     this.files = []
     this.files = Array.from(event.target.files);
-    
+    const ExifReader = require('exifreader')
     if (this.files.length > 0) {
       this.files.forEach(f => {
         let title = ''
         let keywords = ''
-        exifr.parse(f, true).then(parsed => {
-          title = parsed.ImageDescription
-          keywords = parsed.subject?.split(',').map((k: string) => k.trim())
+        let size: number[] = []
+
+        
+        // exifr.parse(f, true).then(parsed => {
+          // console.log(parsed)
+          // console.log(parsed.ImageHeight)
+          // title = parsed.ImageDescription
+          // keywords = parsed.subject?.split(',').map((k: string) => k.trim())
           
           const reader = new FileReader();
           reader.readAsDataURL(f)
-          reader.onloadend = () => {
+          reader.onloadend =async () => {
             const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
+            const metadata = await ExifReader.load(reader.result, {
+              expanded: false,
+              includeUnknown: false
+            });
+            
+            title = metadata.ImageDescription?.description
+            keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
+            size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
+           
+            console.log(metadata[Object.keys(metadata)[1]])
+            console.log(metadata)
+            
             this.loadedImages.push({
               id: null,
               name: f.name,
@@ -93,7 +110,7 @@ export class AdminComponent implements OnInit {
               title: title,
               liked: '',
               keywords: keywords,
-              size: [0, 0],
+              size: size,
               id_collection: null
             })
             if (this.files.length == this.loadedImages.length) {
@@ -101,7 +118,7 @@ export class AdminComponent implements OnInit {
               this.uploadView = true;
             }
           }//onLoadEnd
-        })//parse
+        // })//parse
       })//forEach
     }
   }
@@ -157,7 +174,12 @@ export class AdminComponent implements OnInit {
     this.files.forEach(f=>{
       let i = this.files.indexOf(f)
       formData.append(i.toString(), f)
-      this.meta[i]={collection: this.collection, title: this.dropped[i].title ?? 'ERTITULO', keywords: this.dropped[i].keywords ?? ['los','ki','worls']}
+      this.meta[i]={
+        collection: this.collection,
+        title: this.dropped[i].title ?? 'ERTITULO',
+        keywords: this.dropped[i].keywords ?? ['los','ki','worls'],
+        size : this.dropped[i].size
+        }
     });
     console.log('meta')
     console.log(this.meta)
