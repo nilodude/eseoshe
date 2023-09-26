@@ -115,8 +115,9 @@ export class AdminComponent implements OnInit {
     this.collection = this.uploadForm.value.collection as string;
 
     if (this.collection != '') {
-      if (this.files.length > 0 || this.dropped.length > 0) {
+      if (this.files.length > 0 && this.dropped.length > 0) {
         console.log('uploading files...')
+        
         this.apiService.uploadFiles(this.encodeFormData()).subscribe({
           next: (result) => {
             console.log('files uploaded SUCCESSFULLY\n', result)
@@ -129,6 +130,18 @@ export class AdminComponent implements OnInit {
             this.isFileUploaded = true;
           }
         });
+
+      }else if(this.files.length == 0){
+        console.log('updating files...')
+        this.apiService.updateFiles(this.dropped).subscribe({
+          next: (result)=>{
+            console.log('files updated SUCCESSFULLY\n',result)
+          },
+          error: (error)=>{
+            console.error('ERROR updating files',error)
+          }
+        })
+
       } else {
         console.error('No files selected to upload!')
       }

@@ -57,4 +57,8 @@ export class ApiService {
   removeFile(id: number): Observable<any>{
     return this.http.delete<any>(this.apiUrl+'/delete/'+id)
   }
+
+  updateFiles(files: any):Observable<any>{
+    return this.http.post<any>(this.apiUrl+'/update',{files})
+  }
 }

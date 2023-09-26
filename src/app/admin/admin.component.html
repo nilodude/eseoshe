@@ -34,6 +34,8 @@
             <div class="imDiv">
                 <div  >
                     <img class="im" src="{{ im.b64 }}">
+                    <span>{{im.title}}</span>
+                    <span>{{im.keywords}}</span>
                 </div>
                 <div class="overlay flex">
                     
@@ -57,6 +59,7 @@
         
         <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
         <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No images without collection </div>
+        
         <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
             <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                 <div  >
