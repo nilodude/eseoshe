@@ -157,7 +157,7 @@ export class AdminComponent implements OnInit {
     this.files.forEach(f=>{
       let i = this.files.indexOf(f)
       formData.append(i.toString(), f)
-      this.meta[i]={collection: this.collection, title: this.dropped[i].title, keywords: this.dropped[i].keywords}
+      this.meta[i]={collection: this.collection, title: this.dropped[i].title ?? 'ERTITULO', keywords: this.dropped[i].keywords ?? ['los','ki','worls']}
     });
     console.log('meta')
     console.log(this.meta)
