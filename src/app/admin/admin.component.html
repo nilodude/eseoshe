@@ -1,32 +1,5 @@
 <div class="all">
     <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved"></app-header>
-    <div>
-        <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
-        <div class="uploadForm">
-            <div class="uploadField">
-                <label for="fileNames">fileNames</label>
-                <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
-                    formControlName="fileNames">
-            </div>
-            <div class="uploadField">
-                <label for="collection">collection</label>
-                <input required id="collection" type="text" formControlName="collection">
-            </div>
-
-            <div>
-                <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
-            </div>
-            
-        </div>
-        </form>
-    </div>
-    <div>
-        <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
-        
-    </div>
-    <div>
-        <p-progressBar [value]="this.syncProgress"></p-progressBar>
-    </div>
 
     <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
         <span *ngIf="this.dropped.length == 0">drop here</span>
@@ -47,6 +20,38 @@
                 </div>
             </div>
         </ng-template>
+    </div>
+    <div class="flex">
+        <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
+        <div class="uploadForm">
+            <div class="uploadField">
+                <label for="fileNames">fileNames</label>
+                <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
+                    formControlName="fileNames">
+            </div>
+            <div class="uploadField">
+                <label for="collection">collection</label>
+                <input required id="collection" type="text" formControlName="collection">
+            </div>
+
+            <div>
+                <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
+            </div>
+            
+        </div>
+        </form>
+    </div>
+    <!-- <div>
+        <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
+        
+    </div> -->
+    <p-contextMenu [target]="img" [model]="[]" ></p-contextMenu>
+
+    <img #img src="assets/showcase/images/primeng.svg" alt="CANT RIGHT CLICK ME BITCH">
+
+
+    <div>
+        <p-progressBar [value]="this.syncProgress"></p-progressBar>
     </div>
     <div>
         <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>

@@ -24,6 +24,7 @@ import {ProgressBarModule} from 'primeng/progressbar';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DragDropModule} from 'primeng/dragdrop';
 import {ContextMenuModule} from 'primeng/contextmenu';
+import {SplitterModule} from 'primeng/splitter';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {ContextMenuModule} from 'primeng/contextmenu';
     ProgressBarModule,
     ConfirmDialogModule,
     DragDropModule,
-    ContextMenuModule
+    ContextMenuModule,
+    SplitterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
