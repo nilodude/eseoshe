@@ -3,7 +3,9 @@
   top: 2%;
   display: flex;
   justify-content: space-between;
-  background-color: rgba(226, 226, 226, 0.9);
+  //background-color: rgba(226, 226, 226, 0.9);
+  background-color: rgba(240, 240, 240, 0.74);
+  backdrop-filter: blur(7px);
   align-items: center;
   height: 4vh;
 }

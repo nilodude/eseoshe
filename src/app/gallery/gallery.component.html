@@ -178,14 +178,10 @@
     <div class="popup">
         <p-dialog header="{{zoomedIm.name}}" [(visible)]="popup" [modal]="true" [style]="{width: 'auto'}"
             [maximizable]="false" [draggable]="false" [resizable]="false">
-            
+            <p-contextMenu [target]="zimg" [model]="[]" [styleClass]="'zoomMenu'" ></p-contextMenu>
             <div class="zoomedDiv">
-              <img class="zoomed" src="data:image/png;base64,{{ zoomedIm.b64 }}">
-              <div class="zoomedOverlay flex">
-                <div class="{{zoomedIm.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(zoomedIm.name)"></div>
-              </div>
+              <img #zimg class="zoomed" src="data:image/png;base64,{{ zoomedIm.b64 }}">
             </div>
-
         </p-dialog>
     </div>
 </div>

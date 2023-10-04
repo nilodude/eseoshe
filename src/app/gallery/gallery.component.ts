@@ -129,6 +129,7 @@ export class GalleryComponent implements OnInit {
     this.zoomedIm= im;
     console.log('zoomed image '+im.name);
     this.popup = true;
+    
   }
 
   delete(id: number) {
