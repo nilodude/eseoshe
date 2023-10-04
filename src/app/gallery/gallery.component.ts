@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, SelectItem } from 'primeng/api';
+import { ConfirmationService, MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
 import { Observable, of } from 'rxjs';
@@ -27,6 +27,8 @@ export class GalleryComponent implements OnInit {
   isDataRetrieved: boolean = false;
 
   zoomedIm: any={};
+  
+  imageMenu: any[] = []
 
   constructor(private router: Router,
      private apiService: ApiService,
@@ -71,8 +73,8 @@ export class GalleryComponent implements OnInit {
     request.subscribe({
       next: (result: any[])=>{
         // THIS SHOULD BE PARSED USING A CLASS, not hardcoded json
-        this.images = result.map((i: any)=>{
-          return {
+        result.forEach((i: any)=>{
+          const parsed = {
             id: i.id,
             name: i.file_name,
             b64: i.b64,
@@ -82,8 +84,28 @@ export class GalleryComponent implements OnInit {
             size: [i.width, i.height],
             id_collection: i.id_collection
           }
+          this.images.push(parsed)
+
+          this.imageMenu[parsed.name] = [
+            {
+              label: 'Open',
+              icon: 'pi pi-fw pi-image',
+              command: () => this.clickImage(parsed)
+            },
+            {
+              label: 'Like',
+              icon: 'pi pi-fw pi-heart',
+              command: () => this.like(parsed.name)
+            },
+            {
+              label: 'Zoom',
+              icon: 'pi pi-fw pi-search-plus',
+              command: () => this.zoom(parsed)
+            }
+          ]
         });
         this.numResults = this.images.length;
+
       },
       error: (error)=>{
         console.log('error retrieving images')

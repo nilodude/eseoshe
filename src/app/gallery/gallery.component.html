@@ -152,12 +152,15 @@
             
             </svg>
         </div>
-
         <div *ngIf="isDataRetrieved" class="gallery">
             <ng-template ngFor let-im [ngForOf]="this.images" let-i="index">
-                <div class="imDiv">
+        
+            <p-contextMenu [target]="img" [model]="this.imageMenu[im.name]" ></p-contextMenu>
+                
+              <div class="imDiv">
                     <div (click)="this.clickImage(im)" >
-                        <img class="im" src="data:image/png;base64,{{ im.b64 }}">
+                      
+                        <img #img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
                     <div class="overlay flex">
                         
