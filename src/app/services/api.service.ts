@@ -32,8 +32,8 @@ export class ApiService {
     return this.http.get<any>(this.apiUrl+'/images?fileNames='+fileNames)
   }
 
-  getImagesNoCollection(): Observable<any>{
-    return this.http.get<any>(this.apiUrl+'/images/noCollection')
+  getInactiveImages(): Observable<any>{
+    return this.http.get<any>(this.apiUrl+'/images/inactive')
   }
 
   getImagesByKeywords(keywords: string): Observable<any>{

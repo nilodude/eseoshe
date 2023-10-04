@@ -44,12 +44,12 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.loadedImages = [];
     this.noCollection = [];
-    this.getImagesNoCollection();
+    this.getInactiveImages();
 
   }
 
-  getImagesNoCollection(){
-    this.apiService.getImagesNoCollection().subscribe({
+  getInactiveImages(){
+    this.apiService.getInactiveImages().subscribe({
       next: (result)=>{
         this.noCollection = result.map((i: { id: any; file_name: string | number; b64: any; title: any; keywords: { replaceAll: (arg0: string, arg1: string) => { (): any; new(): any; replaceAll: { (arg0: string, arg1: string): { (): any; new(): any; replaceAll: { (arg0: string, arg1: string): string; new(): any; }; }; new(): any; }; }; }; width: any; height: any; id_collection: any; })=>{
           return {

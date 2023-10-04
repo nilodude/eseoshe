@@ -55,15 +55,15 @@
     </div>
     <div>
         <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>
-        <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW FILES WITHOUT COLLECTION</button>
+        <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW REMOVED IMAGES</button>
     </div>
     <div class="flex align-items-center justify-content-center">
-        <span>{{this.uploadView ? 'Files to upload:' : 'Files without collection:'}}</span>
+        <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
     </div>
     <div class="gallery" >
         
         <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
-        <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No images without collection </div>
+        <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
         
         <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
             <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
