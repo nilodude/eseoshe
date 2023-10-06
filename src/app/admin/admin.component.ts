@@ -4,7 +4,6 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
-import exifr from 'exifr'
 
 @Component({
   selector: 'app-admin',

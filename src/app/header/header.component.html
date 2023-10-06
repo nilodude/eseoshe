@@ -1,5 +1,5 @@
 
-<button (click)="this.gotoAdmin()"> ADMIN SETTINGS </button>
+<button *ngIf="this.admin" (click)="this.gotoAdmin()"> ADMIN SETTINGS </button>
 <app-color-buttons ></app-color-buttons>
 
 <div class="sticky up">

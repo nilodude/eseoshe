@@ -3,6 +3,7 @@
     <p-splitter [style]="{}" [panelSizes]="this.panelSizes">
         <ng-template pTemplate>
             <div class="flex-grow-1">
+                <!-- DROP ZONE -->
                 <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
                     <span *ngIf="this.dropped.length == 0">drop here</span>
                     <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
@@ -23,6 +24,8 @@
                         </div>
                     </ng-template>
                 </div>
+
+                <!-- UPLOAD FORM -->
                 <div class="flex">
                     <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
                     <div class="uploadForm">
@@ -37,20 +40,17 @@
                         </div>
             
                         <div>
-                            <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
+                            <button [attr.disabled]="this.dropped.length == 0 || this.uploadForm.value.collection == '' ? true : null" type="submit">UPLOAD</button>
                         </div>
                         
                     </div>
                     </form>
                 </div>
-                <!-- <div>
-                    <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
-                    
-                </div> -->
-            
                 <div>
                     <p-progressBar [value]="this.syncProgress"></p-progressBar>
                 </div>
+
+                <!-- LOADED FILES -->
                 <div>
                     <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>
                     <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW REMOVED IMAGES</button>
@@ -59,10 +59,8 @@
                     <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
                 </div>
                 <div class="gallery" >
-                    
                     <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
-                    
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
                         <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                             <div (click)="this.editImage(im)" >
@@ -71,7 +69,6 @@
                                 <span>{{im.keywords}}</span>
                             </div>
                             <div class="overlay flex">
-                                
                                 <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
                                 <div class="zoomDiv" >
                                     <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
@@ -83,15 +80,14 @@
                 </div>
             </div>
         </ng-template>
+        <!-- EDIT ZONE -->
         <ng-template  pTemplate>
             <div  *ngIf="this.showIm" class="editZone">
                 <div class="editImage" pDraggable="loaded" (onDragStart)="dragStart(this.image)" (onDragEnd)="dragEnd()">
                     <img class="imEdit" src="{{ this.image.b64 }}">
                 </div>
                 <div class="editForm">
-
-                
-                <form [formGroup]="editForm" >
+                    <form [formGroup]="editForm" >
                         <div class="editField">
                             <label for="title">title</label>
                             <input required class="editTitle" type="text" formControlName="title" (input)="onEdit()">
@@ -99,10 +95,9 @@
                         <div class="editField">
                             <label for="keywords">keywords</label>
                             <p-chips class="editTitle"  formControlName="keywords"></p-chips>
-                            <!-- <input required class="editTitle" type="text" formControlName="keywords"> -->
                         </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         </ng-template>
     </p-splitter>

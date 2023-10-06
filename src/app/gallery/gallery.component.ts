@@ -3,6 +3,7 @@ import { ConfirmationService, MenuItem, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
 import { Observable, of } from 'rxjs';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-gallery',
@@ -29,6 +30,7 @@ export class GalleryComponent implements OnInit {
   zoomedIm: any={};
   
   imageMenu: any[] = []
+  admin:boolean = environment.admin
 
   constructor(private router: Router,
      private apiService: ApiService,
@@ -48,6 +50,7 @@ export class GalleryComponent implements OnInit {
       this.liked = {};
     }
     this.isDataRetrieved = false;
+    this.admin = environment.admin
    }
 
   ngOnInit(): void {

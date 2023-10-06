@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Message, SelectItem } from 'primeng/api';
+import { environment } from './../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -28,8 +29,11 @@ export class HeaderComponent implements OnInit {
 
   msgs: Message[] = []
 
+  admin: boolean = environment.admin
+
   constructor(private router: Router) {
     this.collections = JSON.parse(localStorage.getItem('collections') as any);
+    this.admin = environment.admin
   }
 
   ngOnInit(): void {
