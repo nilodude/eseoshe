@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Message, SelectItem } from 'primeng/api';
@@ -7,15 +7,17 @@ import { environment } from './../../environments/environment';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush 
 })
 export class HeaderComponent implements OnInit {
-  @Input('collectionID') collectionID: number = 0;
-  @Input('imageName') imageName: string = '';
-  @Input('keywords') keywords: string= ''
-  @Input('view') view: string='';
-  @Input('isDataRetrieved') isDataRetrieved: boolean=false;
-  @Input('numResults') numResults: number = 0;
+  @Input() collectionID: number = 0;
+  @Input() imageName: string = '';
+  @Input() keywords: string= ''
+  @Input() view: string='';
+  @Input() isDataRetrieved: boolean=false;
+  @Input() numResults: number = 0;
+  @Input() msgs: Message[] = []
 
   fullTitle: boolean = false;
   collections: SelectItem[] =[]; // SelectItem is the kind of array that "understands" angular p-dropdown component
@@ -27,7 +29,7 @@ export class HeaderComponent implements OnInit {
     keywords: new FormControl(''),
   });
 
-  msgs: Message[] = []
+  
 
   admin: boolean = environment.admin
 
@@ -38,7 +40,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.fullTitle = window.innerWidth > 812;
-    
   }
   ngAfterViewChecked(){
     this.setupStyle();
@@ -62,7 +63,7 @@ export class HeaderComponent implements OnInit {
   }
 
   search(){
-    this.msgs = []
+    
     const keywords = this.searchForm.value.keywords ?? 'art' as string;
     localStorage.setItem('keywords',keywords);
     console.log(keywords)
@@ -74,6 +75,7 @@ export class HeaderComponent implements OnInit {
         this.router.navigate(['/keywords'])
       }
     }else{
+      this.msgs = []
       this.msgs.push({severity:'error', summary:'Empty search!'})
     }
     

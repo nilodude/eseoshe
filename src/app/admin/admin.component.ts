@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-admin',
@@ -11,6 +12,7 @@ import { HttpEventType } from '@angular/common/http';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  msgs: Message[] = []  
   collections: any= []
   panelSizes: number[] = [99.9,0.1]
   uploadForm = new FormGroup({
@@ -28,13 +30,11 @@ export class AdminComponent implements OnInit {
   files: File[] = [];
   collection: string = '';
   meta: any = {};
-  isFileUploaded: boolean = false;
     
   isFileSync: boolean = false;
   syncProgress:number = 0;
   syncSub: Subscription =of().subscribe();
 
-  images: any[] = []
   loadedImages: any[] = []
   noCollection: any[] = []
   isDataRetrieved: boolean = false
@@ -57,7 +57,6 @@ export class AdminComponent implements OnInit {
     this.editForm.controls['keywords'].valueChanges.subscribe(value => {
       this.image.keywords = value
     });
-
   }
 
   getInactiveImages(){
@@ -74,7 +73,6 @@ export class AdminComponent implements OnInit {
             size: [i.width, i.height],
             id_collection: i.id_collection
         }})
-        this.images = structuredClone(this.noCollection)
         this.isDataRetrieved = true;
       }
     })
@@ -142,22 +140,32 @@ export class AdminComponent implements OnInit {
   uploadToBackend() {
     //for now its only one collection, pending dependency: UX/UI proposal
     this.collection = this.uploadForm.value.collection as string;
-
+    
     if (this.collection != '') {
       if (this.files.length > 0 && this.dropped.length > 0) {
         console.log('uploading files...')
         
         this.apiService.uploadFiles(this.encodeFormData()).subscribe({
           next: (result) => {
-            console.log('files uploaded SUCCESSFULLY\n', result)
+            if (result.type == HttpEventType.UploadProgress) {
+              this.syncProgress = Math.round(100 * (result.loaded / result.total));
+              console.log('\tprogress: '+this.syncProgress+'%')
+            }else if(result.type == 4){
+              console.log('files uploaded SUCCESSFULLY\n', result.body)
+              this.msgs = []
+              this.msgs.push({severity:'info', summary:'Uploading'})
+            }
           },
           error: (error) => {
             console.log('ERROR uploading', error);
+            this.msgs = []
+            this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           },
           complete: () => {
             console.log('uploaded');
-            // this.isFileUploaded = true;
             this.resetUI()
+            this.msgs = []
+            this.msgs.push({severity:'success', summary:'Upload complete!'})
           }
         });
 
@@ -168,15 +176,14 @@ export class AdminComponent implements OnInit {
         this.apiService.updateFiles(this.dropped).subscribe({
           next: (result)=>{
             console.log('files updated SUCCESSFULLY\n',result)
+            this.msgs = []
+            this.msgs.push({severity:'success', summary:'Update complete!'})
           },
           error: (error)=>{
             console.error('ERROR updating files',error)
-          },
-          complete: ()=>{
-            console.log('updated');
-            // this.isFileUploaded = true;
-            this.resetUI()
-          },
+            this.msgs = []
+            this.msgs.push({severity:'error', summary:'ERROR updating files'})
+          }
         })
 
       } else {
@@ -201,8 +208,7 @@ export class AdminComponent implements OnInit {
         size : this.dropped[i].size
         }
     });
-    console.log('meta')
-    console.log(this.meta)
+    console.log('metadata:',this.meta)
     formData.append('meta',JSON.stringify(this.meta))
     
     return formData;
@@ -231,7 +237,6 @@ export class AdminComponent implements OnInit {
       },
       complete: () => {
         console.log('sync OK');
-        this.isFileUploaded = false;
         this.isFileSync = true;
         this.dropped = [];
         console.log(this.loadedImages)

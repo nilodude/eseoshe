@@ -1,5 +1,5 @@
 <div class="all">
-    <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved"></app-header>
+    <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved" [msgs]="this.msgs"></app-header>
     <p-splitter [style]="{}" [panelSizes]="this.panelSizes">
         <ng-template pTemplate>
             <div class="flex-grow-1">
@@ -38,11 +38,9 @@
                             <label for="collection">collection</label>
                             <input required id="collection" type="text" formControlName="collection">
                         </div>
-            
                         <div>
                             <button [attr.disabled]="this.dropped.length == 0 || this.uploadForm.value.collection == '' ? true : null" type="submit">UPLOAD</button>
                         </div>
-                        
                     </div>
                     </form>
                 </div>
@@ -101,6 +99,4 @@
             </div>
         </ng-template>
     </p-splitter>
-
-    
 </div>
