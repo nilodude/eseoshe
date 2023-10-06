@@ -2,7 +2,7 @@
     <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved"></app-header>
     <p-splitter [style]="{}" [panelSizes]="this.panelSizes">
         <ng-template pTemplate>
-            <div>
+            <div class="flex-grow-1">
                 <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
                     <span *ngIf="this.dropped.length == 0">drop here</span>
                     <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">

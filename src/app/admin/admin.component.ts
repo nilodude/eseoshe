@@ -247,7 +247,7 @@ export class AdminComponent implements OnInit {
 
 
   editImage(im: any){
-    this.image = structuredClone(im)
+    this.image = im
     this.panelSizes = [60, 40]
     this.editForm.controls["title"].setValue(this.image.title)
     this.editForm.controls["keywords"].setValue(this.image.keywords)
