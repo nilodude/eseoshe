@@ -77,7 +77,7 @@ solo front:
 	
 	-hay que evitar doble click sobre las imagenes. CONTEXTMENU
 	-pantalla admin:
-		-panel lateral onclick para editar title y keywords
+		-panel lateral onclick para editar title y keywords DONE
 		https://www.primefaces.org/primeng-v12-lts/#/splitter
 
 

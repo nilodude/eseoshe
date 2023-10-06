@@ -7,7 +7,7 @@
                     <span *ngIf="this.dropped.length == 0">drop here</span>
                     <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
                         <div class="imDiv">
-                            <div  >
+                            <div  (click)="this.editImage(im)">
                                 <img class="im" src="{{ im.b64 }}">
                                 <span>{{im.title}}</span>
                                 <span>{{im.keywords}}</span>
@@ -85,7 +85,7 @@
         </ng-template>
         <ng-template  pTemplate>
             <div  *ngIf="this.showIm" class="editZone">
-                <div class="editImage">
+                <div class="editImage" pDraggable="loaded" (onDragStart)="dragStart(this.image)" (onDragEnd)="dragEnd()">
                     <img class="imEdit" src="{{ this.image.b64 }}">
                 </div>
                 <div class="editForm">
@@ -94,11 +94,12 @@
                 <form [formGroup]="editForm" >
                         <div class="editField">
                             <label for="title">title</label>
-                            <input required class="editTitle" type="text" formControlName="title">
+                            <input required class="editTitle" type="text" formControlName="title" (input)="onEdit()">
                         </div>
                         <div class="editField">
                             <label for="keywords">keywords</label>
-                            <input required class="editTitle" type="text" formControlName="keywords">
+                            <p-chips class="editTitle"  formControlName="keywords"></p-chips>
+                            <!-- <input required class="editTitle" type="text" formControlName="keywords"> -->
                         </div>
                 </form>
             </div>

@@ -25,6 +25,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {DragDropModule} from 'primeng/dragdrop';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {SplitterModule} from 'primeng/splitter';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {SplitterModule} from 'primeng/splitter';
     ConfirmDialogModule,
     DragDropModule,
     ContextMenuModule,
-    SplitterModule
+    SplitterModule,
+    ChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -23,6 +23,7 @@ export class AdminComponent implements OnInit {
     title: new FormControl(''),
     keywords: new FormControl('',Validators.required)
   });
+  formKeywords: string[]=[]
 
   files: File[] = [];
   collection: string = '';
@@ -51,6 +52,10 @@ export class AdminComponent implements OnInit {
     this.loadedImages = [];
     this.noCollection = [];
     this.getInactiveImages();
+
+    this.editForm.controls['keywords'].valueChanges.subscribe(value => {
+      this.image.keywords = value
+    });
 
   }
 
@@ -242,13 +247,16 @@ export class AdminComponent implements OnInit {
 
 
   editImage(im: any){
-    
-    this.image = im
+    this.image = structuredClone(im)
     this.panelSizes = [60, 40]
-
     this.editForm.controls["title"].setValue(this.image.title)
-    this.editForm.controls["keywords"].setValue(this.image.keywords.join(', '))
-
+    this.editForm.controls["keywords"].setValue(this.image.keywords)
     this.showIm = true
+  }
+
+  onEdit(){
+    
+    this.image.title = this.editForm.value.title ?? ''
+    // this.image.keywords = this.editForm.value.keywords ?? []
   }
 }

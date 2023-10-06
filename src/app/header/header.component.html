@@ -18,7 +18,7 @@
     <p-messages [(value)]="msgs"></p-messages>
   </div>
 
-  <div *ngIf="!['admin','image'].includes(this.view)" class="title">
+  <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="title">
     <div *ngIf="this.isDataRetrieved" class="title flex align-items-center">
       <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span><span> ({{this.numResults}} results)</span>
     </div>
