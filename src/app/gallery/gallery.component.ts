@@ -31,6 +31,7 @@ export class GalleryComponent implements OnInit {
   
   imageMenu: any[] = []
   admin:boolean = environment.admin
+  clickedOverlay: boolean = false;
 
   constructor(private router: Router,
      private apiService: ApiService,
@@ -126,16 +127,18 @@ export class GalleryComponent implements OnInit {
     this.images.find(i=>i.name==imageName).liked = this.liked[imageName];
     console.log((this.liked[imageName] ? 'liked':'unliked')+ ' image '+imageName);
     localStorage.setItem('liked', JSON.stringify(this.liked));
+    this.clickedOverlay = true;
   }
 
   zoom(im: any){
     this.zoomedIm= im;
     console.log('zoomed image '+im.name);
     this.popup = true;
-    
+    this.clickedOverlay = true;
   }
 
   delete(id: number) {
+    this.clickedOverlay = true;
     this.confirmationService.confirm({
       message: 'Are you sure?',
       accept: () => {
@@ -158,13 +161,17 @@ export class GalleryComponent implements OnInit {
   }
 
   clickImage(im: any){
-    console.log('clicked image '+im.name);
-    localStorage.setItem('imageName', im.name);
-    localStorage.setItem('image', JSON.stringify(im));
+    if(!this.clickedOverlay){
+      console.log('clicked image '+im.name);
+      localStorage.setItem('imageName', im.name);
+      localStorage.setItem('image', JSON.stringify(im));
 
-    localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == im.id_collection)))
+      localStorage.setItem('collection', JSON.stringify(this.collections.find(c=>c.value == im.id_collection)))
 
-    this.router.navigate(['/image']);
+      this.router.navigate(['/image']);
+    }else{
+      this.clickedOverlay = false;
+    }
   }
   
   goHome(){
