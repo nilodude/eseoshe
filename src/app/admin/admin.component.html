@@ -8,9 +8,9 @@
                     <span *ngIf="this.dropped.length == 0">drop here</span>
                     <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
                         <div class="imDiv">
-                            <div  (click)="this.editImage(im)">
+                            <div class="flex flex-column" (click)="this.editImage(im)">
                                 <img class="im" src="{{ im.b64 }}">
-                                <span>{{im.title}}</span>
+                                <span><h3>{{im.title}}</h3></span>
                                 <span>{{im.keywords}}</span>
                             </div>
                             <div class="overlay flex">
@@ -61,10 +61,9 @@
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
                         <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
-                            <div (click)="this.editImage(im)" >
+                            <div class="flex flex-column" (click)="this.editImage(im)" >
                                 <img class="im" src="{{ im.b64 }}">
-                                <span>{{im.title}}</span>
-                                <span>{{im.keywords}}</span>
+                                <span><h3>{{im.title}}</h3></span>
                             </div>
                             <div class="overlay flex">
                                 <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
@@ -85,7 +84,7 @@
                     <img class="imEdit" src="{{ this.image.b64 }}">
                 </div>
                 <div class="editForm">
-                    <form [formGroup]="editForm" >
+                    <form [formGroup]="editForm" class="editForm">
                         <div class="editField">
                             <label for="title">title</label>
                             <input required class="editTitle" type="text" formControlName="title" (input)="onEdit()">

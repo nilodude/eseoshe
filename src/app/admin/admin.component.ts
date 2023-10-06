@@ -121,7 +121,6 @@ export class AdminComponent implements OnInit {
               this.uploadView = true;
             }
           }//onLoadEnd
-        // })//parse
       })//forEach
     }
   }
@@ -135,6 +134,7 @@ export class AdminComponent implements OnInit {
     this.showIm = false
     this.image = null
     this.dropped = []
+    // this.loadedImages = [];
   }
 
   uploadToBackend() {
@@ -153,7 +153,7 @@ export class AdminComponent implements OnInit {
             }else if(result.type == 4){
               console.log('files uploaded SUCCESSFULLY\n', result.body)
               this.msgs = []
-              this.msgs.push({severity:'info', summary:'Uploading'})
+              this.msgs.push({severity:'info', summary:'Uploading...'})
             }
           },
           error: (error) => {
@@ -172,6 +172,7 @@ export class AdminComponent implements OnInit {
       }else if(this.files.length == 0){
         console.log('updating files...')
         this.dropped.map(d=>d.b64 = '')
+        //this sould be collectionID, collectionName is only for images with NON EXISTING collection
         this.dropped.map(d=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
         this.apiService.updateFiles(this.dropped).subscribe({
           next: (result)=>{
@@ -200,13 +201,16 @@ export class AdminComponent implements OnInit {
     
     this.files.forEach(f=>{
       let i = this.files.indexOf(f)
-      formData.append(i.toString(), f)
-      this.meta[i]={
-        collection: this.collection,
-        title: this.dropped[i].title ?? 'ERTITULO',
-        keywords: this.dropped[i].keywords ?? ['los','ki','worls'],
-        size : this.dropped[i].size
+      const d = this.dropped.find(d=>d.name == f.name)
+      if(d){
+        formData.append(i.toString(), f)
+        this.meta[i]={
+          collection: this.collection,
+          title: d.title ?? 'ERTITULO',
+          keywords: d.keywords ?? ['los','ki','worls'],
+          size : d.size
         }
+      }
     });
     console.log('metadata:',this.meta)
     formData.append('meta',JSON.stringify(this.meta))

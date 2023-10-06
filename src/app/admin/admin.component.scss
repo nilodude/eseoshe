@@ -25,9 +25,9 @@
     gap: 2vh;
     align-items: stretch;
 }
-.editField{
-    width:100%;
-    height: 80%;
+
+.editTitle{
+    align-items: stretch;
 }
 
 .imEdit{
@@ -68,4 +68,8 @@
 
 :host ::ng-deep .p-splitter-panel-nested{
     justify-content: center;
+}
+
+:host ::ng-deep .p-chips.p-component{
+    display: unset;
 }

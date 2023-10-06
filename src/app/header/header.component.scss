@@ -43,19 +43,28 @@ input[type=text] {
 
 :host ::ng-deep .p-message{
   margin: unset;
+  border: unset;
+  border-width: 0 0 0 0px;
+  background: #962e2a00;
 }
 
 :host ::ng-deep .p-message.p-message-error{
-  background: #962e2a00;
-  border: unset;
-  border-width: 0 0 0 0px;
   color: #ff5757;
 }
+
+:host ::ng-deep .p-message.p-message-info, :host ::ng-deep .p-message.p-message-info .p-message-close{
+  color: #cdb700;
+}
+
+:host ::ng-deep .p-message.p-message-success, :host ::ng-deep .p-message.p-message-success .p-message-close{
+  // color: #cdb700;
+}
+
 :host ::ng-deep .p-message .p-message-wrapper{
   padding: unset;
 }
 
-:host ::ng-deep .p-message.p-message-error .p-message-icon{
+:host ::ng-deep .p-message .p-message-icon{
   display: none;
 }
 
