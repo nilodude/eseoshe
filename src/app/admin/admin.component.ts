@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
@@ -12,10 +12,16 @@ import exifr from 'exifr'
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  
+  panelSizes: number[] = [99.9,0.1]
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
     collection: new FormControl('',Validators.required)
+  });
+  image: any = {}
+  showIm: boolean = false
+  editForm = new FormGroup({
+    title: new FormControl(''),
+    keywords: new FormControl('',Validators.required)
   });
 
   files: File[] = [];
@@ -37,7 +43,7 @@ export class AdminComponent implements OnInit {
 
   uploadView: boolean = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { 
+  constructor(private route: ActivatedRoute, private apiService: ApiService,private fb: FormBuilder,) { 
    
   }
 
@@ -79,15 +85,8 @@ export class AdminComponent implements OnInit {
         let title = ''
         let keywords = ''
         let size: number[] = []
-
-        
-        // exifr.parse(f, true).then(parsed => {
-          // console.log(parsed)
-          // console.log(parsed.ImageHeight)
-          // title = parsed.ImageDescription
-          // keywords = parsed.subject?.split(',').map((k: string) => k.trim())
-          
-          const reader = new FileReader();
+     
+        const reader = new FileReader();
           reader.readAsDataURL(f)
           reader.onloadend =async () => {
             const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
@@ -239,5 +238,17 @@ export class AdminComponent implements OnInit {
   
   dragEnd() {
     this.dragged = null;
+  }
+
+
+  editImage(im: any){
+    
+    this.image = im
+    this.panelSizes = [60, 40]
+
+    this.editForm.controls["title"].setValue(this.image.title)
+    this.editForm.controls["keywords"].setValue(this.image.keywords.join(', '))
+
+    this.showIm = true
   }
 }

@@ -1,15 +1,40 @@
-.uploadForm{
+.uploadForm, .editForm{
     display:flex;
     flex-direction: column;
     align-items: start;
     gap:1vh;
 }
 
-.uploadField{
+.uploadField, .editField{
     display:flex;
     flex-direction: column;
-
 }
+
+.editZone{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 2vh 1vh;
+    width: 100%;
+    margin: 0vh 2vh;
+}
+
+.editForm{
+    width:100%;
+    gap: 2vh;
+    align-items: stretch;
+}
+.editField{
+    width:100%;
+    height: 80%;
+}
+
+.imEdit{
+    width: 45vh;
+    height: auto;
+}
+
 [pDraggable] {
     cursor: move;
 }
@@ -39,4 +64,8 @@
 .im {
     height: 29vh;
     width: auto;
+}
+
+:host ::ng-deep .p-splitter-panel-nested{
+    justify-content: center;
 }

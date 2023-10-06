@@ -1,84 +1,110 @@
 <div class="all">
     <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved"></app-header>
-
-    <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
-        <span *ngIf="this.dropped.length == 0">drop here</span>
-        <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
-            <div class="imDiv">
-                <div  >
-                    <img class="im" src="{{ im.b64 }}">
-                    <span>{{im.title}}</span>
-                    <span>{{im.keywords}}</span>
-                </div>
-                <div class="overlay flex">
-                    
-                    <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
-                    <div class="zoomDiv" >
-                        <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
-                    </div>
-                    <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
-                </div>
-            </div>
-        </ng-template>
-    </div>
-    <div class="flex">
-        <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
-        <div class="uploadForm">
-            <div class="uploadField">
-                <label for="fileNames">fileNames</label>
-                <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
-                    formControlName="fileNames">
-            </div>
-            <div class="uploadField">
-                <label for="collection">collection</label>
-                <input required id="collection" type="text" formControlName="collection">
-            </div>
-
+    <p-splitter [style]="{}" [panelSizes]="this.panelSizes">
+        <ng-template pTemplate>
             <div>
-                <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
-            </div>
-            
-        </div>
-        </form>
-    </div>
-    <!-- <div>
-        <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
-        
-    </div> -->
-    
-
-
-    <div>
-        <p-progressBar [value]="this.syncProgress"></p-progressBar>
-    </div>
-    <div>
-        <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>
-        <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW REMOVED IMAGES</button>
-    </div>
-    <div class="flex align-items-center justify-content-center">
-        <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
-    </div>
-    <div class="gallery" >
-        
-        <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
-        <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
-        
-        <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
-            <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
-                <div  >
-                    <img class="im" src="{{ im.b64 }}">
-                    <span>{{im.title}}</span>
-                    <span>{{im.keywords}}</span>
+                <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
+                    <span *ngIf="this.dropped.length == 0">drop here</span>
+                    <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
+                        <div class="imDiv">
+                            <div  >
+                                <img class="im" src="{{ im.b64 }}">
+                                <span>{{im.title}}</span>
+                                <span>{{im.keywords}}</span>
+                            </div>
+                            <div class="overlay flex">
+                                
+                                <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
+                                <div class="zoomDiv" >
+                                    <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                                </div>
+                                <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
-                <div class="overlay flex">
-                    
-                    <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
-                    <div class="zoomDiv" >
-                        <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                <div class="flex">
+                    <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
+                    <div class="uploadForm">
+                        <div class="uploadField">
+                            <label for="fileNames">fileNames</label>
+                            <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
+                                formControlName="fileNames">
+                        </div>
+                        <div class="uploadField">
+                            <label for="collection">collection</label>
+                            <input required id="collection" type="text" formControlName="collection">
+                        </div>
+            
+                        <div>
+                            <button [attr.disabled]="this.uploadForm.value.collection != '' ? null : true" type="submit">UPLOAD</button>
+                        </div>
+                        
                     </div>
-                    <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
+                    </form>
+                </div>
+                <!-- <div>
+                    <button [attr.disabled]="this.isFileUploaded ? null : true" (click)="this.sync(this.collection)">SYNC</button>
+                    
+                </div> -->
+            
+                <div>
+                    <p-progressBar [value]="this.syncProgress"></p-progressBar>
+                </div>
+                <div>
+                    <button [attr.disabled]="!this.uploadView ? null : true" (click)="this.switch()">SHOW FILES TO UPLOAD</button>
+                    <button [attr.disabled]="this.uploadView ? null : true" (click)="this.switch()">SHOW REMOVED IMAGES</button>
+                </div>
+                <div class="flex align-items-center justify-content-center">
+                    <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
+                </div>
+                <div class="gallery" >
+                    
+                    <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
+                    <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
+                    
+                    <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
+                        <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
+                            <div (click)="this.editImage(im)" >
+                                <img class="im" src="{{ im.b64 }}">
+                                <span>{{im.title}}</span>
+                                <span>{{im.keywords}}</span>
+                            </div>
+                            <div class="overlay flex">
+                                
+                                <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
+                                <div class="zoomDiv" >
+                                    <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
+                                </div>
+                                <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
+                            </div>
+                        </div>
+                    </ng-template>
                 </div>
             </div>
         </ng-template>
-    </div>
+        <ng-template  pTemplate>
+            <div  *ngIf="this.showIm" class="editZone">
+                <div class="editImage">
+                    <img class="imEdit" src="{{ this.image.b64 }}">
+                </div>
+                <div class="editForm">
+
+                
+                <form [formGroup]="editForm" >
+                        <div class="editField">
+                            <label for="title">title</label>
+                            <input required class="editTitle" type="text" formControlName="title">
+                        </div>
+                        <div class="editField">
+                            <label for="keywords">keywords</label>
+                            <input required class="editTitle" type="text" formControlName="keywords">
+                        </div>
+                </form>
+            </div>
+            </div>
+        </ng-template>
+    </p-splitter>
+
+    
 </div>
