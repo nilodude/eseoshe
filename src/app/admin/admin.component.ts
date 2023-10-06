@@ -80,7 +80,7 @@ export class AdminComponent implements OnInit {
 
   loadedFiles(event: any) {
     this.isDataRetrieved = false;
-    console.log(event.target.files)
+    console.log('loading files:',event.target.files)
     this.files = []
     this.files = Array.from(event.target.files);
     const ExifReader = require('exifreader')
@@ -91,36 +91,35 @@ export class AdminComponent implements OnInit {
         let size: number[] = []
      
         const reader = new FileReader();
-          reader.readAsDataURL(f)
-          reader.onloadend =async () => {
-            const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
-            const metadata = await ExifReader.load(reader.result, {
-              expanded: false,
-              includeUnknown: false
-            });
+        reader.readAsDataURL(f)
+        reader.onloadend =async () => {
+          const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
+          const metadata = await ExifReader.load(reader.result, {
+             expanded: false,
+            includeUnknown: false
+          });
             
-            title = metadata.ImageDescription?.description
-            keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
-            size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
+          title = metadata.ImageDescription?.description
+          keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
+          size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
            
-            console.log(metadata[Object.keys(metadata)[1]])
-            console.log(metadata)
+          console.log(metadata)
             
-            this.loadedImages.push({
-              id: null,
-              name: f.name,
-              b64: b64,
-              title: title,
-              liked: '',
-              keywords: keywords,
-              size: size,
-              id_collection: null
-            })
-            if (this.files.length == this.loadedImages.length) {
-              this.isDataRetrieved = true;
-              this.uploadView = true;
-            }
-          }//onLoadEnd
+          this.loadedImages.push({
+            id: null,
+            name: f.name,
+            b64: b64,
+            title: title,
+            liked: '',
+            keywords: keywords,
+            size: size,
+            id_collection: null
+          })
+          if (this.files.length == this.loadedImages.length) {
+            this.isDataRetrieved = true;
+            this.uploadView = true;
+          }
+        }//onLoadEnd
       })//forEach
     }
   }
@@ -149,7 +148,7 @@ export class AdminComponent implements OnInit {
           next: (result) => {
             if (result.type == HttpEventType.UploadProgress) {
               this.syncProgress = Math.round(100 * (result.loaded / result.total));
-              console.log('\tprogress: '+this.syncProgress+'%')
+              console.log('progress: '+this.syncProgress+'%')
             }else if(result.type == 4){
               console.log('files uploaded SUCCESSFULLY\n', result.body)
               this.msgs = []
@@ -162,7 +161,6 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           },
           complete: () => {
-            console.log('uploaded');
             this.resetUI()
             this.msgs = []
             this.msgs.push({severity:'success', summary:'Upload complete!'})
@@ -223,31 +221,6 @@ export class AdminComponent implements OnInit {
     this.syncSub = of().subscribe();
   }
 
-  sync(collection: string){
-    console.log('sync files...')
-    this.syncSub = this.apiService.sync(collection)
-    .pipe(finalize(() => this.resetSync())).subscribe({
-      next: (result)=>{      
-        if (result.type == HttpEventType.UploadProgress) {
-            this.syncProgress = Math.round(100 * (result.loaded / result.total));
-            console.log('\tprogress: '+this.syncProgress+'%')
-        }else{
-          console.log('files sync SUCCESSFULLY\n',result)
-          
-        }
-      },
-       error: (error) => {
-        console.log('ERROR sync',error);
-      },
-      complete: () => {
-        console.log('sync OK');
-        this.isFileSync = true;
-        this.dropped = [];
-        console.log(this.loadedImages)
-      }
-    });
-  }
-
   dragStart(image: any) {
     this.dragged = image;
     console.log('dragged')
@@ -261,8 +234,7 @@ export class AdminComponent implements OnInit {
         let index = arr.indexOf(this.dragged)
         this.dropped.push(this.dragged);
         arr.splice(index,1);
-        console.log('dropped ')
-        console.log(this.dropped)
+        console.log('dropped:',this.dropped)
         this.dragged = null;
     }
   }

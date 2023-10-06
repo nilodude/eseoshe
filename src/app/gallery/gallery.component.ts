@@ -112,8 +112,7 @@ export class GalleryComponent implements OnInit {
 
       },
       error: (error)=>{
-        console.log('error retrieving images')
-        console.log(error)
+        console.log('error retrieving images',error)
       },
       complete: ()=>{
         console.log('retrieved images');
