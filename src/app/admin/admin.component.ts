@@ -12,6 +12,7 @@ import exifr from 'exifr'
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  collections: any= []
   panelSizes: number[] = [99.9,0.1]
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
@@ -45,10 +46,11 @@ export class AdminComponent implements OnInit {
   uploadView: boolean = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,private fb: FormBuilder,) { 
-   
+    this.collections = JSON.parse(localStorage.getItem('collections') as any);
   }
 
   ngOnInit(): void {
+    
     this.loadedImages = [];
     this.noCollection = [];
     this.getInactiveImages();
@@ -163,6 +165,7 @@ export class AdminComponent implements OnInit {
       }else if(this.files.length == 0){
         console.log('updating files...')
         this.dropped.map(d=>d.b64 = '')
+        this.dropped.map(d=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
         this.apiService.updateFiles(this.dropped).subscribe({
           next: (result)=>{
             console.log('files updated SUCCESSFULLY\n',result)
@@ -245,6 +248,7 @@ export class AdminComponent implements OnInit {
   
   drop() {
     if (this.dragged) {
+        //maybe its a good place to set the collection, depending on where it dropped
         let arr = this.uploadView ? this.loadedImages : this.noCollection
         let index = arr.indexOf(this.dragged)
         this.dropped.push(this.dragged);
