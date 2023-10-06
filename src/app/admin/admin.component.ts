@@ -154,6 +154,7 @@ export class AdminComponent implements OnInit {
 
       }else if(this.files.length == 0){
         console.log('updating files...')
+        this.dropped.map(d=>d.b64 = '')
         this.apiService.updateFiles(this.dropped).subscribe({
           next: (result)=>{
             console.log('files updated SUCCESSFULLY\n',result)
