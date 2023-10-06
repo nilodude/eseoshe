@@ -131,6 +131,13 @@ export class AdminComponent implements OnInit {
     this.uploadView = !this.uploadView
   }
 
+  resetUI(){
+    this.panelSizes = [99.9,0.1]
+    this.showIm = false
+    this.image = null
+    this.dropped = []
+  }
+
   uploadToBackend() {
     //for now its only one collection, pending dependency: UX/UI proposal
     this.collection = this.uploadForm.value.collection as string;
@@ -148,7 +155,8 @@ export class AdminComponent implements OnInit {
           },
           complete: () => {
             console.log('uploaded');
-            this.isFileUploaded = true;
+            // this.isFileUploaded = true;
+            this.resetUI()
           }
         });
 
@@ -161,7 +169,12 @@ export class AdminComponent implements OnInit {
           },
           error: (error)=>{
             console.error('ERROR updating files',error)
-          }
+          },
+          complete: ()=>{
+            console.log('updated');
+            // this.isFileUploaded = true;
+            this.resetUI()
+          },
         })
 
       } else {
