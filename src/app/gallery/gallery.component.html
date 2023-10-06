@@ -160,9 +160,9 @@
               <div class="imDiv">
                     <div>
                       
-                        <img #img class="im" src="data:image/png;base64,{{ im.b64 }}">
+                        <img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
-                    <div (click)="this.clickImage(im)"class="overlay flex">
+                    <div #img (click)="this.clickImage(im)"class="overlay flex">
                         
                         <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
                         <div class="zoomDiv" (click)="this.zoom(im)">
