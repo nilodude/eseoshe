@@ -158,11 +158,11 @@
             <p-contextMenu [target]="img" [model]="this.imageMenu[im.name]" ></p-contextMenu>
                 
               <div class="imDiv">
-                    <div (click)="this.clickImage(im)" >
+                    <div>
                       
                         <img #img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
-                    <div class="overlay flex">
+                    <div (click)="this.clickImage(im)"class="overlay flex">
                         
                         <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" (click)="this.like(im.name)"></div>
                         <div class="zoomDiv" (click)="this.zoom(im)">

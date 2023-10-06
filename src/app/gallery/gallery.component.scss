@@ -34,41 +34,36 @@
 .im {
     height: 29vh;
     width: auto;
+    border-radius: 1px;
 }
 
-.imdiv:hover, .zoomDiv:hover{
+.imdiv:hover, .zoomDiv:hover, .removeDiv:hover{
     opacity: 50%;
 }
 
-.overlay, .zoomedOverlay {
+.overlay {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc(100% - 11.5vh);
+    left: 0;
     right: 0;
-    // width: 9.5vh;
-    height: 4vh;
     opacity: 0;
-    transition: .2s ease;
-    border-radius: 4px;
+    transition: .4s ease;
+    border-radius: 1px;
     z-index: 1007;
     display: flex;
-    justify-content: center;
-    align-items:center;
+    justify-content: flex-end;
+    align-items:flex-start;
     gap: 1vh;
-}
-
-.zoomedOverlay {
-    opacity: 1;
-    top: calc(100% - 79vh);
-    left: calc(100% - 15vh);
+    padding: 1vh 1vh;
 }
 
 .imDiv:hover .overlay {
     opacity: 1;
+    backdrop-filter: blur(5px);
 }
 .imDiv:hover .im  {
-    opacity: 0.5;
+    opacity: 0.8;
     transition: .2s ease;
 }
 
