@@ -89,7 +89,9 @@ export class AdminComponent implements OnInit {
         let title = ''
         let keywords = ''
         let size: number[] = []
-     
+        let url = URL.createObjectURL(f)
+        console.log(url)
+        // window.open(url)
         const reader = new FileReader();
         reader.readAsDataURL(f)
         reader.onloadend =async () => {
