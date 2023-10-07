@@ -40,7 +40,7 @@ export class AdminComponent implements OnInit {
   isDataRetrieved: boolean = false
 
   dragged: any = {}
-  dropped: any[] = []
+  dropped: any = {}
 
   uploadView: boolean = false;
 
@@ -57,6 +57,8 @@ export class AdminComponent implements OnInit {
     this.editForm.controls['keywords'].valueChanges.subscribe(value => {
       this.image.keywords = value
     });
+
+    this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
   }
 
   getInactiveImages(){
@@ -86,12 +88,6 @@ export class AdminComponent implements OnInit {
     const ExifReader = require('exifreader')
     if (this.files.length > 0) {
       this.files.forEach(f => {
-        let title = ''
-        let keywords = ''
-        let size: number[] = []
-        let url = URL.createObjectURL(f)
-        console.log(url)
-        // window.open(url)
         const reader = new FileReader();
         reader.readAsDataURL(f)
         reader.onloadend =async () => {
@@ -100,21 +96,19 @@ export class AdminComponent implements OnInit {
              expanded: false,
             includeUnknown: false
           });
-          
-          
-          const form = new FormData()
-          form.append('data', f)
-          this.apiService.getKeywords(form).subscribe({
+                    
+          const data = new FormData()
+          data.append('data', f)
+          this.apiService.getKeywords(data).subscribe({
             next: (result)=>{
              this.formKeywords = result.keywords.map((k:any)=>k.keyword)
             },
             error: (error)=>console.error(error)
           })
 
-
-          title = metadata.ImageDescription?.description
-          keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
-          size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
+          let title = metadata.ImageDescription?.description
+          let keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
+          let size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
            
           console.log(metadata)
             
@@ -145,12 +139,13 @@ export class AdminComponent implements OnInit {
     this.panelSizes = [99.9,0.1]
     this.showIm = false
     this.image = null
-    this.dropped = []
+    this.dropped = {}
     // this.loadedImages = [];
   }
 
   uploadToBackend() {
-    //for now its only one collection, pending dependency: UX/UI proposal
+    //to reuse existing code, must iterate each this.dropped[collection]
+    //and send 1 request per collection
     this.collection = this.uploadForm.value.collection as string;
     
     if (this.collection != '') {
@@ -182,9 +177,9 @@ export class AdminComponent implements OnInit {
 
       }else if(this.files.length == 0){
         console.log('updating files...')
-        this.dropped.map(d=>d.b64 = '')
+        this.dropped.map((d: { b64: string; })=>d.b64 = '')
         //this sould be collectionID, collectionName is only for images with NON EXISTING collection
-        this.dropped.map(d=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
+        this.dropped.map((d: { id_collection: any; })=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
         this.apiService.updateFiles(this.dropped).subscribe({
           next: (result)=>{
             console.log('files updated SUCCESSFULLY\n',result)
@@ -212,7 +207,7 @@ export class AdminComponent implements OnInit {
     
     this.files.forEach(f=>{
       let i = this.files.indexOf(f)
-      const d = this.dropped.find(d=>d.name == f.name)
+      const d = this.dropped.find((d: { name: string; })=>d.name == f.name)
       if(d){
         formData.append(i.toString(), f)
         this.meta[i]={
@@ -240,12 +235,13 @@ export class AdminComponent implements OnInit {
     console.log(this.dragged)
   }
   
-  drop() {
+  drop(collectionName: string) {
     if (this.dragged) {
+        this.dragged.collection = collectionName
         //maybe its a good place to set the collection, depending on where it dropped
         let arr = this.uploadView ? this.loadedImages : this.noCollection
         let index = arr.indexOf(this.dragged)
-        this.dropped.push(this.dragged);
+        this.dropped[collectionName].push(this.dragged);
         arr.splice(index,1);
         console.log('dropped:',this.dropped)
         this.dragged = null;

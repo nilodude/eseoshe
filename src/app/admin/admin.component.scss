@@ -1,3 +1,12 @@
+.collections{
+    display:flex;
+    gap: 2vh;
+}
+
+.dropZone{
+    margin: 1vh;
+}
+
 .uploadForm, .editForm{
     display:flex;
     flex-direction: column;
@@ -39,9 +48,6 @@
     cursor: move;
 }
 
-.dropZone{
-    min-height: 25vh;
-}
 .dropZone:hover{
     border: solid #5b1792 1px;
 }
