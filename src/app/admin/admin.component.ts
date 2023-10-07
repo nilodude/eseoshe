@@ -100,7 +100,18 @@ export class AdminComponent implements OnInit {
              expanded: false,
             includeUnknown: false
           });
-            
+          
+          
+          const form = new FormData()
+          form.append('data', f)
+          this.apiService.getKeywords(form).subscribe({
+            next: (result)=>{
+             this.formKeywords = result.keywords.map((k:any)=>k.keyword)
+            },
+            error: (error)=>console.error(error)
+          })
+
+
           title = metadata.ImageDescription?.description
           keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
           size = [metadata['Image Width']?.value,metadata['Image Height']?.value]
@@ -250,7 +261,7 @@ export class AdminComponent implements OnInit {
     this.image = im
     this.panelSizes = [60, 40]
     this.editForm.controls["title"].setValue(this.image.title)
-    this.editForm.controls["keywords"].setValue(this.image.keywords)
+    this.editForm.controls["keywords"].setValue(this.image.keywords ?? this.formKeywords)
     this.showIm = true
   }
 

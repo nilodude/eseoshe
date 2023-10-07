@@ -11,6 +11,9 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   private apiUrl = environment.api;
+  private keywordsUrl = environment.keywordsUrl;
+  private clientID = environment.clientID;
+  private clientKey = environment.clientKey;
 
   getCollections(): Observable<any>{
     return this.http.get<any>(this.apiUrl+'/collections');
@@ -60,5 +63,11 @@ export class ApiService {
 
   updateFiles(files: any):Observable<any>{
     return this.http.post<any>(this.apiUrl+'/update',{files})
+  }
+
+  getKeywords(data: FormData):Observable<any>{
+    return this.http.post<any>(this.keywordsUrl+'?num_keywords=30',data,{headers: {
+      'Authorization': 'Basic ' + btoa(this.clientID+':'+this.clientKey)
+      }})
   }
 }

@@ -7,20 +7,9 @@
                 <div class="dropZone gallery" pDroppable="loaded" (onDrop)="drop()">
                     <span *ngIf="this.dropped.length == 0">drop here</span>
                     <ng-template ngFor let-im [ngForOf]="this.dropped" let-i="index">
-                        <div class="imDiv">
-                            <div class="flex flex-column" (click)="this.editImage(im)">
-                                <img class="im" src="{{ im.b64 }}">
-                                <span><h3>{{im.title}}</h3></span>
-                                <span>{{im.keywords}}</span>
-                            </div>
-                            <div class="overlay flex">
-                                
-                                <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
-                                <div class="zoomDiv" >
-                                    <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
-                                </div>
-                                <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
-                            </div>
+                        <div class="imDiv flex flex-column" (click)="this.editImage(im)">
+                            <img class="im" src="{{ im.b64 }}">
+                            <span><h3>{{im.title}}</h3></span>
                         </div>
                     </ng-template>
                 </div>
@@ -64,13 +53,6 @@
                             <div class="flex flex-column" (click)="this.editImage(im)" >
                                 <img class="im" src="{{ im.b64 }}">
                                 <span><h3>{{im.title}}</h3></span>
-                            </div>
-                            <div class="overlay flex">
-                                <div class="{{im.liked? 'likedDiv' : 'likeDiv'}}" ></div>
-                                <div class="zoomDiv" >
-                                    <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
-                                </div>
-                                <div class="removeDiv" ><i class="removeIcon fa fa-trash"></i></div>
                             </div>
                         </div>
                     </ng-template>

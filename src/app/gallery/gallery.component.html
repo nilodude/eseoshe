@@ -157,9 +157,8 @@
         
             <p-contextMenu [target]="img" [model]="this.imageMenu[im.name]" ></p-contextMenu>
                 
-              <div class="imDiv">
+                <div class="imDiv">
                     <div>
-                      
                         <img class="im" src="data:image/png;base64,{{ im.b64 }}">
                     </div>
                     <div #img (click)="this.clickImage(im)"class="overlay flex">
