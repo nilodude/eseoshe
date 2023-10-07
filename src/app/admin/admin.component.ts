@@ -230,9 +230,18 @@ export class AdminComponent implements OnInit {
   }
 
   dragStart(image: any) {
-    this.dragged = image;
-    console.log('dragged')
-    console.log(this.dragged)
+    this.dragged = null
+    this.msgs = []
+
+    if(!image.keywords || image.keywords.length == 0 ){
+      this.msgs.push({severity:'error', summary:'Empty keywords!'})
+    }else if(!image.title || image.title == ''){
+      this.msgs.push({severity:'error', summary:'Empty title!'})
+    }else{
+      this.dragged = image;
+      console.log('dragged')
+      console.log(this.dragged)
+    }
   }
   
   drop(collectionName: string) {
