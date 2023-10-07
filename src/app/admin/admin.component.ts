@@ -140,19 +140,21 @@ export class AdminComponent implements OnInit {
     this.showIm = false
     this.image = null
     this.dropped = {}
-    // this.loadedImages = [];
   }
 
   uploadToBackend() {
     //to reuse existing code, must iterate each this.dropped[collection]
     //and send 1 request per collection
-    this.collection = this.uploadForm.value.collection as string;
     
-    if (this.collection != '') {
-      if (this.files.length > 0 && this.dropped.length > 0) {
-        console.log('uploading files...')
-        
-        this.apiService.uploadFiles(this.encodeFormData()).subscribe({
+    Object.entries(this.dropped).forEach(e=>{
+
+      const collectionName = e[0] as string;
+      const images = e[1] as [];
+
+      if(images?.length > 0){
+        if (this.files.length > 0){
+          console.log('uploading files...')
+          this.apiService.uploadFiles(this.encodeFormData(collectionName)).subscribe({
           next: (result) => {
             if (result.type == HttpEventType.UploadProgress) {
               this.syncProgress = Math.round(100 * (result.loaded / result.total));
@@ -174,44 +176,95 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'success', summary:'Upload complete!'})
           }
         });
-
-      }else if(this.files.length == 0){
-        console.log('updating files...')
-        this.dropped.map((d: { b64: string; })=>d.b64 = '')
-        //this sould be collectionID, collectionName is only for images with NON EXISTING collection
-        this.dropped.map((d: { id_collection: any; })=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
-        this.apiService.updateFiles(this.dropped).subscribe({
-          next: (result)=>{
-            console.log('files updated SUCCESSFULLY\n',result)
-            this.msgs = []
-            this.msgs.push({severity:'success', summary:'Update complete!'})
-          },
-          error: (error)=>{
-            console.error('ERROR updating files',error)
-            this.msgs = []
-            this.msgs.push({severity:'error', summary:'ERROR updating files'})
-          }
-        })
-
-      } else {
-        console.error('No files selected to upload!')
+        }else if(this.files.length == 0){
+          console.log('updating files...')
+          this.dropped[collectionName].map((d: { b64: string; })=>d.b64 = '')
+          //this sould be collectionID, collectionName is only for images with NON EXISTING collection
+          this.dropped[collectionName].map((d: { id_collection: any; })=>d.id_collection = collectionName)
+          this.apiService.updateFiles(this.dropped[collectionName]).subscribe({
+            next: (result)=>{
+              console.log('files updated SUCCESSFULLY\n',result)
+              this.msgs = []
+              this.msgs.push({severity:'success', summary:'Update complete!'})
+            },
+            error: (error)=>{
+              console.error('ERROR updating files',error)
+              this.msgs = []
+              this.msgs.push({severity:'error', summary:'ERROR updating files'})
+            }
+          })
+  
+        }else {
+          console.error('No files selected to upload!')
+        }
       }
-    } else {
-      console.error('No collection selected to upload!')
-    }
+    })
+    
+    // this.collection = this.uploadForm.value.collection as string;
+    
+    // if (this.collection != '') {
+    //   if (this.files.length > 0 && this.dropped.length > 0) {
+    //     console.log('uploading files...')
+        
+    //     // this.apiService.uploadFiles(this.encodeFormData()).subscribe({
+    //     //   next: (result) => {
+    //     //     if (result.type == HttpEventType.UploadProgress) {
+    //     //       this.syncProgress = Math.round(100 * (result.loaded / result.total));
+    //     //       console.log('progress: '+this.syncProgress+'%')
+    //     //     }else if(result.type == 4){
+    //     //       console.log('files uploaded SUCCESSFULLY\n', result.body)
+    //     //       this.msgs = []
+    //     //       this.msgs.push({severity:'info', summary:'Uploading...'})
+    //     //     }
+    //     //   },
+    //     //   error: (error) => {
+    //     //     console.log('ERROR uploading', error);
+    //     //     this.msgs = []
+    //     //     this.msgs.push({severity:'error', summary:'ERROR uploading files'})
+    //     //   },
+    //     //   complete: () => {
+    //     //     this.resetUI()
+    //     //     this.msgs = []
+    //     //     this.msgs.push({severity:'success', summary:'Upload complete!'})
+    //     //   }
+    //     // });
+
+    //   }else if(this.files.length == 0){
+    //     console.log('updating files...')
+    //     this.dropped.map((d: { b64: string; })=>d.b64 = '')
+    //     //this sould be collectionID, collectionName is only for images with NON EXISTING collection
+    //     this.dropped.map((d: { id_collection: any; })=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
+    //     // this.apiService.updateFiles(this.dropped).subscribe({
+    //     //   next: (result)=>{
+    //     //     console.log('files updated SUCCESSFULLY\n',result)
+    //     //     this.msgs = []
+    //     //     this.msgs.push({severity:'success', summary:'Update complete!'})
+    //     //   },
+    //     //   error: (error)=>{
+    //     //     console.error('ERROR updating files',error)
+    //     //     this.msgs = []
+    //     //     this.msgs.push({severity:'error', summary:'ERROR updating files'})
+    //     //   }
+    //     // })
+
+    //   } else {
+    //     console.error('No files selected to upload!')
+    //   }
+    // } else {
+    //   console.error('No collection selected to upload!')
+    // }
   }
 
-  // meta should be an array/map (key: imageIndex , value: collection)
-  encodeFormData(){
+  encodeFormData(collectionName: string){
     const formData = new FormData();
     
     this.files.forEach(f=>{
       let i = this.files.indexOf(f)
-      const d = this.dropped.find((d: { name: string; })=>d.name == f.name)
+      const d = this.dropped[collectionName].find((d: { name: string; })=>d.name == f.name)
       if(d){
         formData.append(i.toString(), f)
         this.meta[i]={
-          collection: this.collection,
+          collection: collectionName,
           title: d.title ?? 'ERTITULO',
           keywords: d.keywords ?? ['los','ki','worls'],
           size : d.size
@@ -261,7 +314,6 @@ export class AdminComponent implements OnInit {
     this.dragged = null;
   }
 
-
   editImage(im: any){
     this.image = im
     this.panelSizes = [60, 40]
@@ -271,8 +323,6 @@ export class AdminComponent implements OnInit {
   }
 
   onEdit(){
-    
     this.image.title = this.editForm.value.title ?? ''
-    // this.image.keywords = this.editForm.value.keywords ?? []
   }
 }
