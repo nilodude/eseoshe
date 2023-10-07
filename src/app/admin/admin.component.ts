@@ -171,7 +171,7 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           },
           complete: () => {
-            this.resetUI()
+            //this.resetUI()
             this.msgs = []
             this.msgs.push({severity:'success', summary:'Upload complete!'})
           }
@@ -257,13 +257,14 @@ export class AdminComponent implements OnInit {
 
   encodeFormData(collectionName: string){
     const formData = new FormData();
-    
+    this.meta = {}
+
+    //better iterate this.dropped[collectionName] and find f, f.name in this.files
     this.files.forEach(f=>{
-      let i = this.files.indexOf(f)
       const d = this.dropped[collectionName].find((d: { name: string; })=>d.name == f.name)
       if(d){
-        formData.append(i.toString(), f)
-        this.meta[i]={
+        formData.append(f.name, f)
+        this.meta[f.name]={
           collection: collectionName,
           title: d.title ?? 'ERTITULO',
           keywords: d.keywords ?? ['los','ki','worls'],
