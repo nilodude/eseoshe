@@ -31,7 +31,11 @@
                         
                         <label for="collection">name</label>
                         <input required id="collection" type="text" [(ngModel)]="this.collection">
-                        <button [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">ADD</button>
+                        <button class="{{this.collection == ''? 'disUploadButton': 'uploadButton'}}" [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">
+                            <i class="uploadIcon pi pi-plus">
+                                <span>ADD</span>
+                            </i>
+                        </button>
 
                     </div>
                 </div>
@@ -58,7 +62,12 @@
                                     </i>
                                 </label>
                             </button>
-                            <span *ngIf="this.isDroppedEmpty()">Must drop at least one image into some collection <i class="pi pi-arrow-up"></i></span>
+                            <span *ngIf="this.isDroppedEmpty()">
+                                Must drop at least one image into some collection 
+                                <i class="pi pi-arrow-up-left"></i>
+                                <i class="pi pi-arrow-up"></i>
+                                <i class="pi pi-arrow-up-right"></i>
+                            </span>
                         </div>
                     </div>
                     </form>
