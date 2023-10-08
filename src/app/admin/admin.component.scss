@@ -57,8 +57,37 @@ input#fileNames{
     flex-direction: column;
 }
 
-.folderIcon{
+.folderIcon, .uploadButton{
+    color: #495057;
+    border: 3px outset #ddddddab;
+    border-radius: 3px;
+    padding: 0.2vh;
     font-size: 2vh;
+}
+.uploadIcon{
+    color: #495057;
+    border: 3px outset #ddddddab;
+    border-radius: 3px;
+    padding: 0.2vh;
+    font-size: 2vh;
+}
+
+.folderIcon:hover, .uploadIcon:hover{
+    background-color: #ddddddab;
+}
+
+.uploadButton,.disUploadButton{
+    border: unset;
+    background-color: unset;
+}
+
+.disUploadButton{
+    color:#ffffff;
+}
+
+.disUploadButton .uploadIcon:hover{
+    background-color: #fff;
+    color: #cbcbcb;
 }
 
 .editZone{

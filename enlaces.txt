@@ -67,21 +67,19 @@ solo front:
 	-icono home casita. DONE
 	-header con breadcrumb, barra busqueda y colorbuttons a lo largo de la app. DONE
 	-funcionalidad barra busqueda. DONE
-
+	-hay que evitar doble click sobre las imagenes. CONTEXTMENU. DONE
+	-pantalla admin:
+		-panel lateral onclick para editar title y keywords DONE
+		https://www.primefaces.org/primeng-v12-lts/#/splitter
+		
+		-una zona de drop por cada collection DONE
+	
 	-boton BACK. DONE? con el header no hace falta back?
 
 	-hay que añadir el More... a la pantalla de inicio:
 		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
 	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
 	-en la vista de imagen, hay que resaltar visualmente el keyword recien buscado
-	
-	-hay que evitar doble click sobre las imagenes. CONTEXTMENU. DONE
-	-pantalla admin:
-		-panel lateral onclick para editar title y keywords DONE
-		https://www.primefaces.org/primeng-v12-lts/#/splitter
-		
-		-una zona de drop por cada collection 
-
 
 tambien necesita back:
 	-likes y el perfil de usuario

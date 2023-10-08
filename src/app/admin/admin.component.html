@@ -51,8 +51,12 @@
                                 formControlName="fileNames">
                         </div>
                         <div class="flex justify-content-center align-items-center">
-                            <button [attr.disabled]="this.isDroppedEmpty() ? true : null" type="submit">
-                                <i class="pi pi-cloud-upload"><span>Upload</span></i>
+                            <button class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
+                                <label>
+                                    <i class="uploadIcon pi pi-cloud-upload">
+                                        <span>Upload</span>
+                                    </i>
+                                </label>
                             </button>
                             <span *ngIf="this.isDroppedEmpty()">Must drop at least one image into some collection <i class="pi pi-arrow-up"></i></span>
                         </div>
