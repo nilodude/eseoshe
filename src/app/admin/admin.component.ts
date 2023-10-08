@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { Subscription, finalize, of } from 'rxjs';
+import { Subscription, finalize, firstValueFrom, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 import { Message } from 'primeng/api';
 
@@ -31,9 +31,7 @@ export class AdminComponent implements OnInit {
   collection: string = '';
   meta: any = {};
     
-  isFileSync: boolean = false;
   syncProgress:number = 0;
-  syncSub: Subscription =of().subscribe();
 
   loadedImages: any[] = []
   noCollection: any[] = []
@@ -82,6 +80,8 @@ export class AdminComponent implements OnInit {
 
   loadedFiles(event: any) {
     this.isDataRetrieved = false;
+    this.msgs = []
+    this.msgs.push({severity:'info', summary:'Loading...'})
     console.log('loading files:',event.target.files)
     this.files = []
     this.files = Array.from(event.target.files);
@@ -97,14 +97,14 @@ export class AdminComponent implements OnInit {
             includeUnknown: false
           });
                     
-          const data = new FormData()
-          data.append('data', f)
-          this.apiService.getKeywords(data).subscribe({
-            next: (result)=>{
-             this.formKeywords = result.keywords.map((k:any)=>k.keyword)
-            },
-            error: (error)=>console.error(error)
-          })
+          // const data = new FormData()
+          // data.append('data', f)
+          // this.apiService.getKeywords(data).subscribe({
+          //   next: (result)=>{
+          //    this.formKeywords = result.keywords.map((k:any)=>k.keyword)
+          //   },
+          //   error: (error)=>console.error(error)
+          // })
 
           let title = metadata.ImageDescription?.description
           let keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
@@ -116,15 +116,17 @@ export class AdminComponent implements OnInit {
             id: null,
             name: f.name,
             b64: b64,
-            title: title,
+            title: title ?? f.name,
             liked: '',
-            keywords: keywords,
+            keywords: keywords ?? ['keyword'+f.name],
             size: size,
             id_collection: null
           })
           if (this.files.length == this.loadedImages.length) {
             this.isDataRetrieved = true;
             this.uploadView = true;
+            this.msgs = []
+            this.msgs.push({severity:'success', summary:'Loaded'})
           }
         }//onLoadEnd
       })//forEach
@@ -143,41 +145,34 @@ export class AdminComponent implements OnInit {
   }
 
   uploadToBackend() {
-    //to reuse existing code, must iterate each this.dropped[collection]
-    //and send 1 request per collection
+    let entries = Object.entries(this.dropped)
+    entries.filter((d:any)=>d[1].length > 0).length
     
-    Object.entries(this.dropped).forEach(e=>{
+    
+    entries.forEach(async e=>{
 
       const collectionName = e[0] as string;
       const images = e[1] as [];
 
       if(images?.length > 0){
         if (this.files.length > 0){
-          console.log('uploading files...')
-          this.apiService.uploadFiles(this.encodeFormData(collectionName)).subscribe({
-          next: (result) => {
-            if (result.type == HttpEventType.UploadProgress) {
-              this.syncProgress = Math.round(100 * (result.loaded / result.total));
-              console.log('progress: '+this.syncProgress+'%')
-            }else if(result.type == 4){
-              console.log('files uploaded SUCCESSFULLY\n', result.body)
-              this.msgs = []
-              this.msgs.push({severity:'info', summary:'Uploading...'})
-            }
-          },
-          error: (error) => {
+          console.log('uploading files to /'+collectionName+'...')
+          
+          let result = await firstValueFrom(this.apiService.uploadFiles(this.encodeFormData(collectionName)))
+          .catch(error=>{
             console.log('ERROR uploading', error);
             this.msgs = []
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
-          },
-          complete: () => {
-            //this.resetUI()
+          }).finally(()=>{
+            console.log('/'+collectionName+' files uploaded SUCCESSFULLY\n')
             this.msgs = []
             this.msgs.push({severity:'success', summary:'Upload complete!'})
-          }
-        });
+          });
+
+          console.log(result)
+          
         }else if(this.files.length == 0){
-          console.log('updating files...')
+          console.log('updating files to /'+collectionName+'...')
           this.dropped[collectionName].map((d: { b64: string; })=>d.b64 = '')
           //this sould be collectionID, collectionName is only for images with NON EXISTING collection
           this.dropped[collectionName].map((d: { id_collection: any; })=>d.id_collection = collectionName)
@@ -193,73 +188,17 @@ export class AdminComponent implements OnInit {
               this.msgs.push({severity:'error', summary:'ERROR updating files'})
             }
           })
-  
         }else {
           console.error('No files selected to upload!')
         }
       }
     })
-    
-    // this.collection = this.uploadForm.value.collection as string;
-    
-    // if (this.collection != '') {
-    //   if (this.files.length > 0 && this.dropped.length > 0) {
-    //     console.log('uploading files...')
-        
-    //     // this.apiService.uploadFiles(this.encodeFormData()).subscribe({
-    //     //   next: (result) => {
-    //     //     if (result.type == HttpEventType.UploadProgress) {
-    //     //       this.syncProgress = Math.round(100 * (result.loaded / result.total));
-    //     //       console.log('progress: '+this.syncProgress+'%')
-    //     //     }else if(result.type == 4){
-    //     //       console.log('files uploaded SUCCESSFULLY\n', result.body)
-    //     //       this.msgs = []
-    //     //       this.msgs.push({severity:'info', summary:'Uploading...'})
-    //     //     }
-    //     //   },
-    //     //   error: (error) => {
-    //     //     console.log('ERROR uploading', error);
-    //     //     this.msgs = []
-    //     //     this.msgs.push({severity:'error', summary:'ERROR uploading files'})
-    //     //   },
-    //     //   complete: () => {
-    //     //     this.resetUI()
-    //     //     this.msgs = []
-    //     //     this.msgs.push({severity:'success', summary:'Upload complete!'})
-    //     //   }
-    //     // });
-
-    //   }else if(this.files.length == 0){
-    //     console.log('updating files...')
-    //     this.dropped.map((d: { b64: string; })=>d.b64 = '')
-    //     //this sould be collectionID, collectionName is only for images with NON EXISTING collection
-    //     this.dropped.map((d: { id_collection: any; })=>d.id_collection = this.collections.find((c: { label: string; })=>c.label = this.collection).label)
-    //     // this.apiService.updateFiles(this.dropped).subscribe({
-    //     //   next: (result)=>{
-    //     //     console.log('files updated SUCCESSFULLY\n',result)
-    //     //     this.msgs = []
-    //     //     this.msgs.push({severity:'success', summary:'Update complete!'})
-    //     //   },
-    //     //   error: (error)=>{
-    //     //     console.error('ERROR updating files',error)
-    //     //     this.msgs = []
-    //     //     this.msgs.push({severity:'error', summary:'ERROR updating files'})
-    //     //   }
-    //     // })
-
-    //   } else {
-    //     console.error('No files selected to upload!')
-    //   }
-    // } else {
-    //   console.error('No collection selected to upload!')
-    // }
   }
 
   encodeFormData(collectionName: string){
     const formData = new FormData();
     this.meta = {}
 
-    //better iterate this.dropped[collectionName] and find f, f.name in this.files
     this.files.forEach(f=>{
       const d = this.dropped[collectionName].find((d: { name: string; })=>d.name == f.name)
       if(d){
@@ -276,11 +215,6 @@ export class AdminComponent implements OnInit {
     formData.append('meta',JSON.stringify(this.meta))
     
     return formData;
-  }
-
-  resetSync() {
-    this.syncProgress = 0;
-    this.syncSub = of().subscribe();
   }
 
   dragStart(image: any) {

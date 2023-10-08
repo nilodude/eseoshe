@@ -34,12 +34,8 @@
                             <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
                                 formControlName="fileNames">
                         </div>
-                        <div class="uploadField">
-                            <label for="collection">collection</label>
-                            <input required id="collection" type="text" formControlName="collection">
-                        </div>
                         <div>
-                            <button [attr.disabled]="this.dropped.length == 0 || this.uploadForm.value.collection == '' ? true : null" type="submit">UPLOAD</button>
+                            <button [attr.disabled]="this.dropped.length == 0 ? true : null" type="submit">UPLOAD</button>
                         </div>
                     </div>
                     </form>

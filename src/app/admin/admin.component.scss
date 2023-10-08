@@ -4,7 +4,11 @@
 }
 
 .dropZone{
+    border: solid #5b179200 1px;
     margin: 1vh;
+}
+.dropZone:hover{
+    border: solid #5b1792 1px;
 }
 
 .uploadForm, .editForm{
@@ -48,9 +52,7 @@
     cursor: move;
 }
 
-.dropZone:hover{
-    border: solid #5b1792 1px;
-}
+
 .gallery {
     margin: 1.5vh 0.25%;
     display: flex;
