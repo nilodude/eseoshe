@@ -15,17 +15,29 @@
     flex-direction: column;
     border: solid #5b179200 1px;
     margin: 1vh;
-    max-width: 11vh;
-    min-width: 11vh;
+    max-width: 19vh;
+    max-height: 19vh;
+    min-width: 19vh;
+    min-height: 19vh;
+    overflow-y: auto;
 }
-.dropZone:hover{
+.dropZone:hover, .imTitle:hover{
     border: solid #5b1792 1px;
+}
+
+.dropTitle{
+    display: flex;
+    justify-content: center;
 }
 
 .imTitle{
     text-overflow: ellipsis;
     overflow: hidden;
+    margin: 0.3vh 0vh;
+    border: solid #5b179200 1px;
 }
+
+
 
 .uploadForm, .editForm{
     display:flex;

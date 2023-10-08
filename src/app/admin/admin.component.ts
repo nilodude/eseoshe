@@ -264,7 +264,7 @@ export class AdminComponent implements OnInit {
 
   editImage(im: any){
     this.image = im
-    this.panelSizes = [60, 40]
+    this.panelSizes = [70, 30]
     this.editForm.controls["title"].setValue(this.image.title)
     this.editForm.controls["keywords"].setValue(this.image.keywords ?? this.formKeywords)
     this.showIm = true

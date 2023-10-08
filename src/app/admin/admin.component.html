@@ -8,7 +8,9 @@
                 <div class="collections">
                     <ng-template ngFor let-collection [ngForOf]="this.collections" let-i="index">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                            <span><h3>{{collection.value}}{{collection.label}}</h3></span>
+                            <span class="dropTitle">
+                                <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
+                            </span>
                             
                             <span *ngIf="this.dropped.length == 0">drop here</span>
 
@@ -16,7 +18,7 @@
                                 <div class="imDiv flex flex-column" (click)="this.editImage(im)">
                                     <!-- <img class="im" src="{{ im.b64 }}"> -->
                                     <span>
-                                        <h3 class="imTitle">{{im.title}}</h3>
+                                        <h5 class="imTitle">{{im.title}}</h5>
                                     </span>
                                 </div>
                             </ng-template>
@@ -36,6 +38,7 @@
                         </div>
                         <div>
                             <button [attr.disabled]="this.isDroppedEmpty() ? true : null" type="submit">UPLOAD</button>
+                            <span *ngIf="this.isDroppedEmpty()">Must drop at least one image into some collection</span>
                         </div>
                     </div>
                     </form>
