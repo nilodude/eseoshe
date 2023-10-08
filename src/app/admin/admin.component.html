@@ -35,7 +35,7 @@
                                 formControlName="fileNames">
                         </div>
                         <div>
-                            <button [attr.disabled]="this.dropped.length == 0 ? true : null" type="submit">UPLOAD</button>
+                            <button [attr.disabled]="this.isDroppedEmpty() ? true : null" type="submit">UPLOAD</button>
                         </div>
                     </div>
                     </form>

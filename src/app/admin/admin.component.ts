@@ -58,6 +58,9 @@ export class AdminComponent implements OnInit {
 
     this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
   }
+  isDroppedEmpty(){
+    return !Object.values(this.dropped).some((v:any)=>v.length > 0) 
+  }
 
   getInactiveImages(){
     this.apiService.getInactiveImages().subscribe({
@@ -142,13 +145,16 @@ export class AdminComponent implements OnInit {
     this.showIm = false
     this.image = null
     this.dropped = {}
+    this.files= []
   }
 
   uploadToBackend() {
     let entries = Object.entries(this.dropped)
-    entries.filter((d:any)=>d[1].length > 0).length
-    
-    
+    let numRequests = entries.filter((d:any)=>d[1].length > 0).length
+    let requestDone = 0
+    this.isDataRetrieved = false;
+    this.msgs = []
+    this.msgs.push({severity:'info', summary:'Uploading...'})
     entries.forEach(async e=>{
 
       const collectionName = e[0] as string;
@@ -165,8 +171,14 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           }).finally(()=>{
             console.log('/'+collectionName+' files uploaded SUCCESSFULLY\n')
-            this.msgs = []
-            this.msgs.push({severity:'success', summary:'Upload complete!'})
+            requestDone++
+            this.syncProgress = Math.round(100*(requestDone/numRequests))
+            if(requestDone == numRequests){
+              this.isDataRetrieved = true;
+              this.msgs = []
+              this.msgs.push({severity:'success', summary:'Upload complete!'})
+              this.resetUI();
+            }
           });
 
           console.log(result)
@@ -191,6 +203,7 @@ export class AdminComponent implements OnInit {
         }else {
           console.error('No files selected to upload!')
         }
+        
       }
     })
   }
