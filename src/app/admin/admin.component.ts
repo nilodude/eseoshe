@@ -243,11 +243,16 @@ export class AdminComponent implements OnInit {
     const formData = new FormData();
     this.meta = {}
 
-    this.files.forEach(f=>{
-      const d = this.dropped[collectionName].find((d: { name: string; })=>d.name == f.name)
-      if(d){
-        formData.append(f.name, f)
-        this.meta[f.name]={
+    //dentro de este bucle, cambiando f.name por d.name, ya solo hace falta la f en sí
+    //hay que iterar this.dropped[collectionName] y hacer el find de this.otrofiles cuya f.name=d.name, al contrario de como está ahora
+
+    //this.otrofiles tiene que ser un array que almacene todas las fotos que se han subido, ya que this.files se resetea cada vez que se pulsa Browse
+
+    this.dropped[collectionName].forEach((d: any)=>{
+      const f= this.files.find((f: { name: string; })=>f.name == d.name)
+      if(f){
+        formData.append(d.name, f)
+        this.meta[d.name]={
           collection: collectionName,
           title: d.title ?? 'ERTITULO',
           keywords: d.keywords ?? ['los','ki','worls'],
