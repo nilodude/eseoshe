@@ -8,15 +8,15 @@
                 <div class="collections">
                     <ng-template ngFor let-collection [ngForOf]="this.collections" let-i="index">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                            <span><h3>{{collection.value}}</h3></span>
-                            <span><h3>{{collection.label}}</h3></span>
+                            <span><h3>{{collection.value}}{{collection.label}}</h3></span>
+                            
                             <span *ngIf="this.dropped.length == 0">drop here</span>
 
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]" let-i="index">
                                 <div class="imDiv flex flex-column" (click)="this.editImage(im)">
                                     <!-- <img class="im" src="{{ im.b64 }}"> -->
                                     <span>
-                                        <h3>{{im.title}}</h3>
+                                        <h3 class="imTitle">{{im.title}}</h3>
                                     </span>
                                 </div>
                             </ng-template>
