@@ -81,6 +81,8 @@ solo front:
 	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
 	-en la vista de imagen, hay que resaltar visualmente el keyword recien buscado
 
+	-se podria quitar el imageName del breadCrumb en pantalla pequeña
+
 tambien necesita back:
 	-likes y el perfil de usuario
 
