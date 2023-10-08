@@ -18,9 +18,9 @@ export class HeaderComponent implements OnInit {
   @Input() isDataRetrieved: boolean=false;
   @Input() numResults: number = 0;
   @Input() msgs: Message[] = []
+  @Input() collections: SelectItem[] =[];
 
   fullTitle: boolean = false;
-  collections: SelectItem[] =[]; // SelectItem is the kind of array that "understands" angular p-dropdown component
   collection: SelectItem = {label:'', value:''};
 
   images: any[] = [];

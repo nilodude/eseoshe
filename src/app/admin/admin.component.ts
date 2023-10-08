@@ -4,7 +4,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } 
 import { ApiService } from '../services/api.service';
 import { Subscription, finalize, firstValueFrom, of } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
-import { Message } from 'primeng/api';
+import { Header, Message } from 'primeng/api';
+import { HeaderComponent } from './../header/header.component';
 
 @Component({
   selector: 'app-admin',
@@ -43,11 +44,11 @@ export class AdminComponent implements OnInit {
   uploadView: boolean = false;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService,private fb: FormBuilder,) { 
-    this.collections = JSON.parse(localStorage.getItem('collections') as any);
+    // this.collections = JSON.parse(localStorage.getItem('collections') as any);
   }
 
   ngOnInit(): void {
-    
+    this.getCollections()
     this.loadedImages = [];
     this.noCollection = [];
     this.getInactiveImages();
@@ -56,8 +57,36 @@ export class AdminComponent implements OnInit {
       this.image.keywords = value
     });
 
-    this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
+   
   }
+
+  insertCollection(name: string){
+    this.msgs= []
+    this.msgs.push({severity:'info', summary:'Adding new collection...'})
+    this.apiService.insertCollection(name).subscribe({
+      next: (result)=>{
+        this.msgs= []
+        console.log(result)
+        if(result.inserted?.id){
+          this.msgs.push({severity:'success', summary: 'Collection added!'})
+          this.isDataRetrieved = true
+          this.collection = ''
+          this.getCollections()
+        }else{
+          this.msgs.push({severity:'warn', summary: 'Collection already exists!'})
+        }
+             
+      },error: (error)=>{
+        this.msgs= []
+        this.msgs.push({severity:'error', summary:'Error adding new collection'})
+        console.error(error)
+      },
+      complete: ()=>{
+       
+      }
+    })
+  }
+
   isDroppedEmpty(){
     return !Object.values(this.dropped).some((v:any)=>v.length > 0) 
   }
@@ -272,5 +301,25 @@ export class AdminComponent implements OnInit {
 
   onEdit(){
     this.image.title = this.editForm.value.title ?? ''
+  }
+
+  getCollections(){
+    this.collections = [];
+    this.apiService.getCollections().subscribe({
+      next: (result)=>{
+        this.collections = result.map((c: any)=>{
+          return {label: c['name'], value: c['id']}
+        });
+      },
+      error: (error)=>{
+        console.log('error retrieving collections')
+        console.log(error)
+      },
+      complete: ()=>{
+        console.log('retrieved collections');
+        this.isDataRetrieved = true;
+        this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
+        localStorage.setItem('collections',JSON.stringify(this.collections));
+      }});
   }
 }

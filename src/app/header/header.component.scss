@@ -17,13 +17,13 @@
 .search-container{
   display: flex;
   flex-direction: row;;
-  flex-basis: 30%;
+  flex-basis: 35%;
   justify-content: space-between;
 }
 
 .searchForm{
   display: flex;
-  flex-basis: 70%;
+  flex-basis: 60%;
 }
 
 .search-container button {
@@ -62,6 +62,7 @@ input[type=text] {
 
 :host ::ng-deep .p-message .p-message-wrapper{
   padding: unset;
+  white-space: nowrap;
 }
 
 :host ::ng-deep .p-message .p-message-icon{

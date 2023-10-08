@@ -1,5 +1,5 @@
 <div class="all">
-    <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved" [msgs]="this.msgs"></app-header>
+    <app-header [view]="'admin'" [isDataRetrieved]="this.isDataRetrieved" [msgs]="this.msgs" [collections]="this.collections" ></app-header>
     <p-splitter [style]="{display: 'flex'}" [panelSizes]="this.panelSizes">
         <ng-template pTemplate>
             <div class="flex flex-column flex-grow-1">
@@ -24,6 +24,16 @@
                             </ng-template>
                         </div>
                     </ng-template>
+                    <div class="dropZone">
+                        <span class="dropTitle">
+                            <h3>NEW COLLECTION</h3>
+                        </span>
+                        
+                        <label for="collection">name</label>
+                        <input required id="collection" type="text" [(ngModel)]="this.collection">
+                        <button [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">ADD</button>
+
+                    </div>
                 </div>
                 
 

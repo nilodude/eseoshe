@@ -15,6 +15,10 @@ export class ApiService {
   private clientID = environment.clientID;
   private clientKey = environment.clientKey;
 
+  insertCollection(name: string): Observable<any>{
+    return this.http.post(this.apiUrl+'/collections',{name: name});
+  }
+
   getCollections(): Observable<any>{
     return this.http.get<any>(this.apiUrl+'/collections');
   }
@@ -28,7 +32,7 @@ export class ApiService {
   }
 
   getImagesByCollection(idCollection: number): Observable<any>{
-    return this.http.get<any>(this.apiUrl+'/collection/'+idCollection);
+    return this.http.get<any>(this.apiUrl+'/collections/images/'+idCollection);
   }
 
   getImagesByFileNames(fileNames: string): Observable<any>{

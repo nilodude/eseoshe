@@ -14,7 +14,7 @@ export class BreadcrumbComponent implements OnInit {
   @Input('view') view: string='';
   @Output('changeCollection') changeCollection: EventEmitter<number> = new EventEmitter();
 
-  collections: SelectItem[] =[];
+  @Input() collections: SelectItem[] =[];
   collection: SelectItem = {label:'', value:''};
 
   constructor(private router: Router) {
