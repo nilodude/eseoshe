@@ -41,14 +41,20 @@
                 <div class="flex">
                     <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
                     <div class="uploadForm">
-                        <div class="uploadField">
-                            <label for="fileNames">fileNames</label>
+                        <div>
+                            <label for="fileNames">
+                                <i class="folderIcon pi pi-folder-open">
+                                    <span>Browse your files</span>
+                                </i>
+                            </label>
                             <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
                                 formControlName="fileNames">
                         </div>
-                        <div>
-                            <button [attr.disabled]="this.isDroppedEmpty() ? true : null" type="submit">UPLOAD</button>
-                            <span *ngIf="this.isDroppedEmpty()">Must drop at least one image into some collection</span>
+                        <div class="flex justify-content-center align-items-center">
+                            <button [attr.disabled]="this.isDroppedEmpty() ? true : null" type="submit">
+                                <i class="pi pi-cloud-upload"><span>Upload</span></i>
+                            </button>
+                            <span *ngIf="this.isDroppedEmpty()">Must drop at least one image into some collection <i class="pi pi-arrow-up"></i></span>
                         </div>
                     </div>
                     </form>

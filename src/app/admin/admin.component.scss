@@ -36,19 +36,29 @@
     margin: 0.3vh 0vh;
     border: solid #5b179200 1px;
 }
+.uploadForm{
+    display:flex;
+    align-items: center;
+    gap:1vh;
+}
+input#fileNames{
+    display: none;
+}
 
-
-
-.uploadForm, .editForm{
+.editForm{
     display:flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap:1vh;
 }
 
 .uploadField, .editField{
     display:flex;
     flex-direction: column;
+}
+
+.folderIcon{
+    font-size: 2vh;
 }
 
 .editZone{

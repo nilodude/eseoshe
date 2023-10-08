@@ -18,7 +18,6 @@ export class AdminComponent implements OnInit {
   panelSizes: number[] = [99.9,0.1]
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
-    collection: new FormControl('',Validators.required)
   });
   image: any = {}
   showIm: boolean = false
@@ -175,6 +174,7 @@ export class AdminComponent implements OnInit {
     this.image = null
     this.resetDropped()
     this.files= []
+    this.uploadForm.controls["fileNames"].setValue('')
   }
 
   uploadToBackend() {
