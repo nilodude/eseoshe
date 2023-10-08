@@ -173,7 +173,7 @@ export class AdminComponent implements OnInit {
     this.panelSizes = [99.9,0.1]
     this.showIm = false
     this.image = null
-    this.dropped = {}
+    this.resetDropped()
     this.files= []
   }
 
@@ -194,14 +194,16 @@ export class AdminComponent implements OnInit {
           console.log('uploading files to /'+collectionName+'...')
           
           let result = await firstValueFrom(this.apiService.uploadFiles(this.encodeFormData(collectionName)))
+          .then((result)=>{
+            requestDone++
+            this.syncProgress = Math.round(100*(requestDone/numRequests))
+          })
           .catch(error=>{
             console.log('ERROR uploading', error);
             this.msgs = []
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           }).finally(()=>{
             console.log('/'+collectionName+' files uploaded SUCCESSFULLY\n')
-            requestDone++
-            this.syncProgress = Math.round(100*(requestDone/numRequests))
             if(requestDone == numRequests){
               this.isDataRetrieved = true;
               this.msgs = []
@@ -318,8 +320,13 @@ export class AdminComponent implements OnInit {
       complete: ()=>{
         console.log('retrieved collections');
         this.isDataRetrieved = true;
-        this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
+        this.resetDropped()
         localStorage.setItem('collections',JSON.stringify(this.collections));
       }});
+  }
+
+  
+  resetDropped(){
+    this.collections.map((c: { label: string })=>this.dropped[c.label] = [])
   }
 }
