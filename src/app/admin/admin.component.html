@@ -31,9 +31,9 @@
                         
                         <label for="collection">name</label>
                         <input required id="collection" type="text" [(ngModel)]="this.collection">
-                        <button class="{{this.collection == ''? 'disUploadButton': 'uploadButton'}}" [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">
+                        <button class="{{this.collection == ''? 'disAddButton': 'addButton'}}" [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">
                             <i class="uploadIcon pi pi-plus">
-                                <span>ADD</span>
+                                <span> ADD</span>
                             </i>
                         </button>
 
@@ -48,7 +48,7 @@
                         <div>
                             <label for="fileNames">
                                 <i class="folderIcon pi pi-folder-open">
-                                    <span>Browse your files</span>
+                                    <span> Browse your files</span>
                                 </i>
                             </label>
                             <input multiple id="fileNames" type="file" class="file-upload" (change)="loadedFiles($event)"
@@ -58,7 +58,7 @@
                             <button class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
                                 <label>
                                     <i class="uploadIcon pi pi-cloud-upload">
-                                        <span>Upload</span>
+                                        <span> Upload</span>
                                     </i>
                                 </label>
                             </button>
@@ -88,11 +88,12 @@
                     <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
-                        <div class="imDiv" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
+                        <div class="imDiv flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                             <div class="flex flex-column" (click)="this.editImage(im)" >
                                 <img class="im" src="{{ im.b64 }}">
-                                <span><h3>{{im.title}}</h3></span>
+                                <span><h4 class="imTitle">{{im.title}}</h4></span>
                             </div>
+                            
                         </div>
                     </ng-template>
                 </div>

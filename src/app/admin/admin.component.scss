@@ -39,6 +39,8 @@
     overflow: hidden;
     margin: 0.3vh 0vh;
     border: solid #5b179200 1px;
+    width: 0;
+    min-width: 100%;
 }
 
 .uploadForm{
@@ -56,13 +58,18 @@ input#fileNames{
     flex-direction: column;
 }
 
-.folderIcon, .uploadButton, .uploadIcon{
+.folderIcon, .uploadIcon{
     color: #495057;
     border: 3px outset #ddddddab;
     border-radius: 3px;
-    padding: 0.2vh;
-    font-size: 1.8vh;
+    padding: 0.5vh 0.8vh;
+    font-size: 1.7vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.4vh;
 }
+
 
 .folderIcon:hover, .uploadIcon:hover{
     background-color: #ddddddab;
@@ -71,6 +78,7 @@ input#fileNames{
 .uploadButton,.disUploadButton, .addButton, .disAddButton{
     border: unset;
     background-color: unset;
+    padding: unset;
 }
 
 .disUploadButton, .disAddButton{
@@ -103,8 +111,9 @@ input#fileNames{
 }
 
 .im {
-    height: 29vh;
+    max-height: 29vh;
     width: auto;
+    //max-width:29vh;
 }
 
 .editZone{
