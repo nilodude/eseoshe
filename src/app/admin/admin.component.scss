@@ -161,7 +161,7 @@ input#fileNames{
       rgba(109, 30, 255, 0.486),
       rgba(0, 128, 0, 0.616)
     );
-    opacity: 0.9;
+    opacity: 0.99;
     backdrop-filter: blur(4px);
     z-index: 1111;
 }
@@ -174,6 +174,9 @@ input#fileNames{
 
 .collectionResult{
     background-color: lavender;
+    border: 5px #e6e6fa17 outset;
+    border-radius: 3px;
+    padding: 0.5vh 1vh;
 }
 
 .colTitle{
@@ -181,11 +184,20 @@ input#fileNames{
 }
 
 .arrayResult{
-    margin: 1vh 1vh 1vh 1vh;
+    margin: 2vh 1vh 2vh 1vh;
+    background-color: #ffefd559;
+    border-radius: 4px;
+    align-items: stretch;
 }
 
 .arrayElement{
-    margin: 1vh 1vh 1vh 1vh;
+    margin: 0vh 1vh 0vh 1vh;
+    background-color: #ade19061;
+    border-radius: 4px;
+}
+
+.resizeElement{
+    align-items: center;
 }
 
 .insertResult,.resizeResult,.updatedResult{

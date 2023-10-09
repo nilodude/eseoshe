@@ -122,11 +122,11 @@
         <div class="uploadResult">
         <ng-template ngFor let-colUpload [ngForOf]="this.uploadResult">
             <div class="collectionResult">
-                <span class="colTitle">COLLECTION /{{colUpload.collection}}</span>
+                <span class="colTitle">/{{colUpload.collection}}</span>
                 <div class="arrayResult insertResult" *ngIf="colUpload.inserted?.length > 0">
                     <span>inserted:</span>
                     <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
-                        <div class="arrayElement border-1 border-dashed border-500 flex flex-column">
+                        <div class="arrayElement flex flex-column">
                             <span>id:{{inserted.id}}</span>
                             <span>name:{{inserted.file_name}}</span>
                             <span>title:{{inserted.title}}</span>
@@ -136,7 +136,7 @@
                 <div class="arrayResult updatedResult" *ngIf="colUpload.updated?.length > 0">
                     <span>updated:</span>
                     <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
-                        <div class="arrayElement border-1 border-dashed border-500 flex flex-column">
+                        <div class="arrayElement flex flex-column">
                             <span>id:{{updated.id}}</span>
                             <span>name:{{updated.file_name}}</span>
                             <span>title:{{updated.title}}</span>
@@ -146,7 +146,7 @@
                 <div class="arrayResult resizeResult" *ngIf="colUpload.resized?.length > 0">
                     <span>resized:</span>
                     <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
-                        <div class="arrayElement border-1 border-dashed border-500 flex flex-column">
+                        <div class="arrayElement resizeElement flex flex-column">
                             {{resized}}
                         </div>
                     </ng-template>
