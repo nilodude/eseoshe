@@ -212,3 +212,8 @@ input#fileNames{
     flex-direction: column;
     gap: 1vh;
 }
+
+:host ::ng-deep .p-dialog .p-dialog-content, :host ::ng-deep .p-dialog .p-dialog-header {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+}
