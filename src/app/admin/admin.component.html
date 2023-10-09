@@ -121,25 +121,30 @@
         [maximizable]="true" [draggable]="false" [resizable]="true" class="resultPopup">
         <div class="flex flex-column">
         <ng-template ngFor let-colUpload [ngForOf]="this.uploadResult">
-            <span>COLLECTION {{colUpload.collection}}</span>
+            <span>COLLECTION /{{colUpload.collection}}</span>
             <span>inserted:</span>
             <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
                 <div class="flex flex-column">
-                    id:{{inserted.id}}
-                    name:{{inserted.file_name}}
-                    collection:{{inserted.id_collection}}
+                    <span>id:{{inserted.id}}</span>
+                    <span>name:{{inserted.file_name}}</span>
+                    <span>collection:{{inserted.id_collection}}</span>
                 </div>
-                
             </ng-template>
+            <span>.................</span>
             <span>resized:</span>
             <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
                 {{resized}}
             </ng-template>
+            <span>.................</span>
             <span>updated:</span>
             <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
-                {{updated}}
+                <div class="flex flex-column">
+                    <span>id:{{updated.id}}</span>
+                    <span>name:{{updated.file_name}}</span>
+                    <span>collection:{{updated.id_collection}}</span>
+                </div>
             </ng-template>
-
+            -------------------
         </ng-template>
         </div>
     </p-dialog>
