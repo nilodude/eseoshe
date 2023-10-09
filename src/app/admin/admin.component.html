@@ -119,32 +119,40 @@
 <div *ngIf="this.showResult">
     <p-dialog header="UPLOAD RESULT" [(visible)]="this.showResult" [modal]="true" [style]="{width: 'auto'}"
         [maximizable]="true" [draggable]="false" [resizable]="true" class="resultPopup">
-        <div class="flex flex-column">
+        <div class="uploadResult">
         <ng-template ngFor let-colUpload [ngForOf]="this.uploadResult">
-            <span>COLLECTION /{{colUpload.collection}}</span>
-            <span>inserted:</span>
-            <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
-                <div class="flex flex-column">
-                    <span>id:{{inserted.id}}</span>
-                    <span>name:{{inserted.file_name}}</span>
-                    <span>collection:{{inserted.id_collection}}</span>
+            <div class="collectionResult">
+                <span class="colTitle">COLLECTION /{{colUpload.collection}}</span>
+                <div class="arrayResult insertResult" *ngIf="colUpload.inserted?.length > 0">
+                    <span>inserted:</span>
+                    <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
+                        <div class="border-1 border-dashed border-500 flex flex-column">
+                            <span>id:{{inserted.id}}</span>
+                            <span>name:{{inserted.file_name}}</span>
+                            <span>title:{{inserted.title}}</span>
+                        </div>
+                    </ng-template>
                 </div>
-            </ng-template>
-            <span>.................</span>
-            <span>resized:</span>
-            <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
-                {{resized}}
-            </ng-template>
-            <span>.................</span>
-            <span>updated:</span>
-            <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
-                <div class="flex flex-column">
-                    <span>id:{{updated.id}}</span>
-                    <span>name:{{updated.file_name}}</span>
-                    <span>collection:{{updated.id_collection}}</span>
+                <div class="arrayResult updatedResult" *ngIf="colUpload.updated?.length > 0">
+                    <span>updated:</span>
+                    <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
+                        <div class="border-1 border-dashed border-500 flex flex-column">
+                            <span>id:{{updated.id}}</span>
+                            <span>name:{{updated.file_name}}</span>
+                            <span>title:{{updated.title}}</span>
+                        </div>
+                    </ng-template>
                 </div>
-            </ng-template>
-            -------------------
+                <div class="arrayResult resizeResult" *ngIf="colUpload.resized?.length > 0">
+                    <span>resized:</span>
+                    <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
+                        <div class="border-1 border-dashed border-500 flex flex-column">
+                            {{resized}}
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            
         </ng-template>
         </div>
     </p-dialog>

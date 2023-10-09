@@ -162,6 +162,32 @@ input#fileNames{
       rgba(0, 128, 0, 0.616)
     );
     opacity: 0.9;
-    // backdrop-filter: blur(10px);
+    backdrop-filter: blur(4px);
     z-index: 1111;
+}
+
+.uploadResult{
+    display:flex;
+    // flex-direction: column;
+    gap: 3vh;
+}
+
+.collectionResult{
+    // display:flex;
+    // flex-direction: column;
+    // gap: 1vh;
+}
+
+.colTitle{
+    margin-bottom: 1vh;
+}
+
+.arrayResult{
+    margin-top: 1vh;
+}
+
+.insertResult,.resizeResult,.updatedResult{
+    display:flex;
+    flex-direction: column;
+    gap: 1vh;
 }
