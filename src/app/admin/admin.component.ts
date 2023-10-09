@@ -125,6 +125,9 @@ export class AdminComponent implements OnInit {
           const metadata = await ExifReader.load(reader.result, {
              expanded: false,
             includeUnknown: false
+          }).catch((error: any)=>{
+            console.log(error)
+            
           });
                     
           // const data = new FormData()
@@ -135,6 +138,8 @@ export class AdminComponent implements OnInit {
           //   },
           //   error: (error)=>console.error(error)
           // })
+
+          if(metadata){
 
           let title = metadata.ImageDescription?.description
           let keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
@@ -158,6 +163,7 @@ export class AdminComponent implements OnInit {
             this.msgs = []
             this.msgs.push({severity:'success', summary:'Loaded'})
           }
+        }
         }//onLoadEnd
       })//forEach
     }

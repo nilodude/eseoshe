@@ -168,14 +168,12 @@ input#fileNames{
 
 .uploadResult{
     display:flex;
-    // flex-direction: column;
     gap: 3vh;
+    font-size: 1.7vh;
 }
 
 .collectionResult{
-    // display:flex;
-    // flex-direction: column;
-    // gap: 1vh;
+    background-color: lavender;
 }
 
 .colTitle{
@@ -183,7 +181,11 @@ input#fileNames{
 }
 
 .arrayResult{
-    margin-top: 1vh;
+    margin: 1vh 1vh 1vh 1vh;
+}
+
+.arrayElement{
+    margin: 1vh 1vh 1vh 1vh;
 }
 
 .insertResult,.resizeResult,.updatedResult{
