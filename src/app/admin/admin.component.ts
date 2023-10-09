@@ -188,6 +188,7 @@ export class AdminComponent implements OnInit {
     let numRequests = entries.filter((d:any)=>d[1].length > 0).length
     let requestDone = 0
     this.isDataRetrieved = false;
+    this.uploadResult = []
     this.msgs = []
     this.msgs.push({severity:'info', summary:'Uploading...'})
     entries.forEach(async e=>{

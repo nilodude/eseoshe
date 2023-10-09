@@ -83,6 +83,12 @@ solo front:
 
 	-se podria quitar el imageName del breadCrumb en pantalla pequeña
 
+	-hay que guardar el JSON del ultimo upload. hay que actualizar correctamente this.uploadResults
+	ya que ahora mismo no vacía todos sus campos al darle de nuevo a /upload
+
+
+
+
 tambien necesita back:
 	-likes y el perfil de usuario
 
