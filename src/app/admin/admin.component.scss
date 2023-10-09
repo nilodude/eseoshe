@@ -168,8 +168,11 @@ input#fileNames{
 
 .uploadResult{
     display:flex;
+    flex-wrap: wrap;
     gap: 3vh;
     font-size: 1.7vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .collectionResult{
