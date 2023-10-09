@@ -130,11 +130,12 @@ export class AdminComponent implements OnInit {
             console.log(error)
           });
           if (metadata) {
-          // const data = new FormData()
-          // data.append('data', f)
-          // this.apiService.getKeywords(data).subscribe({
-          //   next: (result) => {
-            let result ={keywords:[{keyword:'key'+f.name}]}
+
+          const data = new FormData()
+          data.append('data', f)
+          this.apiService.getKeywords(data).subscribe({
+            next: (result) => {
+            // let result ={keywords:[{keyword:'key'+f.name}]}
               this.formKeywords = result?.keywords.map((k: any) => k.keyword)
                 let title = metadata.ImageDescription?.description
                 let keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
@@ -158,9 +159,9 @@ export class AdminComponent implements OnInit {
                   this.msgs = []
                   this.msgs.push({ severity: 'success', summary: 'Loaded' })
                 }
-          //   },
-          //   error: (error) => console.error(error)
-          // })
+            },
+            error: (error) => console.error(error)
+          })
         } 
         }//onLoadEnd
       })//forEach
