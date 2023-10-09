@@ -1,11 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { Subscription, finalize, firstValueFrom, of } from 'rxjs';
-import { HttpEventType } from '@angular/common/http';
-import { Header, Message } from 'primeng/api';
-import { HeaderComponent } from './../header/header.component';
+import {  firstValueFrom } from 'rxjs';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'app-admin',
@@ -28,6 +26,8 @@ export class AdminComponent implements OnInit {
   formKeywords: string[]=[]
 
   files: File[] = [];
+  allFiles: File[] = [];
+
   collection: string = '';
   meta: any = {};
     
@@ -42,9 +42,10 @@ export class AdminComponent implements OnInit {
 
   uploadView: boolean = false;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService,private fb: FormBuilder,) { 
-    // this.collections = JSON.parse(localStorage.getItem('collections') as any);
-  }
+  uploadResult: any[] = [{inserted:[], resized: [], updated: []}];
+  showResult: boolean = false;
+
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.getCollections()
@@ -55,8 +56,6 @@ export class AdminComponent implements OnInit {
     this.editForm.controls['keywords'].valueChanges.subscribe(value => {
       this.image.keywords = value
     });
-
-   
   }
 
   insertCollection(name: string){
@@ -74,14 +73,10 @@ export class AdminComponent implements OnInit {
         }else{
           this.msgs.push({severity:'warn', summary: 'Collection already exists!'})
         }
-             
       },error: (error)=>{
         this.msgs= []
         this.msgs.push({severity:'error', summary:'Error adding new collection'})
         console.error(error)
-      },
-      complete: ()=>{
-       
       }
     })
   }
@@ -114,15 +109,19 @@ export class AdminComponent implements OnInit {
     this.msgs = []
     this.msgs.push({severity:'info', summary:'Loading...'})
     console.log('loading files:',event.target.files)
+
     this.files = []
     this.files = Array.from(event.target.files);
+    this.allFiles = this.allFiles.concat(this.files)
+
     const ExifReader = require('exifreader')
+
     if (this.files.length > 0) {
       this.files.forEach(f => {
         const reader = new FileReader();
         reader.readAsDataURL(f)
         reader.onloadend =async () => {
-          const b64 = (reader.result as string)//.replace('data:image/jpeg;base64,','').replace('data:image/png;base64,','')
+          const b64 = (reader.result as string)
           const metadata = await ExifReader.load(reader.result, {
              expanded: false,
             includeUnknown: false
@@ -175,6 +174,7 @@ export class AdminComponent implements OnInit {
     this.resetDropped()
     this.files= []
     this.uploadForm.controls["fileNames"].setValue('')
+    this.showResult = true;
   }
 
   uploadToBackend() {
@@ -190,13 +190,19 @@ export class AdminComponent implements OnInit {
       const images = e[1] as [];
 
       if(images?.length > 0){
-        if (this.files.length > 0){
+        if (this.allFiles.length > 0){
           console.log('uploading files to /'+collectionName+'...')
           
           let result = await firstValueFrom(this.apiService.uploadFiles(this.encodeFormData(collectionName)))
           .then((result)=>{
+            this.uploadResult[requestDone] = {collection: '',inserted:[], resized: [], updated: []}
+            this.uploadResult[requestDone].inserted = this.uploadResult[requestDone].inserted.concat(result.inserted)
+            this.uploadResult[requestDone].resized = this.uploadResult[requestDone].resized.concat(result.resized)
+            this.uploadResult[requestDone].updated = this.uploadResult[requestDone].updated.concat(result.updated)
+            this.uploadResult[requestDone].collection = collectionName
             requestDone++
             this.syncProgress = Math.round(100*(requestDone/numRequests))
+            console.log(result)
           })
           .catch(error=>{
             console.log('ERROR uploading', error);
@@ -204,6 +210,7 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           }).finally(()=>{
             console.log('/'+collectionName+' files uploaded SUCCESSFULLY\n')
+            this.resetUI();
             if(requestDone == numRequests){
               this.isDataRetrieved = true;
               this.msgs = []
@@ -214,7 +221,7 @@ export class AdminComponent implements OnInit {
 
           console.log(result)
           
-        }else if(this.files.length == 0){
+        }else if(this.allFiles.length == 0){
           console.log('updating files to /'+collectionName+'...')
           this.dropped[collectionName].map((d: { b64: string; })=>d.b64 = '')
           //this sould be collectionID, collectionName is only for images with NON EXISTING collection
@@ -234,7 +241,6 @@ export class AdminComponent implements OnInit {
         }else {
           console.error('No files selected to upload!')
         }
-        
       }
     })
   }
@@ -243,14 +249,11 @@ export class AdminComponent implements OnInit {
     const formData = new FormData();
     this.meta = {}
 
-    //dentro de este bucle, cambiando f.name por d.name, ya solo hace falta la f en sí
-    //hay que iterar this.dropped[collectionName] y hacer el find de this.otrofiles cuya f.name=d.name, al contrario de como está ahora
-
-    //this.otrofiles tiene que ser un array que almacene todas las fotos que se han subido, ya que this.files se resetea cada vez que se pulsa Browse
-
     this.dropped[collectionName].forEach((d: any)=>{
-      const f= this.files.find((f: { name: string; })=>f.name == d.name)
+      const f= this.allFiles.find((f: { name: string; })=>f.name == d.name)
       if(f){
+        const index = this.allFiles.indexOf(f)
+        this.allFiles.slice(index,1)
         formData.append(d.name, f)
         this.meta[d.name]={
           collection: collectionName,

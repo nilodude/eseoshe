@@ -4,9 +4,8 @@
         <ng-template pTemplate>
             <div class="flex flex-column flex-grow-1">
                 <!-- DROP ZONE -->
-
                 <div class="collections">
-                    <ng-template ngFor let-collection [ngForOf]="this.collections" let-i="index">
+                    <ng-template ngFor let-collection [ngForOf]="this.collections">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
                             <span class="dropTitle">
                                 <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
@@ -14,7 +13,7 @@
                             
                             <span *ngIf="this.dropped.length == 0">drop here</span>
 
-                            <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]" let-i="index">
+                            <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
                                 <div class="imDiv flex flex-column" (click)="this.editImage(im)">
                                     <!-- <img class="im" src="{{ im.b64 }}"> -->
                                     <span>
@@ -25,10 +24,7 @@
                         </div>
                     </ng-template>
                     <div class="dropZone">
-                        <span class="dropTitle">
-                            <h3>NEW COLLECTION</h3>
-                        </span>
-                        
+                        <span class="dropTitle"><h3>NEW COLLECTION</h3></span>
                         <label for="collection">name</label>
                         <input required id="collection" type="text" [(ngModel)]="this.collection">
                         <button class="{{this.collection == ''? 'disAddButton': 'addButton'}}" [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">
@@ -36,10 +32,8 @@
                                 <span> ADD</span>
                             </i>
                         </button>
-
                     </div>
                 </div>
-                
 
                 <!-- UPLOAD FORM -->
                 <div class="flex">
@@ -85,7 +79,7 @@
                     <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
                 </div>
                 <div class="gallery" >
-                    <div *ngIf="this.uploadView && this.files.length == 0"> Upload images from your device </div>
+                    <div *ngIf="this.uploadView && this.allFiles.length == 0"> Upload images from your device </div>
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
                         <div class="imDiv flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
@@ -93,7 +87,6 @@
                                 <img class="im" src="{{ im.b64 }}">
                                 <span><h4 class="imTitle">{{im.title}}</h4></span>
                             </div>
-                            
                         </div>
                     </ng-template>
                 </div>
@@ -120,4 +113,34 @@
             </div>
         </ng-template>
     </p-splitter>
+
+</div>
+
+<div *ngIf="this.showResult">
+    <p-dialog header="UPLOAD RESULT" [(visible)]="this.showResult" [modal]="true" [style]="{width: 'auto'}"
+        [maximizable]="true" [draggable]="false" [resizable]="true" class="resultPopup">
+        <div class="flex flex-column">
+        <ng-template ngFor let-colUpload [ngForOf]="this.uploadResult">
+            <span>COLLECTION {{colUpload.collection}}</span>
+            <span>inserted:</span>
+            <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
+                <div class="flex flex-column">
+                    id:{{inserted.id}}
+                    name:{{inserted.file_name}}
+                    collection:{{inserted.id_collection}}
+                </div>
+                
+            </ng-template>
+            <span>resized:</span>
+            <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
+                {{resized}}
+            </ng-template>
+            <span>updated:</span>
+            <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
+                {{updated}}
+            </ng-template>
+
+        </ng-template>
+        </div>
+    </p-dialog>
 </div>
