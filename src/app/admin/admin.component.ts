@@ -216,13 +216,15 @@ export class AdminComponent implements OnInit {
             this.msgs.push({severity:'error', summary:'ERROR uploading files'})
           }).finally(()=>{
             console.log('/'+collectionName+' files uploaded SUCCESSFULLY\n')
-            this.resetUI();
+            
             if(requestDone == numRequests){
               this.isDataRetrieved = true;
+              console.log(this.uploadResult)
+              console.log(JSON.stringify(this.uploadResult))
               this.msgs = []
               this.msgs.push({severity:'success', summary:'Upload complete!'})
-              this.resetUI();
             }
+            this.resetUI();
           });
 
           console.log(result)

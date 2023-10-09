@@ -180,10 +180,13 @@ input#fileNames{
     border: 5px #e6e6fa17 outset;
     border-radius: 3px;
     padding: 0.5vh 1vh;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .colTitle{
     margin-bottom: 1vh;
+    flex-basis: 100%;
 }
 
 .arrayResult{
@@ -191,6 +194,7 @@ input#fileNames{
     background-color: #ffefd559;
     border-radius: 4px;
     align-items: stretch;
+    align-self: flex-start;
 }
 
 .arrayElement{
