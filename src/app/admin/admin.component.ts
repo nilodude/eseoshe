@@ -22,8 +22,7 @@ export class AdminComponent implements OnInit {
     title: new FormControl(''),
     keywords: new FormControl('', Validators.required)
   });
-  formKeywords: string[] = []
-
+  
   files: File[] = [];
   allFiles: File[] = [];
 
@@ -131,40 +130,51 @@ export class AdminComponent implements OnInit {
           });
           if (metadata) {
 
-          const data = new FormData()
-          data.append('data', f)
-          this.apiService.getKeywords(data).subscribe({
-            next: (result) => {
-            // let result ={keywords:[{keyword:'key'+f.name}]}
-              this.formKeywords = result?.keywords.map((k: any) => k.keyword)
-                let title = metadata.ImageDescription?.description
-                let keywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
-                let size = [metadata['Image Width']?.value, metadata['Image Height']?.value]
-    
-                console.log(metadata)
-    
-                this.loadedImages.push({
-                  id: null,
-                  name: f.name,
-                  b64: b64,
-                  title: title ?? f.name,
-                  liked: '',
-                  keywords: keywords ?? this.formKeywords,
-                  size: size,
-                  id_collection: null
-                })
-                if (this.files.length == this.loadedImages.length) {
-                  this.isDataRetrieved = true;
-                  this.uploadView = true;
-                  this.msgs = []
-                  this.msgs.push({ severity: 'success', summary: 'Loaded' })
-                }
-            },
-            error: (error) => console.error(error)
-          })
+          // const data = new FormData()
+          // data.append('data', f)
+          // this.apiService.getKeywords(data).subscribe({
+          //   next: (result) => {
+          //   // let result ={keywords:[{keyword:'key'+f.name}]}
+          //     formKeywords = result?.keywords.map((k: any) => k.keyword)
+          //     this.parseLoadedImage(f, b64, metadata,formKeywords)
+          //   },
+          //   error: (error) =>{
+          //     this.parseLoadedImage(f, b64, metadata)
+          //     console.error(error)
+          //   }
+          // })
+          let result ={keywords:[{keyword:'key'+f.name}]}
+          let formKeywords = result?.keywords.map((k: any) => k.keyword)
+          this.parseLoadedImage(f, b64, metadata,formKeywords)
         } 
         }//onLoadEnd
       })//forEach
+    }
+  }
+
+  parseLoadedImage(f: File, b64: string, metadata: any, formKeywords: any) {
+    let title = metadata.ImageDescription?.description
+    let fileKeywords = metadata.subject?.description.split(',').map((k: string) => k.trim())
+    let size = [metadata['Image Width']?.value, metadata['Image Height']?.value]
+
+    console.log(metadata)
+    console.log(title, fileKeywords, size, formKeywords)
+
+    this.loadedImages.push({
+      id: null,
+      name: f.name,
+      b64: b64,
+      title: title ?? f.name,
+      liked: '',
+      keywords: fileKeywords ?? formKeywords ?? ['dummyKeyword'+f.name],
+      size: size,
+      id_collection: null
+    })
+    if (this.allFiles.length == this.loadedImages.length) {
+      this.isDataRetrieved = true;
+      this.uploadView = true;
+      this.msgs = []
+      this.msgs.push({ severity: 'success', summary: 'Loaded' })
     }
   }
 
@@ -316,7 +326,7 @@ export class AdminComponent implements OnInit {
     this.image = im
     this.panelSizes = [70, 30]
     this.editForm.controls["title"].setValue(this.image.title)
-    this.editForm.controls["keywords"].setValue(this.image.keywords ?? this.formKeywords)
+    this.editForm.controls["keywords"].setValue(this.image.keywords)
     this.showIm = true
   }
 
