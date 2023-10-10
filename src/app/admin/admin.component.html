@@ -104,11 +104,12 @@
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField">
                             <label for="title"><span>title ({{this.image.title.length}}/{{'200'}})</span></label>
-                            <input required class="editTitle" type="text" formControlName="title" >
+                            <input required class="title" type="text" formControlName="title" maxlength="200">
                         </div>
                         <div class="editField">
-                            <label for="keywords"><span>keywords ({{this.image.keywords.length}}/{{'200'}})</span></label>
-                            <p-chips class="editTitle" formControlName="keywords" (input)="keyInput()">
+                            <!-- need to check if this.image.keywords length is > 29 -->
+                            <label for="keywords"><span>keywords ({{this.image.keywords.length}}/{{'30'}})</span></label>
+                            <p-chips class="keywords" formControlName="keywords" (input)="keyInput()">
                             </p-chips>
                         </div>
                     </form>

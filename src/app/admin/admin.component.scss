@@ -54,9 +54,11 @@ input#fileNames{
     display: none;
 }
 
-.uploadField, .editField{
+.editField{
     display:flex;
     flex-direction: column;
+    gap: 1vh;
+    font-size: 1.5vh;
 }
 
 .folderIcon, .uploadIcon{
@@ -136,18 +138,28 @@ input#fileNames{
     display:flex;
     flex-direction: column;
     width:100%;
-    gap: 2vh;
+    gap: 3vh;
     align-items: stretch;
 }
 
-.editTitle{
+.title{
     align-items: stretch;
+    font-size: 2vh;
 }
 
 :host ::ng-deep .p-chips.p-component{
     display: unset;
 }
 
+:host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-token{
+    font-size: 1.5vh;
+    font-family: monospace;
+}
+
+:host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-input-token input{
+    font-size: 1.5vh;
+    font-family: monospace;
+}
 .resultPopup{
     position:absolute;
     top:0;
