@@ -179,7 +179,7 @@ export class AdminComponent implements OnInit {
     this.resetDropped()
     this.files = []
     this.uploadForm.controls["fileNames"].setValue('')
-    this.showResult = true;
+    
   }
 
   uploadToBackend() {
@@ -201,11 +201,12 @@ export class AdminComponent implements OnInit {
 
           let result = await firstValueFrom(this.apiService.uploadFiles(this.encodeFormData(collectionName)))
             .then((result) => {
-              this.uploadResult[requestDone] = { collection: '', inserted: [], resized: [], updated: [] }
+              this.uploadResult[requestDone] = { date:'' , collection: '', inserted: [], resized: [], updated: [] }
               this.uploadResult[requestDone].inserted = this.uploadResult[requestDone].inserted.concat(result.inserted)
               this.uploadResult[requestDone].resized = this.uploadResult[requestDone].resized.concat(result.resized)
               this.uploadResult[requestDone].updated = this.uploadResult[requestDone].updated.concat(result.updated)
               this.uploadResult[requestDone].collection = collectionName
+              this.uploadResult[requestDone].date = result.date
               requestDone++
               this.syncProgress = Math.round(100 * (requestDone / numRequests))
               console.log(result)
@@ -218,7 +219,7 @@ export class AdminComponent implements OnInit {
               console.log('/' + collectionName + ' files uploaded SUCCESSFULLY\n')
 
               if (requestDone == numRequests) {
-                
+                this.showResult = true;
                 this.isDataRetrieved = true;
                 console.log(this.uploadResult)
                 console.log(JSON.stringify(this.uploadResult))

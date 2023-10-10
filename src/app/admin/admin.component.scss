@@ -134,7 +134,6 @@ input#fileNames{
 .editForm{
     display:flex;
     flex-direction: column;
-    gap:1vh;
     width:100%;
     gap: 2vh;
     align-items: stretch;
@@ -212,7 +211,7 @@ input#fileNames{
 .insertResult,.resizeResult,.updatedResult{
     display:flex;
     flex-direction: column;
-    gap: 1vh;
+    gap: 1.2vh;
 }
 
 :host ::ng-deep .p-dialog .p-dialog-content, :host ::ng-deep .p-dialog .p-dialog-header {

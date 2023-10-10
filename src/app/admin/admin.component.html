@@ -79,7 +79,7 @@
                     <span>{{this.uploadView ? 'Files to upload:' : 'Removed images:'}}</span>
                 </div>
                 <div class="gallery" >
-                    <div *ngIf="this.uploadView && this.allFiles.length == 0"> Upload images from your device </div>
+                    <div *ngIf="this.uploadView && this.loadedImages.length == 0"> Upload images from your device </div>
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
                         <div class="imDiv flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
@@ -154,7 +154,8 @@
             </div>
             
         </ng-template>
-        <a class="btn btn-clear" title="uploadResult" [href]="jsonUrl" download="pstock_upload_{{this.uploadResult[0].date}}.json">DOWNLOAD JSON</a>
+        <a class="btn btn-clear" title="uploadResult" [href]="jsonUrl" 
+        download="pstock_upload{{this.uploadResult[0].date | date:'dd_MM_yyyy_HH_mm_ss'}}.json">DOWNLOAD JSON</a>
         </div>
     </p-dialog>
 </div>
