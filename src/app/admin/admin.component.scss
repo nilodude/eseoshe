@@ -24,6 +24,7 @@
     min-width: 19vh;
     min-height: 19vh;
     overflow-y: auto;
+    overflow-x: unset;
 }
 .dropZone:hover, .imTitle:hover{
     border: solid #5b1792 1px;

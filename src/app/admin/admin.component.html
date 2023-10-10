@@ -10,12 +10,14 @@
                             <span class="dropTitle">
                                 <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
                             </span>
+                            <!-- <img class="im" src="{{ im.b64 }}"> -->
                             
-                            <span *ngIf="this.dropped.length == 0">drop here</span>
+                            
+                            <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
 
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
                                 <div class="imDiv flex flex-column" (click)="this.editImage(im)">
-                                    <!-- <img class="im" src="{{ im.b64 }}"> -->
+                                    
                                     <span>
                                         <h5 class="imTitle">{{im.title}}</h5>
                                     </span>
@@ -101,12 +103,13 @@
                 <div class="editForm">
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField">
-                            <label for="title">title</label>
-                            <input required class="editTitle" type="text" formControlName="title" (input)="onEdit()">
+                            <label for="title"><span>title ({{this.image.title.length}}/{{'200'}})</span></label>
+                            <input required class="editTitle" type="text" formControlName="title" >
                         </div>
                         <div class="editField">
-                            <label for="keywords">keywords</label>
-                            <p-chips class="editTitle"  formControlName="keywords"></p-chips>
+                            <label for="keywords"><span>keywords ({{this.image.keywords.length}}/{{'200'}})</span></label>
+                            <p-chips class="editTitle" formControlName="keywords" (input)="keyInput()">
+                            </p-chips>
                         </div>
                     </form>
                 </div>

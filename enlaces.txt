@@ -76,6 +76,15 @@ solo front:
 	
 	-boton BACK. DONE? con el header no hace falta back?
 
+	1. title - visualisar la cantidad de caracteres y poner la limitacion de los characteres. No more than 200 letters. 
+	por ejemplo title: Black and white background (26/200). DONE
+
+	-hay que guardar el JSON del ultimo upload. hay que actualizar correctamente this.uploadResults
+	ya que ahora mismo no vacía todos sus campos al darle de nuevo a /upload  DONE
+
+
+
+
 	-hay que añadir el More... a la pantalla de inicio:
 		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
 	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
@@ -83,8 +92,6 @@ solo front:
 
 	-se podria quitar el imageName del breadCrumb en pantalla pequeña
 
-	-hay que guardar el JSON del ultimo upload. hay que actualizar correctamente this.uploadResults
-	ya que ahora mismo no vacía todos sus campos al darle de nuevo a /upload
 
 
 
@@ -97,3 +104,21 @@ tambien necesita back:
 	https://labs.everypixel.com/docs
 	me he registrado y funciona, tengo la peticion en el postman 
 	
+
+
+
+
+
+2. keywords 
+    a) cada nuevo keyword en minuscula por defecto. 
+	b)Tambien mostrar la cantidad de keywords de la imagen.
+	c) mover un poco la ventana para abajo. esta un poco pegada a la palabra "keywords".
+
+3. Quitar el scroll bar del cuadraito con el nombre de la colección. Alinear el texto de tipo Word - Centered.
+
+4. Añadir por lo menos una imagen de preview in cada cuadraito de la colección. Para yo ver a cual colección subo mis nuevas imagenes.
+	Si la colección tiene el nombre 1tpm, es poco descritivo y no me acuerdo q tipo de imagenes estan dentro.
+
+	
+5. New collection poner como un campo (donde se escribe el nombre de la nueva colección) y un boton al lado suya (+ Add), como lo de busqueda por ejemplo. 
+	Tiene q ser fijo siempre, en el mismo sitio.

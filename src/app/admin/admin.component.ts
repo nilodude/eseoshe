@@ -57,6 +57,12 @@ export class AdminComponent implements OnInit {
     });
   }
 
+  keyInput(){
+    let el = document.querySelector('.p-chips-input-token') ?? new Element
+    let inputEl = el.childNodes[0] as HTMLInputElement
+    inputEl.value = inputEl.value.toLowerCase()
+  }
+
   insertCollection(name: string) {
     this.msgs = []
     this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
