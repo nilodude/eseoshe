@@ -103,7 +103,7 @@
                 <div class="editForm">
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField">
-                            <label for="title"><span>title ({{this.image.title.length}}/{{'200'}})</span></label>
+                            <label for="title"><span>title ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
                             <input required class="title" type="text" formControlName="title" maxlength="200">
                         </div>
                         <div class="editField">

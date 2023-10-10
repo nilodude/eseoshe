@@ -81,8 +81,12 @@ solo front:
 
 	1. title - visualisar la cantidad de caracteres y poner la limitacion de los characteres. No more than 200 letters. 
 	por ejemplo title: Black and white background (26/200). DONE
+
 	2. keywords 
     	a) cada nuevo keyword en minuscula por defecto. DONE
+		b)Tambien mostrar la cantidad de keywords de la imagen. DONE
+		c) mover un poco la ventana para abajo. esta un poco pegada a la palabra "keywords".DONE
+
 	3. Quitar el scroll bar del cuadraito con el nombre de la colección. Alinear el texto de tipo Word - Centered. DONE
 
 	
@@ -107,13 +111,6 @@ tambien necesita back:
 	https://labs.everypixel.com/docs
 	me he registrado y funciona, tengo la peticion en el postman 
 	
-
-
-
-
-
-2. keywords 
-	c) mover un poco la ventana para abajo. esta un poco pegada a la palabra "keywords".
 
 
 4. Añadir por lo menos una imagen de preview in cada cuadraito de la colección. Para yo ver a cual colección subo mis nuevas imagenes.
