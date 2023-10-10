@@ -7,10 +7,10 @@
                 <div class="collections">
                     <ng-template ngFor let-collection [ngForOf]="this.collections">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                            <span class="dropTitle">
+                            <!-- <span class="dropTitle">
                                 <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
-                            </span>
-                            <!-- <img class="im" src="{{ im.b64 }}"> -->
+                            </span> -->
+                            <img class="im" src={{collection.b64}}>
                             
                             
                             <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
@@ -104,7 +104,7 @@
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField">
                             <label for="title"><span>title ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
-                            <input required class="title" type="text" formControlName="title" maxlength="200">
+                            <input required class="title" type="text" formControlName="title" maxlength="200" (input)="onEdit()">
                         </div>
                         <div class="editField">
                             <!-- need to check if this.image.keywords length is > 29 -->

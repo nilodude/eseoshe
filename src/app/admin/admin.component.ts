@@ -344,8 +344,37 @@ export class AdminComponent implements OnInit {
     this.collections = [];
     this.apiService.getCollections().subscribe({
       next: (result) => {
-        this.collections = result.map((c: any) => {
-          return { label: c['name'], value: c['id'] }
+        result.forEach((c: any) => {
+          let canvas = document.createElement('canvas');
+          let ctx = canvas.getContext("2d");
+          if(ctx){
+            let img = new Image();
+            let w = 256
+            canvas.width  = w;
+            canvas.height = w;
+            let text = c['name'] as string
+            let cid= c['id']/255
+            //need to map collections ID to 0 - 255
+            let {r,g,b} = {
+              r: 50*cid,
+              g: 255,
+              b: 150
+            }
+
+            console.log(r,g,b)
+
+            ctx.font = 'bold 48px serif';
+           
+            ctx.strokeStyle = 'rgba('+r+','+g+','+b+',0.9)';
+            ctx.strokeText(text, 50, 100);
+
+            ctx.fillStyle = 'rgba('+r+','+g+','+b+',0.9)';
+            ctx.fillText(text, w/2,w/2)
+            ctx.drawImage(img, 0, 0, w, w)
+            
+          }
+          
+          this.collections.push({ label: c['name'], value: c['id'], b64: canvas.toDataURL()}) 
         });
       },
       error: (error) => {
