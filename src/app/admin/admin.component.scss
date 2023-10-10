@@ -182,6 +182,7 @@ input#fileNames{
     padding: 0.5vh 1vh;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .colTitle{
@@ -190,11 +191,12 @@ input#fileNames{
 }
 
 .arrayResult{
-    margin: 2vh 1vh 2vh 1vh;
+    margin: 1vh 1vh 2vh 1vh;
     background-color: #ffefd559;
     border-radius: 4px;
     align-items: stretch;
     align-self: flex-start;
+    padding-bottom: 1vh;
 }
 
 .arrayElement{

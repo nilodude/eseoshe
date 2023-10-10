@@ -1,6 +1,5 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
 import { firstValueFrom } from 'rxjs';
 import { Message } from 'primeng/api';
@@ -44,6 +43,7 @@ export class AdminComponent implements OnInit {
 
   uploadResult: any[] = [{ inserted: [], resized: [], updated: [] }];
   showResult: boolean = false;
+  jsonUrl: string = ''
 
   constructor(private apiService: ApiService) { }
 
@@ -218,9 +218,11 @@ export class AdminComponent implements OnInit {
               console.log('/' + collectionName + ' files uploaded SUCCESSFULLY\n')
 
               if (requestDone == numRequests) {
+                
                 this.isDataRetrieved = true;
                 console.log(this.uploadResult)
                 console.log(JSON.stringify(this.uploadResult))
+                this.jsonUrl ="data:text/json;charset=UTF-8," + encodeURIComponent(JSON.stringify(this.uploadResult));
                 this.msgs = []
                 this.msgs.push({ severity: 'success', summary: 'Upload complete!' })
               }
