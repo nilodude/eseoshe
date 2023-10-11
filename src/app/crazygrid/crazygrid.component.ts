@@ -328,7 +328,10 @@ export class CrazygridComponent implements OnInit {
       }
     })
   }
-
+  getB64Cover(coverName: string){
+    let cover = this.covers.find(co=>co.file_name == coverName)
+    return  cover?.b64 ?? ''
+  }
   getCollections(){
     this.collections = [];
 
@@ -339,7 +342,7 @@ export class CrazygridComponent implements OnInit {
             label: c['name'],
             value: c['id'],
             cover: c['cover'],
-            b64 : this.covers.find(co=>co.file_name == c['cover']).b64
+            b64 : this.getB64Cover(c['cover'])
             }
         });
       },

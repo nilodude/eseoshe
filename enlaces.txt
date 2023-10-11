@@ -88,7 +88,8 @@ solo front:
 		c) mover un poco la ventana para abajo. esta un poco pegada a la palabra "keywords".DONE
 
 	3. Quitar el scroll bar del cuadraito con el nombre de la colección. Alinear el texto de tipo Word - Centered. DONE
-
+	4. Añadir por lo menos una imagen de preview in cada cuadraito de la colección. Para yo ver a cual colección subo mis nuevas imagenes.
+		Si la colección tiene el nombre 1tpm, es poco descritivo y no me acuerdo q tipo de imagenes estan dentro. DONE
 	
 
 
@@ -113,8 +114,7 @@ tambien necesita back:
 	
 
 
-4. Añadir por lo menos una imagen de preview in cada cuadraito de la colección. Para yo ver a cual colección subo mis nuevas imagenes.
-	Si la colección tiene el nombre 1tpm, es poco descritivo y no me acuerdo q tipo de imagenes estan dentro.
+
 
 	
 5. New collection poner como un campo (donde se escribe el nombre de la nueva colección) y un boton al lado suya (+ Add), como lo de busqueda por ejemplo. 

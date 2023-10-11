@@ -357,15 +357,21 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  getB64Cover(coverName: string){
+    let cover = this.covers.find(co=>co.file_name == coverName)
+    return  cover?.b64 ?? ''
+  }
+
   getCollections() {
     this.collections = [];
     this.apiService.getCollections().subscribe({
       next: (result) => {
-        result.filter((r:any)=>r.cover).forEach((c: any) => {
-          this.collections.push(
-            { label: c['name'],
-             value: c['id'],
-              b64: this.covers.find(co=>co.file_name == c['cover']).b64}) 
+        result./*filter((r:any)=>r.cover).*/forEach((c: any) => {
+          this.collections.push({
+              label: c['name'],
+              value: c['id'],
+              b64: this.getB64Cover(c['cover'])
+            }) 
         });
       },
       error: (error) => {
