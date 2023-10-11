@@ -241,7 +241,7 @@ export class CrazygridComponent implements OnInit {
           //image itself
           newImg.id = 'im'+collection?.value;
           newImg.style.position = "realtive";
-          newImg.style.background = "url(../../assets/" + box.boxID + ".jpg)"; //need to get collection cover image from BD
+          newImg.style.background = "url('data:image/png;base64,"+ collection?.b64+"')"; //need to get collection cover image from BD
           newImg.style.backgroundRepeat = 'round';
           const bgScale = 100;
           const bgW = (bgScale / (box.xlen + 1)).toString();
@@ -317,7 +317,7 @@ export class CrazygridComponent implements OnInit {
     this.apiService.getCollections().subscribe({
       next: (result)=>{
         this.collections = result.map((c: any)=>{
-          return {label: c['name'], value: c['id']}
+          return {label: c['name'], value: c['id'], b64: c['b64']}
         });
       },
       error: (error)=>{
