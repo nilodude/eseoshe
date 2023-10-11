@@ -71,6 +71,14 @@
     gap:1vh;
 }
 
+.newCollection{
+    display:flex;
+    align-items: center;
+    .newColField{
+        font-size: 2vh;
+    }
+}
+
 input#fileNames{
     display: none;
 }
