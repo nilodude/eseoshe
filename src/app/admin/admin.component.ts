@@ -12,6 +12,7 @@ import { Message } from 'primeng/api';
 export class AdminComponent implements OnInit {
   msgs: Message[] = []
   collections: any = []
+  covers: any[] = []
   panelSizes: number[] = [99.9, 0.1]
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
@@ -47,7 +48,7 @@ export class AdminComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.getCollections()
+    this.getCovers()
     this.loadedImages = [];
     this.noCollection = [];
     this.getInactiveImages();
@@ -74,7 +75,7 @@ export class AdminComponent implements OnInit {
           this.msgs.push({ severity: 'success', summary: 'Collection added!' })
           this.isDataRetrieved = true
           this.collection = ''
-          this.getCollections()
+          this.getCovers()
         } else {
           this.msgs.push({ severity: 'warn', summary: 'Collection already exists!' })
         }
@@ -340,41 +341,31 @@ export class AdminComponent implements OnInit {
     this.image.title = this.editForm.value.title ?? ''
   }
 
+  getCovers(){
+    this.apiService.getCovers().subscribe({
+      next: (result)=>{
+        this.covers = result
+        console.log(this.covers)
+      },
+      error: (error)=>{
+        console.log('error retrieving covers')
+        console.log(error)
+      },
+      complete: ()=>{
+        this.getCollections();
+      }
+    })
+  }
+
   getCollections() {
     this.collections = [];
     this.apiService.getCollections().subscribe({
       next: (result) => {
-        result.forEach((c: any) => {
-          let canvas = document.createElement('canvas');
-          let ctx = canvas.getContext("2d");
-          if(ctx){
-            let img = new Image();
-            let w = 256
-            canvas.width  = w;
-            canvas.height = w;
-            let text = c['name'] as string
-            let cid= c['id']/255
-            //need to map collections ID to 0 - 255
-            let {r,g,b} = {
-              r: 50*cid,
-              g: 255,
-              b: 150
-            }
-
-            console.log(r,g,b)
-
-            ctx.font = 'bold 48px serif';
-           
-            ctx.strokeStyle = 'rgba('+r+','+g+','+b+',0.9)';
-            ctx.strokeText(text, 50, 100);
-
-            ctx.fillStyle = 'rgba('+r+','+g+','+b+',0.9)';
-            ctx.fillText(text, w/2,w/2)
-            ctx.drawImage(img, 0, 0, w, w)
-            
-          }
-          
-          this.collections.push({ label: c['name'], value: c['id'], b64: canvas.toDataURL()}) 
+        result.filter((r:any)=>r.cover).forEach((c: any) => {
+          this.collections.push(
+            { label: c['name'],
+             value: c['id'],
+              b64: this.covers.find(co=>co.file_name == c['cover']).b64}) 
         });
       },
       error: (error) => {

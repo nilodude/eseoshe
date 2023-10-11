@@ -10,7 +10,7 @@
                             <!-- <span class="dropTitle">
                                 <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
                             </span> -->
-                            <img class="im" src={{collection.b64}}>
+                            <img class="im" src="data:image/png;base64,{{ collection.b64 }}">
                             
                             
                             <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
@@ -86,7 +86,7 @@
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
                         <div class="imDiv flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                             <div class="flex flex-column" (click)="this.editImage(im)" >
-                                <img class="im" src="{{ im.b64 }}">
+                                <img class="imGallery" src="{{ im.b64 }}">
                                 <span><h4 class="imTitle">{{im.title}}</h4></span>
                             </div>
                         </div>

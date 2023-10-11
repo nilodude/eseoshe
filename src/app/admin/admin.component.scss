@@ -105,6 +105,10 @@ input#fileNames{
     gap: 0.7vh;
     justify-content: center;
 }
+.imGallery {
+    max-height: 29vh;
+    width: auto;
+}
 
 .imDiv {
     flex-basis: 0%;
@@ -114,9 +118,9 @@ input#fileNames{
 }
 
 .im {
-    max-height: 29vh;
-    width: auto;
-    //max-width:29vh;
+    max-width: inherit;
+    width: inherit;
+    position: fixed;
 }
 
 .editZone{
