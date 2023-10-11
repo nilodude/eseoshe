@@ -19,6 +19,7 @@ export class CrazygridComponent implements OnInit {
   @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
   collections: any[] =[];
+  covers: any[] = []
   title = 'CrazyGrid';
     
   scale: number = window.innerWidth /this.windowScale;
@@ -314,6 +315,11 @@ export class CrazygridComponent implements OnInit {
 
   getCollections(){
     this.collections = [];
+
+    // this.apiService.getCovers().subscribe({
+    //   next: (result)=>{this.covers = result}
+    // })
+
     this.apiService.getCollections().subscribe({
       next: (result)=>{
         this.collections = result.map((c: any)=>{

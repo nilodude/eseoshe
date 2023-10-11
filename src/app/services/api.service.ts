@@ -71,4 +71,9 @@ export class ApiService {
       'Authorization': 'Basic ' + btoa(this.clientID+':'+this.clientKey)
       }})
   }
+
+  getCovers(): Observable<any>{
+    return this.http.get<any>(this.apiUrl+'/collections/covers/all')
+  }
+
 }
