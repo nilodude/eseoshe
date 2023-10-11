@@ -25,20 +25,29 @@
                             </ng-template>
                         </div>
                     </ng-template>
-                    <div class="dropZone">
-                        <span class="dropTitle"><h3>NEW COLLECTION</h3></span>
-                        <label for="collection">name</label>
-                        <input required id="collection" type="text" [(ngModel)]="this.collection">
-                        <button class="{{this.collection == ''? 'disAddButton': 'addButton'}}" [attr.disabled]="this.collection == '' ?true :null" (click)="insertCollection(this.collection)">
-                            <i class="uploadIcon pi pi-plus">
-                                <span> ADD</span>
-                            </i>
-                        </button>
-                    </div>
+                    
                 </div>
 
                 <!-- UPLOAD FORM -->
                 <div class="flex">
+                    <div class="editField">
+                        <!-- <span class="dropTitle"><h3>NEW COLLECTION</h3></span> -->
+                        <label for="collection">name</label>
+                        <input required id="collection" type="text" [(ngModel)]="this.collection">
+                        
+                        <label for="cover">cover</label>
+                        <select name="cover" id="cover" [(ngModel)]="this.cover">
+                            <ng-template ngFor let-cover [ngForOf]="this.notUsedCovers">
+                                <option value={{cover.file_name}}>{{cover.file_name}}</option>
+                            </ng-template>
+                        </select>
+                        
+                        <button class="{{this.cover == '' || this.collection == ''? 'disAddButton': 'addButton'}}" 
+                            [attr.disabled]="this.cover == '' || this.collection == '' ? true :null"
+                            (click)="insertCollection(this.collection)">
+                            <i class="uploadIcon pi pi-plus"><span> ADD NEW COLLECTION</span></i>
+                        </button>
+                    </div>
                     <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
                     <div class="uploadForm">
                         <div>

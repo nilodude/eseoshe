@@ -11,8 +11,13 @@ import { Message } from 'primeng/api';
 })
 export class AdminComponent implements OnInit {
   msgs: Message[] = []
+  
   collections: any = []
+  collection: string = '';
   covers: any[] = []
+  notUsedCovers: any[] = []
+  cover: string = ''
+
   panelSizes: number[] = [99.9, 0.1]
   uploadForm = new FormGroup({
     fileNames: new FormControl(''),
@@ -26,8 +31,7 @@ export class AdminComponent implements OnInit {
   
   files: File[] = [];
   allFiles: File[] = [];
-
-  collection: string = '';
+  
   meta: any = {};
 
   syncProgress: number = 0;
@@ -67,6 +71,7 @@ export class AdminComponent implements OnInit {
   insertCollection(name: string) {
     this.msgs = []
     this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
+    //this should include cover too, not just name
     this.apiService.insertCollection(name).subscribe({
       next: (result) => {
         this.msgs = []
@@ -358,8 +363,16 @@ export class AdminComponent implements OnInit {
   }
 
   getB64Cover(coverName: string){
-    let cover = this.covers.find(co=>co.file_name == coverName)
-    return  cover?.b64 ?? ''
+    // let cover = this.covers.find(co=>co.file_name == coverName)
+    let index = this.covers.findIndex(co=>co.file_name == coverName)
+    let cover = ''
+
+    if(index>= 0){
+      cover = this.covers.splice(index, 1)[0].b64
+      this.notUsedCovers = this.covers
+    }
+    
+    return  cover
   }
 
   getCollections() {
@@ -367,6 +380,7 @@ export class AdminComponent implements OnInit {
     this.apiService.getCollections().subscribe({
       next: (result) => {
         result./*filter((r:any)=>r.cover).*/forEach((c: any) => {
+          // this.notUsedCovers.push(c['cover'])
           this.collections.push({
               label: c['name'],
               value: c['id'],
@@ -383,6 +397,7 @@ export class AdminComponent implements OnInit {
         this.isDataRetrieved = true;
         this.resetDropped()
         localStorage.setItem('collections', JSON.stringify(this.collections));
+
       }
     });
   }
