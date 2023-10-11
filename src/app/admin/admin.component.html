@@ -7,16 +7,16 @@
                 <div class="collections">
                     <ng-template ngFor let-collection [ngForOf]="this.collections">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                            <!-- <span class="dropTitle">
-                                <h3>{{collection.value}}-</h3><h3>{{collection.label}}</h3>
-                            </span> -->
-                            <img class="im" src="data:image/png;base64,{{ collection.b64 }}">
+                           
+                            <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
                             
                             
                             <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
-
+                            <span class="dropTitle">
+                                <h4>{{collection.value}}-</h4><h4>{{collection.label}}</h4>
+                            </span>
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
-                                <div class="imDiv flex flex-column" (click)="this.editImage(im)">
+                                <div class="droppedTitle flex flex-column" (click)="this.editImage(im)">
                                     
                                     <span>
                                         <h5 class="imTitle">{{im.title}}</h5>
@@ -84,7 +84,7 @@
                     <div *ngIf="this.uploadView && this.loadedImages.length == 0"> Upload images from your device </div>
                     <div *ngIf="!this.uploadView && this.noCollection.length == 0"> No removed images </div>
                     <ng-template ngFor let-im [ngForOf]="this.uploadView ? this.loadedImages : this.noCollection" let-i="index">
-                        <div class="imDiv flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
+                        <div class="flex flex-column" pDraggable="loaded" (onDragStart)="dragStart(im)" (onDragEnd)="dragEnd()">
                             <div class="flex flex-column" (click)="this.editImage(im)" >
                                 <img class="imGallery" src="{{ im.b64 }}">
                                 <span><h4 class="imTitle">{{im.title}}</h4></span>

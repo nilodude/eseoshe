@@ -14,15 +14,14 @@
     justify-content: flex-start;
     align-items: center;
 }
+
 .dropZone{
     display:flex;
     flex-direction: column;
     border: solid #5b179200 1px;
     margin: 1vh;
-    max-width: 19vh;
-    max-height: 19vh;
-    min-width: 19vh;
-    min-height: 19vh;
+    width:21vh;
+    height: 21vh;
     overflow-y: auto;
     overflow-x: unset;
 }
@@ -30,9 +29,31 @@
     border: solid #5b1792 1px;
 }
 
+.covers {
+    max-width: inherit;
+    width: inherit;
+    position: fixed;
+    filter: blur(3px);
+}
+
+.droppedTitle {
+    flex-basis: 0%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    font-size: 1.6vh;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.28);
+    border-radius: 6px;
+}
+
 .dropTitle{
     display: flex;
     justify-content: center;
+    z-index: 1008;
+    color: white;
+    background-color: #0003;
+    border-radius: 6px;
 }
 
 .imTitle{
@@ -110,18 +131,8 @@ input#fileNames{
     width: auto;
 }
 
-.imDiv {
-    flex-basis: 0%;
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
 
-.im {
-    max-width: inherit;
-    width: inherit;
-    position: fixed;
-}
+
 
 .editZone{
     display: flex;
