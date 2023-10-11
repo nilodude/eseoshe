@@ -75,7 +75,7 @@ export class CrazygridComponent implements OnInit {
     
   }
   ngOnInit(){
-    this.getCollections();
+    this.getCovers();
     
     this.removeEventListener = this.renderer.listen(this.elementRef.nativeElement, 'click', (event) => {
       if (event.target instanceof HTMLImageElement) {
@@ -313,17 +313,34 @@ export class CrazygridComponent implements OnInit {
     // return this.collections[value-1]?.label
   }
 
+  getCovers(){
+    this.apiService.getCovers().subscribe({
+      next: (result)=>{
+        this.covers = result
+        console.log(this.covers)
+      },
+      error: (error)=>{
+        console.log('error retrieving covers')
+        console.log(error)
+      },
+      complete: ()=>{
+        this.getCollections();
+      }
+    })
+  }
+
   getCollections(){
     this.collections = [];
 
-    // this.apiService.getCovers().subscribe({
-    //   next: (result)=>{this.covers = result}
-    // })
-
     this.apiService.getCollections().subscribe({
       next: (result)=>{
-        this.collections = result.map((c: any)=>{
-          return {label: c['name'], value: c['id'], b64: c['b64']}
+        this.collections = result.filter((r:any)=>r.cover).map((c: any)=>{
+          return {
+            label: c['name'],
+            value: c['id'],
+            cover: c['cover'],
+            b64 : this.covers.find(co=>co.file_name == c['cover']).b64
+            }
         });
       },
       error: (error)=>{

@@ -119,3 +119,4 @@ tambien necesita back:
 	
 5. New collection poner como un campo (donde se escribe el nombre de la nueva colección) y un boton al lado suya (+ Add), como lo de busqueda por ejemplo. 
 	Tiene q ser fijo siempre, en el mismo sitio.
+	when adding new collection, MUST select collection cover from existing images (or load new one)
