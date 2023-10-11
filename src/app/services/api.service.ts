@@ -15,8 +15,8 @@ export class ApiService {
   private clientID = environment.clientID;
   private clientKey = environment.clientKey;
 
-  insertCollection(name: string): Observable<any>{
-    return this.http.post(this.apiUrl+'/collections',{name: name});
+  insertCollection(name: string, cover: string): Observable<any>{
+    return this.http.post(this.apiUrl+'/collections',{name: name, cover:cover});
   }
 
   getCollections(): Observable<any>{

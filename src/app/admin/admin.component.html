@@ -45,7 +45,7 @@
                         <!-- </div> -->
                         <button class="{{this.cover == '' || this.collection == ''? 'disAddButton': 'addButton'}}" 
                             [attr.disabled]="this.cover == '' || this.collection == '' ? true :null"
-                            (click)="insertCollection(this.collection)">
+                            (click)="insertCollection(this.collection, this.cover)">
                             <i class="uploadIcon pi pi-plus"><span> ADD NEW COLLECTION</span></i>
                         </button>
                     </div>

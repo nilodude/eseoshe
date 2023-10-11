@@ -68,11 +68,11 @@ export class AdminComponent implements OnInit {
     inputEl.value = inputEl.value.toLowerCase()
   }
 
-  insertCollection(name: string) {
+  insertCollection(name: string, cover: string) {
     this.msgs = []
     this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
     //this should include cover too, not just name
-    this.apiService.insertCollection(name).subscribe({
+    this.apiService.insertCollection(name, cover).subscribe({
       next: (result) => {
         this.msgs = []
         console.log(result)
