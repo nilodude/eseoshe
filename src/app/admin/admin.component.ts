@@ -71,7 +71,6 @@ export class AdminComponent implements OnInit {
   insertCollection(name: string, cover: string) {
     this.msgs = []
     this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
-    //this should include cover too, not just name
     this.apiService.insertCollection(name, cover).subscribe({
       next: (result) => {
         this.msgs = []
@@ -320,7 +319,6 @@ export class AdminComponent implements OnInit {
   drop(collectionName: string) {
     if (this.dragged) {
       this.dragged.collection = collectionName
-      //maybe its a good place to set the collection, depending on where it dropped
       let arr = this.uploadView ? this.loadedImages : this.noCollection
       let index = arr.indexOf(this.dragged)
       this.dropped[collectionName].push(this.dragged);
@@ -363,7 +361,6 @@ export class AdminComponent implements OnInit {
   }
 
   getB64Cover(coverName: string){
-    // let cover = this.covers.find(co=>co.file_name == coverName)
     let index = this.covers.findIndex(co=>co.file_name == coverName)
     let cover = ''
 

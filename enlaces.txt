@@ -90,7 +90,9 @@ solo front:
 	3. Quitar el scroll bar del cuadraito con el nombre de la colección. Alinear el texto de tipo Word - Centered. DONE
 	4. Añadir por lo menos una imagen de preview in cada cuadraito de la colección. Para yo ver a cual colección subo mis nuevas imagenes.
 		Si la colección tiene el nombre 1tpm, es poco descritivo y no me acuerdo q tipo de imagenes estan dentro. DONE
-	
+	5. New collection poner como un campo (donde se escribe el nombre de la nueva colección) y un boton al lado suya (+ Add), como lo de busqueda por ejemplo. 
+	Tiene q ser fijo siempre, en el mismo sitio.
+	when adding new collection, MUST select collection cover from existing images (or load new one) DONE
 
 
 	-hay que añadir el More... a la pantalla de inicio:
@@ -117,6 +119,3 @@ tambien necesita back:
 
 
 	
-5. New collection poner como un campo (donde se escribe el nombre de la nueva colección) y un boton al lado suya (+ Add), como lo de busqueda por ejemplo. 
-	Tiene q ser fijo siempre, en el mismo sitio.
-	when adding new collection, MUST select collection cover from existing images (or load new one)

@@ -30,25 +30,7 @@
 
                 <!-- UPLOAD FORM -->
                 <div class="flex justify-content-between align-items-center">
-                    <div class="newCollection">
-                        <!-- <div> -->
-                            <!-- <div class=""> -->
-                                <input class="newColField" required id="collection" type="text" [(ngModel)]="this.collection" placeholder="new collection name">
-                            <!-- </div> -->
-                            <!-- <div class=""> -->
-                                <select class="newColField" name="cover" id="cover" [(ngModel)]="this.cover" >
-                                    <ng-template ngFor let-cover [ngForOf]="this.notUsedCovers">
-                                        <option value={{cover.file_name}}>{{cover.file_name}}</option>
-                                    </ng-template>
-                                </select>
-                            <!-- </div> -->
-                        <!-- </div> -->
-                        <button class="{{this.cover == '' || this.collection == ''? 'disAddButton': 'addButton'}}" 
-                            [attr.disabled]="this.cover == '' || this.collection == '' ? true :null"
-                            (click)="insertCollection(this.collection, this.cover)">
-                            <i class="uploadIcon pi pi-plus"><span> ADD NEW COLLECTION</span></i>
-                        </button>
-                    </div>
+                    
                     <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
                     <div class="uploadForm">
                         <div>
@@ -79,6 +61,25 @@
                         </div>
                     </div>
                     </form>
+
+                    <div class="newCollection">
+                    
+                        <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection"
+                            placeholder="new collection name">
+                    
+                        <select class="newColField" name="cover" id="cover" [(ngModel)]="this.cover">
+                            <option value="" disabled selected>cover</option>
+                            <ng-template ngFor let-cover [ngForOf]="this.notUsedCovers">
+                                <option value={{cover.file_name}}>{{cover.file_name}}</option>
+                            </ng-template>
+                        </select>
+                    
+                        <button class="{{this.cover == '' || this.collection == ''? 'disAddButton': 'addButton'}}"
+                            [attr.disabled]="this.cover == '' || this.collection == '' ? true :null"
+                            (click)="insertCollection(this.collection, this.cover)">
+                            <i class="uploadIcon pi pi-plus"><span> ADD NEW COLLECTION</span></i>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <p-progressBar [value]="this.syncProgress"></p-progressBar>
