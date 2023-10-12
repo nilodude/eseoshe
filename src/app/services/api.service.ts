@@ -76,4 +76,7 @@ export class ApiService {
     return this.http.get<any>(this.apiUrl+'/collections/covers/all')
   }
 
+  setCover(im: any): Observable<any>{
+    return this.http.post<any>(this.apiUrl+'/collections/covers',{id: im.id_collection,cover: im.name })
+  }
 }

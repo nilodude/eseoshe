@@ -173,6 +173,17 @@ export class GalleryComponent implements OnInit {
     }
   }
   
+  setCover(im: any){
+    this.apiService.setCover(im).subscribe({
+      next: (result)=>{
+        console.log(result)
+      },
+      error: (error=>{
+        console.log(error)
+      })
+    })
+  }
+
   goHome(){
     //localStorage.clear();
     this.router.navigate(['/']);

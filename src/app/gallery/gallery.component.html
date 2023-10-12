@@ -167,6 +167,7 @@
                         <div class="zoomDiv" (click)="this.zoom(im)">
                             <img class="zoomIcon" src='../../assets/icons/zoom.svg' />
                         </div>
+                        <div *ngIf="this.admin" class="removeDiv" (click)="this.setCover(im)"><i class="removeIcon fa fa-th-large"></i></div>
                         <div *ngIf="this.admin" class="removeDiv" (click)="this.delete(im.id)"><i class="removeIcon fa fa-trash"></i></div>
                     </div>
                 </div>
