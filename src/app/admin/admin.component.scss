@@ -9,10 +9,11 @@
 }
 .collections{
     display:flex;
-    gap: 0.2vh;
+    gap: 0.15vh;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    margin: 1vh 0vh 1vh 0vh;
 }
 
 .dropZone{
@@ -20,13 +21,18 @@
     flex-direction: column;
     border: solid #5b179200 1px;
     margin: 1vh;
-    width:21vh;
-    height: 21vh;
+    width:22vh;
+    height: 22vh;
     overflow-y: auto;
     overflow-x: unset;
 }
-.dropZone:hover, .imTitle:hover{
+
+.dropZone:hover{
     border: solid #5b1792 1px;
+}
+
+.droppedTitle:hover{
+    background-color: rgba(0, 0, 0, 0.432);
 }
 
 .covers {
@@ -44,7 +50,7 @@
     font-size: 1.6vh;
     color: white;
     background-color: rgba(0, 0, 0, 0.28);
-    border-radius: 6px;
+    border-radius: 3px;
 }
 
 .dropTitle{
@@ -53,7 +59,8 @@
     z-index: 1008;
     color: white;
     background-color: #0003;
-    border-radius: 6px;
+    border-radius: 3px;
+    font-size: 1.7vh;
 }
 
 .imTitle{

@@ -13,7 +13,7 @@
                             
                             <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
                             <span class="dropTitle">
-                                <h4>{{collection.value}}-</h4><h4>{{collection.label}}</h4>
+                               {{collection.label}}
                             </span>
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
                                 <div class="droppedTitle flex flex-column" (click)="this.editImage(im)">
@@ -29,7 +29,7 @@
                 </div>
 
                 <!-- UPLOAD FORM -->
-                <div class="flex align-items-center">
+                <div class="flex justify-content-between align-items-center">
                     <div class="newCollection">
                         <!-- <div> -->
                             <!-- <div class=""> -->
@@ -61,19 +61,21 @@
                                 formControlName="fileNames">
                         </div>
                         <div class="flex justify-content-center align-items-center">
-                            <button class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
+                            <button pTooltip="{{this.isDroppedEmpty()? 'Must drop at least one image into some collection' : 'давай'}}" tooltipPosition="top" class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
                                 <label>
                                     <i class="uploadIcon pi pi-cloud-upload">
                                         <span> Upload</span>
                                     </i>
                                 </label>
                             </button>
+                            <!-- <ng-template #tooltipContent>
                             <span *ngIf="this.isDroppedEmpty()">
                                 Must drop at least one image into some collection 
                                 <i class="pi pi-arrow-up-left"></i>
                                 <i class="pi pi-arrow-up"></i>
                                 <i class="pi pi-arrow-up-right"></i>
                             </span>
+                            </ng-template> -->
                         </div>
                     </div>
                     </form>
