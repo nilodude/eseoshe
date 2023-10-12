@@ -7,19 +7,13 @@
                 <div class="collections">
                     <ng-template ngFor let-collection [ngForOf]="this.collections">
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                           
                             <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
-                            
-                            <!-- <span *ngIf="this.dropped.length == 0">drop here</span> -->
                             <span class="dropTitle">
                                {{collection.label}}
                             </span>
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
                                 <div class="droppedTitle flex flex-column" (click)="this.editImage(im)">
-                                    
-                                    <span>
-                                        <h5 class="imTitle">{{im.title}}</h5>
-                                    </span>
+                                    <span><h5 class="imTitle">{{im.title}}</h5></span>
                                 </div>
                             </ng-template>
                         </div>
@@ -28,7 +22,6 @@
                         <span class="dropTitle">NEW COLLECTION</span>
                         <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection"
                             placeholder="name">
-                        
                             <button class="{{this.collection == ''? 'disAddButton': 'addButton'}}"
                              [attr.disabled]="this.collection == '' ?true :null"
                               (click)="insertCollection(this.collection,this.cover)">
@@ -40,9 +33,8 @@
                 </div>
 
                 <!-- UPLOAD FORM -->
-                <div class="flex justify-content-between align-items-center">
-                    
-                    <form [formGroup]="uploadForm" (submit)="uploadToBackend()">
+                <div class="flex align-items-center">
+                    <form class="flex w-full" [formGroup]="uploadForm" (submit)="uploadToBackend()">
                     <div class="uploadForm">
                         <div>
                             <label for="fileNames">
@@ -54,43 +46,16 @@
                                 formControlName="fileNames">
                         </div>
                         <div class="flex justify-content-center align-items-center">
-                            <button pTooltip="{{this.isDroppedEmpty()? 'Must drop at least one image into some collection' : 'давай'}}" tooltipPosition="top" class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
+                            <button pTooltip="{{this.isDroppedEmpty()? 'Must drop at least one image into some collection' : 'давай'}}" tooltipPosition="left" class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
                                 <label>
                                     <i class="uploadIcon pi pi-cloud-upload">
                                         <span> Upload</span>
                                     </i>
                                 </label>
                             </button>
-                            <!-- <ng-template #tooltipContent>
-                            <span *ngIf="this.isDroppedEmpty()">
-                                Must drop at least one image into some collection 
-                                <i class="pi pi-arrow-up-left"></i>
-                                <i class="pi pi-arrow-up"></i>
-                                <i class="pi pi-arrow-up-right"></i>
-                            </span>
-                            </ng-template> -->
                         </div>
                     </div>
                     </form>
-
-                    <!-- <div class="newCollection"> -->
-                    
-                        <!-- <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection"
-                            placeholder="new collection name"> -->
-                    
-                        <!-- <select class="newColField" name="cover" id="cover" [(ngModel)]="this.cover">
-                            <option value="" disabled selected>cover</option>
-                            <ng-template ngFor let-cover [ngForOf]="this.notUsedCovers">
-                                <option value={{cover.file_name}}>{{cover.file_name}}</option>
-                            </ng-template>
-                        </select> -->
-                    
-                        <!-- <button class="{{this.cover == '' || this.collection == ''? 'disAddButton': 'addButton'}}"
-                            [attr.disabled]="this.cover == '' || this.collection == '' ? true :null"
-                            (click)="insertCollection(this.collection, this.cover)">
-                            <i class="uploadIcon pi pi-plus"><span> ADD NEW COLLECTION</span></i>
-                        </button> -->
-                    <!-- </div> -->
                 </div>
                 <div>
                     <p-progressBar [value]="this.syncProgress"></p-progressBar>
@@ -141,7 +106,6 @@
             </div>
         </ng-template>
     </p-splitter>
-
 </div>
 
 <div *ngIf="this.showResult">
