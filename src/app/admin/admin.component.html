@@ -5,19 +5,6 @@
             <div class="flex flex-column flex-grow-1">
                 <!-- DROP ZONE -->
                 <div class="collections">
-                    <ng-template ngFor let-collection [ngForOf]="this.collections">
-                        <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)">
-                            <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
-                            <span class="dropTitle">
-                               {{collection.label}}
-                            </span>
-                            <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
-                                <div class="droppedTitle flex flex-column" (click)="this.editImage(im)">
-                                    <span><h5 class="imTitle">{{im.title}}</h5></span>
-                                </div>
-                            </ng-template>
-                        </div>
-                    </ng-template>
                     <div class="dropZone">
                         <span class="dropTitle">NEW COLLECTION</span>
                         <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection"
@@ -30,6 +17,19 @@
                             </i>
                         </button>
                     </div>
+                    <ng-template ngFor let-collection [ngForOf]="this.collections">
+                        <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)" (mouseenter)="this.showDropped[collection.label] = true" (mouseleave)="this.showDropped[collection.label] = false">
+                            <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
+                            <span class="dropTitle">
+                               {{collection.label}}
+                            </span>
+                            <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
+                                <div *ngIf="this.showDropped[collection.label]" class="droppedTitle flex flex-column" (click)="this.editImage(im)">
+                                    <span><h5 class="imTitle">{{im.title}}</h5></span>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </ng-template>
                 </div>
 
                 <!-- UPLOAD FORM -->
@@ -93,7 +93,7 @@
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField p-float-label">
                             <input class="title" type="text" id="title" pInputText formControlName="title" maxlength="200" (input)="onEdit()">
-                            <label for="title"><span>title ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
+                            <label for="title"><span>Description ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
                         </div>
                         <div class="editField">
                             <!-- need to check if this.image.keywords length is > 29 -->

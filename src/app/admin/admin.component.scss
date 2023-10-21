@@ -38,8 +38,9 @@
 .covers {
     max-width: inherit;
     width: inherit;
-    position: fixed;
-    filter: blur(3px);
+    position: absolute;
+    // filter: blur(1px);
+    z-index: 1009;
 }
 
 .droppedTitle {
@@ -51,12 +52,13 @@
     color: white;
     background-color: rgba(0, 0, 0, 0.28);
     border-radius: 3px;
+    z-index: 1009;
 }
 
 .dropTitle{
     display: flex;
     justify-content: center;
-    z-index: 1008;
+    z-index: 1009;
     color: white;
     background-color: #0003;
     border-radius: 3px;
@@ -100,8 +102,6 @@ input#fileNames{
     font-size: 1.5vh;
 }
 
-
-
 .folderIcon, .uploadIcon{
     color: #495057;
     border: 3px outset #ddddddab;
@@ -113,7 +113,6 @@ input#fileNames{
     align-items: center;
     gap: 0.4vh;
 }
-
 
 .folderIcon:hover, .uploadIcon:hover{
     background-color: #ddddddab;
@@ -150,8 +149,6 @@ input#fileNames{
     max-height: 29vh;
     width: auto;
 }
-
-
 
 
 .editZone{
@@ -192,6 +189,7 @@ input#fileNames{
     font-family: monospace;
     color: black;
     background: #F0F0F0;
+    border: 1px solid #00000045;
 }
 
 :host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-input-token input{

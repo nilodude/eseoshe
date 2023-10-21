@@ -43,6 +43,8 @@ export class AdminComponent implements OnInit {
   dragged: any = {}
   dropped: any = {}
 
+  showDropped: boolean[] = [false]
+
   uploadView: boolean = false;
 
   uploadResult: any[] = [{ inserted: [], resized: [], updated: [] }];
@@ -321,10 +323,15 @@ export class AdminComponent implements OnInit {
       this.dragged.collection = collectionName
       let arr = this.uploadView ? this.loadedImages : this.noCollection
       let index = arr.indexOf(this.dragged)
-      this.dropped[collectionName].push(this.dragged);
-      arr.splice(index, 1);
-      console.log('dropped:', this.dropped)
-      this.dragged = null;
+      if(index != -1){
+        this.dropped[collectionName].push(this.dragged);
+        arr.splice(index, 1);
+        console.log('dropped:', this.dropped)
+        this.dragged = null;
+      }else{
+        //already dropped image
+      }
+     
     }
   }
 
@@ -398,7 +405,6 @@ export class AdminComponent implements OnInit {
       }
     });
   }
-
 
   resetDropped() {
     this.collections.map((c: { label: string }) => this.dropped[c.label] = [])
