@@ -135,6 +135,10 @@ CURRENT:
 
 	-al seleccionar imagen de portada se va automaticamente a la imagen. corregir clic
 
+	-keyword title y results must have constant width so searchBar doesnt dance depending on results digits
+
+	-when refreshing (f5) after "empty search!" msg appears, it DOES an empty search (request with keyword = " "). LOL
+
 	tambien necesita back:
 		-likes y el perfil de usuario
 

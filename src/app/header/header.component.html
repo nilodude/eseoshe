@@ -10,22 +10,26 @@
 
   <div class="search-container flex-grow-1 sm:flex-grow-0">
     <form class="searchForm" [formGroup]="searchForm" (submit)="search()">
-      <div class="flex flex-grow-1 align-items-center"><input type="text" placeholder="Search by keywords..." formControlName="keywords"></div>
-      <div class="flex align-items-center"><button type="submit"><i class="fa fa-search"></i></button></div>
+      <div class="flex flex-grow-1 align-items-center">
+        <input type="text" placeholder="Search by keywords..." formControlName="keywords">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </div>
       <div class="flex justify-content-end align-items-center"><i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i></div>
       
     </form>
     <p-messages [(value)]="msgs"></p-messages>
   </div>
 
-  <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="title">
-    <div *ngIf="this.isDataRetrieved" class="title flex align-items-center">
-      <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span><span> ({{this.numResults}} results)</span>
+  <div class="title">
+    <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="flex align-items-center">
+      <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span>
+      <span> ({{this.numResults}} results)</span>
     </div>
   </div>
   
-  <div class="userPanel">
-    <button (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
+  <div  class="userPanel">
+    <button *ngIf="!['admin'].includes(this.view)"
+     (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
       class="p-button-raised p-button-secondary p-button-text"></button>
   </div>
 </div>
