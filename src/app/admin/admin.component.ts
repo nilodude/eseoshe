@@ -154,7 +154,7 @@ export class AdminComponent implements OnInit {
           //     console.error(error)
           //   }
           // })
-          let result ={keywords:[{keyword:'key'+f.name}]}
+          let result ={keywords:[]}
           let formKeywords = result?.keywords.map((k: any) => k.keyword)
           this.parseLoadedImage(f, b64, metadata,formKeywords)
         } 
@@ -175,9 +175,9 @@ export class AdminComponent implements OnInit {
       id: null,
       name: f.name,
       b64: b64,
-      title: title ?? f.name,
+      title: title ?? '',
       liked: '',
-      keywords: fileKeywords ?? formKeywords ?? ['dummyKeyword'+f.name],
+      keywords: fileKeywords ?? formKeywords ?? [],
       size: size,
       id_collection: null
     })

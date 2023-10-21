@@ -180,6 +180,7 @@ input#fileNames{
 .title{
     align-items: stretch;
     font-size: 2vh;
+    font-family: monospace;
 }
 
 :host ::ng-deep .p-chips.p-component{
@@ -189,12 +190,19 @@ input#fileNames{
 :host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-token{
     font-size: 1.5vh;
     font-family: monospace;
+    color: black;
+    background: #F0F0F0;
 }
 
 :host ::ng-deep .p-chips .p-chips-multiple-container .p-chips-input-token input{
     font-size: 1.5vh;
     font-family: monospace;
 }
+
+.p-float-label input:focus ~ label{
+    font-size: inherit;
+}
+
 .resultPopup{
     position:absolute;
     top:0;
