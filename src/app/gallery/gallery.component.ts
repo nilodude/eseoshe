@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem, SelectItem } from 'primeng/api';
+import { ConfirmationService, MenuItem, Message, SelectItem } from 'primeng/api';
 import { Router } from '@angular/router';
 import { ApiService } from './../services/api.service';
 import { Observable, of } from 'rxjs';
@@ -12,6 +12,7 @@ import { environment } from './../../environments/environment';
   providers: [ConfirmationService]
 })
 export class GalleryComponent implements OnInit {
+  msgs: Message[] = []
   view: string = 'collection' || 'keywords';
   fullTitle: boolean = false;
 
@@ -174,9 +175,12 @@ export class GalleryComponent implements OnInit {
   }
   
   setCover(im: any){
+    this.clickedOverlay = true;
     this.apiService.setCover(im).subscribe({
       next: (result)=>{
         console.log(result)
+        this.msgs = []
+        this.msgs.push({ severity: 'success', summary: 'Collection cover updated!' })
       },
       error: (error=>{
         console.log(error)
