@@ -133,6 +133,22 @@ input#fileNames{
     color: #cbcbcb;
 }
 
+.uploadButton,.disUploadButton{
+    background-color: #5fc85f !important;
+    border-radius: 10px;
+}
+
+.uploadButton .uploadIcon, .disUploadButton .uploadIcon{
+    padding: 2vh 2vh;
+    border: 3px outset rgba(221, 221, 221, 0.6705882353);
+    border-radius: 10px;
+    font-size: 2vh;
+}
+
+.uploadButton .uploadIcon{
+    color:#ffffff;
+}
+
 [pDraggable] {
     cursor: move;
 }
