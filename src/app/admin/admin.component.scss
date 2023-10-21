@@ -19,7 +19,7 @@
 .dropZone{
     display:flex;
     flex-direction: column;
-    border: solid #5b179200 1px;
+    // border: solid #5b179200 1px;
     margin: 1vh;
     width:22vh;
     height: 22vh;
@@ -27,12 +27,19 @@
     overflow-x: unset;
 }
 
-.dropZone:hover{
-    border: solid #5b1792 1px;
+.dropTitle{
+    display: flex;
+    justify-content: center;
+    z-index: 1009;
+    color: white;
+    background-color: #0003;
+    font-size: 1.7vh;
+    backdrop-filter: blur(3px);
+    border-radius: 2px 2px 0px 0px;
 }
-
-.droppedTitle:hover{
-    background-color: rgba(0, 0, 0, 0.432);
+.dropZone:hover{
+    // border: solid #5b1792 1px;
+    opacity: 0.95;
 }
 
 .covers {
@@ -41,6 +48,7 @@
     position: absolute;
     // filter: blur(1px);
     z-index: 1009;
+    border-radius: 2px;
 }
 
 .droppedTitle {
@@ -54,15 +62,8 @@
     border-radius: 3px;
     z-index: 1009;
 }
-
-.dropTitle{
-    display: flex;
-    justify-content: center;
-    z-index: 1009;
-    color: white;
-    background-color: #0003;
-    border-radius: 3px;
-    font-size: 1.7vh;
+.droppedTitle:hover{
+    background-color: rgba(0, 0, 0, 0.432);
 }
 
 .imTitle{
@@ -114,8 +115,12 @@ input#fileNames{
     gap: 0.4vh;
 }
 
-.folderIcon:hover, .uploadIcon:hover{
+.folderIcon:hover{
     background-color: #ddddddab;
+}
+
+.uploadIcon:hover{
+    background-color: rgba(221, 221, 221, 0.3);
 }
 
 .uploadButton,.disUploadButton, .addButton, .disAddButton{
@@ -134,15 +139,14 @@ input#fileNames{
 }
 
 .uploadButton,.disUploadButton{
-    background-color: #5fc85f !important;
-    border-radius: 10px;
-}
-
-.uploadButton .uploadIcon, .disUploadButton .uploadIcon{
-    padding: 2vh 2vh;
-    border: 3px outset rgba(221, 221, 221, 0.6705882353);
-    border-radius: 10px;
-    font-size: 2vh;
+    background-color: #5fc874 !important;
+    border-radius: 5px;
+    .uploadIcon{
+        padding: 1vh 2vh;
+        border: 3px outset rgba(221, 221, 221, 0.6705882353);
+        border-radius: 5px;
+        font-size: 2vh;
+    }
 }
 
 .uploadButton .uploadIcon{
