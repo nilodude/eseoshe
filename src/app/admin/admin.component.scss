@@ -19,7 +19,6 @@
 .dropZone{
     display:flex;
     flex-direction: column;
-    // border: solid #5b179200 1px;
     margin: 1vh;
     width:22vh;
     height: 22vh;
@@ -38,7 +37,6 @@
     border-radius: 2px 2px 0px 0px;
 }
 .dropZone:hover{
-    // border: solid #5b1792 1px;
     opacity: 0.95;
 }
 
@@ -46,7 +44,6 @@
     max-width: inherit;
     width: inherit;
     position: absolute;
-    // filter: blur(1px);
     z-index: 1009;
     border-radius: 2px;
 }
@@ -127,10 +124,6 @@ input#fileNames{
     border: unset;
     background-color: unset;
     padding: unset;
-}
-
-.disUploadButton, .disAddButton{
-    color:#ffffff;
 }
 
 .disUploadButton .uploadIcon, .disAddButton .uploadIcon{
