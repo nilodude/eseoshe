@@ -92,7 +92,7 @@
                 <div class="editForm">
                     <form [formGroup]="editForm" class="editForm">
                         <div class="editField p-float-label">
-                            <input class="title" type="text" id="title" pInputText formControlName="title" maxlength="200" (input)="onEdit()">
+                            <input class="title" type="text" id="title" pInputText formControlName="title" maxlength="200" (input)="onEdit($event)">
                             <label for="title"><span>Description ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
                         </div>
                         <div class="editField">

@@ -29,6 +29,77 @@ export class AdminComponent implements OnInit {
     keywords: new FormControl('', Validators.required)
   });
   
+  excluded: string[] = ['aboard',
+  'about',
+  'above',
+  'across',
+  'after',
+  'against',
+  'along',
+  'amid',
+  'among',
+  'anti',
+  'around',
+  'as',
+  'at',
+  'before',
+  'behind',
+  'below',
+  'beneath',
+  'beside',
+  'besides',
+  'between',
+  'beyond',
+  'but',
+  'by',
+  'concerning',
+  'considering',
+  'despite',
+  'down',
+  'during',
+  'except',
+  'excepting',
+  'excluding',
+  'following',
+  'for',
+  'from',
+  'in',
+  'inside',
+  'into',
+  'like',
+  'minus',
+  'near',
+  'of',
+  'off',
+  'on',
+  'onto',
+  'opposite',
+  'outside',
+  'over',
+  'past',
+  'per',
+  'plus',
+  'regarding',
+  'round',
+  'save',
+  'since',
+  'than',
+  'through',
+  'to',
+  'toward',
+  'towards',
+  'under',
+  'underneath',
+  'unlike',
+  'until',
+  'up',
+  'upon',
+  'versus',
+  'via',
+  'with',
+  'within',
+  'without']
+
   files: File[] = [];
   allFiles: File[] = [];
   
@@ -347,8 +418,15 @@ export class AdminComponent implements OnInit {
     this.showIm = true
   }
 
-  onEdit() {
+  onEdit(event: any) {
     this.image.title = this.editForm.value.title ?? ''
+    if(event.data == ' '){
+      this.image.title.split(' ').filter((word:any)=>
+        word != '' && !this.image.keywords.includes(word.toLowerCase()) && !this.excluded.includes(word.toLowerCase())).forEach((w:any) => {
+        this.image.keywords.push(w.toLowerCase())
+      });
+    }
+    console.log(event.data)
   }
 
   getCovers(){
