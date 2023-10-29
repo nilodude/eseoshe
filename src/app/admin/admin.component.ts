@@ -80,7 +80,7 @@ export class AdminComponent implements OnInit {
   'per',
   'plus',
   'regarding',
-  'round',
+  // 'round',
   'save',
   'since',
   'than',
@@ -424,6 +424,7 @@ export class AdminComponent implements OnInit {
       this.image.title.split(' ').filter((word:any)=>
         word != '' && !this.image.keywords.includes(word.toLowerCase()) && !this.excluded.includes(word.toLowerCase())).forEach((w:any) => {
         this.image.keywords.push(w.toLowerCase())
+        this.editForm.controls["keywords"].setValue(this.image.keywords)
       });
     }
     console.log(event.data)
