@@ -5,7 +5,7 @@
             <div class="flex flex-column flex-grow-1">
                 <!-- DROP ZONE -->
                 <div class="collections">
-                    <div class="dropZone">
+                    <div class="dropZone flexColumn">
                         <span class="dropTitle">NEW COLLECTION</span>
                         <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection" placeholder="name">
                         <button pTooltip="{{this.collection == ''? 'Must enter name' : 'Add new collection'}}" tooltipPosition="bottom" class="{{this.collection == ''? 'disAddButton': 'addButton'}}"
@@ -14,7 +14,7 @@
                         </button>
                     </div>
                     <ng-template ngFor let-collection [ngForOf]="this.collections">
-                        <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)" (mouseenter)="this.showDropped[collection.label] = true" (mouseleave)="this.showDropped[collection.label] = false">
+                        <div class="dropZone flexColumn" pDroppable="loaded" (onDrop)="drop(collection.label)" (mouseenter)="this.showDropped[collection.label] = true" (mouseleave)="this.showDropped[collection.label] = false">
                             <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
                             <span class="dropTitle">
                                {{collection.label}} <div class="removeDiv" (click)="this.removeCollection(collection.value)"><i class="removeIcon fa fa-trash"></i></div> 
@@ -85,13 +85,13 @@
                 <div class="editImage" pDraggable="loaded" (onDragStart)="dragStart(this.image)" (onDragEnd)="dragEnd()">
                     <img class="imEdit" src="{{ this.image.b64 }}">
                 </div>
-                <div class="editForm">
-                    <form [formGroup]="editForm" class="editForm">
-                        <div class="editField p-float-label">
+                <div class="editForm flexColumn">
+                    <form [formGroup]="editForm" class="editForm flexColumn">
+                        <div class="editField flexColumn p-float-label">
                             <input class="title" type="text" id="title" pInputText formControlName="title" maxlength="200" (input)="onEdit($event)">
                             <label for="title"><span>Description ({{this.editForm.value.title?.length}}/{{'200'}})</span></label>
                         </div>
-                        <div class="editField">
+                        <div class="editField flexColumn">
                             <!-- need to check if this.image.keywords length is > 29 -->
                             <label for="keywords"><span>keywords ({{this.image.keywords.length}}/{{'30'}})</span></label>
                             <p-chips class="keywords" formControlName="keywords" (input)="keyInput()">
@@ -111,7 +111,7 @@
         <ng-template ngFor let-colUpload [ngForOf]="this.uploadResult">
             <div class="collectionResult">
                 <span class="colTitle">/{{colUpload.collection}}</span>
-                <div class="arrayResult insertResult" *ngIf="colUpload.inserted?.length > 0">
+                <div class="arrayResult insertResult flexColumn" *ngIf="colUpload.inserted?.length > 0">
                     <span>inserted:</span>
                     <ng-template ngFor let-inserted [ngForOf]="colUpload.inserted">
                         <div class="arrayElement flex flex-column">
@@ -121,7 +121,7 @@
                         </div>
                     </ng-template>
                 </div>
-                <div class="arrayResult updatedResult" *ngIf="colUpload.updated?.length > 0">
+                <div class="arrayResult updatedResult flexColumn" *ngIf="colUpload.updated?.length > 0">
                     <span>updated:</span>
                     <ng-template ngFor let-updated [ngForOf]="colUpload.updated">
                         <div class="arrayElement flex flex-column">
@@ -131,7 +131,7 @@
                         </div>
                     </ng-template>
                 </div>
-                <div class="arrayResult resizeResult" *ngIf="colUpload.resized?.length > 0">
+                <div class="arrayResult resizeResult flexColumn" *ngIf="colUpload.resized?.length > 0">
                     <span>resized:</span>
                     <ng-template ngFor let-resized [ngForOf]="colUpload.resized">
                         <div class="arrayElement resizeElement flex flex-column">

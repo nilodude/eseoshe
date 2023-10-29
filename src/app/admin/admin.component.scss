@@ -1,3 +1,8 @@
+.flexColumn{
+    display:flex;
+    flex-direction: column;
+}
+
 :host ::ng-deep .p-splitter-panel-nested{
     justify-content: center;
 }
@@ -17,8 +22,6 @@
 }
 
 .dropZone{
-    display:flex;
-    flex-direction: column;
     margin: 1vh;
     width:22vh;
     height: 22vh;
@@ -92,8 +95,6 @@ input#fileNames{
 }
 
 .editField{
-    display:flex;
-    flex-direction: column;
     gap: 1vh;
     font-size: 1.5vh;
 }
@@ -127,12 +128,7 @@ input#fileNames{
     justify-content: center;
 }
 
-.disUploadButton .uploadIcon, .disAddButton .uploadIcon{
-    background-color: #fff;
-    color: #cbcbcb;
-}
-
-.disAddButton .addIcon{
+.disUploadButton .uploadIcon, .disAddButton .addIcon{
     background-color: #fff;
     color: #cbcbcb;
 }
@@ -190,8 +186,6 @@ input#fileNames{
 }
 
 .editForm{
-    display:flex;
-    flex-direction: column;
     width:100%;
     gap: 3vh;
     align-items: stretch;
@@ -239,7 +233,7 @@ input#fileNames{
     );
     opacity: 0.99;
     backdrop-filter: blur(4px);
-    z-index: 1111;
+    z-index: 1113;
 }
 
 .uploadResult{
@@ -286,8 +280,6 @@ input#fileNames{
 }
 
 .insertResult,.resizeResult,.updatedResult{
-    display:flex;
-    flex-direction: column;
     gap: 1.2vh;
 }
 
