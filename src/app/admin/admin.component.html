@@ -17,7 +17,7 @@
                         <div class="dropZone" pDroppable="loaded" (onDrop)="drop(collection.label)" (mouseenter)="this.showDropped[collection.label] = true" (mouseleave)="this.showDropped[collection.label] = false">
                             <img class="covers" src="data:image/png;base64,{{ collection.b64 }}">
                             <span class="dropTitle">
-                               {{collection.label}}
+                               {{collection.label}} <div class="removeDiv" (click)="this.removeCollection(collection.value)"><i class="removeIcon fa fa-trash"></i></div> 
                             </span>
                             <ng-template ngFor let-im [ngForOf]="this.dropped[collection.label]">
                                 <div *ngIf="this.showDropped[collection.label]" class="droppedTitle flex flex-column" (click)="this.editImage(im)">

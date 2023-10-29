@@ -79,4 +79,8 @@ export class ApiService {
   setCover(im: any): Observable<any>{
     return this.http.post<any>(this.apiUrl+'/collections/covers',{id: im.id_collection,cover: im.name })
   }
+
+  removeCollection(id: number): Observable<any>{
+    return this.http.delete<any>(this.apiUrl+'/collections/'+id)
+  }
 }

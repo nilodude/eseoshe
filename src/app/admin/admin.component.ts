@@ -488,4 +488,25 @@ export class AdminComponent implements OnInit {
   resetDropped() {
     this.collections.map((c: { label: string }) => this.dropped[c.label] = [])
   }
+
+  removeCollection(id: number){
+    this.msgs = [];
+    this.msgs.push({ severity: 'info', summary: 'Removing collection...' })
+    this.apiService.removeCollection(id).subscribe({
+      next: (result)=>{
+        this.msgs = [];
+        console.log(result)
+        this.msgs.push({ severity: 'success', summary: 'Collection removed!' })
+        this.isDataRetrieved = true
+        this.getCovers();
+      },
+      error: (error)=>{
+        this.msgs = [];
+        let msg = error.error?.message ?? 'Error removing collection'
+        console.log(msg)
+        this.isDataRetrieved = true
+        this.msgs.push({ severity: 'error', summary: msg })
+      }
+    })
+  }
 }
