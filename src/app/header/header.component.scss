@@ -3,7 +3,6 @@
   top: 2%;
   display: flex;
   justify-content: space-between;
-  //background-color: rgba(226, 226, 226, 0.9);
   background-color: rgba(240, 240, 240, 0.74);
   backdrop-filter: blur(7px);
   align-items: center;
@@ -17,13 +16,20 @@
 .search-container{
   display: flex;
   flex-direction: row;;
-  flex-basis: 35%;
-  justify-content: space-between;
+  width: 30%;
 }
 
 .searchForm{
   display: flex;
-  flex-basis: 60%;
+  width: 56%;
+  gap: 0.5vh;
+}
+
+.searchField{
+  width: 90%;
+}
+.spinner{
+  width: 10%;
 }
 
 .search-container button {
@@ -56,10 +62,6 @@ input[type=text] {
   color: #cdb700;
 }
 
-:host ::ng-deep .p-message.p-message-success, :host ::ng-deep .p-message.p-message-success .p-message-close{
-  // color: #cdb700;
-}
-
 :host ::ng-deep .p-message .p-message-wrapper{
   padding: unset;
   white-space: nowrap;
@@ -69,12 +71,11 @@ input[type=text] {
   display: none;
 }
 
-
 .title {
   letter-spacing: 0.2vh;
   font-size: 1.6vh;
-  margin-right: 2vh;
   white-space: nowrap;
+  width: 12%;
 }
 
 .userPanel{
@@ -87,4 +88,3 @@ input[type=text] {
 .userPanel .p-button{
   padding: 0.5vh 0.4vh;
 }
-

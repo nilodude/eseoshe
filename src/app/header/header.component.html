@@ -8,13 +8,15 @@
       (changeCollection)="this.changeCollection()" [collections]="this.collections"> </app-breadcrumb>
   </div>
 
-  <div class="search-container flex-grow-1 sm:flex-grow-0">
+  <div class="search-container">
     <form class="searchForm" [formGroup]="searchForm" (submit)="search()">
-      <div class="flex flex-grow-1 align-items-center">
+      <div class="searchField flex align-items-center">
         <input type="text" placeholder="Search by keywords..." formControlName="keywords">
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
-      <div class="flex justify-content-end align-items-center"><i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i></div>
+      <div class="spinner flex justify-content-end align-items-center">
+        <i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i>
+      </div>
       
     </form>
     <p-messages [(value)]="msgs"></p-messages>
