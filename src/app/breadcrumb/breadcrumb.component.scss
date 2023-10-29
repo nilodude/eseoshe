@@ -17,16 +17,16 @@
     font-size: 1.6vh;
     white-space: nowrap;
 }
+@media (min-width: 800px){
 .breadcrumbString:hover{
-    letter-spacing: 0.5vh;
-    //font-size: 1.8vh;
+    letter-spacing: 0.35vh;
 }
-
+}
 :host ::ng-deep .ng-trigger.ng-trigger-overlayAnimation.p-dropdown-panel.p-component.ng-star-inserted {
     z-index: 1112 !important;
     background-color: rgba(240, 240, 240, 0.74);//rgba(226, 226, 226, 0.65);
     border: none;
-    top: 5.2vh !important;
+    top: 4vh !important;
     left: -2vh !important;
     backdrop-filter: blur(7px);
 }
@@ -52,6 +52,11 @@
     padding-left:0%;
 }
 
+@media (max-width: 812px){
+    :host ::ng-deep .p-dropdown-label.p-inputtext{
+        display: none;
+    }
+}
 :host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
     color: rgb(255, 255, 255);
     transition: .3s cubic-bezier(0.165, 1, 0.44, 1);

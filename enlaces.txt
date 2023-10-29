@@ -134,7 +134,8 @@ SOLO FRONT:
 
 	-when refreshing (f5) after "empty search!" msg appears, it DOES an empty search (request with keyword = " "). LOL
 
-	-en general la pantalla de movil hay que revisarla por completo, searchBar, zoom, font-size y algunas cosas mas que no se ven bien
+	-en general la pantalla de movil hay que revisarla por completo, searchBar, zoom, font-size y algunas cosas mas que no se ven bien:
+		-el breadcrumb, searchBar, results, y userPanel hay que rediseñarlos en 2 lineas para la pantalla de movil
 
 TAMBIEN NECESITA BACK:
 	-likes y el perfil de usuario
