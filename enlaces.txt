@@ -104,6 +104,7 @@ solo front:
 	9.	Quitar el nombre de archivo desde el campo de title. Poner palabra "Description" gris claro (9.1). 
 		Al pulsar a ese campo la palabla Description debe desaparecer y aparecer el activo el cursor. DONE
 	10. New collection. Anadir un combo a la viste con colecciones (10.jpg). Al pulsar al (+) aparece el popup (10.1). DONE
+	10. New Collection hacer boton "algo menos botón".DONE
 	12. Separar el title por las palabras. Añadirlas como keywords (12.jpg). 
 		Excluir prepositions como "as", "in", "on", "the","of", "to" 
 		-AL ESCRIBIR PALABRAS EN EL TITULO, (EXCLUYENDO LO EXLUIBLE) SE AÑADEN AUTOMATICAMENTE A LOS KEYWORDS
@@ -118,12 +119,11 @@ solo front:
 		-CORREGIR POSITION FIXED DE LAS PORTADAS DE LAS COLLECTIONS. DONE
 
 	-al seleccionar imagen de portada se va automaticamente a la imagen. corregir clic. DONE
+	-keyword title y results must have constant width so searchBar doesnt dance depending on results digits. DONE?
 -----------------------------------------
 CURRENT:
 
 SOLO FRONT:
-
-	10. New Collection hacer boton "algo menos botón"
 
 	-hay que añadir el More... a la pantalla de inicio:
 		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
@@ -132,9 +132,9 @@ SOLO FRONT:
 
 	-se podria quitar el imageName del breadCrumb en pantalla pequeña
 
-	-keyword title y results must have constant width so searchBar doesnt dance depending on results digits
-
 	-when refreshing (f5) after "empty search!" msg appears, it DOES an empty search (request with keyword = " "). LOL
+
+	-en general la pantalla de movil hay que revisarla por completo, searchBar, zoom, font-size y algunas cosas mas que no se ven bien
 
 TAMBIEN NECESITA BACK:
 	-likes y el perfil de usuario
