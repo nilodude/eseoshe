@@ -102,47 +102,43 @@ solo front:
 	DONE
 	8.  La imagen de la portada de una coleccion tiene que aparecer entre las imagenes de la misma colleccion y ser visible para usuario. DONE
 	9.	Quitar el nombre de archivo desde el campo de title. Poner palabra "Description" gris claro (9.1). 
-	Al pulsar a ese campo la palabla Description debe desaparecer y aparecer el activo el cursor. DONE
+		Al pulsar a ese campo la palabla Description debe desaparecer y aparecer el activo el cursor. DONE
 	10. New collection. Anadir un combo a la viste con colecciones (10.jpg). Al pulsar al (+) aparece el popup (10.1). DONE
-
+	12. Separar el title por las palabras. Añadirlas como keywords (12.jpg). 
+		Excluir prepositions como "as", "in", "on", "the","of", "to" 
+		-AL ESCRIBIR PALABRAS EN EL TITULO, (EXCLUYENDO LO EXLUIBLE) SE AÑADEN AUTOMATICAMENTE A LOS KEYWORDS
+	13. Cambiar el estilo de boton Upload (13.jpg). Hacerlo como 13.1.jpg. Por favor ;)
+		-SIMPLEMENTE HACERLO CLARAMENTE DISTINTO AL RESTO DE BOTONES
 	14. Intentar quitar el blur de las portadas de las colecciones. Es importante ver que image/pattern/texture exactamente hay en una coleccion.
-	-entonces no se puede leer bien los nombres de las imagenes añadidas pa upload
-	-MOSTRAR LISTA DE IMAGENES SOLO HOVER. DONE
+		-entonces no se puede leer bien los nombres de las imagenes añadidas pa upload
+		-MOSTRAR LISTA DE IMAGENES SOLO HOVER. DONE
 	15. <<Punto 4. Corecciones>>. Poder crear una nueva coleccion sin portada. 
-	Despues de subir las imagenes a esa coleccion, dentor de esa coleccion marcar una de las imagenes como la portada. DONE
+		Despues de subir las imagenes a esa coleccion, dentor de esa coleccion marcar una de las imagenes como la portada. DONE
 
-	-CORREGIR POSITION FIXED DE LAS PORTADAS DE LAS COLLECTIONS. DONE
+		-CORREGIR POSITION FIXED DE LAS PORTADAS DE LAS COLLECTIONS. DONE
+
+	-al seleccionar imagen de portada se va automaticamente a la imagen. corregir clic. DONE
 -----------------------------------------
 CURRENT:
 
-10. New Collection hacer boton "algo menos botón"
+SOLO FRONT:
 
-12. Separar el title por las palabras. Añadirlas como keywords (12.jpg). 
-	Excluir prepositions como "as", "in", "on", "the","of", "to" 
-	
-	-AL ESCRIBIR PALABRAS EN EL TITULO, (EXCLUYENDO LO EXLUIBLE) SE AÑADEN AUTOMATICAMENTE A LOS KEYWORDS
-
-13. Cambiar el estilo de boton Upload (13.jpg). Hacerlo como 13.1.jpg. Por favor ;)
-	-SIMPLEMENTE HACERLO CLARAMENTE DISTINTO AL RESTO DE BOTONES
-	
+	10. New Collection hacer boton "algo menos botón"
 
 	-hay que añadir el More... a la pantalla de inicio:
 		-al pulsar More, probar a renderizar "OTRO crazygrid" con las collections que no se muestren al principio.
+
 	-hay que arreglar el zoom desde gallery en pantalla pequeña, a lo mejor se puede quitar
-	-en la vista de imagen, hay que resaltar visualmente el keyword recien buscado
 
 	-se podria quitar el imageName del breadCrumb en pantalla pequeña
-
-	-al seleccionar imagen de portada se va automaticamente a la imagen. corregir clic
 
 	-keyword title y results must have constant width so searchBar doesnt dance depending on results digits
 
 	-when refreshing (f5) after "empty search!" msg appears, it DOES an empty search (request with keyword = " "). LOL
 
-	tambien necesita back:
-		-likes y el perfil de usuario
+TAMBIEN NECESITA BACK:
+	-likes y el perfil de usuario
 
-		11. Añadir la posibilidad guardar las imagenes subidas pero no uploaded en un "limbo" y que esas imagenes aparezcan en el campo de "Files to upload" (11.jpg).
-		-como ya hemos hablado, es una happy idea que ha aparecido despues de que ya estuviera programado el funcionamiento del upload
-		eso cambia DRASTICAMENTE el funcionamento del upload
+	11. Añadir la posibilidad guardar las imagenes subidas pero no uploaded en un "limbo" y que esas imagenes aparezcan en el campo de "Files to upload" (11.jpg).
+		-eso cambia DRASTICAMENTE el funcionamento del upload
 		-se hará mas adelante.
