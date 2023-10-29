@@ -7,14 +7,10 @@
                 <div class="collections">
                     <div class="dropZone">
                         <span class="dropTitle">NEW COLLECTION</span>
-                        <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection"
-                            placeholder="name">
-                            <button class="{{this.collection == ''? 'disAddButton': 'addButton'}}"
-                             [attr.disabled]="this.collection == '' ?true :null"
-                              (click)="insertCollection(this.collection,this.cover)">
-                            <i class="uploadIcon pi pi-plus">
-                                <span> ADD</span>
-                            </i>
+                        <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection" placeholder="name">
+                        <button pTooltip="{{this.collection == ''? 'Must enter name' : 'Add new collection'}}" tooltipPosition="bottom" class="{{this.collection == ''? 'disAddButton': 'addButton'}}"
+                                [attr.disabled]="this.collection == '' ?true :null" >
+                                <i class="addIcon pi pi-plus" (click)="insertCollection(this.collection,this.cover)"></i>
                         </button>
                     </div>
                     <ng-template ngFor let-collection [ngForOf]="this.collections">

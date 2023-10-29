@@ -80,13 +80,11 @@
     justify-content: space-between;
 }
 
-.newCollection{
-    display:flex;
-    align-items: center;
-    .newColField{
-        font-size: 1.5vh;
-        padding: 0.54vh;
-    }
+.newColField{
+    font-size: 1.5vh;
+    padding: 0.54vh;
+    margin-top: 6vh;
+    border: 1px solid #ddddddab;
 }
 
 input#fileNames{
@@ -100,7 +98,8 @@ input#fileNames{
     font-size: 1.5vh;
 }
 
-.folderIcon, .uploadIcon{
+
+.folderIcon, .uploadIcon,.addIcon{
     color: #495057;
     border: 3px outset #ddddddab;
     border-radius: 3px;
@@ -116,7 +115,7 @@ input#fileNames{
     background-color: #ddddddab;
 }
 
-.uploadIcon:hover{
+.uploadIcon:hover, .addIcon:hover{
     background-color: rgba(221, 221, 221, 0.3);
 }
 
@@ -124,11 +123,23 @@ input#fileNames{
     border: unset;
     background-color: unset;
     padding: unset;
+    display: flex;
+    justify-content: center;
 }
 
 .disUploadButton .uploadIcon, .disAddButton .uploadIcon{
     background-color: #fff;
     color: #cbcbcb;
+}
+
+.disAddButton .addIcon{
+    background-color: #fff;
+    color: #cbcbcb;
+}
+
+.addIcon{
+    border-radius: 16px;
+    width: 20%;
 }
 
 .uploadButton,.disUploadButton{
@@ -162,7 +173,6 @@ input#fileNames{
     max-height: 29vh;
     width: auto;
 }
-
 
 .editZone{
     display: flex;
