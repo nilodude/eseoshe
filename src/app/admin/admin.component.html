@@ -8,8 +8,7 @@
                     <div class="dropZone flexColumn">
                         <span class="dropTitle">NEW COLLECTION</span>
                         <input class="newColField" id="collection" type="text" [(ngModel)]="this.collection" placeholder="name">
-                        <button pTooltip="{{this.collection == ''? 'Must enter name' : 'Add new collection'}}" tooltipPosition="bottom" class="{{this.collection == ''? 'disAddButton': 'addButton'}}"
-                                [attr.disabled]="this.collection == '' ?true :null" >
+                        <button pTooltip="{{this.collection == ''? 'Must enter name' : 'Add new collection'}}" tooltipPosition="bottom" class="{{this.collection == ''? 'disAddButton': 'addButton'}}">
                                 <i class="addIcon pi pi-plus" (click)="insertCollection(this.collection,this.cover)"></i>
                         </button>
                     </div>
@@ -42,7 +41,10 @@
                                 formControlName="fileNames">
                         </div>
                         <div class="flex justify-content-center align-items-center">
-                            <button pTooltip="{{this.isDroppedEmpty()? 'Must drop at least one image into some collection' : 'давай'}}" tooltipPosition="left" class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
+                            <button pTooltip="{{this.isDroppedEmpty()? 'Must drop at least one image into some collection' : 'давай'}}" 
+                            tooltipPosition="left" 
+                            class="{{this.isDroppedEmpty()? 'disUploadButton': 'uploadButton'}}" 
+                            [disabled]="this.isDroppedEmpty() ? true : null" type="submit">
                                 <label>
                                     <i class="uploadIcon pi pi-cloud-upload">
                                         <span> Upload</span>

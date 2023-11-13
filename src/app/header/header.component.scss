@@ -16,10 +16,11 @@
   }
 
   .search-container{
-    min-width: 100% !important;
+    min-width: 90% !important;
   }
-  .searchForm{
 
+  .searchForm{
+    min-width: 100% !important;;
   }
 }
 
@@ -40,7 +41,7 @@
 }
 
 .searchField{
-  min-width: 94%;
+  min-width: 100%;
 }
 .spinner{
   width: 10%;

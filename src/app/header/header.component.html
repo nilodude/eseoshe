@@ -14,14 +14,12 @@
         <input type="text" placeholder="Search by keywords..." formControlName="keywords">
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
-      <div class="spinner flex justify-content-end align-items-center">
-        <i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i>
-      </div>
-      
     </form>
-    <p-messages [(value)]="msgs"></p-messages>
+    <div class="spinner flex justify-content-end align-items-center">
+      <i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i>
+    </div>
   </div>
-
+ 
   <div class="title">
     <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="flex align-items-center">
       <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span>
@@ -34,4 +32,7 @@
      (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
       class="p-button-raised p-button-secondary p-button-text"></button>
   </div>
+  
 </div>
+
+<p-messages [(value)]="msgs"></p-messages>

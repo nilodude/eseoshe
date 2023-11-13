@@ -142,26 +142,32 @@ export class AdminComponent implements OnInit {
   }
 
   insertCollection(name: string, cover: string) {
-    this.msgs = []
-    this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
-    this.apiService.insertCollection(name, cover).subscribe({
-      next: (result) => {
-        this.msgs = []
-        console.log(result)
-        if (result.inserted?.id) {
-          this.msgs.push({ severity: 'success', summary: 'Collection added!' })
-          this.isDataRetrieved = true
-          this.collection = ''
-          this.getCovers()
-        } else {
-          this.msgs.push({ severity: 'warn', summary: 'Collection already exists!' })
+    if(name != ''){
+      this.msgs = []
+      this.msgs.push({ severity: 'info', summary: 'Adding new collection...' })
+      this.apiService.insertCollection(name, cover).subscribe({
+        next: (result) => {
+          this.msgs = []
+          console.log(result)
+          if (result.inserted?.id) {
+            this.msgs.push({ severity: 'success', summary: 'Collection added!' })
+            this.isDataRetrieved = true
+            this.collection = ''
+            this.getCovers()
+          } else {
+            this.msgs.push({ severity: 'warn', summary: 'Collection already exists!' })
+          }
+        }, error: (error) => {
+          this.msgs = []
+          this.msgs.push({ severity: 'error', summary: 'Error adding new collection' })
+          console.error(error)
         }
-      }, error: (error) => {
-        this.msgs = []
-        this.msgs.push({ severity: 'error', summary: 'Error adding new collection' })
-        console.error(error)
-      }
-    })
+      })
+    }else{
+      this.msgs = []
+      this.msgs.push({ severity: 'info', summary: 'Must enter collection name' })
+    }
+    
   }
 
   isDroppedEmpty() {
