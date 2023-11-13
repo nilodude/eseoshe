@@ -52,11 +52,11 @@
     padding-left:0%;
 }
 
-@media (max-width: 812px){
-    :host ::ng-deep .p-dropdown-label.p-inputtext{
-        display: none;
-    }
-}
+// @media (max-width: 812px){
+//     :host ::ng-deep .p-dropdown-label.p-inputtext{
+//         display: none;
+//     }
+// }
 :host ::ng-deep .p-dropdown-label.p-inputtext:hover, .breadcrumbString>div:hover{
     color: rgb(255, 255, 255);
     transition: .3s cubic-bezier(0.165, 1, 0.44, 1);
