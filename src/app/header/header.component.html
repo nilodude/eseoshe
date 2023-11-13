@@ -15,7 +15,7 @@
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
     </form>
-    <div class="spinner flex justify-content-end align-items-center">
+    <div class="spinner flex justify-content-center align-items-center">
       <i *ngIf="!isDataRetrieved" class="fa fa-cog fa-spin"></i>
     </div>
   </div>
@@ -26,7 +26,7 @@
   </div>
   
   <div  class="userPanel">
-    <button *ngIf="!['admin'].includes(this.view)"
+    <button *ngIf="!['admin','home','collection' ,'keywords','image'].includes(this.view)"
      (click)="this.userPanel()" pButton pRipple type="button" label="USER PANEL"
       class="p-button-raised p-button-secondary p-button-text"></button>
   </div>
