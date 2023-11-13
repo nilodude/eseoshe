@@ -20,7 +20,13 @@
   }
 
   .searchForm{
-    min-width: 100% !important;;
+    min-width: 100% !important;
+    margin-left: 2vh;
+  }
+
+  .title{
+    justify-content: center;
+    flex-wrap: wrap;
   }
 }
 

@@ -20,11 +20,9 @@
     </div>
   </div>
  
-  <div class="title">
-    <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="flex align-items-center">
-      <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span>
-      <span> ({{this.numResults}} results)</span>
-    </div>
+  <div *ngIf="!['admin','image', 'home'].includes(this.view)" class="title flex align-items-center">
+    <span id="keywordTitle" *ngIf="this.view == 'keywords'">"{{this.keywords}}" </span>
+    <span> ({{this.numResults}} results)</span>
   </div>
   
   <div  class="userPanel">
