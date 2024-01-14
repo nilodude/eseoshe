@@ -137,6 +137,31 @@ SOLO FRONT:
 	-en general la pantalla de movil hay que revisarla por completo, searchBar, zoom, font-size y algunas cosas mas que no se ven bien:
 		-el breadcrumb, searchBar, results, y userPanel hay que rediseñarlos en 2 lineas para la pantalla de movil
 
+para superponer un texto transparente sobre una imagen de fondo:
+
+<div>Backgrounds</div>
+
+y en CSS:
+	
+	div{
+    background-color: rgba(255,255,255,0.5);
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    font-size:100px;
+    font-weight: bold;
+    letter-spacing: -11px;
+    margin:12px;
+}
+
+*{
+    background:  url(http://2.bp.blogspot.com/-NSwhl6hv41Y/Th5EIJL_zZI/AAAAAAAAFc4/UGUNfb--tGc/s1600/vector_wallpaper_by_seppoftw.jpg);
+    background-repeat: no repeat;
+}
+
+
+
+
+
 TAMBIEN NECESITA BACK:
 	-likes y el perfil de usuario
 
