@@ -4,10 +4,17 @@
      <div class="field">
         <label for="email">Email</label>
         <input type="text" pInputText formControlName="email" class="w-full" name="email" placeholder="Type your email"/>
+        <small *ngIf="email.invalid && (email.dirty || email.touched)"></small>
+        <div *ngIf="email.errors?.['required']">Email is required</div>
+        <div *ngIf="email.errors?.['email']">Email should be valid</div>
      </div>
      <div class="field">
         <label for="password">Password</label>
         <input type="password" pInputText formControlName="password" class="w-full" name="password" placeholder="Type your password"/>
+     </div>
+     <p-button label="SIGN IN" styleClass="w-full"></p-button>
+     <div class="mt-3"> 
+        Not a member? <a routerLink="/register">Register</a>
      </div>
     </p-card>
 </form>
