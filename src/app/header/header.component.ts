@@ -56,6 +56,10 @@ export class HeaderComponent implements OnInit {
   gotoAdmin(){
     this.router.navigate(['/admin']);
   }
+
+  gotoLogin(){
+    this.router.navigate(['/login']);
+  }
   
   changeCollection(){
     this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>

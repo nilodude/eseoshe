@@ -26,6 +26,10 @@ import {DragDropModule} from 'primeng/dragdrop';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {SplitterModule} from 'primeng/splitter';
 import { ChipsModule } from 'primeng/chips';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,9 @@ import { ChipsModule } from 'primeng/chips';
     ImageComponent,
     ColorButtonsComponent,
     BreadcrumbComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,9 @@ import { ChipsModule } from 'primeng/chips';
     DragDropModule,
     ContextMenuModule,
     SplitterModule,
-    ChipsModule
+    ChipsModule,
+    CardModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]

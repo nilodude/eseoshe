@@ -1,0 +1,8 @@
+.all{
+    height: 100vh;
+    
+}
+
+:host ::ng-deep .p-card.p-card-content{
+    background-color: aquamarine;
+}
