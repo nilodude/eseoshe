@@ -18,8 +18,9 @@
 
 .colorButtons{
   width: 100%;
-  // top: 5%;
-  background-color: white !important;
+  height: 2.7rem;
+  background-color:rgb(255, 255, 255);
+  backdrop-filter: blur(7px);
 }
 
 @media (max-width: 812px){
