@@ -1,14 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
+.colorButtons{
+    width: 100%
+}
+
 div {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+}
+@keyframes rotate {
+    0%   {rotate: 0deg}
+    // 50%  {rotate: 180deg; filter: blur(5px)}
+    100% {rotate: 360deg; filter: blur(0px)}
+}
+
+.toggler{
+    
+    border-radius: 50%;
+    border: 0;
+    width:2.7rem;
+    height: 2.7rem;
+    background: conic-gradient( 
+     red, orange, yellow, 
+     green ,cyan,  blue , purple, magenta, red);
+    animation-name: rotate;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+    // animation-direction: alternate;
+    animation-timing-function: linear;
 }
 
 .btn-color:enabled:hover {
     background-position: right center;
-    backdrop-filter: blur(10px);
 }
 
 .btn-color {
@@ -18,7 +43,7 @@ div {
     text-transform: uppercase;
     margin: 0.5% 0.3%;
     padding: 0% 0%;
-    transition: 0.5s;
+    transition: background-position 0.5s;
     font-size: 74%;
     background-size: 200% auto;
     color: white;
@@ -29,78 +54,82 @@ div {
     font-family: "Roboto";
     opacity: 0;
     transform: scale(0,0);
+    filter: blur(18px);
 }
 
 .btn-color-show{
     transform: scale(1,1);
     opacity: 1;
+    filter: blur(0px);
 }
 *{
-    --delay: 0.04s;
+    --delay: 0.01s;
+    --filterStart: 0.1s;
+    --showStart: 0.1s;
 }
 .btn-red-grad {
     background-image: linear-gradient(to right, #e52d27 0%, #b31217 51%, #e52d27 100%);
-    transition: opacity 0.05s, transform 0.05s;
+    transition: display 1s,opacity var(--showStart), transform var(--showStart), background-position 0.5s,filter var(--filterStart);
 }
         
 .btn-orange-grad {
     background-image: linear-gradient(to right, #E44D26 0%, #F16529  51%, #E44D26  100%);
-    transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay));
+    transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay)), background-position 0.5s,filter calc(var(--filterStart) + var(--delay));
 }
        
 .btn-yellow-grad {
     background-image: linear-gradient(to right, #ffb347 0%, #ffcc33  51%, #ffb347  100%);
-    transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 2);
+    transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 2), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 2);
 }
          
 .btn-green-grad {
     background-image: linear-gradient(to right, #a8e063 0%, #56ab2f  51%, #56ab2f  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 3);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 3), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 3);
 }
        
 .btn-cyan-grad {
     background-image: linear-gradient(to right, #40b7ee 0%, #12D8FA  51%, #1FA2FF  100%);
-    transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 4);
+    transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 4), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 4);
 }
          
 .btn-blue-grad {
     background-image: linear-gradient(to right, #0575E6 0%, #021B79  51%, #0575E6  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 5);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 5), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 5);
 }
          
 .btn-purple-grad {
     background-image: linear-gradient(to right, #7a44d6 0%, #512DA8  51%, #542d98  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 6);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 6), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 6);
 }
          
 .btn-magenta-grad {
     background-image: linear-gradient(to right, #ff00cc 0%, #950880  51%, #ff00cc  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 7);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 7), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 7);
 }
          
 .btn-brown-grad {
     background-image: linear-gradient(to right, #bb8d72 0%, #38210a  51%, #bb8d72  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 8);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 8), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 8);
 }
 
 .btn-black-grad {
     background-image: linear-gradient(to right, #000 15%, #7e7e7e 50%, #000 70%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 9);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 9), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 9);
 }
          
 .btn-grey-grad {
     background-image: linear-gradient(to right, #8e9eab 0%, #eef2f3  51%, #8e9eab  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 10);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 10), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)*10);
 }
          
 .btn-white-grad {
     background-image: linear-gradient(to right, #ECE9E6 0%, #FFFFFF  51%, #ECE9E6  100%);
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 11);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 11), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 11);
     color: black;
   }
  
   .btn-rainbow-grad {
-     transition: opacity calc(0.05s + var(--delay)), transform calc(0.05s + var(--delay) * 12);
+     transition: opacity calc(var(--showStart) + var(--delay)), transform calc(var(--showStart) + var(--delay) * 12), background-position 0.5s,filter calc(var(--filterStart) + var(--delay)* 12);
     background-image: linear-gradient(to right, rgba(255, 0, 0, 1) 0%,
     rgba(255, 154, 0, 1) 10%,
     rgba(208, 222, 33, 1) 20%,
