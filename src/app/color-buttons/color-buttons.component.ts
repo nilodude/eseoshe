@@ -76,24 +76,17 @@ export class ColorButtonsComponent implements OnInit {
     let buttons =  document.getElementsByClassName("btn-color")
     let buttonContainer =  document.getElementsByClassName("button-container")
     Array.from(buttons).forEach(button => {
+      let container = Array.from(buttonContainer)[0]
+      let containerClass =container?.getAttribute("class") ?? ''
       let butonClass = button?.getAttribute("class")
       if(butonClass?.includes('show')){
+        //HIDE BUTTONS
         button?.setAttribute("class",butonClass.replace('btn-color-show',''))
-        Array.from(buttonContainer).forEach(c => {
-          let butonClass = c?.getAttribute("class")
-          if(butonClass?.includes('show')){
-            c?.setAttribute("class",butonClass.replace('button-container-show',''))
-          }
-          
-        })
-       
+        container?.setAttribute("class",containerClass.replace('button-container-blur',''))
       }else{
+        //SHOW BUTTONS
         button?.setAttribute("class", butonClass+" btn-color-show")
-        Array.from(buttonContainer).forEach(c => {
-          let butonClass = c?.getAttribute("class")
-          c?.setAttribute("class",butonClass+" button-container-show")
-          
-        })
+        container?.setAttribute("class",containerClass+" button-container-blur")
       }
     });
   }
