@@ -1,3 +1,9 @@
+.stickyColumn{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .up {
   z-index: 1112;
   top: 0%;
@@ -12,7 +18,8 @@
 
 .colorButtons{
   width: 100%;
-  top: 5%;
+  // top: 5%;
+  background-color: white !important;
 }
 
 @media (max-width: 812px){
