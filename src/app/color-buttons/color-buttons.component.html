@@ -1,5 +1,9 @@
+
+<div>
+    <button class="toggler" (click)="toggleButtons()">  </button>
+</div>
 <div>
     <ng-template ngFor let-buton [ngForOf]="this.buttonInfo" let-i="index">
-        <button class="btn-color {{buton.class}}" (click)="this.click(buton.label.toLowerCase().trim())">  </button>
+        <button class="btn-color {{buton.class}}" (click)="this.click(buton.label)">  </button>
     </ng-template>
 </div>

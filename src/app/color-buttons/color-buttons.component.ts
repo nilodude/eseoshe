@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../services/api.service';
 import { Router } from '@angular/router';
+import { MenuItem } from 'primeng/api/menuitem';
 
 
 @Component({
@@ -9,11 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./color-buttons.component.scss']
 })
 export class ColorButtonsComponent implements OnInit {
-
+  showButtons: boolean = false;
   buttonInfo: any = [
     {
       class: "btn-red-grad",
-      label: 'Red'
+      label: 'red'
     },
     {
       class: "btn-orange-grad",
@@ -69,6 +70,18 @@ export class ColorButtonsComponent implements OnInit {
   constructor(private router: Router,private apiService: ApiService) { }
 
   ngOnInit(): void {
+  }
+
+  toggleButtons(){
+    let buttons =  document.getElementsByClassName("btn-color")
+    Array.from(buttons).forEach(button => {
+      let butonClass = button?.getAttribute("class")
+      if(butonClass?.includes('show')){
+        button?.setAttribute("class",butonClass.replace('btn-color-show',''))
+      }else{
+        button?.setAttribute("class", butonClass+" btn-color-show")
+      }
+    });
   }
 
   click(color: string){
