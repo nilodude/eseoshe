@@ -1,8 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
-.buttonContainer{
+.button-container{
     background-color:rgba(255, 255, 255, 0);
-    // backdrop-filter: blur(7px);
+    
+}
+.button-container-show{
+    background-color:rgba(255, 255, 255, 0);
+    backdrop-filter: blur(7px);
 }
 
 div {
