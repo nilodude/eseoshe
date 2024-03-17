@@ -14,8 +14,7 @@ export class CrazygridComponent implements OnInit {
   @Input('buttons') buttons: boolean = false;
   @Input('cols') width: number = 7;
   @Input('rows') height: number = 3;
-  @Input('scale') windowScale: number = 7.15;
-  //[scale]="7.15" ocupa toda la pantalla
+  @Input('scale') windowScale: number = 8.25;
   @Input('outerMargin') margin: string = '0%';
   @Input('innerMargin') boxPadding: number = 18;
   collections: any[] =[];
@@ -241,6 +240,7 @@ export class CrazygridComponent implements OnInit {
           newBox.style.transform = "translate(" + scale*x  + "px, " + scale * y + "px)";
           //image itself
           newImg.id = 'im'+collection?.value;
+          newImg.style.borderRadius = '3px';
           newImg.style.position = "realtive";
           newImg.style.background = "url('data:image/png;base64,"+ collection?.b64+"')"; //need to get collection cover image from BD
           newImg.style.backgroundRepeat = 'round';

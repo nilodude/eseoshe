@@ -11,14 +11,14 @@ export class HomeComponent implements OnInit {
 
   cgRows: number = 4;
   cgCols: number = 7;
-  cgScale: number = 7.425;
+  cgScale: number = 7.175;
 
   constructor() { }
 
   ngOnInit(): void {
     if(window.innerWidth < 812){
       this.cgCols = 2;
-      this.cgScale = 2.11;
+      this.cgScale = 2.06;
     }
   }
 
