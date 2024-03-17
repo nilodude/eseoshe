@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './../services/api.service';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api/menuitem';
-
 
 @Component({
-  selector: 'app-color-buttons',
+  selector: 'color-buttons',
   templateUrl: './color-buttons.component.html',
   styleUrls: ['./color-buttons.component.scss']
 })
