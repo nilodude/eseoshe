@@ -1,13 +1,39 @@
-.up {
+.stickyColumn{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 3rem;
+}
+.upup {
   z-index: 1112;
   top: 0%;
+}
+.up {
   display: flex;
   justify-content: space-between;
   background-color: rgba(240, 240, 240, 0.74);
   backdrop-filter: blur(7px);
   align-items: center;
-  // height: 4vh;
   gap: 1vh;
+}
+
+.toggler{
+  border-radius: 50%;
+  border: 0;
+  width:1.7rem;
+  height: 1.7rem;
+  background: conic-gradient( 
+   red, orange, yellow, 
+   green ,cyan,  blue , purple, magenta, red);
+  animation-name: rotate;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
+.colorButtons{
+  width: 100%;
+  height: 2.7rem;
 }
 
 @media (max-width: 812px){
@@ -17,8 +43,8 @@
   }
 
   .search-container{
-    min-width: 90% !important;
-    margin-left: 2vh;
+    min-width: 85% !important;
+    margin-left: 1rem;
   }
 
   .searchForm{
@@ -31,6 +57,10 @@
     flex-grow: 1;
     flex-basis: 100%;
   }
+
+  .stickyColumn{
+    height: 7rem;
+  }
 }
 
 .breadcrumb{
@@ -41,6 +71,7 @@
   display: flex;
   flex-direction: row;;
   min-width: 30%;
+  gap: 0.6rem;
 }
 
 .searchForm{
@@ -68,7 +99,9 @@
 
 input[type=text] {
   min-width: 90%;
-  height: 3vh;
+  height: 1.6rem;
+  border-radius: 2px;
+  border: 1px solid #d3d3d3;
 }
 
 :host ::ng-deep .p-message{
@@ -89,6 +122,7 @@ input[type=text] {
 :host ::ng-deep .p-message .p-message-wrapper{
   padding: unset;
   white-space: nowrap;
+   backdrop-filter: blur(7px);  
 }
 
 :host ::ng-deep .p-message .p-message-icon{
@@ -97,7 +131,7 @@ input[type=text] {
 
 .title {
   letter-spacing: 0.2vh;
-  font-size: 1.6vh;
+  // font-size: 1.6vh;
   white-space: nowrap;
   width: 12%;
 }
