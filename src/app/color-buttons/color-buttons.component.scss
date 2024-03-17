@@ -135,32 +135,4 @@ div {
     rgba(186, 12, 248, 1) 80%,
     rgba(251, 7, 217, 1) 90%,
     rgba(255, 0, 0, 1) 100%);
-
   }
- .container {
-     position: relative;
- }
-
- .buttonOverlay {
-     backdrop-filter: drop-shadow(4px 4px 10px blue);
-     background-color: rgba(225, 0, 0, 0.43);
-     z-index: 1111;
-     position: absolute;
-     width: 100%;
-     height: 100%;
-     top: 0;
-     left: 0;
- }
-
- .buttonOverlay:hover {
-     display: none;
- }
-
-
-
- 
-
-
- 
-
- 
