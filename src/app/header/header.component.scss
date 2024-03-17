@@ -16,7 +16,10 @@
   align-items: center;
   gap: 1vh;
 }
-
+@keyframes rotate {
+  0%   {rotate: 0deg}
+  100% {rotate: 360deg; filter: blur(0px)}
+}
 .toggler{
   border-radius: 50%;
   border: 0;

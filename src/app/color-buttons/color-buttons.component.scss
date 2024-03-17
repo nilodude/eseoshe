@@ -22,10 +22,7 @@ div {
     justify-content: center;
     align-items: center;
 }
-@keyframes rotate {
-    0%   {rotate: 0deg}
-    100% {rotate: 360deg; filter: blur(0px)}
-}
+
 
 .btn-color:enabled:hover {
     background-position: right center;
