@@ -7,8 +7,7 @@
 .button-container-blur{
     backdrop-filter: blur(7px);
     -webkit-mask: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 33%);   
-    padding-bottom:2rem; 
-    border-radius: 5px;
+    padding-bottom:2rem;
 }
 
 @media(max-width: 812px){

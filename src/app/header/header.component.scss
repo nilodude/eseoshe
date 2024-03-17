@@ -26,7 +26,7 @@
    red, orange, yellow, 
    green ,cyan,  blue , purple, magenta, red);
   animation-name: rotate;
-  animation-duration: 3s;
+  animation-duration: 4s;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   animation-timing-function: ease-in-out;
@@ -101,6 +101,8 @@
 input[type=text] {
   min-width: 90%;
   height: 3vh;
+  border-radius: 2px;
+  border: 1px solid #d3d3d3;
 }
 
 :host ::ng-deep .p-message{
@@ -121,6 +123,7 @@ input[type=text] {
 :host ::ng-deep .p-message .p-message-wrapper{
   padding: unset;
   white-space: nowrap;
+   backdrop-filter: blur(7px);  
 }
 
 :host ::ng-deep .p-message .p-message-icon{
