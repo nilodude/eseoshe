@@ -25,23 +25,7 @@ div {
 }
 @keyframes rotate {
     0%   {rotate: 0deg}
-    // 50%  {rotate: 180deg; filter: blur(5px)}
     100% {rotate: 360deg; filter: blur(0px)}
-}
-
-.toggler{
-    border-radius: 50%;
-    border: 0;
-    width:2.7rem;
-    height: 2.7rem;
-    background: conic-gradient( 
-     red, orange, yellow, 
-     green ,cyan,  blue , purple, magenta, red);
-    animation-name: rotate;
-    animation-duration: 4s;
-    animation-iteration-count: infinite;
-    // animation-direction: alternate;
-    animation-timing-function: linear;
 }
 
 .btn-color:enabled:hover {

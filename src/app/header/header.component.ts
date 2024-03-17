@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Message, SelectItem } from 'primeng/api';
 import { environment } from './../../environments/environment';
+import { ColorButtonsComponent } from '../color-buttons/color-buttons.component';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,8 @@ export class HeaderComponent implements OnInit {
   @Input() numResults: number = 0;
   @Input() msgs: Message[] = []
   @Input() collections: SelectItem[] =[];
+
+  @ViewChild(ColorButtonsComponent) colorButtons!:ColorButtonsComponent;
 
   fullTitle: boolean = false;
   collection: SelectItem = {label:'', value:''};
@@ -79,6 +82,10 @@ export class HeaderComponent implements OnInit {
       this.msgs.push({severity:'error', summary:'Empty search!'})
     }
     
+  }
+
+  toggleButtons(){
+    this.colorButtons.toggleButtons()
   }
 
   userPanel(){

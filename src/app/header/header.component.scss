@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 3rem;
+  height: 2rem;
 }
 
 .up {
@@ -17,6 +17,20 @@
   gap: 1vh;
 }
 
+.toggler{
+  border-radius: 50%;
+  border: 0;
+  width:1.7rem;
+  height: 1.7rem;
+  background: conic-gradient( 
+   red, orange, yellow, 
+   green ,cyan,  blue , purple, magenta, red);
+  animation-name: rotate;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+}
 .colorButtons{
   width: 100%;
   height: 2.7rem;
