@@ -84,8 +84,31 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  toggleButtons(){
-    this.colorButtons.toggleButtons()
+  toggleButtons() {
+    // this.colorButtons.toggleButtons()
+
+    let buttons = document.getElementsByClassName("btn-color")
+    let buttonContainer = document.getElementsByClassName("button-container")
+    let overlayContainer = document.getElementsByClassName("colorButtons")
+    let overlay = Array.from(overlayContainer)[0]
+    let overlayClass = overlay?.getAttribute("class") ?? ''
+    Array.from(buttons).forEach(button => {
+      let container = Array.from(buttonContainer)[0]
+      let containerClass = container?.getAttribute("class") ?? ''
+      let butonClass = button?.getAttribute("class")
+      if (butonClass?.includes('show')) {
+        //HIDE BUTTONS
+        button?.setAttribute("class", butonClass.replace('btn-color-show', ''))
+        container?.setAttribute("class", containerClass.replace('button-container-blur', ''))
+        overlay?.setAttribute("class", overlayClass.replace('colorButtons-show', ''))
+      } else {
+        //SHOW BUTTONS
+        button?.setAttribute("class", butonClass + " btn-color-show")
+        container?.setAttribute("class", containerClass + " button-container-blur")
+        overlay?.setAttribute("class", overlayClass + " colorButtons-show")
+      }
+    });
+
   }
 
   userPanel(){
